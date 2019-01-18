@@ -6,7 +6,10 @@ Les requêtes considérées seront de la forme SELECT ... FROM ... WHERE sans im
 
 ## Encadrant et Étudiants :
 Étudiants :
-    - Massili Kezzoul `massy.kezzoul@gmail.com`
+- Massili Kezzoul `massy.kezzoul@gmail.com`
+- Chakib
+- Ramzi 
+- Mizou
 
 Encadrant : Anne-Muriel Chifolleau `chifolleau@lirmm.fr`
 
