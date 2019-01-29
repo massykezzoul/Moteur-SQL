@@ -68,10 +68,10 @@ WHERE   age < 28
 
 Étudiants :
 
-- Massili Kezzoul : `massy.kezzoul@gmail.com`
-- Chakib : `@`
-- Ramzi : `@`
-- Mizou : `@`
+- Massili KEZZOUL : `massy.kezzoul@gmail.com`
+- Chakib ELHOUITI : `celhouiti@gmail.com`
+- Ramzi ZEROUAL : `ramzizer@gmail.com`
+- Belkassem BOUZIDI : `@`
 
 Encadrant : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
 Début du projet : Janvier 2019<br>
