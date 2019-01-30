@@ -1,6 +1,8 @@
 #ifndef MATRICE_STRING_H
 #define MATRICE_STRING_H
 
+#include "tabstring.h"
+
 class MatriceString {
 private:
     TabString* tab;
@@ -14,7 +16,7 @@ public:
 
     void add(const TabString&);
     TabString &get(unsigned long int) const;
-    unsigned long int size() const;
+    unsigned long int getSize() const;
 
 };
 
