@@ -68,7 +68,7 @@ string TabString::get(unsigned int i) const
 {
     return table[i];
 }
-unsigned int TabString::size()const
+unsigned int TabString::getSize()const
 {
     return size;
 }

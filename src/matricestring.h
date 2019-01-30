@@ -1,6 +1,6 @@
 #ifndef MATRICE_STRING_H
 #define MATRICE_STRING_H
-
+#include "tabstring.h"
 class MatriceString {
 private:
     TabString* tab;

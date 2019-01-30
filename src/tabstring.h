@@ -20,7 +20,7 @@ public:
     void add(std::string str);
     unsigned int get(std::string str) const ;
     std::string get(unsigned int i) const;
-    unsigned int size() const;
+    unsigned int getSize() const;
 };
 
 #endif
