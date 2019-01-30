@@ -1,4 +1,5 @@
 #include <fstream>
+#include <cstdlib>
 #include "matricestring.h"
 
 
@@ -6,7 +7,7 @@ using namespace std;
 
 MatriceString::MatriceString():tab(NULL),size(0){}
 
-MatriceString::MatriceString(ifstream file):tab(NULL),size(0){
+MatriceString::MatriceString(ifstream &file):tab(NULL),size(0){
     if (file != NULL)
         while(! file.eof())
             add(TabString(file));
@@ -44,6 +45,6 @@ TabString& MatriceString::get(unsigned long int i) const {
     return tab[i];        
 }
 
-unsigned long int MatriceString::size() const{
+unsigned long int MatriceString::getSize() const{
     return size;
 }

@@ -15,12 +15,12 @@ TabString::TabString(const TabString &tab)
 {
     size = tab.size;
     /*on copie les elements*/
-    for (int i = 0 ; i<size ; ++i)
+    for (unsigned long int i = 0 ; i<size ; ++i)
     {
-        table[i]=tab[i];
+        table[i]=tab.table[i];
     }
 }
-~TabString::TabString()
+TabString::~TabString()
 {
     if(table != NULL) delete[] table;
 }
@@ -32,19 +32,21 @@ TabString &TabString::operator=(const TabString &tab)
         /*on supprime l'ancien tableau*/
         delete[] table;
         /*on copie les elements*/
-        for(int i = 0 ; i < size ; ++i)
+        for(unsigned long int i = 0 ; i < size ; ++i)
         {
-            table[i]=tab[i]; 
+            table[i]=tab.table[i]; 
         }
     }
+    
+    return *this;
 }
-void add(string str)
+void TabString::add(string str)
 {
     size++;
     /*on cree un nouvel espace mémoire*/
     string *copie= new string[size];
     /*on copie les elements*/
-        for(int i = 0 ; i < size-1 ; ++i)
+        for(unsigned long int i = 0 ; i < size-1 ; ++i)
         {
             copie[i]=table[i]; 
         }
@@ -55,20 +57,22 @@ void add(string str)
     table=copie;
 
 }
-unsigned int TabString::get(string str) const
+unsigned long int TabString::get(string str) const
 {
-    unsigned int i=0;
-    while(i<size())
+    unsigned long int i=0;
+    while(i<size)
     {
         if(table[i]==str) return i;
         i++;
     }
+    return -1;
 } 
-string TabString::get(unsigned int i) const
+string TabString::get(unsigned long int i) const
 {
     return table[i];
 }
-unsigned int TabString::getSize()const
+
+unsigned long int TabString::getSize()const
 {
     return size;
 }

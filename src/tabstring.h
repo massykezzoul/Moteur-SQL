@@ -7,7 +7,7 @@
 class TabString {
 private:
     std::string *table; 
-    unsigned int size; 
+    unsigned long int size; 
 
 public:
     TabString();
@@ -18,9 +18,10 @@ public:
     TabString &operator=(const TabString &tab);
 
     void add(std::string str);
-    unsigned int get(std::string str) const ;
-    std::string get(unsigned int i) const;
-    unsigned int getSize() const;
+
+    unsigned long int get(std::string str) const ;
+    std::string get(unsigned long int i) const;
+    unsigned long int getSize() const;
 };
 
 #endif
