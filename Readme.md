@@ -65,15 +65,15 @@ WHERE   age < 28
 - Ecrire le resultat dans un flux de sortie;
 
 ## Encadrant et Étudiants :
+Encadrant : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
 
 Étudiants :
 
 - Massili KEZZOUL : `massy.kezzoul@gmail.com`
 - Chakib ELHOUITI : `celhouiti@gmail.com`
 - Ramzi ZEROUAL : `ramzizerr@gmail.com`
-- Belkassim BOUZIDI : `bouzidibelkacem@gmail.com`
+- Belkassim BOUZIDI : `bouzidibelkassim@gmail.com`
 
-Encadrant : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
 Début du projet : Janvier 2019<br>
 Fin du projet   : ~ 2019<br>
 Langage Utilisé : C++<br>
