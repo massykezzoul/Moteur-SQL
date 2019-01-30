@@ -22,6 +22,9 @@ public:
     unsigned long int get(std::string str) const ;
     std::string get(unsigned long int i) const;
     unsigned long int getSize() const;
+
+    /* Split the string */
+    static unsigned long int strsplit(const std::string& ,std::string*&,char);
 };
 
 #endif

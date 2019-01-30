@@ -8,7 +8,7 @@ using namespace std;
 MatriceString::MatriceString():tab(NULL),size(0){}
 
 MatriceString::MatriceString(ifstream &file):tab(NULL),size(0){
-    if (file != NULL)
+    if (file)
         while(! file.eof())
             add(TabString(file));
     else 

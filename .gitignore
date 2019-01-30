@@ -2,3 +2,4 @@
 .*
 src/.*
 src/*.o
+src/sql
