@@ -65,7 +65,7 @@ WHERE   age < 28
 - Ecrire le resultat dans un flux de sortie;
 
 ## Encadrant et Étudiants :
-Encadrant : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
+Encadrante : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
 
 Étudiants :
 
