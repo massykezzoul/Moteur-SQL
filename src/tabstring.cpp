@@ -7,7 +7,7 @@ using namespace std;
     }
     TabString::TabString(ifstream &file):table(NULL),size(0)
     {
-
+        
     }
     TabString::TabString(const TabString &tab)
     {

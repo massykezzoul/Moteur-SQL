@@ -70,8 +70,8 @@ WHERE   age < 28
 
 - Massili KEZZOUL : `massy.kezzoul@gmail.com`
 - Chakib ELHOUITI : `celhouiti@gmail.com`
-- Ramzi ZEROUAL : `ramzizer@gmail.com`
-- Belkassem BOUZIDI : `@`
+- Ramzi ZEROUAL : `ramzizerr@gmail.com`
+- Belkassem BOUZIDI : `bouzidibelkassem@gmail.com`
 
 Encadrant : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
 Début du projet : Janvier 2019<br>
