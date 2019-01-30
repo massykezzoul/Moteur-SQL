@@ -1,0 +1,4 @@
+# Tout les fichier caché
+.*
+src/.*
+src/*.o
