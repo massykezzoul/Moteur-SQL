@@ -17,9 +17,9 @@ CC=g++
 CFLAGS=-Wall -pedantic -ansi 
 LDFLAGS= -g #for debugging
 EXEC=sql
-SRC= $(wildcard *.cpp)
+SRC= $(wildcard *.cpp) test/test-matrice.cpp
 HEADERS = $(wildcard *.h)
-OBJ= $(SRC:.cpp=.o)
+OBJ= $(SRC:.cpp=.o) 
 ARCHIVE_NAME = source_code
 
 ## Compilation
@@ -29,7 +29,7 @@ ARCHIVE_NAME = source_code
 all: $(EXEC)
 
 $(EXEC) : $(OBJ) $(HEADERS)
-	@$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS) && echo	"$(EXEC) created"
+	$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS) && echo "$(EXEC) created"
 
 %.o: %.cpp 
 	@$(CC) -o $@ -c $< $(CFLAGS) 

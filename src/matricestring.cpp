@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include "matricestring.h"
 
-
 using namespace std;
 
 MatriceString::MatriceString():tab(NULL),size(0){}
