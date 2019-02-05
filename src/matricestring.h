@@ -7,7 +7,7 @@ class MatriceString {
 private:
     TabString* tab;
     unsigned long int size;
-
+    
 public:
     MatriceString();
     MatriceString(std::ifstream& file);
