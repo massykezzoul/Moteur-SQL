@@ -70,9 +70,9 @@ Encadrante : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
 Étudiants :
 
 - Massili KEZZOUL : `massy.kezzoul@gmail.com`
+- Belkassim BOUZIDI : `bouzidibelkassim@gmail.com`
 - Chakib ELHOUITI : `celhouiti@gmail.com`
 - Ramzi ZEROUAL : `ramzizerr@gmail.com`
-- Belkassim BOUZIDI : `bouzidibelkassim@gmail.com`
 
 Début du projet : Janvier 2019<br>
 Fin du projet   : ~ 2019<br>
