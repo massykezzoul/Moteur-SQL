@@ -1,5 +1,5 @@
 # Tout les fichier caché
 .*
 src/.*
-src/*.o
+src/**.o
 src/sql
