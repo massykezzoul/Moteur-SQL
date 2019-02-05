@@ -25,6 +25,21 @@ MatriceString::~MatriceString(){
     if (tab != NULL) delete[] tab;
 }
 
+MatriceString &MatriceString::operator=(const MatriceString &t) {
+    if (this!=&t) {
+        size = t.size;
+        /* Suppression de l'ancien Tableau */
+        if (tab != NULL) delete[] tab;
+        tab = new TabString[t.size];
+        /* copie des elements */
+        for(unsigned long int i = 0; i < size; i++) {
+            tab[i] = t.tab[i];
+        }
+        
+    }
+    return *this;
+}
+
 void MatriceString::add(const TabString& jdide){
     ++size;
     /* Création d'un nouvelle espace mémoire */

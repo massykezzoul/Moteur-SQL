@@ -6,11 +6,12 @@
 
 class Table
 {
-    private:
+private:
     std::string nomTable;
     TabString nomAttributs;
     MatriceString valeurAttributs;
-    public:
+
+public:
     Table();
     Table(std::string fileName);
     std::string getNomTable();

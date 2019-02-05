@@ -26,16 +26,15 @@ using namespace std;
     void Table::print()
     {
         /* Affichages des nom des attributs*/            
-            for(size_t i = 0; i < nomAttributs.getSize(); i++)
-                cout << nomAttributs.get(i) << " | ";
-            cout << endl << endl;
-            /* Affichages des valeurs des attributs */
-            for(size_t i = 0; i < valeurAttributs.getSize(); i++) 
-            {
-                for(size_t j = 0; j < valeurAttributs.get(i).getSize() ; j++)
-                    cout << valeurAttributs.get(i).get(j) << " | ";
-                cout << endl;
-            } 
+        for(size_t i = 0; i < nomAttributs.getSize(); i++)
+            cout << nomAttributs.get(i) << " | ";
+        cout << endl << endl;
+        /* Affichages des valeurs des attributs */
+        for(size_t i = 0; i < valeurAttributs.getSize(); i++) {
+            for(size_t j = 0; j < valeurAttributs.get(i).getSize() ; j++)
+                cout << valeurAttributs.get(i).get(j) << " | ";
+            cout << endl;
+        } 
     }
     string Table::getNomTable(){return nomTable;}
 

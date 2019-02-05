@@ -14,10 +14,14 @@ public:
     MatriceString(const MatriceString&);
     ~MatriceString();
 
+    MatriceString &operator=(const MatriceString &tab);
+
     void add(const TabString&);
     TabString &get(unsigned long int) const;
     unsigned long int getSize() const;
 
 };
+
+
 
 #endif
