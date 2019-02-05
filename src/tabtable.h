@@ -1,11 +1,11 @@
 #ifndef TABTABLE_H_
-#def TABTABLE_H_
+#define TABTABLE_H_
 
 #include"table.h"
 
 class TabTable {
 private:
-  Table tables[];
+  Table* tables;
   unsigned long int size;
 public:
   TabTable();

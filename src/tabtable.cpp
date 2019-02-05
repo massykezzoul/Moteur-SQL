@@ -1,8 +1,9 @@
 #include<iostream>
+#include <cstdlib>
 #include "tabtable.h"
 using namespace std;
 
-TabTable::TabTable():Table(NULL),size(0){}
+TabTable::TabTable():tables(NULL),size(0){}
 
 void TabTable::add (string fileName){
   size++;
@@ -21,7 +22,7 @@ void TabTable::add (string fileName){
 
 Table& TabTable::get (string nom){
     for (unsigned long int i=0; i<getSize(); i++){
-      if (tables[i].getNom()==nom)
+      if (tables[i].getNomTable()==nom)
       return tables[i];
     }
     cerr << "Table non trouvé" << endl;
