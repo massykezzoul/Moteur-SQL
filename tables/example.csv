@@ -1,4 +1,5 @@
-EmailAddress,FirstName,LastName,Age
-bob@mywebsite.com,Bob,Smith,34
-jane@example.com,Jane,Wilson,21
-pete@example.com,Pete,Von Burg,44
+NOM,PRENOM,e-mail,age
+Kezzoul,Massili,massy@example.com,20
+ElHouiti,chakib,chakib@example.com,19\,9
+Zer,Ramzi,ramzi@example.com,20
+Bouzidi,Belkassim,mizou@example.com,20
