@@ -5,13 +5,15 @@
 
 class TabTable {
 private:
-  Table* tables;
-  unsigned long int size;
+	Table* tables;
+	unsigned long int size;
 public:
-  TabTable();
+	TabTable();
 
-void add (std::string fileName);
-Table& get (std::string nom);
-unsigned long int getSize ();
+	void add(std::string fileName);
+	void add(const char*);
+	Table* get(std::string nom) const;
+	unsigned long int getSize() const;
 };
+
 #endif
