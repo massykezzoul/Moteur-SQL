@@ -1,8 +1,8 @@
 #include<iostream>
-#include "table.h"
 #include<fstream>
+#include <sstream>
 #include<cstdlib>
-#include <unistd.h>
+#include "table.h"
 using namespace std; 
 
 
@@ -28,6 +28,7 @@ using namespace std;
     {
         size_t *tabMax= new size_t[nomAttributs.getSize()];
         size_t max,somme=0;
+        string sep,space;
         for(size_t i= 0 ; i < nomAttributs.getSize(); ++i)
         {
             max = nomAttributs.get(i).size();
@@ -38,16 +39,10 @@ using namespace std;
             tabMax[i]=max;
             somme+=tabMax[i];
         }
-        cout << somme;
 
-        for(size_t i = 0; i < nomAttributs.getSize(); i++){
-            cout << tabMax[i] << " " ;
-        }
         cout << endl;
-        //usleep(500000);
-        
     
-        /* Affichages des nom des attributs*/
+        /* Affichages des noms des attributs*/
         cout << "| ";        
         for(size_t i = 0; i < nomAttributs.getSize(); i++){
             cout << nomAttributs.get(i) ;
@@ -58,10 +53,9 @@ using namespace std;
         }
         cout << endl;
         /* affichage du séparateur */
-        for(size_t i = 0; i < somme+nomAttributs.getSize()*4+1; i++) {
-            cout << "-";
-        }
-        cout << endl;
+        sep = string(somme+(nomAttributs.getSize()*4)+1,'-');
+        cout << sep<< endl;
+
         /* Affichages des valeurs des attributs */
         for(size_t i = 0; i < valeurAttributs.getSize(); i++) {
             cout << "| ";
@@ -73,7 +67,9 @@ using namespace std;
                 cout << " | ";
             }
             cout << endl;
-        } 
+        }
+
+        cout << sep << endl;
     }
     string Table::getNomTable(){return nomTable;}
 

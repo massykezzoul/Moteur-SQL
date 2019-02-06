@@ -9,15 +9,15 @@ MatriceString::MatriceString():tab(NULL),size(0),alloc(0){}
 
 MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
     if (file){
+        string line;
         file.seekg(0, file.end);
         alloc = file.tellg();
         file.seekg(0, file.beg);
+        getline(file,line);
         tab = new TabString[alloc];
 
-        unsigned long int i = 0;
         while( !file.eof() ) {
             add(TabString(file));
-            cout << "Ligne " << i++ << "Ok" << endl;
         }
     }
     else 
