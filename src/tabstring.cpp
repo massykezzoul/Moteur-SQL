@@ -13,6 +13,7 @@ TabString::TabString(ifstream &file):table(NULL),size(0)
     if (file){
         string line;
         getline(file,line);
+        //std::cout << line << std::endl;
         size = strsplit(line,table,',');
         if (size == 0)
             exit(1);

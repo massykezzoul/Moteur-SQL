@@ -7,6 +7,7 @@ class MatriceString {
 private:
     TabString* tab;
     unsigned long int size;
+    unsigned long int alloc;
     
 public:
     MatriceString();
