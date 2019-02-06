@@ -31,7 +31,7 @@ int main(int argc, char const *argv[]) {
             if ( tab != NULL) {
                 tab->print();
             } else if (line != "exit") {
-                cout << "la table " << line << " n'existe pas" << endl;
+                cout << "la table '" << line << "' n'existe pas" << endl;
             }
         }
     } else {

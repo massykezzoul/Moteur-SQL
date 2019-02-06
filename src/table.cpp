@@ -31,10 +31,10 @@ using namespace std;
         string sep,space;
         for(size_t i= 0 ; i < nomAttributs.getSize(); ++i)
         {
-            max = nomAttributs.get(i).size();
+            max = nomAttributs.get(i).length();
             for(size_t j=0 ; j < valeurAttributs.getSize();++j)
             {
-                max = (valeurAttributs.get(j).get(i).size() < max ? max : valeurAttributs.get(j).get(i).size()); 
+                max = (valeurAttributs.get(j).get(i).length() < max ? max : valeurAttributs.get(j).get(i).length()); 
             }
             tabMax[i]=max;
             somme+=tabMax[i];
@@ -46,7 +46,7 @@ using namespace std;
         cout << "| ";        
         for(size_t i = 0; i < nomAttributs.getSize(); i++){
             cout << nomAttributs.get(i) ;
-            space = string(tabMax[i]-nomAttributs.get(i).size() + 1,' ');
+            space = string(tabMax[i]-nomAttributs.get(i).length() + 1,' ');
             cout << space <<" | " ;
         }
         cout << endl;
@@ -59,7 +59,7 @@ using namespace std;
             cout << "| ";
             for(size_t j = 0; j < valeurAttributs.get(i).getSize() ; j++){
                 cout << valeurAttributs.get(i).get(j);
-                space = string(tabMax[j]-valeurAttributs.get(i).get(j).size()+1,' ');
+                space = string(tabMax[j]-valeurAttributs.get(i).get(j).length()+1,' ');
                 cout << space << " | ";
             }
             cout << endl;
