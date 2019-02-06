@@ -46,10 +46,8 @@ using namespace std;
         cout << "| ";        
         for(size_t i = 0; i < nomAttributs.getSize(); i++){
             cout << nomAttributs.get(i) ;
-            for (size_t k =0 ; k < tabMax[i]-nomAttributs.get(i).size() + 1;++k) {
-                cout<< " ";
-            }
-            cout << " | " ;
+            space = string(tabMax[i]-nomAttributs.get(i).size() + 1,' ');
+            cout << space <<" | " ;
         }
         cout << endl;
         /* affichage du séparateur */
@@ -61,15 +59,14 @@ using namespace std;
             cout << "| ";
             for(size_t j = 0; j < valeurAttributs.get(i).getSize() ; j++){
                 cout << valeurAttributs.get(i).get(j);
-                for (size_t k =0 ; k < tabMax[j]-valeurAttributs.get(i).get(j).size()+1;++k){
-                    cout << " ";
-                }
-                cout << " | ";
+                space = string(tabMax[j]-valeurAttributs.get(i).get(j).size()+1,' ');
+                cout << space << " | ";
             }
             cout << endl;
         }
-
         cout << sep << endl;
+
+        delete[] tabMax;
     }
     string Table::getNomTable(){return nomTable;}
 
