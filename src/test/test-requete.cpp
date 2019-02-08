@@ -15,17 +15,17 @@ int main(int argc, char const *argv[]) {
         if (line != "exit") {
             sql = Requete(line);
             cout << "projection : " << endl;
-            if (sql.getSizeSelect() > 0) 
-                for(unsigned int i = 0; i < sql.getSizeSelect(); i++)
-                    cout << sql.getSelect(i) << " ";
+            if (sql.getSelect().getSize() > 0) 
+                for(unsigned int i = 0; i < sql.getSelect().getSize(); i++)
+                    cout << sql.getSelect().get(i) << " ";
             else 
                 cout << "NO SELECT";
             cout << endl;
             
             cout << "jointure : " << endl;
-            if (sql.getSizeFrom() > 0) 
-                for(unsigned int i = 0; i < sql.getSizeFrom(); i++)
-                    cout << sql.getFrom(i) << " ";
+            if (sql.getFrom().getSize() > 0) 
+                for(unsigned int i = 0; i < sql.getFrom().getSize(); i++)
+                    cout << sql.getFrom().get(i) << " ";
             else 
                 cout << "NO From";
             cout << endl;

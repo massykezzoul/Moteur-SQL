@@ -21,7 +21,7 @@ public:
     Table &jointure(const Table& tab1,const Table& tab2);
 
 
-
+    static std::string getFileName(std::string, bool = false, char = '/');
 
 
 };

@@ -35,6 +35,14 @@ Table* TabTable::get(string nom) const{
 	return NULL;
 }
 
+Table* TabTable::get(unsigned long int i) const{
+	if (i < 0 || i >= size) {
+		cerr << "Out of range in TabTable" << endl;
+		exit(1);
+	}
+	return tables + i;
+}
+
 unsigned long int TabTable::getSize ()const {
 	return size;
 }

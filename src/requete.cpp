@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <cstdlib>   // exit()
 #include <algorithm> // std::transform
@@ -9,29 +8,35 @@ using namespace std;
 
 void Requete::parseSelect(string sql) {
     string cle = "select";
-    unsigned int debut = 0,fin = sql.size();
+    string *res;
+    size_t debut = 0,fin = sql.size();
+
     debut = sql.find(cle);
     fin = sql.find("from");
     if (debut != string::npos && fin != string::npos) {
         debut += cle.size()+1;
         sql = sql.substr(debut,fin - debut);
-        sizeSelect = TabString::strsplit(sql,select,',');
+        unsigned long int sizeSelect = TabString::strsplit(sql,res,',');
+        select = TabString(res,sizeSelect);
     }
 }
 void Requete::parseFrom(string sql) {
     string cle = "from";
-    unsigned int debut = 0,fin = sql.size();
+    string* res;
+    size_t debut = 0,fin = sql.size();
+
     debut = sql.find(cle);
     fin = sql.find("where");
     if (debut != string::npos) {
         debut += cle.size()+1;
         sql = sql.substr(debut,fin-debut);
-        sizeFrom = TabString::strsplit(sql,from,',');
+        unsigned long int sizeFrom = TabString::strsplit(sql,res,',');
+        from = TabString(res,sizeFrom);
     }
 }
 void Requete::parseWhere(string sql) {
     string cle = "where";
-    unsigned int debut = 0,fin = sql.size();
+    size_t debut = 0,fin = sql.size();
     debut = sql.find(cle);
     fin = sql.find(";");
     if (debut != string::npos) {
@@ -43,9 +48,7 @@ void Requete::parseWhere(string sql) {
 
 string Requete::cleanLine(string ligne){
 	string clean = ligne;
-	// Suppression des commentairess
-	//clean = clean.substr(0,clean.find_first_of("#"));
-    
+
 	//supprimer les espaces en plus et les tabulations
 	//supprimer les espaces et les tabulations en debut de chaine
 	while ((clean[0] == ' ') || (clean[0] == '\t'))
@@ -74,70 +77,23 @@ string Requete::cleanLine(string ligne){
 	return clean;
 }
 
-Requete::Requete():select(NULL),sizeSelect(0),from(NULL),sizeFrom(0),where(){}
+Requete::Requete():select(),from(),where(){}
 
-Requete::Requete(string sql):select(NULL),sizeSelect(0),from(NULL),sizeFrom(0),where(){
+Requete::Requete(string sql):select(),from(),where(){
     sql = cleanLine(sql);
     parseSelect(sql);
     parseFrom(sql);
     parseWhere(sql);
 }
 
-Requete::Requete(const Requete& req){
-    /* Copie des attributs static */
-    sizeSelect = req.sizeSelect;
-    sizeFrom = req.sizeFrom;
-    where = req.where;
-    /* allocation de l'espace mémoire pour les attributs dynamique*/
-    select = new string[sizeSelect];
-    from = new string[sizeFrom];
-    /* Copie des élement dynamique */
-    for(unsigned int i = 0; i < sizeSelect; i++)
-        select[i] = req.select[i];
-    for(unsigned int i = 0; i < sizeFrom; i++)
-        from[i] = req.from[i];
+TabString &Requete::getSelect(){
+    return select;
 }
 
-Requete::~Requete(){
-    if (select != NULL) delete[] select;
-    if (from != NULL) delete[] from;    
-}
-Requete& Requete::operator=(const Requete& req){
-    if (this != &req) {
-        /* Les attributs statique*/
-        sizeSelect = req.sizeSelect;
-        sizeFrom = req.sizeFrom;
-        where = req.where;
-        /* Suppression des ancien élement dynamique et réallocation */
-        if (select != NULL) delete[] select;
-        if (from != NULL) delete[] from;
-        select = new string[sizeSelect];
-        from = new string[sizeFrom];
-        /* Copie des elements */
-        for(unsigned int i = 0; i < sizeSelect; i++)
-            select[i] = req.select[i];
-        for(unsigned int i = 0; i < sizeFrom; i++)
-            from[i] = req.from[i];
-    }
-    return *this;
+TabString &Requete::getFrom(){
+    return from;
 }
 
-string Requete::getSelect(unsigned int i)const{
-    if (i < 0 || i >= sizeSelect)
-        exit(1);
-    return select[i];
-}
-unsigned int Requete::getSizeSelect()const{
-    return sizeSelect;
-}
-string Requete::getFrom(unsigned int i)const{
-    if (i < 0 || i >= sizeFrom)
-        exit(1);
-    return from[i];
-}
-unsigned int Requete::getSizeFrom()const{
-    return sizeFrom;
-}
-string Requete::getWhere() const{
+string &Requete::getWhere() {
     return where;
 }

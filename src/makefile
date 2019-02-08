@@ -17,7 +17,7 @@ CC=g++
 CFLAGS=-Wall -pedantic -ansi 
 LDFLAGS= -g #for debugging
 EXEC=sql
-SRC= $(wildcard *.cpp) test/test-requete.cpp
+SRC= $(wildcard *.cpp) test/test-tabtable.cpp
 HEADERS = $(wildcard *.h)
 OBJ= $(SRC:.cpp=.o) 
 ARCHIVE_NAME = source_code
@@ -29,7 +29,7 @@ ARCHIVE_NAME = source_code
 all: $(EXEC)
 
 $(EXEC) : $(OBJ) $(HEADERS)
-	$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS) && echo "$(EXEC) created"
+	@$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS) && echo "$(EXEC) created"
 
 %.o: %.cpp 
 	@$(CC) -o $@ -c $< $(CFLAGS) 
@@ -49,7 +49,7 @@ exe : $(EXEC)
 	@./$(EXEC) && echo "'$(EXEC)' Done" || echo "Fail on running '$(EXEC)'"
 
 debug :
-	gdb $(EXEC)
+	@gdb $(EXEC)
 
 tar : 
 	@tar -czvf $(ARCHIVE_NAME).tar.gz makefile $(SRC) $(HEADERS) && echo "'$(ARCHIVE_NAME).tar.gz' created" || echo "FAIL"

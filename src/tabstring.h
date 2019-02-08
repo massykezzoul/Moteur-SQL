@@ -12,10 +12,12 @@ private:
 public:
     TabString();
     TabString(std::ifstream &file); 
+    TabString(std::string*&,unsigned long int);
     TabString(const TabString &tab);
     ~TabString();
 
     TabString &operator=(const TabString &tab);
+    std::string &operator[](unsigned long int);
 
     void add(std::string str);
 

@@ -20,9 +20,19 @@ TabString::TabString(ifstream &file):table(NULL),size(0)
     } else 
         exit(1);
 }
+
+TabString::TabString(string*& str,unsigned long int i):table(new string[i]),size(i) {
+    for (unsigned long int j = 0 ; j < i ; j++) {
+        cout << j << endl;
+        if (str == NULL) cout << "NULL" << endl; 
+        table[j] = str[j];
+    }
+}
+
 TabString::TabString(const TabString &tab)
 {
     size = tab.size;
+    table = new string[size];
     /*on copie les elements*/
     for (unsigned long int i = 0 ; i<size ; ++i)
     {
@@ -50,6 +60,15 @@ TabString &TabString::operator=(const TabString &tab)
     
     return *this;
 }
+
+string &TabString::operator[](unsigned long int i) {
+    if (i < 0 || i >= size) {
+        cerr << "Out of Range in TabString"<< endl;
+        exit(1);
+    }
+    return table[i];
+}
+
 void TabString::add(string str)
 {
     size++;

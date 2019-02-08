@@ -12,7 +12,7 @@ int main(int argc, char const *argv[]) {
             struct stat buffer;   
             if (stat(argv[i], &buffer) == 0){
                 mesTables.add(argv[i]);
-                cout << argv[i] << " ajouté" << endl;   
+                cout << mesTables.get(i-1)->getNomTable() << " ajouté" << endl;   
             }
             else
                 cerr << "'"<<argv[i]<<"' n'existe pas"<< endl;

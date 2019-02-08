@@ -1,7 +1,8 @@
-#include<iostream>
-#include<fstream>
+#include <iostream>
+#include <fstream>
 #include <sstream>
-#include<cstdlib>
+#include <string>
+#include <cstdlib>
 #include "table.h"
 using namespace std; 
 
@@ -16,7 +17,7 @@ using namespace std;
         ifstream stream(fileName.c_str());
         if (stream)
         {
-            nomTable=fileName;
+            nomTable=Table::getFileName(fileName);
             nomAttributs = TabString(stream);
             valeurAttributs = MatriceString(stream);
 
@@ -82,3 +83,19 @@ using namespace std;
     {
 
     }
+
+
+/*
+ * Get File Name from a Path with or without extension
+ */
+string Table::getFileName(string filePath, bool withExtension, char seperator)
+{
+	// Le dernièr point trouvé
+	size_t point = filePath.rfind(".");
+	size_t sepPos = filePath.rfind(seperator);
+    // Séparateur trouver
+	if(sepPos != string::npos)
+		return filePath.substr(sepPos + 1,(withExtension || point == string::npos ? 1 : point) - sepPos -1);
+    // Séparateur non trouver
+    return filePath.substr(0,(withExtension || point == string::npos ? filePath.size() : point));
+}

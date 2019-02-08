@@ -1,12 +1,12 @@
 #ifndef _REQUETE__H_
 #define _REQUETE__H_
 
+#include "tabstring.h"
+
 class Requete {
 private:
-    std::string* select;
-    unsigned int sizeSelect;
-    std::string* from;
-    unsigned int sizeFrom;
+    TabString select;
+    TabString from;
     std::string where;
 
     void parseSelect(std::string);
@@ -18,15 +18,10 @@ private:
 public:
     Requete();
     Requete(std::string);
-    Requete(const Requete&);
-    ~Requete();
-    Requete& operator=(const Requete&);
 
-    std::string getSelect(unsigned int)const;
-    unsigned int getSizeSelect()const;
-    std::string getFrom(unsigned int)const;
-    unsigned int getSizeFrom()const;
-    std::string getWhere() const;
+    TabString &getSelect();
+    TabString &getFrom();
+    std::string &getWhere();
 };
 
 #endif
