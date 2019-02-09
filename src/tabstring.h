@@ -11,6 +11,7 @@ public:
     TabString(std::ifstream &file); 
     TabString(std::string*&,unsigned long int);
     TabString(const TabString &tab);
+    TabString(const TabString&,const TabString&);
     ~TabString();
 
     TabString &operator=(const TabString &tab);

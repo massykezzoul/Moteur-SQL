@@ -32,6 +32,13 @@ MatriceString::MatriceString(const MatriceString& copie){
         tab[i] = copie.tab[i];
 }
 
+MatriceString::MatriceString(const MatriceString& mat1,const MatriceString& mat2)
+    :tab(new TabString[mat1.size*mat2.size]),size(0),alloc(mat1.size*mat2.size){
+    for (unsigned long int i = 0; i < mat1.size; i++)
+        for(unsigned long int j = 0; j < mat2.size; j++)
+            add(TabString(mat1[i],mat2[j]));
+}
+
 MatriceString::~MatriceString(){
     if (tab != NULL) delete[] tab;
 }
@@ -53,14 +60,18 @@ MatriceString &MatriceString::operator=(const MatriceString &t) {
 }
 
 TabString& MatriceString::operator[](unsigned long int i) {
-    if (i < 0 || i > size)
+    if (i < 0 || i > size){
+        cerr << "Out of range on MatriceString"<< endl;
         exit(1);
+    }
     return tab[i];
 }
 
-TabString MatriceString::operator[](unsigned long int i)const {
-    if (i < 0 || i > size)
+const TabString& MatriceString::operator[](unsigned long int i)const {
+    if (i < 0 || i > size){
+        cerr << "Out of range on MatriceString"<< endl;
         exit(1);
+    }
     return tab[i];
 }
 

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <sys/stat.h> // stat buffer
-#include <unistd.h>
 #include "../tabtable.h"
 
 using namespace std;

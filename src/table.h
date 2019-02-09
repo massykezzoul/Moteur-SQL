@@ -16,14 +16,15 @@ private:
 public:
     Table();
     Table(std::string fileName);
+    Table(const Table& tab1,const Table& tab2);
     std::string getNomTable();
     const TabString& getNomAttributs() const;
     const MatriceString& getValeurAttributs() const;
 
     void print(); 
-    Table &projection(TabString attributs);
-    Table &selection(std::string condition);
-    Table &jointure(const Table& tab1,const Table& tab2);
+    Table projection(TabString attributs) const;
+    Table selection(std::string condition) const;
+    Table jointure(const Table& tab1,const Table& tab2) const;
 
 };
 

@@ -4,8 +4,8 @@
 #include <string>
 #include <cstdlib>
 #include "table.h"
-using namespace std; 
 
+using namespace std; 
 
 Table::Table()
 {}
@@ -21,15 +21,21 @@ Table::Table(string fileName) {
         exit(1);
 }
 
+Table::Table(const Table& tab1,const Table& tab2)
+    :nomTable(tab1.nomTable+"JOIN"+tab2.nomTable),nomAttributs(tab1.nomAttributs,tab2.nomAttributs),valeurAttributs(tab1.valeurAttributs,tab2.valeurAttributs){
+        
+}
+
+
 void Table::print() {
     size_t *tabMax= new size_t[nomAttributs.getSize()];
     size_t max,somme=0;
     string sep,space;
     for(size_t i= 0 ; i < nomAttributs.getSize(); ++i) {
-        max = nomAttributs.get(i).length();
+        max = nomAttributs[i].size();
         for(size_t j=0 ; j < valeurAttributs.getSize();++j)
         {
-            max = (valeurAttributs.get(j).get(i).length() < max ? max : valeurAttributs.get(j).get(i).length()); 
+            max = (valeurAttributs[j][i].size() < max ? max : valeurAttributs[j][i].size()); 
         }
         tabMax[i]=max;
         somme+=tabMax[i];
@@ -40,8 +46,8 @@ void Table::print() {
     /* Affichages des noms des attributs*/
     cout << "| ";       
     for(size_t i = 0; i < nomAttributs.getSize(); i++){
-        cout << nomAttributs.get(i) ;
-        space = string(tabMax[i]-nomAttributs.get(i).length() + 1,' ');
+        cout << nomAttributs[i] ;
+        space = string(tabMax[i]-nomAttributs[i].size() + 1,' ');
         cout << space <<" | " ;
     }
     cout << endl;
@@ -51,9 +57,9 @@ void Table::print() {
     /* Affichages des valeurs des attributs */
     for(size_t i = 0; i < valeurAttributs.getSize(); i++) {
         cout << "| ";
-        for(size_t j = 0; j < valeurAttributs.get(i).getSize() ; j++){
-            cout << valeurAttributs.get(i).get(j);
-            space = string(tabMax[j]-valeurAttributs.get(i).get(j).length()+1,' ');
+        for(size_t j = 0; j < valeurAttributs[i].getSize() ; j++){
+            cout << valeurAttributs[i][j];
+            space = string(tabMax[j]-valeurAttributs[i][j].size()+1,' ');
             cout << space << " | ";
         }
         cout << endl;
@@ -74,14 +80,14 @@ const MatriceString& Table::getValeurAttributs() const{
     return valeurAttributs;
 }
 
-Table &Table::projection(TabString attributs){
+Table Table::projection(TabString attributs) const{
     return *this;
 }
-Table &Table::selection(string condition){
+Table Table::selection(string condition) const{
     return *this;
 }
-Table &Table::jointure(const Table& tab1,const Table& tab2) {
-    return *this;
+Table Table::jointure(const Table& tab1,const Table& tab2) const{
+    return Table(tab1,tab2);
 }
 
 /*

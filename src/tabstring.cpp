@@ -14,7 +14,6 @@ TabString::TabString(ifstream &file):table(NULL),size(0)
     if (file){
         string line;
         getline(file,line);
-        //std::cout << line << std::endl;
         size = strsplit(line,table,',');
         if (size == 0)
             exit(1);
@@ -24,8 +23,6 @@ TabString::TabString(ifstream &file):table(NULL),size(0)
 
 TabString::TabString(string*& str,unsigned long int i):table(new string[i]),size(i) {
     for (unsigned long int j = 0 ; j < i ; j++) {
-        cout << j << endl;
-        if (str == NULL) cout << "NULL" << endl; 
         table[j] = str[j];
     }
 }
@@ -40,6 +37,18 @@ TabString::TabString(const TabString &tab)
         table[i]=tab.table[i];
     }
 }
+
+TabString::TabString(const TabString &tab1,const TabString &tab2)
+    :table(new string[tab1.size+tab2.size]),size(tab1.size+tab2.size) {
+    /*on copie les elements*/
+    unsigned long int i = 0;
+    for (i = 0 ; i<tab1.size ; ++i)
+        table[i]=tab1[i];
+
+    for(unsigned long int j = 0; j < tab2.size; j++)
+        table[i++] = tab2[j];
+}
+
 TabString::~TabString()
 {
     if(table != NULL) delete[] table;
