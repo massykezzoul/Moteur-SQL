@@ -5,32 +5,36 @@
 
 using namespace std;
 
-TabString::TabString():table(NULL),size(0)
+TabString::TabString():table(NULL),size(0),alloc(0)
 {
 
 }
-TabString::TabString(ifstream &file):table(NULL),size(0)
+TabString::TabString(ifstream &file):table(NULL),size(0),alloc(0)
 {
     if (file){
         string line;
         getline(file,line);
         size = strsplit(line,table,',');
+        alloc = size;
         if (size == 0)
             exit(1);
     } else 
         exit(1);
 }
 
-TabString::TabString(string*& str,unsigned long int i):table(new string[i]),size(i) {
+TabString::TabString(unsigned long int i):table(new string[i]),size(0),alloc(i) {}
+
+TabString::TabString(string*& str,unsigned long int i):table(new string[i]),size(0),alloc(i) {
     for (unsigned long int j = 0 ; j < i ; j++) {
-        table[j] = str[j];
+        add(str[j]);
     }
 }
 
 TabString::TabString(const TabString &tab)
 {
     size = tab.size;
-    table = new string[size];
+    alloc = tab.alloc;
+    table = new string[alloc];
     /*on copie les elements*/
     for (unsigned long int i = 0 ; i<size ; ++i)
     {
@@ -39,32 +43,45 @@ TabString::TabString(const TabString &tab)
 }
 
 TabString::TabString(const TabString &tab1,const TabString &tab2)
-    :table(new string[tab1.size+tab2.size]),size(tab1.size+tab2.size) {
+    :table(new string[tab1.size+tab2.size]),size(0),alloc(tab1.size+tab2.size) {
     /*on copie les elements*/
     unsigned long int i = 0;
     for (i = 0 ; i<tab1.size ; ++i)
-        table[i]=tab1[i];
+        add(tab1[i]);
 
     for(unsigned long int j = 0; j < tab2.size; j++)
-        table[i++] = tab2[j];
+        add(tab2[j]);
 }
 
 TabString::~TabString()
 {
     if(table != NULL) delete[] table;
 }
+
+TabString &TabString::operator+=(const TabString &tab) {
+    for(unsigned long int i = 0; i < tab.size; i++)
+        add(tab[i]);
+    return *this;
+}
+
+
 TabString &TabString::operator=(const TabString &tab)
 {
     if(this!=&tab)
     {
-        size=tab.size;
-        /*on supprime l'ancien tableau*/
-        if (table != NULL) delete[] table;
-        table = new string[tab.size];
+        if (alloc < tab.size) {
+            /* Réallocation si espace insufisant */
+            alloc = tab.alloc;
+            /*on supprime l'ancien tableau*/
+            if (table != NULL) delete[] table;
+            table = new string[alloc];
+        }
+        size = tab.size;
+        
         /*on copie les elements*/
         for(unsigned long int i = 0 ; i < size ; ++i)
         {
-            table[i]=tab.table[i]; 
+            table[i]=tab[i]; 
         }
     }
     
@@ -89,21 +106,19 @@ string TabString::operator[](unsigned long int i) const{
 
 void TabString::add(string str)
 {
-    size++;
-    /*on cree un nouvel espace mémoire*/
-    string *copie= new string[size];
-    /*on copie les elements*/
-        for(unsigned long int i = 0 ; i < size-1 ; ++i)
-        {
-            copie[i]=table[i]; 
-        }
-    /*on ajoute l'element à la dernière case*/
-    copie[size-1]=str;
-    /*suppression de l'ancien espace*/
-    delete[] table;
-    table=copie;
+    if (size >= alloc) {
+        /* Création d'un nouvelle espace mémoire */
+        if (alloc > 0) alloc *= 2; else alloc = 2;
+        string* copie = new string[alloc];
+        /* Copie des elements */
+        for(unsigned long int i = 0; i < size - 1; i++)
+            copie[i] = str[i];
+        delete[] table;
+        table = copie;
+    }
+    table[size++] = str;
 
-}
+    }
 unsigned long int TabString::get(string str) const
 {
     unsigned long int i=0;

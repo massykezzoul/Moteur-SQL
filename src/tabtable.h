@@ -1,7 +1,7 @@
 #ifndef TABTABLE_H_
 #define TABTABLE_H_
 
-#include"table.h"
+class Table;
 
 class TabTable {
 private:

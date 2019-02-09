@@ -34,9 +34,11 @@ MatriceString::MatriceString(const MatriceString& copie){
 
 MatriceString::MatriceString(const MatriceString& mat1,const MatriceString& mat2)
     :tab(new TabString[mat1.size*mat2.size]),size(0),alloc(mat1.size*mat2.size){
+    unsigned long int k = 0;
     for (unsigned long int i = 0; i < mat1.size; i++)
         for(unsigned long int j = 0; j < mat2.size; j++)
-            add(TabString(mat1[i],mat2[j]));
+            tab[k++] = TabString(mat1[i],mat2[j]);
+    size = k;
 }
 
 MatriceString::~MatriceString(){
@@ -45,11 +47,14 @@ MatriceString::~MatriceString(){
 
 MatriceString &MatriceString::operator=(const MatriceString &t) {
     if (this!=&t) {
-        alloc = t.alloc;
+        if (alloc < t.size) {
+            /* Suppression de l'ancien Tableau */
+            alloc = t.alloc;
+            if (tab != NULL) delete[] tab;
+            tab = new TabString[alloc];
+        }
         size = t.size;
-        /* Suppression de l'ancien Tableau */
-        if (tab != NULL) delete[] tab;
-        tab = new TabString[t.size];
+        
         /* copie des elements */
         for(unsigned long int i = 0; i < size; i++) {
             tab[i] = t.tab[i];
