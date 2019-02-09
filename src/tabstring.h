@@ -1,9 +1,6 @@
 #ifndef TABSTRING_H_
 #define TABSTRING_H_
 
-#include <string>
-#include <fstream>
-
 class TabString {
 private:
     std::string *table; 
@@ -18,6 +15,7 @@ public:
 
     TabString &operator=(const TabString &tab);
     std::string &operator[](unsigned long int);
+    std::string operator[](unsigned long int) const;
 
     void add(std::string str);
 

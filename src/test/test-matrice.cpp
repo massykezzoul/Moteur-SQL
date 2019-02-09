@@ -15,12 +15,12 @@ int main(int argc, char const *argv[])
 
             /* Affichages des nom des attributs*/            
             for(size_t i = 0; i < tab.getSize(); i++)
-                cout << tab.get(i) << " | ";
+                cout << tab[i] << " | ";
             cout << endl << endl;
             /* Affichages des valeurs des attributs */
             for(size_t i = 0; i < mat.getSize(); i++) {
-                for(size_t j = 0; j < mat.get(i).getSize() ; j++)
-                    cout << mat.get(i).get(j) << " | ";
+                for(size_t j = 0; j < mat[i].getSize() ; j++)
+                    cout << mat[i][j] << " | ";
                 cout << endl;
             }
 

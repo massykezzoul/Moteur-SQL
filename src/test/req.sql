@@ -1,0 +1,12 @@
+select att1,att2,att3 from Table1,table2,table3 where age > 20 or age < 18;
+select att1,att2,att3 from Table1,table2,table3;
+select att1,att2,att3 from Table1 where age > 20 or age < 18;
+select att1,att2,att3 from Table1;
+select att1 from Table1,table2,table3 where age > 20 or age < 18;
+select att1 from Table1,table2,table3;
+select att1 from Table1 where age > 20 or age < 18;
+select att1 from Table1;
+select * from Table1,table2,table3 where age > 20 or age < 18;
+select * from Table1,table2,table3;
+select * from Table1 where age > 20 or age < 18;
+select * from Table1;

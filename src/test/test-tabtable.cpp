@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]) {
             
             tab = mesTables.get(line);
             if (line != "exit") {
-                tab.print();
+                cout << tab << endl; 
             }
         }
     } else {
