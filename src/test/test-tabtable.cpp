@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sys/stat.h> // stat buffer
+#include <unistd.h>
 #include "../tabtable.h"
 
 using namespace std;
@@ -12,14 +13,14 @@ int main(int argc, char const *argv[]) {
             struct stat buffer;   
             if (stat(argv[i], &buffer) == 0){
                 mesTables.add(argv[i]);
-                cout << mesTables.get(i-1)->getNomTable() << " ajouté" << endl;   
+                cout << mesTables[i-1].getNomTable() << " ajouté" << endl;   
             }
             else
                 cerr << "'"<<argv[i]<<"' n'existe pas"<< endl;
         }
         
         string line;
-        Table* tab;
+        Table tab;
         
         cout << "Tapez exit pour quitter"<<endl;
         cout << "Donnez la table à afficher : "<< endl;
@@ -28,10 +29,8 @@ int main(int argc, char const *argv[]) {
             cin >> line;
             
             tab = mesTables.get(line);
-            if ( tab != NULL) {
-                tab->print();
-            } else if (line != "exit") {
-                cout << "la table '" << line << "' n'existe pas" << endl;
+            if (line != "exit") {
+                tab.print();
             }
         }
     } else {

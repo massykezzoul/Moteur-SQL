@@ -6,6 +6,22 @@ using namespace std;
 
 TabTable::TabTable():tables(NULL),size(0){}
 
+Table& TabTable::operator[](unsigned long int i) {
+	if (i < 0 || i >= size) {
+		cerr << "Out of range in TabTable" << endl;
+		exit(1);
+	}
+	return tables[i];
+}
+
+Table TabTable::operator[](unsigned long int i) const{
+	if (i < 0 || i >= size) {
+		cerr << "Out of range in TabTable" << endl;
+		exit(1);
+	}
+	return tables[i];
+}
+
 void TabTable::add (string fileName){
 	size++;
 
@@ -26,21 +42,21 @@ void TabTable::add(const char* fileName) {
 	add(file); 
 }
 
-Table* TabTable::get(string nom) const{
+Table& TabTable::get(string nom) const{
 	for (unsigned long int i=0; i<getSize(); i++){
 		if (tables[i].getNomTable()==nom)
-			return tables + i;
+			return tables[i];
 	}
 	cerr << "Table non trouvé" << endl;
-	return NULL;
+	exit(1);
 }
 
-Table* TabTable::get(unsigned long int i) const{
+Table& TabTable::get(unsigned long int i) const{
 	if (i < 0 || i >= size) {
 		cerr << "Out of range in TabTable" << endl;
-		exit(1);
+		//	return Table();
 	}
-	return tables + i;
+	return tables[i];
 }
 
 unsigned long int TabTable::getSize ()const {
