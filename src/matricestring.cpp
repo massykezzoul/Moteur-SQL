@@ -52,6 +52,18 @@ MatriceString &MatriceString::operator=(const MatriceString &t) {
     return *this;
 }
 
+TabString& MatriceString::operator[](unsigned long int i) {
+    if (i < 0 || i > size)
+        exit(1);
+    return tab[i];
+}
+
+TabString MatriceString::operator[](unsigned long int i)const {
+    if (i < 0 || i > size)
+        exit(1);
+    return tab[i];
+}
+
 void MatriceString::add(const TabString& jdide){
     if (size >= alloc) {
         /* Création d'un nouvelle espace mémoire */

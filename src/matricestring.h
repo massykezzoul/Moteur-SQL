@@ -16,13 +16,13 @@ public:
     ~MatriceString();
 
     MatriceString &operator=(const MatriceString &tab);
+    TabString &operator[](unsigned long int);
+    TabString operator[](unsigned long int)const;
 
     void add(const TabString&);
     TabString &get(unsigned long int) const;
     unsigned long int getSize() const;
 
 };
-
-
 
 #endif
