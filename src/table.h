@@ -11,23 +11,22 @@ private:
     TabString nomAttributs;
     MatriceString valeurAttributs;
 
+    static std::string getFileName(std::string, bool = false, char = '/');
+
 public:
     Table();
     Table(std::string fileName);
     std::string getNomTable();
+    const TabString& getNomAttributs() const;
+    const MatriceString& getValeurAttributs() const;
+
     void print(); 
     Table &projection(TabString attributs);
     Table &selection(std::string condition);
     Table &jointure(const Table& tab1,const Table& tab2);
 
-
-    static std::string getFileName(std::string, bool = false, char = '/');
-
-
 };
 
-
-
-
+std::ostream& operator<<(std::ostream&,const Table&);
 
 #endif
