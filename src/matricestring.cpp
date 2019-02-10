@@ -7,6 +7,16 @@ using namespace std;
 
 MatriceString::MatriceString():tab(NULL),size(0),alloc(0){}
 
+MatriceString::MatriceString(unsigned long int i):tab(new TabString[i]),size(0),alloc(i) {}
+
+MatriceString::MatriceString(unsigned long int i,unsigned long int j):tab(new TabString[i]),size(0),alloc(0) {
+    for(unsigned long int k = 0; k < i; k++) {
+        tab[i] = TabString(j);
+    }
+    
+}
+
+
 MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
     if (file){
         string line;

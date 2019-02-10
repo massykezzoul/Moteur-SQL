@@ -12,6 +12,7 @@ private:
 public:
     MatriceString();
     MatriceString(std::ifstream& file);
+    MatriceString(unsigned long int,unsigned long int);
     MatriceString(const MatriceString&);
     MatriceString(const MatriceString&,const MatriceString&);
     ~MatriceString();
