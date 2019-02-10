@@ -15,7 +15,7 @@ Table& TabTable::operator[](unsigned long int i) {
 	return tables[i];
 }
 
-Table TabTable::operator[](unsigned long int i) const{
+const Table& TabTable::operator[](unsigned long int i) const{
 	if (i < 0 || i >= size) {
 		cerr << "Out of range in TabTable" << endl;
 		exit(1);

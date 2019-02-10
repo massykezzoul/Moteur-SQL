@@ -5,6 +5,7 @@
 #include <algorithm> // std::transform
 #include <cstdlib>
 #include "table.h"
+#include "tabtable.h"
 
 
 using namespace std; 
@@ -29,6 +30,21 @@ Table::Table(const Table& tab1,const Table& tab2)
 
 }
 
+Table::Table(const TabTable& tab) {
+    nomTable = "Jointure";
+    /* Allocation de la mémoire nécessaire */ 
+    unsigned long int s = 0;
+    unsigned long int s1 = 0;
+    for(unsigned long int i = 0; i < tab.getSize(); i++) {
+        s += tab[i].getNomAttributs().getSize();
+        s1 *= tab[i].getValeurAttributs().getSize();
+    }
+    nomAttributs = TabString(s);
+    valeurAttributs = MatriceString(s1,s);
+
+    /* Mémoire alloué */
+
+}
 
 void Table::print() {
     size_t *tabMax= new size_t[nomAttributs.getSize()];
