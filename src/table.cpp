@@ -126,18 +126,10 @@ Table Table::selection(string condition) const{
 Table Table::jointure(const Table& tab1,const Table& tab2) const{
     return Table(tab1,tab2);
 }
+
 /* Change l'instance courante */
 void Table::jointure(const TabTable& tab){
-    nomTable = tab[0].getNomTable();
-    for(unsigned long int i = 1; i < tab.getSize(); i++) {
-        nomTable += "JOIN"+tab[i].getNomTable();
-    }
-    /* Nom des attributts */
-    nomAttributs = tab[0].getNomAttributs();
-    for(unsigned long int i = 1; i < tab.getSize(); i++)
-        nomAttributs += tab[i].getNomAttributs();
-    
-    /* Omba3 wellah  ma3labali */
+
 }
 
 
