@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <algorithm> // std::transform
 #include <cstdlib>
 #include "table.h"
 
@@ -13,8 +14,9 @@ Table::Table()
 Table::Table(string fileName) {
     ifstream stream(fileName.c_str());
     if (stream)
-    {
+    {   
         nomTable=Table::getFileName(fileName);
+        transform(nomTable.begin(), nomTable.end(), nomTable.begin(), ::tolower);
         nomAttributs = TabString(stream);
         valeurAttributs = MatriceString(stream);
     }
@@ -24,7 +26,7 @@ Table::Table(string fileName) {
 
 Table::Table(const Table& tab1,const Table& tab2)
     :nomTable(tab1.nomTable+"JOIN"+tab2.nomTable),nomAttributs(tab1.nomAttributs,tab2.nomAttributs),valeurAttributs(tab1.valeurAttributs,tab2.valeurAttributs){
-        
+
 }
 
 
@@ -70,7 +72,7 @@ void Table::print() {
     
 }
 
-string Table::getNomTable(){
+string Table::getNomTable() const{
     return nomTable;
 }
 
@@ -124,6 +126,20 @@ Table Table::selection(string condition) const{
 Table Table::jointure(const Table& tab1,const Table& tab2) const{
     return Table(tab1,tab2);
 }
+/* Change l'instance courante */
+void Table::jointure(const TabTable& tab){
+    nomTable = tab[0].getNomTable();
+    for(unsigned long int i = 1; i < tab.getSize(); i++) {
+        nomTable += "JOIN"+tab[i].getNomTable();
+    }
+    /* Nom des attributts */
+    nomAttributs = tab[0].getNomAttributs();
+    for(unsigned long int i = 1; i < tab.getSize(); i++)
+        nomAttributs += tab[i].getNomAttributs();
+    
+    /* Omba3 wellah  ma3labali */
+}
+
 
 /*
  * Get File Name from a Path with or without extension

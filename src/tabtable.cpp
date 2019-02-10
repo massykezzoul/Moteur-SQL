@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "tabtable.h"
+#include "table.h"
 
 using namespace std;
 
