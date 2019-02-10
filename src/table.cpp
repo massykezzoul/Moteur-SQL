@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "table.h"
 
+
 using namespace std; 
 
 Table::Table()
@@ -81,7 +82,41 @@ const MatriceString& Table::getValeurAttributs() const{
 }
 
 Table Table::projection(TabString attributs) const{
-    return *this;
+    Table tab;
+    tab.nomTable=nomTable;
+    tab.nomAttributs=attributs;
+    tab.valeurAttributs=MatriceString();
+    tab.valeurAttributs.setSize(valeurAttributs.getSize());
+    tab.valeurAttributs.setAlloc(valeurAttributs.getAlloc());
+    tab.valeurAttributs.setTab(valeurAttributs.getAlloc());
+    
+
+    /*on copie les élements projetés*/
+    for(size_t i = 0; i < attributs.getSize(); i++)
+    {
+        cout<<"ok"<<endl;
+        
+        for(size_t j = 0; j <nomAttributs.getSize(); j++)
+        {
+        cout<<"ok"<<endl;
+
+            if (tab.nomAttributs.get(i)==nomAttributs.get(j))
+            {
+        cout<<"ok"<<endl;
+
+                for(size_t k = 0; k < valeurAttributs.getSize(); k++)
+                {
+                    cout<<"ok"<<endl;
+                    tab.valeurAttributs.get(i).get(k)=valeurAttributs.get(j).get(k);
+                }
+                
+            }
+        }
+        
+    }
+    
+    
+    return tab;
 }
 Table Table::selection(string condition) const{
     return *this;

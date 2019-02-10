@@ -13,6 +13,8 @@ public:
     MatriceString();
     MatriceString(std::ifstream& file);
     MatriceString(const MatriceString&);
+    MatriceString(const MatriceString&,const TabString&);
+
     MatriceString(const MatriceString&,const MatriceString&);
     ~MatriceString();
 
@@ -23,6 +25,11 @@ public:
     void add(const TabString&);
     TabString &get(unsigned long int) const;
     unsigned long int getSize() const;
+    unsigned long int getAlloc() const;
+    void setSize(unsigned long int size);
+    void setAlloc(unsigned long int alloc);
+    void setTab(unsigned long int alloc);
+
 
 };
 

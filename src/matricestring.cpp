@@ -31,6 +31,23 @@ MatriceString::MatriceString(const MatriceString& copie){
     for (unsigned long int i = 0; i < size; i++)
         tab[i] = copie.tab[i];
 }
+/*MatriceString::MatriceString(const MatriceString& copie,const TabString &attr)
+{
+    alloc = copie.alloc;
+    size = copie.size;
+    tab = new TabString[alloc];
+    for (unsigned long int j=0;j<attr.getSize();++j)
+    {
+    for (unsigned long int i = 0; i < size; i++)
+       {    if (tab[i].get(attr.get(j))==j)
+           tab[i].get(j) = copie.tab[i].get(j); }
+    }
+}*/
+ void MatriceString::setTab(unsigned long int alloc)
+ {
+     tab = new TabString[alloc];
+ }
+
 
 MatriceString::MatriceString(const MatriceString& mat1,const MatriceString& mat2)
     :tab(new TabString[mat1.size*mat2.size]),size(0),alloc(mat1.size*mat2.size){
@@ -98,3 +115,14 @@ TabString& MatriceString::get(unsigned long int i) const {
 unsigned long int MatriceString::getSize() const{
     return size;
 }
+unsigned long int MatriceString::getAlloc() const {
+    return alloc;
+}
+void MatriceString::setSize(unsigned long int size){
+    this->size=size;
+}
+void MatriceString::setAlloc(unsigned long int alloc){
+    this->alloc=alloc;
+}
+
+
