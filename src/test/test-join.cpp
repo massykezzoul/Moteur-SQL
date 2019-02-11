@@ -33,7 +33,6 @@ int main(int argc, char const *argv[]) {
             Table tab = Table(mesTables[0],mesTables[1]);
             for(unsigned long int i = 2; i < mesTables.getSize(); i++)
                 tab = Table(tab,mesTables[i]);
-            
             //tab = tab.jointure(mesTables[0],mesTables[1]);
             t2 = clock();
             cout << tab.getNomTable()<< endl;

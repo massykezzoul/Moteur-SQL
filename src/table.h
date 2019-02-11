@@ -18,6 +18,7 @@ public:
     Table();
     Table(std::string fileName);
     Table(const Table& tab1,const Table& tab2);
+    Table(const TabTable&);    
     std::string getNomTable() const;
     const TabString& getNomAttributs() const;
     const MatriceString& getValeurAttributs() const;

@@ -10,7 +10,7 @@ private:
 public:
 	TabTable();
 	Table& operator[](unsigned long int);
-	Table operator[](unsigned long int) const;
+	const Table& operator[](unsigned long int) const;
 
 	void add(std::string fileName);
 	void add(const char*);

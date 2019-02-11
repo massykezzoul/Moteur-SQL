@@ -14,7 +14,7 @@
 ##################################################################################################################
  
 CC=g++
-CFLAGS=-Wall -O3 -pedantic -ansi 
+CFLAGS=-Wall -pedantic -ansi
 LDFLAGS= -g #for debugging
 EXEC=sql
 SRC= $(wildcard *.cpp) test/test-join.cpp
