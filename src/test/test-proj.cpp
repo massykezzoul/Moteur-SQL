@@ -14,7 +14,7 @@ int main(int argc, char const *argv[])
         attr.add("NOM");
         attr.add("PRENOM");
         cout<<"ok"<<endl;
-       tab=matable.projection(attr);
+        tab=matable.projection(attr);
        
         tab.print();
         cout << "La Table '" << matable.getNomTable() <<  "' ; " << endl;

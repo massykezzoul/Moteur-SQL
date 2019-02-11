@@ -113,11 +113,14 @@ void MatriceString::add(const TabString& jdide){
         if (alloc > 0) alloc *= 2; else alloc = 2;
         TabString* copie = new TabString[alloc];
         /* Copie des elements */
-        for(unsigned long int i = 0; i < size - 1; i++)
+         for(unsigned long int i = 0; i < size - 1; i++)
             copie[i] = tab[i];
         delete[] tab;
+        cout << "there" << endl;
         tab = copie;
+        cout << "and not there" << endl;
     }
+    cout << "Erreur pas dans la boucle" << endl;
     tab[size++] = jdide;
 }
 

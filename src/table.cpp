@@ -103,37 +103,22 @@ Table Table::projection(TabString attributs) const{
     Table tab;
     tab.nomTable=nomTable;
     tab.nomAttributs=attributs;
-    tab.valeurAttributs=MatriceString();
-    tab.valeurAttributs.setSize(valeurAttributs.getSize());
-    tab.valeurAttributs.setAlloc(valeurAttributs.getAlloc());
-    tab.valeurAttributs.setTab(valeurAttributs.getAlloc());
-    
-
-    /*on copie les élements projetés*/
-    for(size_t i = 0; i < attributs.getSize(); i++)
-    {
-        cout<<"ok"<<endl;
-        
-        for(size_t j = 0; j <nomAttributs.getSize(); j++)
-        {
-        cout<<"ok"<<endl;
-
-            if (tab.nomAttributs.get(i)==nomAttributs.get(j))
-            {
-        cout<<"ok"<<endl;
-
-                for(size_t k = 0; k < valeurAttributs.getSize(); k++)
-                {
-                    cout<<"ok"<<endl;
-                    tab.valeurAttributs.get(i).get(k)=valeurAttributs.get(j).get(k);
-                }
-                
-            }
-        }
-        
+    tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
+    unsigned long int *elements = new unsigned long int[attributs.getSize()];
+    for(unsigned long int i = 0; i < attributs.getSize(); i++) {
+        elements[i] = nomAttributs.get(attributs[i]);
     }
     
-    
+    /*on copie les élements projetés*/
+    cout << "Debut de la copie des elements" << endl;
+    for(unsigned long int i = 0; i < valeurAttributs.getSize(); i++) {
+        TabString tmp(attributs.getSize());
+        for(unsigned long int j = 0; j < attributs.getSize(); j++) {
+            tmp.add(valeurAttributs[i][elements[j]]);
+        }
+        tab.valeurAttributs.add(tmp);
+    }
+
     return tab;
 }
 Table Table::selection(string condition) const{

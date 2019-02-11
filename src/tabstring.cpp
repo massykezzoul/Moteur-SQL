@@ -69,19 +69,22 @@ TabString &TabString::operator=(const TabString &tab)
 {
     if(this!=&tab)
     {
-        if (alloc < tab.size) {
-            /* Réallocation si espace insufisant */
-            alloc = tab.alloc;
-            /*on supprime l'ancien tableau*/
-            if (table != NULL) delete[] table;
-            table = new string[alloc];
-        }
+        cout << "OK0" << endl;
+        /* Réallocation si espace insufisant */
+        alloc = tab.alloc;
+        cout << alloc << endl;
+        cout << endl;
+        /*on supprime l'ancien tableau*/
+        if (table != NULL) delete[] table;
+        table = new string[alloc];
+        
         size = tab.size;
         
         /*on copie les elements*/
+        cout << "ok111 " << endl;
         for(unsigned long int i = 0 ; i < size ; ++i)
         {
-            table[i]=tab[i]; 
+            table[i]=tab[i];
         }
     }
     
@@ -111,14 +114,14 @@ void TabString::add(string str)
         if (alloc > 0) alloc *= 2; else alloc = 2;
         string* copie = new string[alloc];
         /* Copie des elements */
-        for(unsigned long int i = 0; i < size - 1; i++)
-            copie[i] = str[i];
-        delete[] table;
+        for(unsigned long int i = 0; i < size; i++)
+            copie[i] = table[i];
+        if (table != NULL) delete[] table;
         table = copie;
     }
     table[size++] = str;
-
-    }
+    
+}
 unsigned long int TabString::get(string str) const
 {
     unsigned long int i=0;
