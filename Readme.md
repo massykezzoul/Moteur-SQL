@@ -73,6 +73,7 @@ Encadrante : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
 - Belkassim BOUZIDI : `bouzidibelkassim@gmail.com`
 - Chakib ELHOUITI : `celhouiti@gmail.com`
 - Ramzi ZEROUAL : `ramzizerr@gmail.com`
+- Fei YANG : `fei.yang@insa-cvl.fr`
 
 Début du projet : Janvier 2019<br>
 Fin du projet   : ~ 2019<br>
