@@ -19,8 +19,13 @@ MatriceString::MatriceString(unsigned long int i,unsigned long int j):tab(new Ta
 MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
     if (file){
         string line;
-        file.seekg(0, file.end);
-        alloc = file.tellg();
+        /* Compter le  nombre de ligne */
+        unsigned long int nombre_ligne = 0;
+        while ( !file.eof()) {
+            getline(file,line);
+            if (line != "") ++nombre_ligne;
+        }
+        alloc = nombre_ligne;
         file.seekg(0, file.beg);
         getline(file,line);
         tab = new TabString[alloc];
