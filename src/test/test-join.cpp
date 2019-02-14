@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <sys/stat.h> // stat buffer
 #include "../table.h"
 #include "../tabtable.h"
@@ -35,11 +36,16 @@ int main(int argc, char const *argv[]) {
                 tab = Table(tab,mesTables[i]);
             //tab = tab.jointure(mesTables[0],mesTables[1]);
             t2 = clock();
+            ofstream file("jointure.txt");
+
             cout << tab.getNomTable()<< endl;
             cout << "Temps d'execution : " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC
                  << "Sec pour : " << tab.getValeurAttributs().getSize() << " Lignes"
                  << " Et " << tab.getNomAttributs().getSize() << " Colonnes" << endl;
-            //cout << tab << endl;
+            t1 = clock();
+            file << tab << endl;
+            t2 = clock();
+            cout << "Écriture des données en " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Sec" << endl;
         }
     }else {
         cerr << "Qlile args" << endl;

@@ -3,4 +3,5 @@
 src/.*
 src/*/*.o
 src/*.o
+src/jointure.txt
 src/sql

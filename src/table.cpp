@@ -103,7 +103,7 @@ Table Table::projection(TabString attributs) const{
     Table tab;
     tab.nomTable=nomTable;
     tab.nomAttributs=attributs;
-    tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
+    tab.valeurAttributs=MatriceString(valeurAttributs.getSize(),nomAttributs.getSize());
     unsigned long int *elements = new unsigned long int[attributs.getSize()];
     for(unsigned long int i = 0; i < attributs.getSize(); i++) {
         elements[i] = nomAttributs.get(attributs[i]);
@@ -164,8 +164,6 @@ ostream& operator<<(ostream& stream,const Table& tab) {
         tabMax[i]=max;
         somme+=tabMax[i];
     }
-    
-    stream << endl;
     
     /* Affichages des noms des attributs*/
     stream << "| ";       
