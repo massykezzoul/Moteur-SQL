@@ -95,7 +95,7 @@ string &TabString::operator[](unsigned long int i){
     return table[i];
 }
 
-string TabString::operator[](unsigned long int i) const{
+const string &TabString::operator[](unsigned long int i) const{
     if (i < 0 || i >= size) {
         cerr << "Out of Range in TabString"<< endl;
         exit(1);
@@ -103,7 +103,7 @@ string TabString::operator[](unsigned long int i) const{
     return table[i];
 }
 
-void TabString::add(string str)
+void TabString::add(const string& str)
 {
     if (size >= alloc) {
         /* Création d'un nouvelle espace mémoire */

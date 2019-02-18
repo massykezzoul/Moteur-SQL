@@ -11,7 +11,7 @@ MatriceString::MatriceString(unsigned long int i):tab(new TabString[i]),size(0),
 
 MatriceString::MatriceString(unsigned long int i,unsigned long int j):tab(new TabString[i]),size(0),alloc(i) {
     for(unsigned long int k = 0; k < i; k++) {
-        tab[i] = TabString(j);
+        tab[k] = TabString(j);
     }
 }
 
@@ -78,12 +78,10 @@ MatriceString::~MatriceString(){
 
 MatriceString &MatriceString::operator=(const MatriceString &t) {
     if (this!=&t) {
-        if (alloc < t.size) {
-            /* Suppression de l'ancien Tableau */
-            alloc = t.alloc;
-            if (tab != NULL) delete[] tab;
-            tab = new TabString[alloc];
-        }
+        /* Suppression de l'ancien Tableau */
+        alloc = t.alloc;
+        if (tab != NULL) delete[] tab;
+        tab = new TabString[alloc];
         size = t.size;
         
         /* copie des elements */
@@ -117,12 +115,31 @@ void MatriceString::add(const TabString& jdide){
         if (alloc > 0) alloc *= 2; else alloc = 2;
         TabString* copie = new TabString[alloc];
         /* Copie des elements */
-         for(unsigned long int i = 0; i < size - 1; i++)
+         for(unsigned long int i = 0; i < size - 1; i++) {
+            //cout << "alloc : "<< alloc << " size : "<< size << " : " <<i << endl; 
             copie[i] = tab[i];
+        }
         delete[] tab;
         tab = copie;
     }
+    // cout << "OK" << endl;
     tab[size++] = jdide;
+}
+
+void MatriceString::addCollonne(const MatriceString& mat,unsigned long int indice) {
+    if (size == 0) {
+        for(unsigned long int i = 0; i < mat.size; i++) {
+            tab[i].add(mat[i][indice]);
+            size++;
+        }
+    } else if (size == mat.size) { 
+        for(unsigned long int i = 0; i < size; i++)
+            this->tab[i].add(mat[i][indice]);
+    }else {
+        cerr << "Erreur à l'ajout de la collonne" << endl;
+        cerr << size << " != " << mat.size << endl;
+        exit(1);
+    }
 }
 
 TabString& MatriceString::get(unsigned long int i) const {

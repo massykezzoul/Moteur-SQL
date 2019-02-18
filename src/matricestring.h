@@ -25,6 +25,7 @@ public:
     const TabString &operator[](unsigned long int)const;
 
     void add(const TabString&);
+    void addCollonne(const MatriceString&,unsigned long int);
     TabString &get(unsigned long int) const;
     unsigned long int getSize() const;
     unsigned long int getAlloc() const;

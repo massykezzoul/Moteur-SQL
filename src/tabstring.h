@@ -18,10 +18,10 @@ public:
     TabString &operator=(const TabString &tab);
     TabString &operator+=(const TabString &tab);
     std::string &operator[](unsigned long int);
-    std::string operator[](unsigned long int) const;
+    const std::string &operator[](unsigned long int) const;
 
 
-    void add(std::string str);
+    void add(const std::string& str);
 
     unsigned long int get(std::string str) const ;
     std::string get(unsigned long int i) const;

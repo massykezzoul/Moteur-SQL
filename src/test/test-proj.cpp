@@ -10,14 +10,12 @@ int main(int argc, char const *argv[])
     if (argc == 2) {
         Table tab;
         Table matable(argv[1]);
-        TabString attr;
-        attr.add("NOM");
-        attr.add("PRENOM");
-        cout<<"ok"<<endl;
+        TabString attr(2);
+        attr.add("\"code postal\"");
+        attr.add("\"ville\"");
         tab=matable.projection(attr);
-       
-        tab.print();
-        cout << "La Table '" << matable.getNomTable() <<  "' ; " << endl;
+        cout << endl << tab << endl;
+        cout << "La Table '" << matable.getNomTable() <<  "'" << endl;
     } else {
         cerr << "Please give a file"<< endl;
     }

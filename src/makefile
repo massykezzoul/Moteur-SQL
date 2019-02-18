@@ -17,7 +17,7 @@ CC=g++
 CFLAGS=-Wall -pedantic -ansi -O3
 LDFLAGS= -g #for debugging
 EXEC=sql
-SRC= $(wildcard *.cpp) test/test-join.cpp
+SRC= $(wildcard *.cpp) test/test-proj.cpp
 HEADERS = $(wildcard *.h)
 OBJ= $(SRC:.cpp=.o) 
 ARCHIVE_NAME = source_code
