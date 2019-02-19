@@ -34,7 +34,7 @@ MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
             add(TabString(file));
         }
     }
-    else 
+    else
         exit(1);
 }
 
@@ -45,23 +45,6 @@ MatriceString::MatriceString(const MatriceString& copie){
     for (unsigned long int i = 0; i < size; i++)
         tab[i] = copie.tab[i];
 }
-/*MatriceString::MatriceString(const MatriceString& copie,const TabString &attr)
-{
-    alloc = copie.alloc;
-    size = copie.size;
-    tab = new TabString[alloc];
-    for (unsigned long int j=0;j<attr.getSize();++j)
-    {
-    for (unsigned long int i = 0; i < size; i++)
-       {    if (tab[i].get(attr.get(j))==j)
-           tab[i].get(j) = copie.tab[i].get(j); }
-    }
-}*/
- void MatriceString::setTab(unsigned long int alloc)
- {
-     tab = new TabString[alloc];
- }
-
 
 MatriceString::MatriceString(const MatriceString& mat1,const MatriceString& mat2)
     :tab(new TabString[mat1.size*mat2.size]),size(0),alloc(mat1.size*mat2.size){
@@ -83,12 +66,12 @@ MatriceString &MatriceString::operator=(const MatriceString &t) {
         if (tab != NULL) delete[] tab;
         tab = new TabString[alloc];
         size = t.size;
-        
+
         /* copie des elements */
         for(unsigned long int i = 0; i < size; i++) {
             tab[i] = t.tab[i];
         }
-        
+
     }
     return *this;
 }
@@ -116,7 +99,7 @@ void MatriceString::add(const TabString& jdide){
         TabString* copie = new TabString[alloc];
         /* Copie des elements */
          for(unsigned long int i = 0; i < size - 1; i++) {
-            //cout << "alloc : "<< alloc << " size : "<< size << " : " <<i << endl; 
+            //cout << "alloc : "<< alloc << " size : "<< size << " : " <<i << endl;
             copie[i] = tab[i];
         }
         delete[] tab;
@@ -126,13 +109,13 @@ void MatriceString::add(const TabString& jdide){
     tab[size++] = jdide;
 }
 
-void MatriceString::addCollonne(const MatriceString& mat,unsigned long int indice) {
+void MatriceString::addColonne(const MatriceString& mat,unsigned long int indice) {
     if (size == 0) {
         for(unsigned long int i = 0; i < mat.size; i++) {
             tab[i].add(mat[i][indice]);
             size++;
         }
-    } else if (size == mat.size) { 
+    } else if (size == mat.size) {
         for(unsigned long int i = 0; i < size; i++)
             this->tab[i].add(mat[i][indice]);
     }else {
@@ -142,23 +125,6 @@ void MatriceString::addCollonne(const MatriceString& mat,unsigned long int indic
     }
 }
 
-TabString& MatriceString::get(unsigned long int i) const {
-    if (i < 0 || i > size)
-        exit(1);
-    return tab[i];        
-}
-
 unsigned long int MatriceString::getSize() const{
     return size;
 }
-unsigned long int MatriceString::getAlloc() const {
-    return alloc;
-}
-void MatriceString::setSize(unsigned long int size){
-    this->size=size;
-}
-void MatriceString::setAlloc(unsigned long int alloc){
-    this->alloc=alloc;
-}
-
-
