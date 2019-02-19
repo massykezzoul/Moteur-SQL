@@ -14,10 +14,10 @@
 ##################################################################################################################
  
 CC=g++
-CFLAGS=-Wall -pedantic -ansi -O3
+CFLAGS=-Wall -pedantic -ansi
 LDFLAGS= -g #for debugging
 EXEC=sql
-SRC= $(wildcard *.cpp) test/test-proj.cpp
+SRC= $(wildcard *.cpp) test/test-requete.cpp
 HEADERS = $(wildcard *.h)
 OBJ= $(SRC:.cpp=.o) 
 ARCHIVE_NAME = source_code
