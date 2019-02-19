@@ -9,10 +9,9 @@ private:
 public:
     TabString();
     TabString(std::ifstream &file); 
-    TabString(unsigned long int);
-    TabString(std::string*&,unsigned long int);
+    TabString(unsigned long int);// allouer 
     TabString(const TabString &tab);
-    TabString(const TabString&,const TabString&);
+    TabString(const TabString&,const TabString&); // projection 
     ~TabString();
 
     TabString &operator=(const TabString &tab);
