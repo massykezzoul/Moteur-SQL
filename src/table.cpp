@@ -104,24 +104,9 @@ Table Table::projection(TabString attributs) const{
     tab.nomTable=nomTable;
     tab.nomAttributs=attributs;
     tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
-    //unsigned long int *elements = new unsigned long int[attributs.getSize()];
     for(unsigned long int i = 0; i < attributs.getSize(); i++) {
         tab.valeurAttributs.addCollonne(valeurAttributs,nomAttributs.get(attributs[i]));
     }
-
-    /* Ancienne version 
-    cout << "Debut de la copie des elements" << endl;
-    for(unsigned long int i = 0; i < valeurAttributs.getSize(); i++) {
-        TabString tmp(attributs.getSize());
-        for(unsigned long int j = 0; j < attributs.getSize(); j++) {
-            cout << i << " , " << elements[j] << endl;
-            tmp.add(valeurAttributs[i][elements[j]]);
-        }
-        cout << tmp[0] << " | " << tmp[1] << endl;
-        tab.valeurAttributs.add(tmp);
-    }
-    */
-
     return tab;
 }
 Table Table::selection(string condition) const{
