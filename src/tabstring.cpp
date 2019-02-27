@@ -24,7 +24,11 @@ TabString::TabString(ifstream &file):table(NULL),size(0),alloc(0)
 
 TabString::TabString(unsigned long int i):table(new string[i]),size(0),alloc(i) {}
 
-
+TabString::TabString(string*& str,unsigned long int i):table(new string[i]),size(0),alloc(i) {
+    for (unsigned long int j = 0 ; j < i ; j++) {
+        add(str[j]);
+    }
+}
 
 
 TabString::TabString(const TabString &tab)

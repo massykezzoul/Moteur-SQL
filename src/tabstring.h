@@ -10,6 +10,7 @@ public:
     TabString();
     TabString(std::ifstream &file); 
     TabString(unsigned long int);// allouer 
+    TabString(std::string*& str,unsigned long int i);
     TabString(const TabString &tab);
     TabString(const TabString&,const TabString&); // projection 
     ~TabString();
