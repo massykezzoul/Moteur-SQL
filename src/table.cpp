@@ -8,20 +8,20 @@
 #include "tabtable.h"
 
 
-using namespace std;
+using namespace std; 
 
 Table::Table()
 {}
 Table::Table(string fileName) {
     ifstream stream(fileName.c_str());
     if (stream)
-    {
+    {   
         nomTable=Table::getFileName(fileName);
         transform(nomTable.begin(), nomTable.end(), nomTable.begin(), ::tolower);
         nomAttributs = TabString(stream);
         valeurAttributs = MatriceString(stream);
     }
-    else
+    else 
         exit(1);
 }
 
@@ -32,7 +32,7 @@ Table::Table(const Table& tab1,const Table& tab2)
 
 Table::Table(const TabTable& tab) {
     nomTable = "Jointure";
-    /* Allocation de la mémoire nécessaire */
+    /* Allocation de la mémoire nécessaire */ 
     unsigned long int s = 0;
     unsigned long int s1 = 0;
     for(unsigned long int i = 0; i < tab.getSize(); i++) {
@@ -54,16 +54,16 @@ void Table::print() {
         max = nomAttributs[i].size();
         for(size_t j=0 ; j < valeurAttributs.getSize();++j)
         {
-            max = (valeurAttributs[j][i].size() < max ? max : valeurAttributs[j][i].size());
+            max = (valeurAttributs[j][i].size() < max ? max : valeurAttributs[j][i].size()); 
         }
         tabMax[i]=max;
         somme+=tabMax[i];
     }
-
+    
     cout << endl;
-
+    
     /* Affichages des noms des attributs*/
-    cout << "| ";
+    cout << "| ";       
     for(size_t i = 0; i < nomAttributs.getSize(); i++){
         cout << nomAttributs[i] ;
         space = string(tabMax[i]-nomAttributs[i].size() + 1,' ');
@@ -85,7 +85,7 @@ void Table::print() {
     }
     cout << sep << endl;
     delete[] tabMax;
-
+    
 }
 
 string Table::getNomTable() const{
@@ -105,7 +105,7 @@ Table Table::projection(TabString attributs) const{
     tab.nomAttributs=attributs;
     tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
     for(unsigned long int i = 0; i < attributs.getSize(); i++) {
-        tab.valeurAttributs.addColonne(valeurAttributs,nomAttributs.get(attributs[i]));
+        tab.valeurAttributs.addCollonne(valeurAttributs,nomAttributs.get(attributs[i]));
     }
     return tab;
 }
@@ -128,7 +128,7 @@ void Table::jointure(const TabTable& tab){
 string Table::getFileName(string filePath, bool withExtension, char seperator) {
 	/* Le dernièr point trouvé */
 	size_t point = filePath.rfind(".");
-    size_t sepPos = filePath.rfind(seperator);
+    size_t sepPos = filePath.rfind(seperator);    
     // Séparateur trouver
 	if(sepPos != string::npos)
         return filePath.substr(sepPos + 1,(withExtension || point == string::npos ? 1 : point) - sepPos -1);
@@ -147,14 +147,14 @@ ostream& operator<<(ostream& stream,const Table& tab) {
         max = tab.getNomAttributs()[i].size();
         for(size_t j=0 ; j < tab.getValeurAttributs().getSize();++j)
         {
-            max = (tab.getValeurAttributs()[j][i].size() < max ? max : tab.getValeurAttributs()[j][i].size());
+            max = (tab.getValeurAttributs()[j][i].size() < max ? max : tab.getValeurAttributs()[j][i].size()); 
         }
         tabMax[i]=max;
         somme+=tabMax[i];
     }
-
+    
     /* Affichages des noms des attributs*/
-    stream << "| ";
+    stream << "| ";       
     for(size_t i = 0; i < tab.getNomAttributs().getSize(); i++){
         stream << tab.getNomAttributs()[i] ;
         space = string(tabMax[i]-tab.getNomAttributs()[i].size() + 1,' ');
@@ -177,5 +177,5 @@ ostream& operator<<(ostream& stream,const Table& tab) {
     stream << sep;
     delete[] tabMax;
 
-    return stream;
+    return stream;   
 }
