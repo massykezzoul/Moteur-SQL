@@ -122,9 +122,9 @@ void Table::jointure(const TabTable& tab){
 }
 
 
-/******
+/*
  * Get File Name from a Path with or without extension
- ******/
+ */
 string Table::getFileName(string filePath, bool withExtension, char seperator) {
 	/* Le dernièr point trouvé */
 	size_t point = filePath.rfind(".");
