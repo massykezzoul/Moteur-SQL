@@ -8,7 +8,7 @@ private:
     TabString* tab;
     unsigned long int size;
     unsigned long int alloc;
-    
+
 public:
     MatriceString();
     MatriceString(std::ifstream& file);
@@ -25,13 +25,8 @@ public:
     const TabString &operator[](unsigned long int)const;
 
     void add(const TabString&);
-    void addCollonne(const MatriceString&,unsigned long int);
-    TabString &get(unsigned long int) const;
+    void addColonne(const MatriceString&,unsigned long int);
     unsigned long int getSize() const;
-    unsigned long int getAlloc() const;
-    void setSize(unsigned long int size);
-    void setAlloc(unsigned long int alloc);
-    void setTab(unsigned long int alloc);
 
 
 };
