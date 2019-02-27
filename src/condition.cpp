@@ -55,7 +55,7 @@ bool operation(string op1,Operateur op,string op2) {
 }
 
 bool Condition::isVal(string operande) {
-    return Condition::isFloat(operande) || operande[0] == '"' || Condition::isDate(operande);
+    return atof(operande.c_str()) || operande[0] == '\"' || Condition::isDate(operande);
 }
 
 /* thanks Stackoverflow */
@@ -74,21 +74,23 @@ bool Condition::isDate(string date) {
     return false;
 }
 
+Condition::Condition():operande1(),operateur(NOTHING),operande2(){}
+
 Condition::Condition(string str) {
     size_t space1 = str.find_first_of(' ');
-    size_t space2 = str.find_first_of(' ',space1);
-    operateur = strToOperateur(str.substr(space1,space2));
+    size_t space2 = str.find_first_of(' ',space1+1);
+    operateur = strToOperateur(str.substr(space1+1,space2-space1-1));
     if (space1 > str.size() || space2 > str.size() || operateur == NOTHING) {
         cerr << "Syntaxe error on : \"" << str << "\"" << endl;
         exit(1);
     }
     operande1 = str.substr(0,space1);
-    operande2 = str.substr(space2);
+    operande2 = str.substr(space2+1);
 
     type = (isVal(operande2)?VAL:ATTRIBUT);
 }
 
-bool Condition::verifier(TabString line,unsigned long int iAtt,unsigned long int iVal) const {
+bool Condition::verifier(const TabString &line,unsigned long int iAtt,unsigned long int iVal) const {
     if (type == VAL || iVal > line.getSize())
         return operation(line[iAtt],operateur,operande2);
     else

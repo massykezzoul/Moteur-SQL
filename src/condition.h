@@ -39,9 +39,10 @@ private:
     bool isVal(std::string); // Retourne vrai si c'est une valeur (chaine ou int ...)
 
 public:
+    Condition();
     Condition(std::string);
 
-    bool verifier(TabString,unsigned long int,unsigned long int = -1) const;
+    bool verifier(const TabString&,unsigned long int,unsigned long int = -1) const;
 
     /* thanks Stackoverflow */  
     bool static isFloat(std::string);
