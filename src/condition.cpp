@@ -77,7 +77,7 @@ bool Condition::isDate(string date) {
 Condition::Condition():operande1(),operateur(NOTHING),operande2(){}
 
 Condition::Condition(string str) {
-    size_t space1 = str.find_first_of(' ');
+    size_t space1 = str.find_first_of(' ',1);
     size_t space2 = str.find_first_of(' ',space1+1);
     operateur = strToOperateur(str.substr(space1+1,space2-space1-1));
     if (space1 > str.size() || space2 > str.size() || operateur == NOTHING) {
