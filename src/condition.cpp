@@ -25,6 +25,22 @@ Operateur strToOperateur(string s) {
     return NOTHING;
 }
 
+string operateurToStr(Operateur s) {
+    if (s == EQUAL)
+        return "=";
+    if (s == NOTEQUAL)
+        return "!=";
+    if (s == GTHAN)
+        return ">";
+    if (s == LTHAN)
+        return "<";
+    if (s == GOREQUAL)
+        return ">=";
+    if (s == LOREQUAL)
+        return "<=";
+    return "NOTHING";
+}
+
 bool operation(string op1,Operateur op,string op2) {
     /*
         Faudrait traiter les types de données
@@ -100,6 +116,10 @@ string Condition::getOp2() const {
 
 TypeCondition Condition::getType()const {
     return type;
+}
+
+string Condition::toString()const {
+    return operande1 + " " + operateurToStr(operateur) + " " + operande2;
 }
 
 bool Condition::verifier(const TabString &line,unsigned long int iAtt,unsigned long int iVal) const {

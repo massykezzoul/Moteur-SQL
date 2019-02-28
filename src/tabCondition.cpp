@@ -24,7 +24,6 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
         if(debut !=string::npos) nbor++;
     }
     nbop=nband+nbor;
-    cout << "nbop : "<< nbop<< endl ;
     tab = new Condition[nbop+1];
     oplogique = new OpLogique[nbop]; 
     debut = 0;
@@ -39,7 +38,6 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
         {
             if (posAnd < posOr )
             {
-                cout << str.substr(debut,posAnd - debut - 1) << endl;
                 tab[i]=Condition(str.substr(debut,posAnd - debut - 1));
                 oplogique[j]=AND;
                 j++;
@@ -49,7 +47,6 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
             }
             else 
             {
-                cout << str.substr(debut,posOr - debut - 1) << endl;
                 tab[i]=Condition(str.substr(debut,posOr - debut - 1));
                 oplogique[j]=OR;
                 j++;
@@ -60,8 +57,7 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
         }
         else 
         {
-            cout << str.substr(debut,fin - debut)<< endl;
-            tab[i]=Condition(str.substr(debut,fin - debut - 1));
+            tab[i]=Condition(str.substr(debut,fin - debut));
             i++;
             debut = fin ;
         }
@@ -88,7 +84,18 @@ OpLogique TabCondition::getOpL(unsigned int i)const
 }
 
 
-bool TabCondition::verifier(TabString line,TabString attr)
+bool TabCondition::verifier(const TabString &line,const TabString &attr) const
 {
-return false;
+    bool booleen = tab[0].verifier(line,attr.get(tab[0].getOp1()),attr.get(tab[0].getOp2()));
+    unsigned int i=0;
+    while(i < getSizeOp())
+    {
+        if(oplogique[i]==AND)
+        {
+            booleen = (booleen && tab[i+1].verifier(line,attr.get(tab[i+1].getOp1()),attr.get(tab[i+1].getOp2())));
+        }
+        else booleen = (booleen || tab[i+1].verifier(line,attr.get(tab[i+1].getOp1()),attr.get(tab[i+1].getOp2())));
+        i++;
+    }
+    return booleen;
 }

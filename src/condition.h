@@ -23,6 +23,9 @@ bool operation(std::string,Operateur,std::string);
     Retourne le resultat de l'operation (Logique) entre deux operande
 */
 
+std::string operateurToStr(Operateur);
+
+
 enum TypeCondition {
     VAL,        // Entre un attribut et une valeur
     ATTRIBUT,   // Entre deux attribut
@@ -45,6 +48,7 @@ public:
     std::string getOp1() const;
     std::string getOp2() const;
     TypeCondition getType() const;
+    std::string toString() const;
 
     bool verifier(const TabString&,unsigned long int,unsigned long int = -1) const;
 
