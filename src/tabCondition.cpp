@@ -12,10 +12,8 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
 {
     size_t debut=0,fin=str.size();
     unsigned int nband=0,nbor=0,nbop=0;
-    cout << "ok";
     while(debut < fin)
     {
-        cout << debut << endl;
         debut=str.find("and",debut+1);
         if(debut != string::npos) nband++;
     }
@@ -26,6 +24,7 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
         if(debut !=string::npos) nbor++;
     }
     nbop=nband+nbor;
+    cout << "nbop : "<< nbop<< endl ;
     tab = new Condition[nbop+1];
     oplogique = new OpLogique[nbop]; 
     debut = 0;
@@ -40,29 +39,29 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
         {
             if (posAnd < posOr )
             {
-                cout << str.substr(debut,posAnd) << endl;
-                tab[i]=Condition(str.substr(debut,posAnd));
+                cout << str.substr(debut,posAnd - debut - 1) << endl;
+                tab[i]=Condition(str.substr(debut,posAnd - debut - 1));
                 oplogique[j]=AND;
                 j++;
                 i++;
-                debut=posAnd+3;
+                debut=posAnd+4;
                 posAnd=debut;
             }
             else 
             {
-                cout << str.substr(debut,posOr) << endl;
-                tab[i]=Condition(str.substr(debut,posOr));
+                cout << str.substr(debut,posOr - debut - 1) << endl;
+                tab[i]=Condition(str.substr(debut,posOr - debut - 1));
                 oplogique[j]=OR;
                 j++;
                 i++;
-                debut=posOr+2;
+                debut=posOr+3;
                 posOr=debut;
             }
         }
         else 
         {
-            cout << str.substr(debut,fin)<< endl;
-            tab[i]=Condition(str.substr(debut,fin));
+            cout << str.substr(debut,fin - debut)<< endl;
+            tab[i]=Condition(str.substr(debut,fin - debut - 1));
             i++;
             debut = fin ;
         }
@@ -73,11 +72,11 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
 }
 unsigned int TabCondition::getSizeOp()const
 {
-return size;
+return size-1;
 }
 unsigned int TabCondition::getSize() const
 {
-return size-1;
+return size;
 }
 Condition TabCondition::getCond(unsigned int i)const
 {
