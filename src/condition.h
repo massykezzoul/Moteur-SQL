@@ -44,6 +44,7 @@ public:
 
     std::string getOp1() const;
     std::string getOp2() const;
+    TypeCondition getType() const;
 
     bool verifier(const TabString&,unsigned long int,unsigned long int = -1) const;
 

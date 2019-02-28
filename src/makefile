@@ -12,14 +12,14 @@
 ## 		-make zip 	   = create an archive .zip with all the source code, headers and this makefile				##
 ##																												##
 ##################################################################################################################
- 
+
 CC=g++
 CFLAGS=-Wall -pedantic -ansi
 LDFLAGS= -g #for debugging
 EXEC=sql
-SRC= $(wildcard *.cpp) test/test-tabcondition.cpp
+SRC= $(wildcard *.cpp) test/test-condition.cpp
 HEADERS = $(wildcard *.h)
-OBJ= $(SRC:.cpp=.o) 
+OBJ= $(SRC:.cpp=.o)
 ARCHIVE_NAME = source_code
 
 ## Compilation
@@ -31,8 +31,8 @@ all: $(EXEC)
 $(EXEC) : $(OBJ) $(HEADERS)
 	@$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS) && echo "$(EXEC) created"
 
-%.o: %.cpp 
-	@$(CC) -o $@ -c $< $(CFLAGS) 
+%.o: %.cpp
+	@$(CC) -o $@ -c $< $(CFLAGS)
 
 
 ## clean and all that shit
@@ -51,7 +51,7 @@ exe : $(EXEC)
 debug :
 	@gdb $(EXEC)
 
-tar : 
+tar :
 	@tar -czvf $(ARCHIVE_NAME).tar.gz makefile $(SRC) $(HEADERS) && echo "'$(ARCHIVE_NAME).tar.gz' created" || echo "FAIL"
-zip : 
+zip :
 	@zip -r $(ARCHIVE_NAME).zip makefile $(SRC) $(HEADERS) && echo "'$(ARCHIVE_NAME).zip' created" || echo "FAIL"

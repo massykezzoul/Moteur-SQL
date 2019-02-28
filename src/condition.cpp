@@ -98,6 +98,10 @@ string Condition::getOp2() const {
   return operande2;
 }
 
+TypeCondition Condition::getType()const {
+    return type;
+}
+
 bool Condition::verifier(const TabString &line,unsigned long int iAtt,unsigned long int iVal) const {
     if (type == VAL || iVal > line.getSize())
         return operation(line[iAtt],operateur,operande2);
