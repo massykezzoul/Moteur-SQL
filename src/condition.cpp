@@ -54,7 +54,7 @@ bool operation(string op1,Operateur op,string op2) {
     }
 }
 
-bool Condition::isVal(string operande) {
+bool Condition::isVal(string operande)const {
     return atof(operande.c_str()) || operande[0] == '\"' || Condition::isDate(operande);
 }
 
@@ -64,7 +64,7 @@ bool Condition::isFloat( string myString ) {
     float f;
     iss >> noskipws >> f; // noskipws considers leading whitespace invalid
     // Check the entire string was consumed and if either failbit or badbit is set
-    return iss.eof() && !iss.fail(); 
+    return iss.eof() && !iss.fail();
 }
 bool Condition::isDate(string date) {
     string* split;
@@ -88,6 +88,14 @@ Condition::Condition(string str) {
     operande2 = str.substr(space2+1);
 
     type = (isVal(operande2)?VAL:ATTRIBUT);
+}
+
+string Condition::getOp1() const {
+  return operande1;
+}
+
+string Condition::getOp2() const {
+  return operande2;
 }
 
 bool Condition::verifier(const TabString &line,unsigned long int iAtt,unsigned long int iVal) const {

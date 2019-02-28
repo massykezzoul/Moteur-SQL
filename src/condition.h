@@ -20,7 +20,7 @@ Operateur strToOperateur(std::string);
 */
 bool operation(std::string,Operateur,std::string);
 /*
-    Retourne le resultat de l'operation (Logique) entre deux operande 
+    Retourne le resultat de l'operation (Logique) entre deux operande
 */
 
 enum TypeCondition {
@@ -36,15 +36,18 @@ private:
     std::string operande2;
     TypeCondition type;
 
-    bool isVal(std::string); // Retourne vrai si c'est une valeur (chaine ou int ...)
+    bool isVal(std::string) const; // Retourne vrai si c'est une valeur (chaine ou int ...)
 
 public:
     Condition();
     Condition(std::string);
 
+    std::string getOp1() const;
+    std::string getOp2() const;
+
     bool verifier(const TabString&,unsigned long int,unsigned long int = -1) const;
 
-    /* thanks Stackoverflow */  
+    /* thanks Stackoverflow */
     bool static isFloat(std::string);
     bool static isDate(std::string);
 
