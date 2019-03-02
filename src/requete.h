@@ -2,12 +2,13 @@
 #define _REQUETE__H_
 
 #include "tabstring.h"
+#include "tabCondition.h"
 
 class Requete {
 private:
     TabString select;
     TabString from;
-    std::string where;
+    TabCondition where;
 
     void parseSelect(std::string);
     void parseFrom(std::string);
@@ -21,7 +22,7 @@ public:
 
     TabString &getSelect();
     TabString &getFrom();
-    std::string &getWhere();
+    TabCondition &getWhere();
 };
 
 #endif

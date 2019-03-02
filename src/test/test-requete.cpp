@@ -33,7 +33,35 @@ int main(int argc, char const *argv[]) {
                 cout << endl;
 
                 cout << "selection : " << endl;
-                cout << (sql.getWhere()!=""?sql.getWhere():"No Where") << endl;
+                //verification de la condition where
+                 /* Initialisation de la ligne des attributs */
+    TabString nomAtt;
+    nomAtt.add("id1");
+    nomAtt.add("age");
+    nomAtt.add("id2");
+    /* Initialisation de la ligne des valeurs */
+    TabString val1;
+    val1.add("1");
+    val1.add("19");
+    val1.add("1");
+
+    TabString val2;
+    val2.add("1");
+    val2.add("29");
+    val2.add("2");
+    for(unsigned long int i = 0; i < sql.getWhere().getSize(); i++) {
+        cout << sql.getWhere().getCond(i).toString() << endl;
+    }
+    
+    for (unsigned long int i = 0 ; i< sql.getWhere().getSizeOp() ; i++) {
+        if(sql.getWhere().getOpL(i)==0) cout << "and\t";
+        else cout << "or\t";
+    }
+    /* Affichage du resultat de verifier() */
+    cout << endl;
+    cout << (sql.getWhere().verifier(val1,nomAtt)?"VRAI":"FAUX") << endl; 
+    cout << (sql.getWhere().verifier(val2,nomAtt)?"VRAI":"FAUX") << endl;
+               // cout << (sql.getWhere().getCond(0).toString()!=""?sql.getWhere():"No Where") << endl;
             }
         }
     } else {
@@ -58,7 +86,7 @@ int main(int argc, char const *argv[]) {
                 cout << endl;
 
                 cout << "selection : " << endl;
-                cout << (sql.getWhere()!=""?sql.getWhere():"No Where") << endl;
+              //  cout << (sql.getWhere()!=""?sql.getWhere():"No Where") << endl;
                 cout << endl;
         
     }

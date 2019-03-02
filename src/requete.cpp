@@ -42,7 +42,7 @@ void Requete::parseWhere(string sql) {
     if (debut != string::npos) {
         debut += cle.size()+1;
         if (fin != string::npos) fin--;
-        where = sql.substr(debut,fin);
+        where = TabCondition(sql.substr(debut,fin));
     }
 }
 
@@ -94,6 +94,6 @@ TabString &Requete::getFrom(){
     return from;
 }
 
-string &Requete::getWhere() {
+TabCondition &Requete::getWhere() {
     return where;
 }
