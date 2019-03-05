@@ -3,9 +3,6 @@
 using namespace std;
 
 
-
-
-
 TabCondition::TabCondition():tab(NULL),oplogique(NULL),size(0){
 }
 TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)

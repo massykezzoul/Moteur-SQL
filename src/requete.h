@@ -14,8 +14,6 @@ private:
     void parseFrom(std::string);
     void parseWhere(std::string);
 
-    static std::string cleanLine(std::string);
-
 public:
     Requete();
     Requete(std::string);
@@ -23,6 +21,9 @@ public:
     TabString &getSelect();
     TabString &getFrom();
     TabCondition &getWhere();
+
+    static std::string cleanLine(std::string);
+
 };
 
 #endif

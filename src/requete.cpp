@@ -4,6 +4,8 @@
 #include "requete.h"
 #include "tabstring.h"
 
+#include <iostream>
+
 using namespace std;
 
 void Requete::parseSelect(string sql) {
@@ -41,8 +43,10 @@ void Requete::parseWhere(string sql) {
     fin = sql.find(";");
     if (debut != string::npos) {
         debut += cle.size()+1;
-        if (fin != string::npos) fin--;
-        where = TabCondition(sql.substr(debut,fin));
+        where = TabCondition(sql.substr(debut,fin - debut));
+    } else {
+        /* Pas de selection dans la requete SQL */
+        where = TabCondition();
     }
 }
 

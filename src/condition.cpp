@@ -4,7 +4,7 @@
 #include <sstream> // for istringstream
 #include "condition.h"
 #include "tabstring.h" // for strsplit()
-
+#include "requete.h" // for cleanLine();
 using namespace std;
 
 Operateur strToOperateur(string s) {
@@ -90,18 +90,22 @@ bool Condition::isDate(string date) {
     return false;
 }
 
-Condition::Condition():operande1(),operateur(NOTHING),operande2(){}
+Condition::Condition():operande1(""),operateur(NOTHING),operande2(""){}
 
 Condition::Condition(string str) {
-    size_t space1 = str.find_first_of(' ');
-    size_t space2 = str.find_first_of(' ',space1+1);
-    operateur = strToOperateur(str.substr(space1+1,space2-space1-1));
+    str = Requete::cleanLine(str);
+    size_t space1 = str.find_first_of("<>=! ");
+    size_t space2 = str.find_last_of("=<>! ")+1;
+    cout << "'" <<str.substr(space1,space2-space1) << "'"<< endl;
+    cout << space1 << " " << space2 << endl;
+    operateur = strToOperateur(Requete::cleanLine(str.substr(space1,space2-space1)));
+    cout << operateurToStr(operateur)<<endl;
     if (space1 > str.size() || space2 > str.size() || operateur == NOTHING) {
         cerr << "Syntaxe error on : \"" << str << "\"" << endl;
         exit(1);
     }
     operande1 = str.substr(0,space1);
-    operande2 = str.substr(space2+1);
+    operande2 = str.substr(space2);
 
     type = (isVal(operande2)?VAL:ATTRIBUT);
 }
@@ -113,6 +117,11 @@ string Condition::getOp1() const {
 string Condition::getOp2() const {
   return operande2;
 }
+
+string Condition::getOperateur() const {
+    return operateurToStr(operateur);
+}
+
 
 TypeCondition Condition::getType()const {
     return type;

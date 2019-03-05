@@ -47,6 +47,7 @@ public:
 
     std::string getOp1() const;
     std::string getOp2() const;
+    std::string getOperateur() const;
     TypeCondition getType() const;
     std::string toString() const;
 

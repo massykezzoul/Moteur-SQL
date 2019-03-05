@@ -19,6 +19,7 @@ int main(int argc, char const *argv[]) {
     cout << "La Condition : " << c << " : " << endl;
     cout << "Operande 1 : " << "'" <<cond.getOp1() << "'" << endl;
     cout << "Operande 2 : " << "'" << cond.getOp2() << "'" << endl;
+    cout << "Operateur  : " << "'" << cond.getOperateur() << "'" << endl;
     cout << "Type de la condition : " << (cond.getType()==VAL?"ATTRIBUT/VAL":(cond.getType()==ATTRIBUT?"ATTRIBUT/ATTRIBUT":"ERREUR")) << endl;
 
     cout << (cond.verifier(tab,1)?"vrai":"faux") << endl;

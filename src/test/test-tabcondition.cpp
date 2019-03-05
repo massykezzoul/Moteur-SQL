@@ -2,8 +2,6 @@
 #include <iostream>
 using namespace std; 
 
-
-
 int main()
 {
     string str = "age >= 19 and id1 = id2";
