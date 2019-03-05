@@ -20,6 +20,9 @@ void Requete::parseSelect(string sql) {
         sql = sql.substr(debut,fin - debut);
         unsigned long int sizeSelect = TabString::strsplit(sql,res,',');
         select = TabString(res,sizeSelect);
+    } else {
+        cerr << "Erreur de syntax dans la requte : Select ou From introuvable '" << sql << "'" << endl;
+        exit(1);
     }
 }
 void Requete::parseFrom(string sql) {
@@ -31,9 +34,13 @@ void Requete::parseFrom(string sql) {
     fin = sql.find("where");
     if (debut != string::npos) {
         debut += cle.size()+1;
+        if (fin == string::npos) fin = sql.size() - 1;
         sql = sql.substr(debut,fin-debut);
         unsigned long int sizeFrom = TabString::strsplit(sql,res,',');
         from = TabString(res,sizeFrom);
+    } else {
+        cerr << "Erreur de syntax dans la requte : From introuvable '" << sql << "'" << endl;
+        exit(1);
     }
 }
 void Requete::parseWhere(string sql) {
