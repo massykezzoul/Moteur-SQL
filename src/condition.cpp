@@ -5,6 +5,7 @@
 #include "condition.h"
 #include "tabstring.h" // for strsplit()
 #include "requete.h" // for cleanLine();
+#include "date.h" // for Date
 using namespace std;
 
 Operateur strToOperateur(string s) {
@@ -40,11 +41,8 @@ string operateurToStr(Operateur s) {
         return "<=";
     return "NOTHING";
 }
-
-bool operation(string op1,Operateur op,string op2) {
-    /*
-        Faudrait traiter les types de données
-    */
+template <typename T>
+bool operation(T op1,Operateur op,T op2) {
     switch (op)
     {
         case EQUAL:
@@ -71,7 +69,7 @@ bool operation(string op1,Operateur op,string op2) {
 }
 
 bool Condition::isVal(string operande)const {
-    return atof(operande.c_str()) || operande[0] == '\"' || Condition::isDate(operande);
+    return atof(operande.c_str()) || Date::isDate(operande);
 }
 
 /* thanks Stackoverflow */
@@ -82,13 +80,6 @@ bool Condition::isFloat( string myString ) {
     // Check the entire string was consumed and if either failbit or badbit is set
     return iss.eof() && !iss.fail();
 }
-bool Condition::isDate(string date) {
-    string* split;
-    if (TabString::strsplit(date,split,'/') == 3) {
-        return atoi(split[0].c_str()) > 0 && atoi(split[1].c_str()) > 0 && atoi(split[2].c_str()) > 0;
-    }
-    return false;
-}
 
 Condition::Condition():operande1(""),operateur(NOTHING),operande2(""){}
 
@@ -96,10 +87,7 @@ Condition::Condition(string str) {
     str = Requete::cleanLine(str);
     size_t space1 = str.find_first_of("<>=! ");
     size_t space2 = str.find_last_of("=<>! ")+1;
-    cout << "'" <<str.substr(space1,space2-space1) << "'"<< endl;
-    cout << space1 << " " << space2 << endl;
     operateur = strToOperateur(Requete::cleanLine(str.substr(space1,space2-space1)));
-    cout << operateurToStr(operateur)<<endl;
     if (space1 > str.size() || space2 > str.size() || operateur == NOTHING) {
         cerr << "Syntaxe error on : \"" << str << "\"" << endl;
         exit(1);
@@ -132,8 +120,21 @@ string Condition::toString()const {
 }
 
 bool Condition::verifier(const TabString &line,unsigned long int iAtt,unsigned long int iVal) const {
-    if (type == VAL || iVal > line.getSize())
-        return operation(line[iAtt],operateur,operande2);
-    else
-        return operation(line[iAtt],operateur,line[iVal]);
+    if (type == VAL || iVal > line.getSize() || iVal < 0) {
+        /* Le 2éme operande est une valeur */
+        if (isFloat(line[iAtt]) && isFloat(operande2) )
+            return operation<float>(atof(line[iAtt].c_str()),operateur,atof(operande2.c_str()));
+        else if (Date::isDate(line[iAtt]) && Date::isDate(operande2))
+            return operation<Date>(Date(line[iAtt]),operateur,Date(operande2));
+        else 
+            return operation<string>(line[iAtt],operateur,operande2);        
+    }
+    else {
+        if (isFloat(line[iAtt]) && isFloat(line[iVal]) )
+            return operation<float>(atof(line[iAtt].c_str()),operateur,atof(line[iVal].c_str()));
+        else if (Date::isDate(line[iAtt]) && Date::isDate(line[iVal]))
+            return operation<Date>(Date(line[iAtt]),operateur,Date(line[iVal]));
+        else 
+            return operation<string>(line[iAtt],operateur,line[iVal]);        
+    }
 }

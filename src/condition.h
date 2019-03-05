@@ -55,7 +55,6 @@ public:
 
     /* thanks Stackoverflow */
     bool static isFloat(std::string);
-    bool static isDate(std::string);
 
 };
 

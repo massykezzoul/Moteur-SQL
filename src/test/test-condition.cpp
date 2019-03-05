@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-    string c("age = 19"); // La condition à tester
+    string c("nombre > 19.25"); // La condition à tester
     Condition cond(c);    // Appel au constructeur de la classe Condition
     /* Inistialisation de deux TabString (deux ligne d'un fichier CSV) */
     TabString tab;
