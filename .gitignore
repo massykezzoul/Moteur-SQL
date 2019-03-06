@@ -4,5 +4,7 @@ src/.*
 src/*/*.o
 src/*.o
 src/jointure.txt
+src/selection.txt
+src/request.txt
 src/sql
 Utiles/

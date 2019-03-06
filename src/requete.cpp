@@ -14,10 +14,11 @@ void Requete::parseSelect(string sql) {
     size_t debut = 0,fin = sql.size();
 
     debut = sql.find(cle);
-    fin = sql.find("from");
+    fin = sql.find(" from");
     if (debut != string::npos && fin != string::npos) {
         debut += cle.size()+1;
         sql = sql.substr(debut,fin - debut);
+        sql = Requete::cleanLine(sql);
         unsigned long int sizeSelect = TabString::strsplit(sql,res,',');
         select = TabString(res,sizeSelect);
     } else {
@@ -31,7 +32,7 @@ void Requete::parseFrom(string sql) {
     size_t debut = 0,fin = sql.size();
 
     debut = sql.find(cle);
-    fin = sql.find("where");
+    fin = sql.find(" where");
     if (debut != string::npos) {
         debut += cle.size()+1;
         if (fin == string::npos) fin = sql.size() - 1;

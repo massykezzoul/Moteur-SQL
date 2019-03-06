@@ -104,6 +104,7 @@ Table Table::projection(TabString attributs) const{
     tab.nomTable=nomTable;
     tab.nomAttributs=attributs;
     tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
+    cout << "'"<<attributs[0] <<"'"<< endl;
     for(unsigned long int i = 0; i < attributs.getSize(); i++) {
         tab.valeurAttributs.addColonne(valeurAttributs,nomAttributs.get(attributs[i]));
     }
