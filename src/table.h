@@ -4,6 +4,7 @@
 #include "tabstring.h"
 #include "matricestring.h"
 class TabTable;
+class TabCondition;
 
 class Table
 {
@@ -25,7 +26,7 @@ public:
 
     void print(); 
     Table projection(TabString attributs) const;
-    Table selection(std::string condition) const;
+    Table selection(TabCondition condition) const;
     Table jointure(const Table& tab1,const Table& tab2) const;
     void jointure(const TabTable& tab);
 

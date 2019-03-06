@@ -2,7 +2,7 @@
 #include <fstream>
 #include <cstdlib>
 #include "tabstring.h"
-
+#include "requete.h"
 using namespace std;
 
 TabString::TabString():table(NULL),size(0),alloc(0)
@@ -14,6 +14,7 @@ TabString::TabString(ifstream &file):table(NULL),size(0),alloc(0)
     if (file){
         string line;
         getline(file,line);
+        line = Requete::cleanLine(line);
         size = strsplit(line,table,',');
         alloc = size;
         if (size == 0)

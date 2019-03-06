@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include "table.h"
 #include "tabtable.h"
-
+#include "tabCondition.h" // pour la selection
 
 using namespace std;
 
@@ -109,8 +109,20 @@ Table Table::projection(TabString attributs) const{
     }
     return tab;
 }
-Table Table::selection(string condition) const{
-    return *this;
+Table Table::selection(TabCondition condition) const{
+    Table res; // la Table resultat
+    res.nomTable = "Resultat Final";
+    res.nomAttributs = this->nomAttributs; // Le même nom d'attribut
+    /* Allocation de l'espace mémoire (plus que suffisant) */
+    res.valeurAttributs = MatriceString(this->valeurAttributs.getSize());
+    /* Parcours des valeurs */
+    for(unsigned long int i = 0; i < this->valeurAttributs.getSize(); i++) {
+        if (condition.verifier(this->valeurAttributs[i],res.nomAttributs)) {
+            res.valeurAttributs.add(this->valeurAttributs[i]);
+        }
+    }
+    /* Pensez à supprimer l'espace supplementaire alloué (if alloc >> size ) */
+    return res;
 }
 Table Table::jointure(const Table& tab1,const Table& tab2) const{
     return Table(tab1,tab2);

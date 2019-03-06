@@ -1,5 +1,6 @@
 #include "tabCondition.h"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 
@@ -83,10 +84,18 @@ OpLogique TabCondition::getOpL(unsigned int i)const
 
 bool TabCondition::verifier(const TabString &line,const TabString &attr) const
 {
+    if (attr.get(tab[0].getOp1()) > attr.getSize()) {
+        cerr << "Erreur : '" << tab[0].getOp1() << "' introuvable" << endl;
+        exit(1);
+    }
     bool booleen = tab[0].verifier(line,attr.get(tab[0].getOp1()),attr.get(tab[0].getOp2()));
     unsigned int i=0;
     while(i < getSizeOp())
     {
+        if (attr.get(tab[i+1].getOp1()) > attr.getSize()) {
+            cerr << "Erreur : '" << tab[i+1].getOp1() << "' introuvable" << endl;
+            exit(1);
+        }
         if(oplogique[i]==AND)
         {
             booleen = (booleen && tab[i+1].verifier(line,attr.get(tab[i+1].getOp1()),attr.get(tab[i+1].getOp2())));
