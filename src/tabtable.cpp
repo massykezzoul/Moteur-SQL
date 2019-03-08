@@ -23,6 +23,24 @@ const Table& TabTable::operator[](unsigned long int i) const{
 	return tables[i];
 }
 
+Table& TabTable::operator[](string nom) {
+	for (unsigned long int i=0; i<getSize(); i++){
+		if (tables[i].getNomTable()==nom)
+			return tables[i];
+	}
+	cerr << "Table non trouvé" << endl;
+	exit(1);
+}
+
+const Table& TabTable::operator[](string nom) const{
+	for (unsigned long int i=0; i<getSize(); i++){
+		if (tables[i].getNomTable()==nom)
+			return tables[i];
+	}
+	cerr << "Table non trouvé" << endl;
+	exit(1);
+}
+
 void TabTable::add (string fileName){
 	size++;
 
@@ -58,6 +76,14 @@ Table& TabTable::get(unsigned long int i) const{
 		//	return Table();
 	}
 	return tables[i];
+}
+
+bool TabTable::existe(string nom) const {
+	for (unsigned long int i=0; i<getSize(); i++){
+		if (tables[i].getNomTable()==nom)
+			return true;
+	}
+	return false;
 }
 
 unsigned long int TabTable::getSize ()const {

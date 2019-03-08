@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cstdlib> // for exit()
 #include "../table.h"
 #include "../tabtable.h"
 #include "../requete.h"
@@ -21,13 +22,13 @@ int main(int argc, char const *argv[]) {
             mesTables.add(argv[i]);
         }
         t2 = clock();
-        cout << "Lecture des Tables en " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC << " Secondes" << endl;
+        cout << "Lecture des Tables en \t" << (double) (t2-t1)/  (double) CLOCKS_PER_SEC << " Secondes" << endl;
 
         /* Chargement de la requete sql en mémoire */
         t1 = clock();
         Requete sql(argv[argc-1]);
         t2 = clock();
-        cout << "Chargement de la requete en mémoire en " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC << " Secondes" << endl;
+        cout << "Chargement de la requete en mémoire en \t" << (double) (t2-t1)/  (double) CLOCKS_PER_SEC << " Secondes" << endl;
 
         /* La Table final */
         Table res;
@@ -35,27 +36,47 @@ int main(int argc, char const *argv[]) {
         /* execution des jointures (à ameliorer !!) */
         t1 = clock();
         TabString join = sql.getFrom();
-        if (mesTables.getSize() > 1) {
-            res = Table(mesTables[0],mesTables[1]);
-            for(unsigned long int i = 2; i < mesTables.getSize(); i++)
-                res = Table(res,mesTables[i]);
+        if (join.getSize() > 1) {
+            /* Si jointure il y'a (au moin deux tables apres le FROM) */
+            if (!mesTables.existe(join[0])) {
+                cerr << "La Table '"<<join[0] << "' n'existe pas" << endl;
+                exit(1);
+            }
+            if (!mesTables.existe(join[1])) {
+                cerr << "La Table '"<<join[1] << "' n'existe pas" << endl;
+                exit(1);
+            }
+            res = Table(mesTables[join[0]],mesTables[join[1]]);
+            for(unsigned long int i = 2; i < join.getSize(); i++) {
+                if (mesTables.existe(join[i]))
+                    res = Table(res,mesTables[join[i]]);
+                else {
+                    cerr << "La Table '"<<join[i] << "' n'existe pas" << endl;
+                    exit(1);
+                }
+            }
         } else {
-            res = mesTables[0];
+            if (mesTables.existe(join[0]))
+                res = mesTables[join[0]];
+            else {
+                cerr << "La Table '"<<join[0] << "' n'existe pas" << endl;
+                exit(1);
+            }
         }
         t2 = clock();
-        cout << "Jointure en " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
+        cout << "Jointure en \t" << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
         /* Execution de la selection */
         t1 = clock();
         if (sql.getWhere().getSize() > 0)
             res = res.selection(sql.getWhere());
         t2 = clock();
-        cout << "Selection en " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
+        cout << "Selection en \t" << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
 
         /* Execution de la projection */
         t1 = clock();
         res = res.projection(sql.getSelect());
         t2 = clock();
-        cout << "Projection en " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
+        cout << "Projection en \t" << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
 
         /* Affichage du resultat dans un fichier */
         ofstream file("request.txt");
@@ -67,9 +88,9 @@ int main(int argc, char const *argv[]) {
             cout << res << endl;
         }
         t2 = clock();
-        cout << "Écriture en " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
+        cout << "Écriture en \t" << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
 
-        cout << "Execution Total en " << (double) (t2-t0)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
+        cout << "Total en \t" << (double) (t2-t0)/  (double) CLOCKS_PER_SEC  << " Secondes" << endl;
                 
     }else {
         cerr << "use it like this : "<<argv[0] <<" [one ore more CSV files] [SQL request]" << endl;
