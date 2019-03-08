@@ -98,14 +98,14 @@ Requete::Requete(string sql):select(),from(),where(){
     parseWhere(sql);
 }
 
-TabString &Requete::getSelect(){
+const TabString &Requete::getSelect()const {
     return select;
 }
 
-TabString &Requete::getFrom(){
+const TabString &Requete::getFrom()const {
     return from;
 }
 
-TabCondition &Requete::getWhere() {
+const TabCondition &Requete::getWhere() const {
     return where;
 }

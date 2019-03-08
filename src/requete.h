@@ -18,9 +18,9 @@ public:
     Requete();
     Requete(std::string);
 
-    TabString &getSelect();
-    TabString &getFrom();
-    TabCondition &getWhere();
+    const TabString &getSelect() const;
+    const TabString &getFrom() const;
+    const TabCondition &getWhere() const;
 
     static std::string cleanLine(std::string);
 
