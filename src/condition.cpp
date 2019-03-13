@@ -68,19 +68,6 @@ bool operation(T op1,Operateur op,T op2) {
     }
 }
 
-bool Condition::isVal(string operande)const {
-    return atof(operande.c_str()) || Date::isDate(operande);
-}
-
-/* thanks Stackoverflow */
-bool Condition::isFloat( string myString ) {
-    istringstream iss(myString);
-    float f;
-    iss >> noskipws >> f; // noskipws considers leading whitespace invalid
-    // Check the entire string was consumed and if either failbit or badbit is set
-    return iss.eof() && !iss.fail();
-}
-
 Condition::Condition():operande1(""),operateur(NOTHING),operande2(""){}
 
 Condition::Condition(string str) {
@@ -95,7 +82,7 @@ Condition::Condition(string str) {
     operande1 = str.substr(0,space1);
     operande2 = str.substr(space2);
 
-    type = (isVal(operande2)?VAL:ATTRIBUT);
+    type = (Condition::isVal(operande2)?VAL:ATTRIBUT);
 }
 
 string Condition::getOp1() const {
@@ -137,4 +124,18 @@ bool Condition::verifier(const TabString &line,unsigned long int iAtt,unsigned l
         else 
             return operation<string>(line[iAtt],operateur,line[iVal]);        
     }
+}
+
+
+bool Condition::isVal(string operande) {
+    return atof(operande.c_str()) || Date::isDate(operande);
+}
+
+/* thanks Stackoverflow */
+bool Condition::isFloat( string myString ) {
+    istringstream iss(myString);
+    float f;
+    iss >> noskipws >> f; // noskipws considers leading whitespace invalid
+    // Check the entire string was consumed and if either failbit or badbit is set
+    return iss.eof() && !iss.fail();
 }

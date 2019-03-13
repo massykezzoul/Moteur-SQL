@@ -18,7 +18,9 @@ Operateur strToOperateur(std::string);
 /*
     Convertir une chaine en un Operateur
 */
-bool operation(std::string,Operateur,std::string);
+
+template <typename T>
+bool operation(T,Operateur,T);
 /*
     Retourne le resultat de l'operation (Logique) entre deux operande
 */
@@ -39,8 +41,6 @@ private:
     std::string operande2;
     TypeCondition type;
 
-    bool isVal(std::string) const; // Retourne vrai si c'est une valeur (chaine ou int ...)
-
 public:
     Condition();
     Condition(std::string);
@@ -55,7 +55,8 @@ public:
 
     /* thanks Stackoverflow */
     bool static isFloat(std::string);
-
+    
+    bool static isVal(std::string); // Retourne vrai si c'est une valeur (chaine ou int ...)
 };
 
 #endif
