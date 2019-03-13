@@ -1,10 +1,19 @@
 # Tout les fichier caché
 .*
 src/.*
+
+# Les point 'O'
 src/*/*.o
 src/*.o
+
+# Les fichier resultat
 src/jointure.txt
 src/selection.txt
 src/request.txt
+src/resultat.txt
+
+# Executable
 src/sql
+
 Utiles/
+# Pas tant que ça
