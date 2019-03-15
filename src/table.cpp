@@ -21,28 +21,13 @@ Table::Table(string fileName) {
         nomAttributs = TabString(stream);
         valeurAttributs = MatriceString(stream);
     }
-    else
-        exit(1);
+    else {
+        cerr << "Lecture du fichier '" << fileName << "' Impossible" << endl;
+    }
 }
 
 Table::Table(const Table& tab1,const Table& tab2)
     :nomTable(tab1.nomTable+"JOIN"+tab2.nomTable),nomAttributs(tab1.nomAttributs,tab2.nomAttributs),valeurAttributs(tab1.valeurAttributs,tab2.valeurAttributs){
-
-}
-
-Table::Table(const TabTable& tab) {
-    nomTable = "Jointure";
-    /* Allocation de la mémoire nécessaire */
-    unsigned long int s = 0;
-    unsigned long int s1 = 0;
-    for(unsigned long int i = 0; i < tab.getSize(); i++) {
-        s += tab[i].getNomAttributs().getSize();
-        s1 *= tab[i].getValeurAttributs().getSize();
-    }
-    nomAttributs = TabString(s);
-    valeurAttributs = MatriceString(s1,s);
-
-    /* Mémoire alloué */
 
 }
 
@@ -127,12 +112,6 @@ Table Table::selection(TabCondition condition) const{
 Table Table::jointure(const Table& tab1,const Table& tab2) const{
     return Table(tab1,tab2);
 }
-
-/* Change l'instance courante */
-void Table::jointure(const TabTable& tab){
-
-}
-
 
 /******
  * Get File Name from a Path with or without extension
