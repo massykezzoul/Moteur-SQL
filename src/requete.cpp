@@ -35,7 +35,7 @@ void Requete::parseFrom(string sql) {
     fin = sql.find(" where");
     if (debut != string::npos) {
         debut += cle.size()+1;
-        if (fin == string::npos) fin = sql.size() - 1;
+        if (fin == string::npos) fin = sql.size();
         sql = sql.substr(debut,fin-debut);
         unsigned long int sizeFrom = TabString::strsplit(sql,res,',');
         from = TabString(res,sizeFrom);

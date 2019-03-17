@@ -85,14 +85,24 @@ const MatriceString& Table::getValeurAttributs() const{
 }
 
 Table Table::projection(TabString attributs) const{
-    Table tab;
-    tab.nomTable=nomTable;
-    tab.nomAttributs=attributs;
-    tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
-    for(unsigned long int i = 0; i < attributs.getSize(); i++) {
-        tab.valeurAttributs.addColonne(valeurAttributs,nomAttributs.get(attributs[i]));
+    
+    if (attributs.get(0) == "*") // select * from ... where ...;
+        return *this;
+    else {
+        Table tab;
+        tab.nomTable=nomTable;
+        tab.nomAttributs=attributs;
+        tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
+        for(unsigned long int i = 0; i < attributs.getSize(); i++) {
+            if (nomAttributs.get(attributs[i]) == (unsigned long int)-1 ) { // attribut non trouvé
+                cerr << "Attribut '" << attributs[i] << "' non trouver." << endl;
+                exit(1);
+            }
+            else 
+                tab.valeurAttributs.addColonne(valeurAttributs,nomAttributs.get(attributs[i]));
+        }
+        return tab;
     }
-    return tab;
 }
 Table Table::selection(TabCondition condition) const{
     Table res; // la Table resultat
