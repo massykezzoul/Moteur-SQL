@@ -15,7 +15,7 @@ TabString::TabString(ifstream &file):table(NULL),size(0),alloc(0)
         string line;
         getline(file,line);
         line = Requete::cleanLine(line);
-        size = strsplit(line,table,',');
+        size = strsplit2(line,table,',');
         alloc = size;
         if (size == 0)
             exit(1);
@@ -90,18 +90,18 @@ TabString &TabString::operator=(const TabString &tab)
 }
 
 string &TabString::operator[](unsigned long int i){
-    if (i < 0 || i >= size) {
+    /*if (i < 0 || i >= size) {
         cerr << "Out of Range in TabString"<< endl;
         exit(1);
-    }
+    }*/
     return table[i];
 }
 
 const string &TabString::operator[](unsigned long int i) const{
-    if (i < 0 || i >= size) {
+    /*if (i < 0 || i >= size) {
         cerr << "Out of Range in TabString"<< endl;
         exit(1);
-    }
+    }*/
     return table[i];
 }
 
@@ -172,3 +172,63 @@ unsigned long int TabString::strsplit(const string& line,string* &tab,char delim
     return j+1;
 
 }
+
+unsigned long int TabString::strsplit2(const string& line,string* &tab,char delim)
+{
+    bool go=false; unsigned int j = 0;
+    unsigned int i = 0,nbc =0;
+    while (i < line.size()){
+        if(line[i]=='\"' && line[i+1]!='\"'){
+            go = true;
+            while(go){
+                i++;
+                if(line[i]=='\"' && (i >= line.size()-1 || line[i+1]!='\"')){
+                    go=false;
+                } else if (line[i]=='\"' && line[i+1]=='\"') i++;
+            }
+        }
+        if(line[i]==delim){
+            nbc++;
+        }
+        i++;
+    }
+    i=0;unsigned int deb=0;
+    tab = new string[nbc+1]; 
+    while (i< line.size()){
+         if(line[i]=='\"' && line[i+1]!='\"'){
+            go = true;deb = i+1;
+            while(go){
+                i++;
+                if(line[i]=='\"' && (i >= line.size()-1 || line[i+1]!='\"')){
+                    go=false;
+                } else if (line[i]=='\"' && line[i+1]=='\"') {
+                    tab[j] += line.substr(deb,i-deb-1);
+                    deb = i+2;
+                    i++;
+                }
+                
+            }
+            tab[j]+=line.substr(deb,i-deb);
+            j++;
+            i++;
+            deb = i + 1;
+            
+        }
+        else if (line[i] == delim) {
+            tab[j]+=line.substr(deb,i-deb);
+            j++;
+            deb = i+1 ;
+
+
+        }
+        i++;
+
+    }
+    tab[j] += line.substr(deb);
+
+    return j+1;
+
+
+    
+
+} 

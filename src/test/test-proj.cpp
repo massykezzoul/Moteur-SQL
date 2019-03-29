@@ -14,8 +14,8 @@ int main(int argc, char const *argv[])
         Table tab;
         Table matable(argv[1]);
         TabString attr(2);
-        attr.add("\"code postal\"");
-        attr.add("\"ville\"");
+        attr.add("NOM");
+        attr.add("PRENOM");
         t1 = clock();
         tab=matable.projection(attr);
         t2 = clock();

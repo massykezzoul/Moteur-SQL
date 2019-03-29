@@ -21,6 +21,7 @@ int main(int argc, char const *argv[]) {
         /* execution de la requete sql sur les tables en mémoire */
         res = baseDeDonnee.executer(sql);
         /* fichier ou sera écrit le resultat */
+        cout << "Execution terminer" << endl;
         ofstream file("resultat.txt");
         if (file) {
             file << res;

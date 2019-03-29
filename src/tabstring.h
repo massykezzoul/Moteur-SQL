@@ -1,6 +1,8 @@
 #ifndef TABSTRING_H_
 #define TABSTRING_H_
 
+#include <string>
+
 class TabString {
 private:
     std::string *table; 
@@ -29,6 +31,7 @@ public:
 
     /* Split the string */
     static unsigned long int strsplit(const std::string& ,std::string*&,char);
+    static unsigned long int strsplit2(const std::string& ,std::string*&,char);
 };
 
 #endif

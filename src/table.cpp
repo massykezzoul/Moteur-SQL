@@ -144,6 +144,7 @@ ostream& operator<<(ostream& stream,const Table& tab) {
     size_t *tabMax= new size_t[tab.getNomAttributs().getSize()];
     size_t max,somme=0;
     string sep,space;
+    cout << "Calcul du max " << endl;
     for(size_t i= 0 ; i < tab.getNomAttributs().getSize(); ++i) {
         max = tab.getNomAttributs()[i].size();
         for(size_t j=0 ; j < tab.getValeurAttributs().getSize();++j)
@@ -153,16 +154,20 @@ ostream& operator<<(ostream& stream,const Table& tab) {
         tabMax[i]=max;
         somme+=tabMax[i];
     }
-
+    cout << "Fin Max " << endl;
     /* Affichages des noms des attributs*/
+    cout << "Affichage du nom des attributs " <<tab.getNomAttributs().getSize() << endl;
     stream << "| ";
     for(size_t i = 0; i < tab.getNomAttributs().getSize(); i++){
         stream << tab.getNomAttributs()[i] ;
+        cout << i << endl;
         space = string(tabMax[i]-tab.getNomAttributs()[i].size() + 1,' ');
         stream << space <<" | " ;
     }
+    cout << "Fin du nom des attr" << endl;
     stream << endl;
     /* affichage du séparateur */
+    cout << "Sep "<< endl;
     sep = string(somme+(tab.getNomAttributs().getSize()*4)+1,'-');
     stream << sep<< endl;
     /* Affichages des valeurs des attributs */
