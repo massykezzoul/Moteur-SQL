@@ -29,13 +29,14 @@ MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
         file.seekg(0, file.beg);
         getline(file,line);
         tab = new TabString[alloc];
-
         while( !file.eof() ) {
             add(TabString(file));
         }
     }
-    else
+    else {
+        cerr << "Erreur d'ouverture du fichier" << endl;
         exit(1);
+    }
 }
 
 MatriceString::MatriceString(const MatriceString& copie){

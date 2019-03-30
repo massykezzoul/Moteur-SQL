@@ -17,10 +17,14 @@ TabString::TabString(ifstream &file):table(NULL),size(0),alloc(0)
         line = Requete::cleanLine(line);
         size = strsplit2(line,table,',');
         alloc = size;
-        if (size == 0)
+        if (size == 0) {
+            cerr << "Erreur dans Strsplit (size == 0)" << endl;
             exit(1);
-    } else 
+        }
+    } else {
+        cerr << "Impossible d'ouvrire le fichier (cons TabString)" << file << endl;
         exit(1);
+    }
 }
 
 TabString::TabString(unsigned long int i):table(new string[i]),size(0),alloc(i) {}
@@ -90,18 +94,18 @@ TabString &TabString::operator=(const TabString &tab)
 }
 
 string &TabString::operator[](unsigned long int i){
-    /*if (i < 0 || i >= size) {
+    if (i < 0 || i >= size) {
         cerr << "Out of Range in TabString"<< endl;
         exit(1);
-    }*/
+    }
     return table[i];
 }
 
 const string &TabString::operator[](unsigned long int i) const{
-    /*if (i < 0 || i >= size) {
+    if (i < 0 || i >= size) {
         cerr << "Out of Range in TabString"<< endl;
         exit(1);
-    }*/
+    }
     return table[i];
 }
 
@@ -178,7 +182,7 @@ unsigned long int TabString::strsplit2(const string& line,string* &tab,char deli
     bool go=false; unsigned int j = 0;
     unsigned int i = 0,nbc =0;
     while (i < line.size()){
-        if(line[i]=='\"' && line[i+1]!='\"'){
+        if(line[i]=='\"'){
             go = true;
             while(go){
                 i++;
@@ -195,7 +199,7 @@ unsigned long int TabString::strsplit2(const string& line,string* &tab,char deli
     i=0;unsigned int deb=0;
     tab = new string[nbc+1]; 
     while (i< line.size()){
-         if(line[i]=='\"' && line[i+1]!='\"'){
+         if(line[i]=='\"'){
             go = true;deb = i+1;
             while(go){
                 i++;
@@ -224,11 +228,10 @@ unsigned long int TabString::strsplit2(const string& line,string* &tab,char deli
         i++;
 
     }
-    tab[j] += line.substr(deb);
+    if (j <= nbc) {
+        tab[j] += line.substr(deb);
+        j++;
+    }
 
-    return j+1;
-
-
-    
-
+    return j;
 } 

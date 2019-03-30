@@ -45,11 +45,12 @@ void TabTable::add (string fileName){
 	size++;
 
 	Table *copie= new Table[size];
-
+	
 	for (unsigned long int i=0; i<(size-1) ;i++)
 	{
 		copie[i]=tables[i];
 	}
+	
 	copie[size-1]=Table(fileName);
 
 	delete[] tables;

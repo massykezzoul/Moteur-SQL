@@ -24,8 +24,6 @@ ARCHIVE_NAME = source_code
 
 ## Compilation
 
-
-
 all: $(EXEC)
 
 $(EXEC) : $(OBJ) $(HEADERS)

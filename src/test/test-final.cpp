@@ -36,4 +36,5 @@ int main(int argc, char const *argv[]) {
         cerr << "Use it like : \n\t" << argv[0] <<" [one or more CSV file] [SQL request]" << endl;
         return 1;
     }
+    cout << "end" << endl;
 }
