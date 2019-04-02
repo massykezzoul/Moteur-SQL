@@ -181,6 +181,7 @@ unsigned long int TabString::strsplit2(const string& line,string* &tab,char deli
 {
     bool go=false; unsigned int j = 0;
     unsigned int i = 0,nbc =0;
+    // Compter le nombre d'attribut dans la line
     while (i < line.size()){
         if(line[i]=='\"'){
             go = true;
@@ -197,7 +198,10 @@ unsigned long int TabString::strsplit2(const string& line,string* &tab,char deli
         i++;
     }
     i=0;unsigned int deb=0;
+    // Allocaton mémoire
     tab = new string[nbc+1]; 
+
+    // Debut de lecture des attributs
     while (i< line.size()){
          if(line[i]=='\"'){
             go = true;deb = i+1;
@@ -213,6 +217,7 @@ unsigned long int TabString::strsplit2(const string& line,string* &tab,char deli
                 
             }
             tab[j]+=line.substr(deb,i-deb);
+            tab[j] = Requete::cleanLine(tab[j]);
             j++;
             i++;
             deb = i + 1;
@@ -220,6 +225,7 @@ unsigned long int TabString::strsplit2(const string& line,string* &tab,char deli
         }
         else if (line[i] == delim) {
             tab[j]+=line.substr(deb,i-deb);
+            tab[j] = Requete::cleanLine(tab[j]);
             j++;
             deb = i+1 ;
 
@@ -230,6 +236,7 @@ unsigned long int TabString::strsplit2(const string& line,string* &tab,char deli
     }
     if (j <= nbc) {
         tab[j] += line.substr(deb);
+        tab[j] = Requete::cleanLine(tab[j]);
         j++;
     }
 

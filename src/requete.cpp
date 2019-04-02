@@ -19,7 +19,7 @@ void Requete::parseSelect(string sql) {
         debut += cle.size()+1;
         sql = sql.substr(debut,fin - debut);
         sql = Requete::cleanLine(sql);
-        unsigned long int sizeSelect = TabString::strsplit(sql,res,',');
+        unsigned long int sizeSelect = TabString::strsplit2(sql,res,',');
         select = TabString(res,sizeSelect);
     } else {
         cerr << "Erreur de syntax dans la requte : Select ou From introuvable '" << sql << "'" << endl;
