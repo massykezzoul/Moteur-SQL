@@ -12,13 +12,13 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
     unsigned int nband=0,nbor=0,nbop=0;
     while(debut < fin)
     {
-        debut=str.find("and",debut+1);
+        debut=str.find(" and ",debut+1);
         if(debut != string::npos) nband++;
     }
     debut = 0;
     while(debut < fin )
     {
-        debut=str.find("or",debut+1);
+        debut=str.find(" or ",debut+1);
         if(debut !=string::npos) nbor++;
     }
     nbop=nband+nbor;
@@ -30,8 +30,8 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
     int i=0,j=0;
     while (debut < fin )
     {
-        posAnd=str.find("and",posAnd);
-        posOr=str.find("or",posOr);
+        posAnd=str.find(" and ",posAnd);
+        posOr=str.find(" or ",posOr);
         if(posAnd != string::npos || posOr != string::npos)
         {
             if (posAnd < posOr )
