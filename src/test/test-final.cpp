@@ -22,6 +22,8 @@ int main(int argc, char const *argv[]) {
         res = baseDeDonnee.executer(sql);
         /* fichier ou sera écrit le resultat */
         cout << "Execution terminer" << endl;
+        cout << res.getValeurAttributs().getSize() <<" lines"<<endl;
+        cout << res.getNomAttributs().getSize() <<" Collonnes" << endl;
         ofstream file("resultat.txt");
         if (file) {
             file << res;

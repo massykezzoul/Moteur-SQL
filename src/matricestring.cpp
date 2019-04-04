@@ -19,17 +19,29 @@ MatriceString::MatriceString(unsigned long int i,unsigned long int j):tab(new Ta
 MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
     if (file){
         string line;
-        /* Compter le  nombre de ligne */
+        /* Compter le nombre de ligne */
         unsigned long int nombre_ligne = 0;
         while ( !file.eof()) {
-            getline(file,line);
-            if (line != "") ++nombre_ligne;
+            getline(file,line,'\n');
+            if (line != "" && line != " " && line != "\n" && line.size()>0) ++nombre_ligne;
+        }
+
+        if (file) {
+            cerr << "file is ok" << endl;
+        } else {
+            cerr << "file is off" << endl;
+            file.clear();
+            cerr << "bad?   : " << file.bad() << endl;
+            cerr << "good?  : " << file.good() << endl;
+            cerr << "fail?  : " << file.fail() << endl;
+            cerr << endl;
         }
         alloc = nombre_ligne;
+        cout << alloc << endl;
         file.seekg(0, file.beg);
         getline(file,line);
         tab = new TabString[alloc];
-        while( !file.eof() ) {
+        for(unsigned long int i = 0; i < alloc ; i++) {
             add(TabString(file));
         }
     }

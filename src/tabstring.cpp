@@ -95,7 +95,7 @@ TabString &TabString::operator=(const TabString &tab)
 
 string &TabString::operator[](unsigned long int i){
     if (i < 0 || i >= size) {
-        cerr << "Out of Range in TabString"<< endl;
+        cerr << "Out of Range in TabString: "<<i<< endl;
         exit(1);
     }
     return table[i];
@@ -103,7 +103,8 @@ string &TabString::operator[](unsigned long int i){
 
 const string &TabString::operator[](unsigned long int i) const{
     if (i < 0 || i >= size) {
-        cerr << "Out of Range in TabString"<< endl;
+        
+        cerr << "Out of Range in TabString: "<<i<< endl;
         exit(1);
     }
     return table[i];
