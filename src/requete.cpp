@@ -1,10 +1,11 @@
+#include <iostream>
 #include <string>
 #include <cstdlib>   // exit()
 #include <algorithm> // std::transform
 #include "requete.h"
 #include "tabstring.h"
+#include "tabAttribut.h"
 
-#include <iostream>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ void Requete::parseSelect(string sql) {
         sql = sql.substr(debut,fin - debut);
         sql = Requete::cleanLine(sql);
         unsigned long int sizeSelect = TabString::strsplit2(sql,res,',');
-        select = TabString(res,sizeSelect);
+        select = TabAttribut(res,sizeSelect);
     } else {
         cerr << "Erreur de syntax dans la requte : Select ou From introuvable '" << sql << "'" << endl;
         exit(1);
@@ -98,7 +99,7 @@ Requete::Requete(string sql):select(),from(),where(){
     parseWhere(sql);
 }
 
-const TabString &Requete::getSelect()const {
+const TabAttribut &Requete::getSelect()const {
     return select;
 }
 
