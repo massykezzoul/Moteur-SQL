@@ -19,14 +19,14 @@ public:
 
     TabAttribut &operator=(const TabAttribut &tab);
     TabAttribut &operator+=(const TabAttribut &tab);
-    NomAttribut &operator[](unsigned long int);
-    const NomAttribut &operator[](unsigned long int) const;
+    std::string &operator[](unsigned long int);
+    const std::string &operator[](unsigned long int) const;
 
 
     void add(const NomAttribut& str);
 
     unsigned long int get(NomAttribut str) const ;
-    NomAttribut get(unsigned long int i) const;
+    NomAttribut get(unsigned long int i)const
     unsigned long int getSize() const;
 };
 #endif
