@@ -1,5 +1,7 @@
 #include "tabCondition.h"
 #include <iostream>
+#include "tabAttribut.h"
+#include "nomAttribut.h"
 #include <cstdlib>
 using namespace std;
 
@@ -82,13 +84,14 @@ OpLogique TabCondition::getOpL(unsigned int i)const
 }
 
 
-bool TabCondition::verifier(const TabString &line,const TabString &attr) const
+bool TabCondition::verifier(const TabString &line,const TabAttribut &attr) const
 {
-    if (attr.get(tab[0].getOp1()) > attr.getSize()) {
+    // ERROR
+    if (attr.get(NomAttribut("",tab[0].getOp1())) > attr.getSize()) {
         cerr << "Erreur : '" << tab[0].getOp1() << "' introuvable" << endl;
         exit(1);
     }
-    bool booleen = tab[0].verifier(line,attr.get(tab[0].getOp1()),attr.get(tab[0].getOp2()));
+    bool booleen = tab[0].verifier(line,attr.get(NomAttribut("",tab[0].getOp1())),attr.get(NomAttribut("",tab[0].getOp2())));
     unsigned int i=0;
     while(i < getSizeOp())
     {

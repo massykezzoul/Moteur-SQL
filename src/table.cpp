@@ -90,7 +90,7 @@ const MatriceString& Table::getValeurAttributs() const{
 
 Table Table::projection(TabAttribut attributs) const{
     
-    if (attributs.get(0) == "*") // select * from ... where ...;
+    if (attributs[0] == "*") // select * from ... where ...;
         return *this;
     else {
         /* Vérification des ambiguïté */
@@ -119,12 +119,12 @@ Table Table::projection(TabAttribut attributs) const{
         tab.nomAttributs=attributs; // à modifier
         tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
         for(unsigned long int i = 0; i < attributs.getSize(); i++) {
-            if (nomAttributs.get(attributs[i]) == (unsigned long int)-1 ) { // attribut non trouvé
+            if (nomAttributs.get(attributs.get(i)) == (unsigned long int)-1 ) { // attribut non trouvé
                 cerr << "Attribut '" << attributs[i] << "' non trouver." << endl;
                 exit(1);
             }
             else 
-                tab.valeurAttributs.addColonne(valeurAttributs,nomAttributs.get(attributs[i]));
+                tab.valeurAttributs.addColonne(valeurAttributs,nomAttributs.get(attributs.get(i)));
         }
         return tab;
     }

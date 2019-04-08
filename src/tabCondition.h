@@ -3,6 +3,7 @@
 
 #include <string>
 #include "tabstring.h"
+#include "tabAttribut.h"
 #include "condition.h"
 
 enum OpLogique{
@@ -22,7 +23,7 @@ class TabCondition
     public:
     TabCondition();
     TabCondition(std::string);
-    bool verifier(const TabString&,const TabString&) const;
+    bool verifier(const TabString&,const TabAttribut&) const;
     unsigned int getSize() const;
     unsigned int getSizeOp() const;
     Condition getCond(unsigned int i) const;

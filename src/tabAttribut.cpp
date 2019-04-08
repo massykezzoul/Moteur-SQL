@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include "tabAttribut.h"
 #include "tabstring.h"
+#include "nomAttribut.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ using namespace std;
     TabAttribut::TabAttribut(unsigned long int i):table(new NomAttribut[i]),size(0),alloc(0){
     }// allouer 
 
-    TabAttribut::TabAttribut(NomAttribut*& str,unsigned long int taille):table(new NomAttribut[taille]),size(taille),alloc(taille){
+    TabAttribut::TabAttribut(string*& str,unsigned long int taille):table(new NomAttribut[taille]),size(taille),alloc(taille){
        unsigned long int j=0;
         for(unsigned long int i = 0; i < taille; i++)
         {
@@ -51,14 +52,14 @@ using namespace std;
         table[i]=tab.table[i];
     }
     }
-    TabAttribut::TabAttribut(const TabAttribut&,const TabAttribut&):table(new string[tab1.size+tab2.size]),size(0),alloc(tab1.size+tab2.size){
+    TabAttribut::TabAttribut(const TabAttribut& tab1,const TabAttribut& tab2):table(new NomAttribut[tab1.size+tab2.size]),size(0),alloc(tab1.size+tab2.size){
         /*on copie les elements*/
     unsigned long int i = 0;
     for (i = 0 ; i<tab1.size ; ++i)
-        add(tab1[i]);
+        add(tab1.table[i]);
 
     for(unsigned long int j = 0; j < tab2.size; j++)
-        add(tab2[j]);
+        add(tab2.table[j]);
     } // projection 
     TabAttribut::~TabAttribut(){
         if(table!=NULL) delete[] table;
@@ -79,32 +80,25 @@ using namespace std;
         /*on copie les elements*/
         for(unsigned long int i = 0 ; i < size ; ++i)
         {
-            table[i]=tab[i];
+            table[i]=tab.table[i];
         }
     }
     
     return *this;
     }
     TabAttribut &TabAttribut::operator+=(const TabAttribut &tab){
-         for(unsigned long int i = 0; i < tab.size; i++)
-        add(tab[i]);
-    return *this;
-    }
-    string &TabAttribut::operator[](unsigned long int){
-         if (i < 0 || i >= size) {
-        cerr << "Out of Range in TabString: "<<i<< endl;
-        exit(1);
-    }
-    return table[i].getAttribut();
-    }
-    const NomAttribut &TabAttribut::operator[](unsigned long int) const{
-         if (i < 0 || i >= size) {
-        cerr << "Out of Range in TabString: "<<i<< endl;
-        exit(1);
-    }
-    return table[i].getAttribut();
+        for(unsigned long int i = 0; i < tab.size; i++)
+            add(tab.table[i]);
+        return *this;
     }
 
+    const string &TabAttribut::operator[](unsigned long int i) const{
+        if (i < 0 || i >= size) {
+            cerr << "Out of Range in TabString: "<<i<< endl;
+            exit(1);
+        }
+        return table[i].getAttribut();
+    }
 
     void TabAttribut::add(const NomAttribut& str){
         if (size >= alloc) {
@@ -132,10 +126,12 @@ using namespace std;
     return -1;
     }
     
+    
+
     NomAttribut TabAttribut::get(unsigned long int i)const{
         return table[i];
     
-    
+    }
     unsigned long int TabAttribut::getSize() const{
         return size;
     }
