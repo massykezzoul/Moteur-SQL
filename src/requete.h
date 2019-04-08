@@ -3,10 +3,11 @@
 
 #include "tabstring.h"
 #include "tabCondition.h"
+#include "tabAttribut.h"
 
 class Requete {
 private:
-    TabString select;
+    TabAttribut select;
     TabString from;
     TabCondition where;
 
@@ -18,7 +19,7 @@ public:
     Requete();
     Requete(std::string);
 
-    const TabString &getSelect() const;
+    const TabAttribut &getSelect() const;
     const TabString &getFrom() const;
     const TabCondition &getWhere() const;
 

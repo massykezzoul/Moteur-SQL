@@ -1,14 +1,16 @@
+#include <iostream>
+#include <cstdlib>
 #include "tabAttribut.h"
 #include "tabstring.h"
 
-
+using namespace std;
 
     TabAttribut::TabAttribut():table(NULL),size(0),alloc(0){
 
     }
     TabAttribut::TabAttribut(string nomTable,string line):table(NULL),size(0),alloc(0)
     {
-        strng *tab = NULL;
+        string *tab = NULL;
         
         size = TabString::strsplit2(line,tab,',');
         if (size == 0) {
@@ -19,13 +21,13 @@
         table = new NomAttribut[alloc]; 
         for(size_t i = 0; i < size; i++)
         {
-            table[i]=nomAtrribut(nomTable,tab[i]);
+            table[i] = NomAttribut(nomTable,tab[i]);
         }
         
     } 
-    TabAttribut::TabAttribut(unsigned long int):table(new NomAttribut[i]),size(0),alloc(0){
+    TabAttribut::TabAttribut(unsigned long int i):table(new NomAttribut[i]),size(0),alloc(0){
     }// allouer 
-    TabAttribut::TabAttribut(NomAttribut*& str,unsigned long int taille):table(new NomAttribut[taille]),size(taille),alloc(taille){
+    TabAttribut::TabAttribut(string*& str,unsigned long int taille):table(new NomAttribut[taille]),size(taille),alloc(taille){
        int j=0;
         for(size_t i = 0; i < taille; i++)
         {

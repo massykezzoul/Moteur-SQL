@@ -1,6 +1,8 @@
 #ifndef NOMATTRIBUT_H
 #define NOMATTRIBUT_H
 
+#include <string>
+
 class NomAttribut {
 private:
     std::string nomTable;

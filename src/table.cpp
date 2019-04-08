@@ -14,14 +14,18 @@ Table::Table()
 {}
 Table::Table(string fileName) {
     ifstream stream(fileName.c_str());
-    if (stream && !stream.bad() && stream.good())
-    {
+    if (stream) {   
         nomTable=Table::getFileName(fileName);
+        /* Mise en miniscule */
         transform(nomTable.begin(), nomTable.end(), nomTable.begin(), ::tolower);
-        nomAttributs = TabString(stream);
+        
+        /* Lire la premier ligne du fichier pour construire le tableau des noms des attributs */
+        string line;
+        getline(stream,line);
+        nomAttributs = TabAttribut(nomTable,line);
+        
         valeurAttributs = MatriceString(stream);
-    }
-    else {
+    } else {
         cerr << "Lecture du fichier '" << fileName << "' Impossible" << endl;
     }
 }
@@ -77,21 +81,42 @@ string Table::getNomTable() const{
     return nomTable;
 }
 
-const TabString& Table::getNomAttributs() const{
+const TabAttribut& Table::getNomAttributs() const{
     return nomAttributs;
 }
 const MatriceString& Table::getValeurAttributs() const{
     return valeurAttributs;
 }
 
-Table Table::projection(TabString attributs) const{
+Table Table::projection(TabAttribut attributs) const{
     
     if (attributs.get(0) == "*") // select * from ... where ...;
         return *this;
     else {
+        /* Vérification des ambiguïté */
+        for(unsigned long int i = 0; i < attributs.getSize(); i++) {
+            int n_trouve = 0;
+            for(unsigned long int j = 0; j < this->getNomAttributs().getSize(); j++) {
+                if (attributs[i] == this->getNomAttributs()[j]) 
+                    n_trouve++;
+            }
+            if (n_trouve > 1) {
+                cerr << "Erreur dans la Requete SQL" << endl;
+                cerr << "Il éxiste plusieurs '" << attributs[i] << "' dans les tables (ambiguïté)" << endl;
+                cerr << "Veuillez préciser le nom de la table" << endl;
+                exit(1);
+            }
+            if (n_trouve == 0) {
+                cerr << "Erreur dans la Requete SQL" << endl;
+                cerr << "Il n'éxiste pas '" << attributs[i] << "' dans les tables" << endl;
+                exit(1);
+            }
+        }
+        
+        /* Si pas d'ambiguïté */
         Table tab;
         tab.nomTable=nomTable;
-        tab.nomAttributs=attributs;
+        tab.nomAttributs=attributs; // à modifier
         tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
         for(unsigned long int i = 0; i < attributs.getSize(); i++) {
             if (nomAttributs.get(attributs[i]) == (unsigned long int)-1 ) { // attribut non trouvé
@@ -127,7 +152,7 @@ Table Table::jointure(const Table& tab1,const Table& tab2) const{
  * Get File Name from a Path with or without extension
  ******/
 string Table::getFileName(string filePath, bool withExtension, char seperator) {
-	/* Le dernièr point trouvé */
+	/* Le dernier point trouvé */
 	size_t point = filePath.rfind(".");
     size_t sepPos = filePath.rfind(seperator);
     // Séparateur trouver

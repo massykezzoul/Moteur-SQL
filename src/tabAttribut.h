@@ -3,6 +3,7 @@
 
 #include "nomAttribut.h"
 #include <string>
+
 class TabAttribut {
 private:
     NomAttribut *table; 
@@ -12,7 +13,7 @@ public:
     TabAttribut();
     TabAttribut(std::string,std::string); 
     TabAttribut(unsigned long int);// allouer 
-    TabAttribut(NomAttribut*& str,unsigned long int i);
+    TabAttribut(std::string*& str,unsigned long int i);
     TabAttribut(const TabAttribut &tab);
     TabAttribut(const TabAttribut&,const TabAttribut&); // projection 
     ~TabAttribut();
@@ -28,5 +29,7 @@ public:
     unsigned long int get(NomAttribut str) const ;
     NomAttribut get(unsigned long int i) const;
     unsigned long int getSize() const;
+
 };
+
 #endif
