@@ -27,19 +27,20 @@ MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
         }
 
         if (!file) {
-            cerr << "file is off" << endl;
-            cerr << "bad?   : " << file.bad() << endl;
-            cerr << "good?  : " << file.good() << endl;
-            cerr << "fail?  : " << file.fail() << endl;
             file.clear();
-            cerr << endl;
         }
+        
         alloc = nombre_ligne;
         file.seekg(0, file.beg);
-        getline(file,line);
+        /* ignorer les lignes vide au debut de fichier */
+        while (getline(file,line) && line == "");
         tab = new TabString[alloc];
-        for(unsigned long int i = 0; i < alloc ; i++) {
-            add(TabString(file));
+        while(getline(file,line)) {
+            /* ignorer les lignes vides au milier et à la fin du fichier */
+            if (line != "" && line != " " && line != "\n" )
+                add(TabString(line));
+            
+            //add(TabString(file));
         }
     }
     else {
