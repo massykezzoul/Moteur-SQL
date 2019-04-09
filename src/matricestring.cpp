@@ -26,18 +26,15 @@ MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
             if (line != "" && line != " " && line != "\n" && line.size()>0) ++nombre_ligne;
         }
 
-        if (file) {
-            cerr << "file is ok" << endl;
-        } else {
+        if (!file) {
             cerr << "file is off" << endl;
-            file.clear();
             cerr << "bad?   : " << file.bad() << endl;
             cerr << "good?  : " << file.good() << endl;
             cerr << "fail?  : " << file.fail() << endl;
+            file.clear();
             cerr << endl;
         }
         alloc = nombre_ligne;
-        cout << alloc << endl;
         file.seekg(0, file.beg);
         getline(file,line);
         tab = new TabString[alloc];

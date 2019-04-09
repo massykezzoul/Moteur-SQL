@@ -97,12 +97,12 @@ Table Table::projection(TabAttribut attributs) const{
         for(unsigned long int i = 0; i < attributs.getSize(); i++) {
             int n_trouve = 0;
             for(unsigned long int j = 0; j < this->getNomAttributs().getSize(); j++) {
-                if (attributs[i] == this->getNomAttributs()[j]) 
+                if (attributs.get(i) == this->getNomAttributs().get(j)) 
                     n_trouve++;
             }
             if (n_trouve > 1) {
-                cerr << "Erreur dans la Requete SQL" << endl;
-                cerr << "Il éxiste plusieurs '" << attributs[i] << "' dans les tables (ambiguïté)" << endl;
+                cerr << "Erreur dans la Requete SQL (selection) " << endl;
+                cerr << "Il existe plusieurs '" << attributs[i] << "' dans les tables (ambiguïté)" << endl;
                 cerr << "Veuillez préciser le nom de la table" << endl;
                 exit(1);
             }
@@ -170,7 +170,7 @@ ostream& operator<<(ostream& stream,const Table& tab) {
     size_t max,somme=0;
     string sep,space;
     for(size_t i= 0 ; i < tab.getNomAttributs().getSize(); ++i) {
-        max = tab.getNomAttributs()[i].size();
+        max = tab.getNomAttributs()[i].size(); // problem on *size*
         for(size_t j=0 ; j < tab.getValeurAttributs().getSize();++j)
         {
             max = (tab.getValeurAttributs()[j][i].size() < max ? max : tab.getValeurAttributs()[j][i].size());

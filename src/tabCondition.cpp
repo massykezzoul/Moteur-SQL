@@ -87,11 +87,11 @@ OpLogique TabCondition::getOpL(unsigned int i)const
 bool TabCondition::verifier(const TabString &line,const TabAttribut &attr) const
 {
     // ERROR
-    if (attr.get(NomAttribut("",tab[0].getOp1())) > attr.getSize()) {
+    if (attr.get(tab[0].getOp1()) > attr.getSize()) { // A verifier
         cerr << "Erreur : '" << tab[0].getOp1() << "' introuvable" << endl;
         exit(1);
     }
-    bool booleen = tab[0].verifier(line,attr.get(NomAttribut("",tab[0].getOp1())),attr.get(NomAttribut("",tab[0].getOp2())));
+    bool booleen = tab[0].verifier(line,attr.get(tab[0].getOp1()),attr.get(tab[0].getOp2()));
     unsigned int i=0;
     while(i < getSizeOp())
     {
@@ -101,9 +101,9 @@ bool TabCondition::verifier(const TabString &line,const TabAttribut &attr) const
         }
         if(oplogique[i]==AND)
         {
-            booleen = (booleen && tab[i+1].verifier(line,attr.get(tab[i+1].getOp1()),attr.get(tab[i+1].getOp2())));
+            booleen = (booleen && tab[i+1].verifier(line,attr.get(NomAttribut("",tab[i+1].getOp1())),attr.get(NomAttribut("",tab[i+1].getOp2()))));
         }
-        else booleen = (booleen || tab[i+1].verifier(line,attr.get(tab[i+1].getOp1()),attr.get(tab[i+1].getOp2())));
+        else booleen = (booleen || tab[i+1].verifier(line,attr.get(NomAttribut("",tab[i+1].getOp1())),attr.get(NomAttribut("",tab[i+1].getOp2()))));
         i++;
     }
     return booleen;

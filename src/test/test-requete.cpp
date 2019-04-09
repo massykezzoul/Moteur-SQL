@@ -1,5 +1,7 @@
 #include <iostream>
 #include "../requete.h"
+#include "../tabAttribut.h"
+#include "../nomAttribut.h"
 
 using namespace std;
 
@@ -19,7 +21,7 @@ int main(int argc, char const *argv[]) {
                 cout << "projection : " << endl;
                 if (sql.getSelect().getSize() > 0) 
                     for(unsigned int i = 0; i < sql.getSelect().getSize(); i++)
-                        cout << sql.getSelect().get(i) << " ";
+                        cout << sql.getSelect()[i] << " ";
                 else 
                     cout << "NO SELECT";
                 cout << endl;
@@ -35,10 +37,10 @@ int main(int argc, char const *argv[]) {
                 cout << "selection : " << endl;
                 //verification de la condition where
                  /* Initialisation de la ligne des attributs */
-                TabString nomAtt;
-                nomAtt.add("id1");
-                nomAtt.add("age");
-                nomAtt.add("id2");
+                TabAttribut nomAtt;
+                nomAtt.add(NomAttribut("","id1"));
+                nomAtt.add(NomAttribut("","age"));
+                nomAtt.add(NomAttribut("","id2"));
                 /* Initialisation de la ligne des valeurs */
                 TabString val1;
                 val1.add("1");
@@ -73,7 +75,7 @@ int main(int argc, char const *argv[]) {
             cout << "projection : " << endl;
             if (sql.getSelect().getSize() > 0) 
                 for(unsigned int i = 0; i < sql.getSelect().getSize(); i++)
-                    cout << sql.getSelect().get(i) << " ";
+                    cout << "\t" << sql.getSelect()[i] << endl;
             else 
                 cout << "Pas de projection";
             cout << endl;
@@ -82,7 +84,7 @@ int main(int argc, char const *argv[]) {
             cout << "jointure : " << endl;
             if (sql.getFrom().getSize() > 0) 
                 for(unsigned int i = 0; i < sql.getFrom().getSize(); i++)
-                    cout << sql.getFrom().get(i) << " ";
+                    cout << "\t" << sql.getFrom().get(i) << endl;
             else 
                 cout << "Pas de jointure";
             cout << endl;

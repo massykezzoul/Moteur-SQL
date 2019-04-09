@@ -9,10 +9,14 @@ private:
     std::string nomAttribut;
 public:
     NomAttribut(std::string,std::string);
+    NomAttribut(std::string);
     NomAttribut();
 
-    std::string getTable() const;
-    std::string getAttribut() const;
+    const std::string& getTable() const;
+    const std::string& getAttribut() const;
+
+    std::string& getTable();
+    std::string& getAttribut();
 
     bool operator==(NomAttribut) const;
     void operator=(NomAttribut);

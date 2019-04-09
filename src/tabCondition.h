@@ -12,15 +12,13 @@ enum OpLogique{
     NO_OP
 };
 
-class TabCondition
-{
-    private:
+class TabCondition {
+private:
     Condition *tab; 
     OpLogique *oplogique; 
     unsigned int size;
 
-
-    public:
+public:
     TabCondition();
     TabCondition(std::string);
     bool verifier(const TabString&,const TabAttribut&) const;
