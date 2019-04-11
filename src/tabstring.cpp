@@ -27,6 +27,18 @@ TabString::TabString(ifstream &file):table(NULL),size(0),alloc(0)
     }
 }
 
+TabString::TabString(string &line):table(NULL),size(0),alloc(0)
+{
+    line = Requete::cleanLine(line);
+    size = strsplit2(line,table,',');
+    alloc = size;
+    if (size == 0) {
+        cerr << "Erreur dans Strsplit (size == 0)" << endl;
+        exit(1);
+    }
+}
+
+
 TabString::TabString(unsigned long int i):table(new string[i]),size(0),alloc(i) {}
 
 TabString::TabString(string*& str,unsigned long int i):table(new string[i]),size(0),alloc(i) {

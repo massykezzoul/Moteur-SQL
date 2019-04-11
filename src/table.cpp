@@ -10,8 +10,8 @@
 
 using namespace std;
 
-Table::Table()
-{}
+Table::Table() {}
+
 Table::Table(string fileName) {
     ifstream stream(fileName.c_str());
     if (stream) {   
@@ -21,7 +21,8 @@ Table::Table(string fileName) {
         
         /* Lire la premier ligne du fichier pour construire le tableau des noms des attributs */
         string line;
-        getline(stream,line);
+        while (getline(stream,line) && line == "");
+
         nomAttributs = TabAttribut(nomTable,line);
         
         valeurAttributs = MatriceString(stream);

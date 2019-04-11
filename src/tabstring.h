@@ -11,6 +11,7 @@ private:
 public:
     TabString();
     TabString(std::ifstream &file); 
+    TabString(std::string&);
     TabString(unsigned long int);// allouer 
     TabString(std::string*& str,unsigned long int i);
     TabString(const TabString &tab);
