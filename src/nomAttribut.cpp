@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream> // temp
 #include "nomAttribut.h"
 
 using namespace std;
@@ -32,10 +33,10 @@ string& NomAttribut::getAttribut(){
 }
 
 bool NomAttribut::operator==(NomAttribut att) const{
-    if (att.getTable() == "")
+    if (att.getTable() == "" || nomTable == "")
         return att.getAttribut() == nomAttribut;
     else
-        return att.getAttribut() == nomAttribut && att.getTable() == nomTable;
+        return (att.getAttribut() == nomAttribut || nomAttribut == "*" || att.getAttribut() == "*") && att.getTable() == nomTable;
 }
 
 void NomAttribut::operator=(NomAttribut att){

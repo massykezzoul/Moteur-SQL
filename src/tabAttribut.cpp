@@ -64,7 +64,7 @@ TabAttribut &TabAttribut::operator=(const TabAttribut &tab){
     if (this != &tab) {
         /* Réallocation si espace insufisant */
         alloc = tab.alloc;
-        /*on supprime l'ancien tableau*/
+        /* On supprime l'ancien tableau */
         if (table != NULL)
             delete[] table;
         table = new NomAttribut[alloc];

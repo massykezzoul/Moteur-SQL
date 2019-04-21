@@ -91,41 +91,42 @@ const MatriceString& Table::getValeurAttributs() const{
 
 Table Table::projection(TabAttribut attributs) const{
     
-    if (attributs[0] == "*") // select * from ... where ...;
+    if (attributs.get(0).getAttribut() == "*" && attributs.get(0).getTable() == "") // select * from ... where ...;
         return *this;
     else {
         /* Vérification des ambiguïté */
         for(unsigned long int i = 0; i < attributs.getSize(); i++) {
-            int n_trouve = 0;
-            for(unsigned long int j = 0; j < this->getNomAttributs().getSize(); j++) {
-                if (attributs.get(i) == this->getNomAttributs().get(j)) 
-                    n_trouve++;
-            }
-            if (n_trouve > 1) {
-                cerr << "Erreur dans la Requete SQL (selection) " << endl;
-                cerr << "Il existe plusieurs '" << attributs[i] << "' dans les tables (ambiguïté)" << endl;
-                cerr << "Veuillez préciser le nom de la table" << endl;
-                exit(1);
-            }
-            if (n_trouve == 0) {
-                cerr << "Erreur dans la Requete SQL" << endl;
-                cerr << "Il n'éxiste pas '" << attributs[i] << "' dans les tables" << endl;
-                exit(1);
+            if (attributs[i] != "*") { // pas d'ambiguïté si attributs[i] == "Table.*"
+                int n_trouve = 0;
+                for(unsigned long int j = 0; j < this->getNomAttributs().getSize(); j++) {
+                    if (attributs.get(i) == this->getNomAttributs().get(j)) 
+                        n_trouve++;
+                }
+                if (n_trouve > 1) {
+                    cerr << "Erreur dans la Requete SQL (selection) " << endl;
+                    cerr << "Il existe plusieurs '" << attributs[i] << "' dans les tables (ambiguïté)" << endl;
+                    cerr << "Veuillez préciser le nom de la table" << endl;
+                    exit(1);
+                }
+                if (n_trouve == 0) {
+                    cerr << "Erreur dans la Requete SQL" << endl;
+                    cerr << "Il n'éxiste pas '" << attributs[i] << "' dans les tables." << endl;
+                    exit(1);
+                }
             }
         }
         
         /* Si pas d'ambiguïté */
         Table tab;
         tab.nomTable=nomTable;
-        tab.nomAttributs=attributs; // à modifier
         tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
         for(unsigned long int i = 0; i < attributs.getSize(); i++) {
-            if (nomAttributs.get(attributs.get(i)) == (unsigned long int)-1 ) { // attribut non trouvé
-                cerr << "Attribut '" << attributs[i] << "' non trouver." << endl;
-                exit(1);
+            for (unsigned long int j = 0; j < nomAttributs.getSize() ; j++) {
+                if (nomAttributs.get(j) == attributs.get(i) ) {
+                    tab.nomAttributs.add(nomAttributs.get(j));
+                    tab.valeurAttributs.addColonne(valeurAttributs,j);
+                }
             }
-            else 
-                tab.valeurAttributs.addColonne(valeurAttributs,nomAttributs.get(attributs.get(i)));
         }
         return tab;
     }
