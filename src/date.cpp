@@ -59,3 +59,8 @@ bool Date::isDate(string date) {
     }
     return false;
 }
+
+
+ostream& operator<<(ostream& s,const Date d) {
+    return s << d.toString();
+}

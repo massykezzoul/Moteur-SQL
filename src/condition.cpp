@@ -43,6 +43,8 @@ string operateurToStr(Operateur s) {
 }
 template <typename T>
 bool operation(T op1,Operateur op,T op2) {
+    //cout << op1 << " " << op << " " << op2 << endl;
+
     switch (op)
     {
         case EQUAL:
@@ -73,16 +75,23 @@ Condition::Condition():operande1(""),operateur(NOTHING),operande2(""){}
 Condition::Condition(string str) {
     str = Requete::cleanLine(str);
     size_t space1 = str.find_first_of("<>=! ");
-    size_t space2 = str.find_last_of("=<>! ")+1;
+    size_t space2 = str.find_last_of("=<>!")+1;
     operateur = strToOperateur(Requete::cleanLine(str.substr(space1,space2-space1)));
     if (space1 > str.size() || space2 > str.size() || operateur == NOTHING) {
         cerr << "Syntaxe error on : \"" << str << "\"" << endl;
+        cerr << "space1 > str.size() : " << (space1 > str.size()) << endl;
+        cerr << "space2 > str.size() : " <<( space2 > str.size() )<< endl;
+        cerr << "operateur == NOTHING : " << (operateur == NOTHING) << endl;
         exit(1);
     }
-    operande1 = str.substr(0,space1);
-    operande2 = str.substr(space2);
+    operande1 = Requete::cleanLine(str.substr(0,space1));
+    operande2 = Requete::cleanLine(str.substr(space2));
 
     type = (Condition::isVal(operande2)?VAL:ATTRIBUT);
+
+    cout << operande1 << " " << operateur << " " << operande2 << " type : "<< type << endl;
+ 
+    
 }
 
 string Condition::getOp1() const {
@@ -114,7 +123,7 @@ bool Condition::verifier(const TabString &line,unsigned long int iAtt,unsigned l
         else if (Date::isDate(line[iAtt]) && Date::isDate(operande2))
             return operation<Date>(Date(line[iAtt]),operateur,Date(operande2));
         else 
-            return operation<string>(line[iAtt],operateur,operande2);        
+            return operation<string>(line[iAtt],operateur,operande2.substr(1,operande2.size()-2));        
     }
     else {
         if (isFloat(line[iAtt]) && isFloat(line[iVal]) )
@@ -128,11 +137,14 @@ bool Condition::verifier(const TabString &line,unsigned long int iAtt,unsigned l
 
 
 bool Condition::isVal(string operande) {
-    return atof(operande.c_str()) || Date::isDate(operande);
+    return atof(operande.c_str()) ||    // type float
+        Date::isDate(operande) ||       // type date
+        (operande[0]=='\'' && operande[operande.size()-1]=='\'') ||  // type string 'xxxxx'
+        (operande[0]=='\"' && operande[operande.size()-1]=='\"');    // type string "xxxxx"
 }
 
 /* thanks Stackoverflow */
-bool Condition::isFloat( string myString ) {
+bool Condition::isFloat(string myString ) {
     istringstream iss(myString);
     float f;
     iss >> noskipws >> f; // noskipws considers leading whitespace invalid

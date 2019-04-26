@@ -27,4 +27,6 @@ public:
     bool static isDate(std::string);
 };
 
+std::ostream& operator<<(std::ostream&,const Date);
+
 #endif
