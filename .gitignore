@@ -1,8 +1,8 @@
 # Tout les fichier caché
 .*
-src/.*
+*/.*
 
-# Les point 'O'
+# Les point 'o'
 src/*/*.o
 src/*.o
 
@@ -17,3 +17,9 @@ src/sql
 
 Utiles/
 # Pas tant que ça
+
+# Raport
+rapport/rapport.aux
+rapport/rapport.log
+rapport/rapport.toc
+rapport/rapport.pdf
