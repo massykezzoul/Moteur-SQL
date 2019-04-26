@@ -1,7 +1,7 @@
 \documentclass[oneside,13pt,a4paper]{report}
 
 % Chargement d'extensions
-\usepackage[utf8]{inputenc}    
+\usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 \usepackage{graphicx}
 \usepackage[top=3cm, bottom=3cm, left=3cm, right=3cm]{geometry}
@@ -9,11 +9,10 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
- 
 % Informations le titre, le(s) auteur(s), la date
 \title{Moteur de Requêtes SQL Simples}
 \author{
-    Massili KEZZOUL \and 
+    Massili KEZZOUL \and
     Chakib ELHOUITI \and
     Ramzi ZEROUAL \and
     Belkassim BOUZIDI \and
@@ -25,28 +24,27 @@
 \begin{document}
     %\maketitle
     \begin{titlepage}
-        \centering        
-        \vfill
+        \centering
         {\scshape\LARGE Univérsité de Montpellier\par}
         {\scshape\Large Rapport de projet\par}
         \vspace{1.5cm}
         {\huge\bfseries Moteur de requêtes SQL simples\par}
         \vspace{2cm}
-        {\Large\itshape 
+        {\Large\itshape
             Massili KEZZOUL \\
             Chakib ELHOUITI \\
             Ramzi ZEROUAL \\
             Belkassim BOUZIDI \\
             Fei YANG \\
         \par}
-        
+
         \vspace{1.5cm}
 
-        {\Large\itshape 
+        {\Large\itshape
             Encadrante :\par
             Mme. Anne-Muriel \textsc{Chifolleau}
         \par}
-        
+
         \vspace{2cm}
 
         \begin{figure}[h]
@@ -72,7 +70,7 @@
 
     \tableofcontents
 
-% Espacement entre les paragraphes  
+% Espacement entre les paragraphes
 \parskip=5pt
 
 % ------------------------------------- %
@@ -99,9 +97,9 @@
         \section{Méthodes d’organisation}
 
             Afin de mener à bien le développement du projet, nous avons décidé de travailler un maximum de temps ensemble et de manière très régulière. Nous nous sommes réunis trois à quatre fois par semaine afin de faire le point sur l’avancement du projet et de définir les objectifs restant à atteindre.
-            
+
             Enfin, selon l’état d’avancement du moteur de requêtes, nous réalisons les tâches en retard durant le week-end pour ne pas cumulé de retard et respecter l’intégralité le cahier des charges.
-            
+
             Toutes les semaines, nous nous sommes réunis avec notre encadrante, Mme Anne-Muriel Chifolleau, afin de faire le point sur l’état du projet. Ces réunions nous on également permis de bénéficier des précieux conseils de notre encadrante.
 
         \section{Decoupage du projet}
@@ -109,17 +107,17 @@
             Nous avons découpé la réalisation du projet en trois grandes phases.
 
             \subsection{Phase de modélisation}
-                
+
                 Durant cette étape, nous nous somme réunis pour définir les fonctionnalités demandés par le projet. Notamment séparer les fonctionnalités importants de celle moins importantes. Nous avons également choisi les outils de travail collaboratif et les principales technologies utilisés, ainsi que une première modélisation du projet.
 
             \subsection{Phase de développement}
-                
+
                 Durant cette phase, nous avons commencer à implémenter les différentes fonctionnalités que nous avons modélisé lors de l’étape précédente, toute en améliorant la modélisation au fur et à mesure de l’avancement de notre projet. Nous avons notamment réaliser des tests pour les différents modules afin de s’assurer de leur bon fonctionnement.
-            
+
             \subsection{Finalisation du projet}
 
                 Cette étape a consisté en la réalisation des tests finaux afin de s’assurer que le moteur de requêtes fonctionne en toute circonstance et éventuellement corriger les bogues qui peuvent apparaître.
-            
+
         \section{Outils de collaboration}
 
             Afin de s’organiser, nous avons décider d’utiliser Git au travers du serveur GitLab héberger par le service informatique de la faculté. En effet le logiciel libre Git a facilité grandement la collaboration entre nous. Le serveur GitLab quant à lui est fourni gratuitement par le service informatique la faculté.
@@ -129,8 +127,8 @@
 % ------------------------------------- %
 
     \chapter{Le langage SQL et les bases de données}
-    
-        Le domaine dans le quelle ce situ notre projet est la gestion d’une base de donnée en utilisant le langage SQL . 
+
+        Le domaine dans le quelle ce situ notre projet est la gestion d’une base de donnée en utilisant le langage SQL .
 
         \section{Qu’est-ce qu’une donnée}
 
@@ -188,7 +186,7 @@
         
         Un moteur de requêtes SQL simples est un logiciel qui :
         \begin{itemize}
-            \item Reconnaît et interprète le langage SQL 
+            \item Reconnaît et interprète le langage SQL
             \item Implémente l’accès aux données en lecture.
         \end{itemize}
 
@@ -204,15 +202,49 @@
 
         \subsection{La projection}
 
+         Une projection est une instruction permettant de sélectionner un ensemble de colonnes dans une table.
+         Soit la table "FRANCE" suivante :
+
+
+
+         \begin{tabular}{|l|c|r|}
+          \hline
+          ville & region & codepostal
+          \\
+          \hline
+          Paris01 & Ile-de-france & 75101 \\
+          Paris02 & Ile-de-france & 75102 \\
+          Paris03 & Ile-de-france & 75103 \\
+          \hline
+
+         \end{tabular}
+
+
+         La selection de la colonne ville se fait par l'instruction :
+
+         Select ville from FRANCE
+
+         
+
+         \begin{tabular}{|l|}
+          \hline
+          ville
+          \\
+          \hline
+          Paris01 \\
+          Paris02 \\
+          Paris03  \\
+          \hline
+
+
+         \end{tabular}
         \subsection{La jointure}
 
             La jointure est un produit cartésien entre un ou plusieurs tableaux donnés par la personne qui effectue la requête puis d'une sélection , les tableaux donnés sont séparé par des virgules lors de initialisation de la requête .
-	        
+
             Le produit cartésien entre un tableau A et B et un tableau composé de l'ensemble des couples possible entre leurs éléments respectives, ainsi nous aurons en résultat un tableau A*B.
 
-            -Dans notre programme nous exécutons la projection et la sélection sur le tableau finale. -
-
-	        Le produit cartésien est donc la base et la première tache qu’effectue notre programme lors de l’exécution. Un exemple est plus parlant qu'une longue explication , prenons deux tableaux N et B nous effectuons un PC entre ces deux tableaux N*B, le résultat de l’exécution de la jointure donnera un nouveau tableau ((N*B) - Sélection).
+	          Un exemple est plus parlant qu'une longue explication , prenons deux tableaux N et B nous effectuons un PC entre ces deux tableaux N*B, le résultat de l’exécution de la jointure donnera un nouveau tableau ((N*B) - Sélection).
 
 % ------------------------------------- %
 % Conception du Moteur de Requêtes
@@ -297,5 +329,5 @@
 
     \chapter{Annexes}
 
-    
+
 \end{document}
