@@ -5,16 +5,17 @@
 #include "requete.h"
 using namespace std;
 
-TabString::TabString():table(NULL),size(0),alloc(0)
+TabString::TabString():table(NULL),size(0),alloc(0),tailleFichier(0)
 {
 
 }
-TabString::TabString(ifstream &file):table(NULL),size(0),alloc(0)
+TabString::TabString(ifstream &file):table(NULL),size(0),alloc(0),tailleFichier(0)
 {
     if (file){
         string line;
         getline(file,line);
         line = Requete::cleanLine(line);
+        tailleFichier = line.size() + 1;
         size = strsplit2(line,table,',');
         alloc = size;
         if (size == 0) {
@@ -27,7 +28,7 @@ TabString::TabString(ifstream &file):table(NULL),size(0),alloc(0)
     }
 }
 
-TabString::TabString(string &line):table(NULL),size(0),alloc(0)
+TabString::TabString(string &line):table(NULL),size(0),alloc(0),tailleFichier(line.size()+1)
 {
     line = Requete::cleanLine(line);
     size = strsplit2(line,table,',');
@@ -39,11 +40,12 @@ TabString::TabString(string &line):table(NULL),size(0),alloc(0)
 }
 
 
-TabString::TabString(unsigned long int i):table(new string[i]),size(0),alloc(i) {}
+TabString::TabString(unsigned long int i):table(new string[i]),size(0),alloc(i),tailleFichier(0) {}
 
-TabString::TabString(string*& str,unsigned long int i):table(new string[i]),size(0),alloc(i) {
+TabString::TabString(string*& str,unsigned long int i):table(new string[i]),size(0),alloc(i),tailleFichier(1) {
     for (unsigned long int j = 0 ; j < i ; j++) {
         add(str[j]);
+        tailleFichier += str[j].size();
     }
 }
 
@@ -52,6 +54,7 @@ TabString::TabString(const TabString &tab)
 {
     size = tab.size;
     alloc = tab.alloc;
+    tailleFichier = tab.tailleFichier;
     table = new string[alloc];
     /*on copie les elements*/
     for (unsigned long int i = 0 ; i<size ; ++i)
@@ -61,7 +64,7 @@ TabString::TabString(const TabString &tab)
 }
 
 TabString::TabString(const TabString &tab1,const TabString &tab2)
-    :table(new string[tab1.size+tab2.size]),size(0),alloc(tab1.size+tab2.size) {
+    :table(new string[tab1.size+tab2.size]),size(0),alloc(tab1.size+tab2.size),tailleFichier(tab1.tailleFichier+tab2.tailleFichier) {
     /*on copie les elements*/
     unsigned long int i = 0;
     for (i = 0 ; i<tab1.size ; ++i)
@@ -79,6 +82,7 @@ TabString::~TabString()
 TabString &TabString::operator+=(const TabString &tab) {
     for(unsigned long int i = 0; i < tab.size; i++)
         add(tab[i]);
+    tailleFichier += tab.tailleFichier;
     return *this;
 }
 
@@ -89,6 +93,7 @@ TabString &TabString::operator=(const TabString &tab)
     {
         /* Réallocation si espace insufisant */
         alloc = tab.alloc;
+        tailleFichier = tab.tailleFichier;
         /*on supprime l'ancien tableau*/
         if (table != NULL) delete[] table;
         table = new string[alloc];
@@ -155,6 +160,10 @@ string TabString::get(unsigned long int i) const
 unsigned long int TabString::getSize()const
 {
     return size;
+}
+
+unsigned long int TabString::getTailleFichier() const {
+    return tailleFichier;
 }
 
 unsigned long int TabString::strsplit(const string& line,string* &tab,char delim) {

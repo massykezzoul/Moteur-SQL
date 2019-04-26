@@ -10,9 +10,9 @@
 
 using namespace std;
 
-Table::Table() {}
+Table::Table():tailleFichier(0) {}
 
-Table::Table(string fileName) {
+Table::Table(string fileName):tailleFichier(0) {
     ifstream stream(fileName.c_str());
     if (stream) {   
         nomTable=Table::getFileName(fileName);
@@ -22,17 +22,19 @@ Table::Table(string fileName) {
         /* Lire la premier ligne du fichier pour construire le tableau des noms des attributs */
         string line;
         while (getline(stream,line) && line == "");
-
+        tailleFichier = line.size();
         nomAttributs = TabAttribut(nomTable,line);
         
         valeurAttributs = MatriceString(stream);
+        tailleFichier += valeurAttributs.getTailleFichier();
+
     } else {
         cerr << "Lecture du fichier '" << fileName << "' Impossible" << endl;
     }
 }
 
 Table::Table(const Table& tab1,const Table& tab2)
-    :nomTable(tab1.nomTable+"JOIN"+tab2.nomTable),nomAttributs(tab1.nomAttributs,tab2.nomAttributs),valeurAttributs(tab1.valeurAttributs,tab2.valeurAttributs){
+    :nomTable(tab1.nomTable+"JOIN"+tab2.nomTable),nomAttributs(tab1.nomAttributs,tab2.nomAttributs),valeurAttributs(tab1.valeurAttributs,tab2.valeurAttributs),tailleFichier(valeurAttributs.getTailleFichier()){
 
 }
 
@@ -148,6 +150,10 @@ Table Table::selection(TabCondition condition) const{
 }
 Table Table::jointure(const Table& tab1,const Table& tab2) const{
     return Table(tab1,tab2);
+}
+
+unsigned long int Table::getTailleFichier() const{
+    return tailleFichier;
 }
 
 /******

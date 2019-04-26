@@ -8,6 +8,7 @@ private:
     std::string *table; 
     unsigned long int size; 
     unsigned long int alloc;
+    unsigned long int tailleFichier;
 public:
     TabString();
     TabString(std::ifstream &file); 
@@ -29,6 +30,8 @@ public:
     unsigned long int get(std::string str) const ;
     std::string get(unsigned long int i) const;
     unsigned long int getSize() const;
+    unsigned long int getTailleFichier() const;
+
 
     /* Split the string */
     static unsigned long int strsplit(const std::string& ,std::string*&,char);

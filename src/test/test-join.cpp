@@ -31,21 +31,32 @@ int main(int argc, char const *argv[]) {
             return 1;                
         } else {
             t1 = clock();
+            for(unsigned long int i = 0; i < mesTables.getSize(); i++) {
+                cout << "La Table '" << mesTables[i].getNomTable() <<  "' : " << endl;
+                // Nombre de ligne 
+                cout << "\tNombre de lignes  : " << mesTables[i].getValeurAttributs().getSize()+1 << endl;
+                cout << "\ttaille du fichier : " << mesTables[i].getTailleFichier() << " o." << endl;
+            }
+            cout << "Jointure"<< endl << endl;
+            
+            
             Table tab = Table(mesTables[0],mesTables[1]);
             for(unsigned long int i = 2; i < mesTables.getSize(); i++)
                 tab = Table(tab,mesTables[i]);
-            //tab = tab.jointure(mesTables[0],mesTables[1]);
             t2 = clock();
-            ofstream file("jointure.txt");
 
-            cout << tab.getNomTable()<< endl;
-            cout << "Temps d'execution : " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC
-                 << "Sec pour : " << tab.getValeurAttributs().getSize() << " Lignes"
-                 << " Et " << tab.getNomAttributs().getSize() << " Colonnes" << endl;
+            cout << "Table : " << tab.getNomTable()<< endl;
+            cout << "\tTemps d'execution : " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC
+                 << "\tSec pour : " << tab.getValeurAttributs().getSize() << " Lignes"
+                 << " Et " << tab.getNomAttributs().getSize() << " Colonnes" << endl
+                 << "\ttaille du fichier : " << tab.getTailleFichier() << " o." << endl;
+            getchar();
+            ofstream file("jointure.txt");
             t1 = clock();
             file << tab << endl;
             t2 = clock();
             cout << "Écriture des données en " << (double) (t2-t1)/  (double) CLOCKS_PER_SEC  << " Sec" << endl;
+            getchar();
         }
     }else {
         cerr << "Qlile args" << endl;

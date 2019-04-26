@@ -5,25 +5,28 @@
 
 using namespace std;
 
-MatriceString::MatriceString():tab(NULL),size(0),alloc(0){}
+MatriceString::MatriceString():tab(NULL),size(0),alloc(0),tailleFichier(0){}
 
-MatriceString::MatriceString(unsigned long int i):tab(new TabString[i]),size(0),alloc(i) {}
+MatriceString::MatriceString(unsigned long int i):tab(new TabString[i]),size(0),alloc(i),tailleFichier(0) {}
 
-MatriceString::MatriceString(unsigned long int i,unsigned long int j):tab(new TabString[i]),size(0),alloc(i) {
+MatriceString::MatriceString(unsigned long int i,unsigned long int j):tab(new TabString[i]),size(0),alloc(i),tailleFichier(0) {
     for(unsigned long int k = 0; k < i; k++) {
         tab[k] = TabString(j);
     }
 }
 
 
-MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
+MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0),tailleFichier(0){
     if (file){
         string line;
-        /* Compter le nombre de ligne */
+        /* Compter le nombre de ligne et le nombre de caractère */
         unsigned long int nombre_ligne = 0;
         while ( !file.eof()) {
             getline(file,line,'\n');
-            if (line != "" && line != " " && line != "\n" && line.size()>0) ++nombre_ligne;
+            if (line != "" && line != " " && line != "\n" && line.size()>0) {
+                ++nombre_ligne;
+                tailleFichier += line.size()+1;
+            }
         }
 
         if (!file) {
@@ -39,8 +42,6 @@ MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
             /* ignorer les lignes vides au milier et à la fin du fichier */
             if (line != "" && line != " " && line != "\n" )
                 add(TabString(line));
-            
-            //add(TabString(file));
         }
     }
     else {
@@ -52,17 +53,27 @@ MatriceString::MatriceString(ifstream &file):tab(NULL),size(0),alloc(0){
 MatriceString::MatriceString(const MatriceString& copie){
     alloc = copie.alloc;
     size = copie.size;
+    tailleFichier = copie.tailleFichier;
     tab = new TabString[alloc];
     for (unsigned long int i = 0; i < size; i++)
         tab[i] = copie.tab[i];
 }
 
+/* Produit cartésient */
 MatriceString::MatriceString(const MatriceString& mat1,const MatriceString& mat2)
-    :tab(new TabString[mat1.size*mat2.size]),size(0),alloc(mat1.size*mat2.size){
+    :tab(new TabString[mat1.size*mat2.size]),size(0),alloc(mat1.size*mat2.size),tailleFichier(0){
     unsigned long int k = 0;
     for (unsigned long int i = 0; i < mat1.size; i++)
-        for(unsigned long int j = 0; j < mat2.size; j++)
-            tab[k++] = TabString(mat1[i],mat2[j]);
+        for(unsigned long int j = 0; j < mat2.size; j++) {
+            tab[k] = TabString(mat1[i],mat2[j]);
+            tailleFichier += tab[k].getTailleFichier();
+            if (tailleFichier > 5000000000) {
+                cerr << "Erreur Mémoire insufisante" << endl;
+                cerr << "\ttaille en mémoire de la joiture : " << tailleFichier << " octets" <<endl;
+                exit(1);
+            }
+            k++;
+        }
     size = k;
 }
 
@@ -74,6 +85,7 @@ MatriceString &MatriceString::operator=(const MatriceString &t) {
     if (this!=&t) {
         /* Suppression de l'ancien Tableau */
         alloc = t.alloc;
+        tailleFichier = t.tailleFichier;
         if (tab != NULL) delete[] tab;
         tab = new TabString[alloc];
         size = t.size;
@@ -138,4 +150,7 @@ void MatriceString::addColonne(const MatriceString& mat,unsigned long int indice
 
 unsigned long int MatriceString::getSize() const{
     return size;
+}
+unsigned long int MatriceString::getTailleFichier() const{
+    return tailleFichier;
 }
