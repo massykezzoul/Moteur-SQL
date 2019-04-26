@@ -102,10 +102,11 @@ bool TabCondition::verifier(const TabString &line,const TabAttribut &attr) const
             cerr << "Erreur : '" << tab[i].getOp1() << "' introuvable" << endl;
             exit(1);
         }
-        if(oplogique[i]==AND)
-            booleen = (booleen && tab[i].verifier(line,attr.get(NomAttribut("",tab[i].getOp1())),attr.get(NomAttribut("",tab[i].getOp2()))));
+        if(oplogique[i-1]==AND)
+            booleen = (booleen && tab[i].verifier(line,attr.get(NomAttribut(tab[i].getOp1())),attr.get(NomAttribut(tab[i].getOp2()))));
         else 
-            booleen = (booleen || tab[i].verifier(line,attr.get(NomAttribut("",tab[i].getOp1())),attr.get(NomAttribut("",tab[i].getOp2()))));
+            booleen = (booleen || tab[i].verifier(line,attr.get(NomAttribut(tab[i].getOp1())),attr.get(NomAttribut(tab[i].getOp2()))));
+        //cout << tab[]
         i++;
     }
     return booleen;
