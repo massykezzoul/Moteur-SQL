@@ -106,7 +106,6 @@ bool TabCondition::verifier(const TabString &line,const TabAttribut &attr) const
             booleen = (booleen && tab[i].verifier(line,attr.get(NomAttribut(tab[i].getOp1())),attr.get(NomAttribut(tab[i].getOp2()))));
         else 
             booleen = (booleen || tab[i].verifier(line,attr.get(NomAttribut(tab[i].getOp1())),attr.get(NomAttribut(tab[i].getOp2()))));
-        //cout << tab[]
         i++;
     }
     return booleen;

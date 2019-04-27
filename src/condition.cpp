@@ -43,8 +43,6 @@ string operateurToStr(Operateur s) {
 }
 template <typename T>
 bool operation(T op1,Operateur op,T op2) {
-    //cout << op1 << " " << op << " " << op2 << endl;
-
     switch (op)
     {
         case EQUAL:
@@ -89,9 +87,6 @@ Condition::Condition(string str) {
 
     type = (Condition::isVal(operande2)?VAL:ATTRIBUT);
 
-    cout << operande1 << " " << operateur << " " << operande2 << " type : "<< type << endl;
- 
-    
 }
 
 string Condition::getOp1() const {
