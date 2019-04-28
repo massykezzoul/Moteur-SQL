@@ -79,20 +79,24 @@
 
     \chapter{Introduction}
 
-        Dans le cadre du module de projet informatique du second semestre de L2, nous avons mis au point un moteur d’évaluation de requêtes SQL en mémoire vive.
+        Dans le cadre de notre second semestre de la Licence 2, 
+        il nous est proposé un projet nous permettant de mettre en pratique nos connaissances et nos compétences 
+        au travers d’un cahier des charges ayant pour finalité la conception et le développement d’un moteur d’évaluation de requêtes SQL en mémoire vive.
 
         Les requêtes considérées seront des requêtes simples de la forme : « SELECT … FROM … WHERE … »  sans imbrication.
 
-        À partir d’un ou plusieurs fichiers csv, Comma Separated Value, il est demandé de construire une représentation en mémoire des données et d’implémenter les procédures de projection, sélection et de jointure découlant de l’interrogation SQL.
+        À partir d’un ou plusieurs fichiers CSV, Comma-separated Values\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules.}, 
+        il est demandé de construire une représentation en mémoire des données et d’implémenter les procédures de projection, 
+        sélection et de jointure découlant de l’interrogation SQL.
 
-        Il s’agit principalement de reproduire les fonctionnalités de bases d’un gestionnaire de données qui est Oracle .
+        Il s’agit principalement de reproduire les fonctionnalités de bases d’un SGBD\footnote{Système de Gestion de Base de Données}, tel que MySQL ou bien Oracle.
 
-        Notre groupe est composé de quatre personnes, Massili Kezzoul, Chakib Elhouiti, Ramzi Zeroual et Belkassim Bouzidi, et nous sommes encadrés par Mme Anne-Muriel Chifolleau. La réalisation du projet s’est déroulée sur une période de X semaines, de mi-janvier à avril 2019.
+        Notre groupe, composé de cinq personnes : Massili Kezzoul, Chakib Elhouiti, Ramzi Zeroual, Belkassim Bouzidi et Yang Feï, et encadré par Mme Anne-Muriel Chifolleau,
+        a saisie l'opportunité de réaliser ce projet.
 
 % ------------------------------------- %
 % Organisation
 % ------------------------------------- %
-
     \chapter{Organisation du projet}
         \section{Méthodes d’organisation}
 
@@ -128,25 +132,40 @@
 
     \chapter{Le langage SQL et les bases de données}
 
-        Le domaine dans le quelle ce situ notre projet est la gestion d’une base de donnée en utilisant le langage SQL .
+        %Le domaine dans le quelle ce situ notre projet est la gestion d’une base de donnée en utilisant le langage SQL .
 
-        \section{Qu’est-ce qu’une donnée}
-
-            En termes simples, les données peuvent êtres des faits liés a tout objet considéré .
-            Par exemple, un nom, un age, une taille, un poids ect. Sont des données.
-
+        %\section{Qu’est-ce qu’une donnée}
         \section{Présentation d’une base de donnée}
 
-            Une base de données regroupe et stock un ensemble d’informations organisées et accessibles qui peuvent être modifiées et mises à jour. En informatique une base de données est la pièce centrale d’un système d’informations ou d’un système de base de donnée , qui régit la collecte, le stockage , le retraitement et l’utilisation de données . Ce dispositif comporte souvent un logiciel moteur dont notre projet.
+            Une base de données regroupe et stock un ensemble d’informations, qu'on appelle aussi donnée.
+            En termes simples, les données peuvent êtres des faits liés à tout objet considéré.
+            (Par exemple, un nom, un age, une taille, un poids ect.)
+            En informatique, une base de données est la pièce centrale des dispositifs de collecte, mise en forme, stockage et utilisation d'informations.
+            Ce dispositif comporte un système de gestion de base de données : un logiciel moteur qui manipule la base de données et dirige l'accès à son contenu.
+
+
 
         \section{Un système de gestion de base de données}
 
-            Le système de gestion de base de données (SGBD) est un ensemble de programmes qui permet à ses utilisateurs d'accéder à une base de données, de manipuler des données, de générer des rapports et de représenter des données.
-            Cela permet également de contrôler l'accès à la base de données.
+            Le système de gestion de base de données (SGBD) est un ensemble de programmes qui permet à ses utilisateurs d'accéder à une base de données, de manipuler des données, de générer des rapports et de représenter des données, 
+            ainsi que de contrôler l'accès à la base de données, tout en cachant la complexité des opérations effectuer.
 
-        \section{Le langage SQl}
+            Les SGBD sont utilisés pour de nombreuses applications informatiques, notamment : 
+            \begin{itemize}
+                \item les guichets automatiques bancaires
+                \item les bibliothèques numérique
+                \item les logiciels d'inventaire
+                \item et aussi dans de nombreux blogs et sites web.
+            \end{itemize}
 
-            Le langage de requête structuré (SQL) prononcé comme "S-Q-L" est en fait le langage standard pour traiter les bases de données relationnelles.
+            Il existe de nombreux SGBD. En 2008, Oracle détenait près de la moitié du marché avec MySQL et Oracle Database.
+            Les opérations de recherche et de manipulation des données peuvent être exprimées sous forme de requêtes (anglais query) 
+            dans un langage informatique reconnu par le SGBD5. SQL est le langage informatique le plus populaire.
+
+
+        \section{Le langage SQL}
+
+            Le SQL (sigle de Structured Query Language, en français langage de requête structurée) est en fait le langage standard pour traiter les bases de données relationnelles.
 
             La programmation SQL peut être utilisée efficacement pour insérer, rechercher, mettre à jour et supprimer des enregistrements de base de données.
 
@@ -165,7 +184,8 @@
 
     \section{Présentation générale}
 
-        Notre projet consiste à concevoir et implémenter un moteur de requêtes SQL simples , nous avons donc à partir d’un ou plusieurs fichiers CSV\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules.} donnés permettre d’exécuter une requête SQL simple .
+        Notre projet consiste à concevoir et implémenter un moteur de requêtes SQL simples, 
+        nous avons donc à partir d’un ou plusieurs fichiers CSV donnés permettre d’exécuter une requête SQL simple .
 
         Il s’agit donc de crée une passerelle entre la personne qui exécute la requête SQL et le fichier CSV qui contient les informations nécessaire afin réaliser cette requête SQL, 
         notre programme doit analyser une requête et la décompose en 3 : 
