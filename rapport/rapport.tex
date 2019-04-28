@@ -28,53 +28,53 @@
 
 
 \begin{document}
-    %\maketitle
-    \begin{titlepage}
-        \centering
-        {\scshape\LARGE Univérsité de Montpellier\par}
-        {\scshape\Large Rapport de projet\par}
-        \vspace{1.5cm}
-        {\huge\bfseries Moteur de requêtes SQL simples\par}
-        \vspace{2cm}
-        {\Large\itshape
-            Massili KEZZOUL \\
-            Chakib ELHOUITI \\
-            Ramzi ZEROUAL \\
-            Belkassim BOUZIDI \\
-            Fei YANG \\
-        \par}
+%\maketitle
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Univérsité de Montpellier\par}
+	{\scshape\Large Rapport de projet\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Moteur de requêtes SQL simples\par}
+	\vspace{2cm}
+	{\Large\itshape
+		Massili KEZZOUL \\
+		Chakib ELHOUITI \\
+		Ramzi ZEROUAL \\
+		Belkassim BOUZIDI \\
+		Fei YANG \\
+		\par}
 
-        \vspace{1.5cm}
+	\vspace{1.5cm}
 
-        {\Large\itshape
-            Encadrante :\par
-            Mme. Anne-Muriel \textsc{Chifolleau}
-        \par}
+	{\Large\itshape
+		Encadrante :\par
+		Mme. Anne-Muriel \textsc{Chifolleau}
+		\par}
 
-        \vspace{2cm}
+	\vspace{2cm}
 
-        \begin{figure}[h]
-            \begin{minipage}[c]{.46\linewidth}
-                \centering
-                \includegraphics[width=1\textwidth]{img/univ-montpellier.png}
-            \end{minipage}
-            \hfill%
-            \begin{minipage}[c]{.46\linewidth}
-                \centering
-                \includegraphics[width=1\textwidth]{img/fds.png}
-            \end{minipage}
-        \end{figure}
+	\begin{figure}[h]
+		\begin{minipage}[c]{.46\linewidth}
+			\centering
+			\includegraphics[width=1\textwidth]{img/univ-montpellier.png}
+		\end{minipage}
+		\hfill%
+		\begin{minipage}[c]{.46\linewidth}
+			\centering
+			\includegraphics[width=1\textwidth]{img/fds.png}
+		\end{minipage}
+	\end{figure}
 
-        \par\vspace{1cm}
+	\par\vspace{1cm}
 
-        \vfill
+	\vfill
 
-        % Bottom of the page
-        {\large \today\par}
-    \end{titlepage}
+	% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
 
 
-    \tableofcontents
+\tableofcontents
 
 % Espacement entre les paragraphes
 \parskip=5pt
@@ -83,303 +83,311 @@
 % Introduction
 % ------------------------------------- %
 
-    \chapter{Introduction}
+\chapter{Introduction}
 
-        Dans le cadre de notre second semestre de la Licence 2, 
-        il nous est proposé un projet nous permettant de mettre en pratique nos connaissances et nos compétences 
-        au travers d’un cahier des charges ayant pour finalité la conception et le développement d’un moteur d’évaluation de requêtes SQL en mémoire vive.
+Dans le cadre de notre second semestre de la Licence 2,
+il nous est proposé un projet nous permettant de mettre en pratique nos connaissances et nos compétences
+au travers d’un cahier des charges ayant pour finalité la conception et le développement d’un moteur d’évaluation de requêtes SQL en mémoire vive.
 
-        Les requêtes considérées seront des requêtes simples de la forme : \enquote{SELECT ... FROM ... WHERE ... }  sans imbrication.
+Les requêtes considérées seront des requêtes simples de la forme : \enquote{SELECT ... FROM ... WHERE ... }  sans imbrication.
 
-        À partir d’un ou plusieurs fichiers CSV, Comma-separated Values\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules.}, 
-        il est demandé de construire une représentation en mémoire des données et d’implémenter les procédures de projection, 
-        sélection et de jointure découlant de l’interrogation SQL.
+À partir d’un ou plusieurs fichiers CSV, Comma-separated Values\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules.},
+il est demandé de construire une représentation en mémoire des données et d’implémenter les procédures de projection,
+sélection et de jointure découlant de l’interrogation SQL.
 
-        Il s’agit principalement de reproduire les fonctionnalités de bases d’un SGBD\footnote{Système de Gestion de Base de Données, voir page \pageref{sgbd}}, tel que MySQL ou bien Oracle.
+Il s’agit principalement de reproduire les fonctionnalités de bases d’un SGBD\footnote{Système de Gestion de Base de Données, voir page \pageref{sgbd}}, tel que MySQL ou bien Oracle.
 
-        Notre groupe, composé de cinq personnes : Massili Kezzoul, Chakib Elhouiti, Ramzi Zeroual, Belkassim Bouzidi et Yang Feï, et encadré par Mme Anne-Muriel Chifolleau,
-        a saisie l'opportunité de réaliser ce projet.
+Notre groupe, composé de cinq personnes : Massili Kezzoul, Chakib Elhouiti, Ramzi Zeroual, Belkassim Bouzidi et Yang Feï, et encadré par Mme Anne-Muriel Chifolleau,
+a saisie l'opportunité de réaliser ce projet.
 
 % ------------------------------------- %
 % Organisation
 % ------------------------------------- %
-    \chapter{Organisation du projet}
-        \section{Méthodes d’organisation}
+\chapter{Organisation du projet}
+\section{Méthodes d’organisation}
 
-            Afin de mener à bien le développement du projet, nous avons décidé de travailler un maximum de temps ensemble et de manière très régulière. Nous nous sommes réunis trois à quatre fois par semaine afin de faire le point sur l’avancement du projet et de définir les objectifs restant à atteindre.
+Afin de mener à bien le développement du projet, nous avons décidé de travailler un maximum de temps ensemble et de manière très régulière. Nous nous sommes réunis trois à quatre fois par semaine afin de faire le point sur l’avancement du projet et de définir les objectifs restant à atteindre.
 
-            Enfin, selon l’état d’avancement du moteur de requêtes, nous réalisons les tâches en retard durant le week-end pour ne pas cumulé de retard et respecter l’intégralité le cahier des charges.
+Enfin, selon l’état d’avancement du moteur de requêtes, nous réalisons les tâches en retard durant le week-end pour ne pas cumulé de retard et respecter l’intégralité le cahier des charges.
 
-            Toutes les semaines, nous nous sommes réunis avec notre encadrante, Mme Anne-Muriel Chifolleau, afin de faire le point sur l’état du projet. Ces réunions nous on également permis de bénéficier des précieux conseils de notre encadrante.
+Toutes les semaines, nous nous sommes réunis avec notre encadrante, Mme Anne-Muriel Chifolleau, afin de faire le point sur l’état du projet. Ces réunions nous on également permis de bénéficier des précieux conseils de notre encadrante.
 
-        \section{Decoupage du projet}
+\section{Decoupage du projet}
 
-            Nous avons découpé la réalisation du projet en trois grandes phases.
+Nous avons découpé la réalisation du projet en trois grandes phases.
 
-            \subsection{Phase de modélisation}
+\subsection{Phase de modélisation}
 
-                Durant cette étape, nous nous somme réunis pour définir les fonctionnalités demandés par le projet. Notamment séparer les fonctionnalités importants de celle moins importantes. Nous avons également choisi les outils de travail collaboratif et les principales technologies utilisés, ainsi que une première modélisation du projet.
+Durant cette étape, nous nous somme réunis pour définir les fonctionnalités demandés par le projet. Notamment séparer les fonctionnalités importants de celle moins importantes. Nous avons également choisi les outils de travail collaboratif et les principales technologies utilisés, ainsi que une première modélisation du projet.
 
-            \subsection{Phase de développement}
+\subsection{Phase de développement}
 
-                Durant cette phase, nous avons commencer à implémenter les différentes fonctionnalités que nous avons modélisé lors de l’étape précédente, toute en améliorant la modélisation au fur et à mesure de l’avancement de notre projet. Nous avons notamment réaliser des tests pour les différents modules afin de s’assurer de leur bon fonctionnement.
+Durant cette phase, nous avons commencer à implémenter les différentes fonctionnalités que nous avons modélisé lors de l’étape précédente, toute en améliorant la modélisation au fur et à mesure de l’avancement de notre projet. Nous avons notamment réaliser des tests pour les différents modules afin de s’assurer de leur bon fonctionnement.
 
-            \subsection{Finalisation du projet}
+\subsection{Finalisation du projet}
 
-                Cette étape a consisté en la réalisation des tests finaux afin de s’assurer que le moteur de requêtes fonctionne en toute circonstance et éventuellement corriger les bogues qui peuvent apparaître.
+Cette étape a consisté en la réalisation des tests finaux afin de s’assurer que le moteur de requêtes fonctionne en toute circonstance et éventuellement corriger les bogues qui peuvent apparaître.
 
-        \section{Outils de collaboration}
+\section{Outils de collaboration}
 
-            Afin de s’organiser, nous avons décider d’utiliser Git au travers du serveur GitLab héberger par le service informatique de la faculté. En effet le logiciel libre Git a facilité grandement la collaboration entre nous. Le serveur GitLab quant à lui est fourni gratuitement par le service informatique la faculté.
+Afin de s’organiser, nous avons décider d’utiliser Git au travers du serveur GitLab héberger par le service informatique de la faculté. En effet le logiciel libre Git a facilité grandement la collaboration entre nous. Le serveur GitLab quant à lui est fourni gratuitement par le service informatique la faculté.
 
 % ------------------------------------- %
 % Le langage SQL
 % ------------------------------------- %
 
-    \chapter{Le langage SQL et les bases de données}
+\chapter{Le langage SQL et les bases de données}
 
-        %Le domaine dans le quelle ce situ notre projet est la gestion d’une base de donnée en utilisant le langage SQL .
+%Le domaine dans le quelle ce situ notre projet est la gestion d’une base de donnée en utilisant le langage SQL .
 
-        %\section{Qu’est-ce qu’une donnée}
-        \section{Présentation d’une base de donnée}
+%\section{Qu’est-ce qu’une donnée}
+\section{Présentation d’une base de donnée}
 
-            Une base de données regroupe et stock un ensemble d’informations, qu'on appelle aussi donnée.
-            En termes simples, les données peuvent êtres des faits liés à tout objet considéré.
-            (Par exemple, un nom, un age, une taille, un poids ...)
+Une base de données regroupe et stock un ensemble d’informations, qu'on appelle aussi donnée.
+En termes simples, les données peuvent êtres des faits liés à tout objet considéré.
+(Par exemple, un nom, un age, une taille, un poids ...)
 
-            On s'interesse ici uniquement au base de données dite relationnelles, une base de données où l'information est organisée dans des tableaux à deux dimensions appelés des relations ou tables\footnote{ selon le modèle introduit par Edgar F. Codd en 1970.}.
-            Selon ce modèle relationnel, une base de données consiste en une ou plusieurs relations. Les lignes de ces relations sont appelées des nuplets ou enregistrements. Les colonnes sont appelées des attributs.
+On s'interesse ici uniquement au base de données dite relationnelles, une base de données où l'information est organisée dans des tableaux à deux dimensions appelés des relations ou tables\footnote{ selon le modèle introduit par Edgar F. Codd en 1970.}.
+Selon ce modèle relationnel, une base de données consiste en une ou plusieurs relations. Les lignes de ces relations sont appelées des nuplets ou enregistrements. Les colonnes sont appelées des attributs.
 
-            \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.7\textwidth]{img/table_relationnel.png}
-                \caption{Représentation d'une Table}
-            \end{figure}
-            
-            En informatique, une base de données est la pièce centrale des dispositifs de collecte, mise en forme, stockage et utilisation d'informations.
-            Ce dispositif comporte un système de gestion de base de données.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/table_relationnel.png}
+	\caption{Représentation d'une Table}
+\end{figure}
 
-        \section{Système de gestion de base de données}
-            \label{sgbd}
-            Le système de gestion de base de données (SGBD) est un ensemble de programmes qui permet à ses utilisateurs d'accéder à une base de données, 
-            de manipuler des données, de générer des rapports, ainsi que de contrôler l'accès à la base de données, 
-            tout en cachant la complexité des opérations effectuer.
+En informatique, une base de données est la pièce centrale des dispositifs de collecte, mise en forme, stockage et utilisation d'informations.
+Ce dispositif comporte un système de gestion de base de données.
 
-            Les SGBD sont utilisés pour de nombreuses applications informatiques, notamment : 
-            \begin{itemize}
-                \item les guichets automatiques bancaires
-                \item les bibliothèques numérique
-                \item les logiciels d'inventaire
-                \item et aussi dans de nombreux blogs et sites web.
-            \end{itemize}
+\section{Système de gestion de base de données}
+\label{sgbd}
+Le système de gestion de base de données (SGBD) est un ensemble de programmes qui permet à ses utilisateurs d'accéder à une base de données,
+de manipuler des données, de générer des rapports, ainsi que de contrôler l'accès à la base de données,
+tout en cachant la complexité des opérations effectuer.
 
-            %\vfill
+Les SGBD sont utilisés pour de nombreuses applications informatiques, notamment :
+\begin{itemize}
+	\item les guichets automatiques bancaires
+	\item les bibliothèques numérique
+	\item les logiciels d'inventaire
+	\item et aussi dans de nombreux blogs et sites web.
+\end{itemize}
 
-            \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.7\textwidth]{img/sgbd.png}
-                \caption{Représentation d'un SGBD}
-            \end{figure}
+%\vfill
 
-            Il existe de nombreux SGBD. En 2008, Oracle détenait près de la moitié du marché avec MySQL et Oracle Database.
-            Les opérations de recherche et de manipulation des données peuvent être exprimées sous forme de requêtes (anglais query) 
-            dans un langage informatique reconnu par le SGBD. SQL est le langage informatique le plus populaire.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/sgbd.png}
+	\caption{Représentation d'un SGBD}
+\end{figure}
 
-        \section{Le langage SQL}
+Il existe de nombreux SGBD. En 2008, Oracle détenait près de la moitié du marché avec MySQL et Oracle Database.
+Les opérations de recherche et de manipulation des données peuvent être exprimées sous forme de requêtes (anglais query)
+dans un langage informatique reconnu par le SGBD. SQL est le langage informatique le plus populaire.
 
-            Le SQL (sigle de Structured Query Language, en français langage de requête structurée) est le langage standard pour traiter les bases de données relationnelles.
-            La programmation SQL peut être utilisée efficacement pour insérer, rechercher, mettre à jour et supprimer des enregistrements de base de données.
-            Les instructions SQL s'écrivent d'une manière qui ressemble à celle de phrases ordinaires en anglais. Cette ressemblance voulue vise à faciliter l'apprentissage et la lecture.
-            
-            Le SQL est un langage déclaratif, c'est-à-dire qu'il permet de décrire le résultat escompté, sans décrire la manière de l'obtenir. 
-            Les SGBD sont équipés d'optimiseurs de requêtes, des mécanismes qui déterminent automatiquement la manière optimale d'effectuer les opérations, 
-            notamment par une estimation de la complexité algorithmique. 
+\section{Le langage SQL}
 
-            Le langage SQL est utilisé par des bases de données relationnelles, telles que la base de données MySQL, Oracle, le serveur Ms SQL, Sybase, etc...
+Le SQL (sigle de Structured Query Language, en français langage de requête structurée) est le langage standard pour traiter les bases de données relationnelles.
+La programmation SQL peut être utilisée efficacement pour insérer, rechercher, mettre à jour et supprimer des enregistrements de base de données.
+Les instructions SQL s'écrivent d'une manière qui ressemble à celle de phrases ordinaires en anglais. Cette ressemblance voulue vise à faciliter l'apprentissage et la lecture.
 
-            Les instructions SQL couvrent 3 principale domaines :
-            \begin{itemize}
-                \item langage de manipulation de données.
-                \item langage de définition de données.
-                \item langage de contrôle des données et des transactions.
-            \end{itemize}
-            \vspace{0.3cm}
+Le SQL est un langage déclaratif, c'est-à-dire qu'il permet de décrire le résultat escompté, sans décrire la manière de l'obtenir.
+Les SGBD sont équipés d'optimiseurs de requêtes, des mécanismes qui déterminent automatiquement la manière optimale d'effectuer les opérations,
+notamment par une estimation de la complexité algorithmique.
 
-            Le domaine considéré dans ce projet et le langage de manipulation de données simple sans imbrication.
-            Example de requête SQL : \enquote{SELECT * FROM Members WHERE Age $ \leq $ 30;}
+Le langage SQL est utilisé par des bases de données relationnelles, telles que la base de données MySQL, Oracle, le serveur Ms SQL, Sybase, etc...
+
+Les instructions SQL couvrent 3 principale domaines :
+\begin{itemize}
+	\item langage de manipulation de données.
+	\item langage de définition de données.
+	\item langage de contrôle des données et des transactions.
+\end{itemize}
+\vspace{0.3cm}
+
+Le domaine considéré dans ce projet et le langage de manipulation de données simple sans imbrication.
+Example de requête SQL : \enquote{SELECT * FROM Members WHERE Age $ \leq $ 30;}
 
 % ------------------------------------- %
 % Présentation du projet : moteur de requêtes SQL simples
 % ------------------------------------- %
 
-    \chapter{Présentation du projet : moteur de requêtes SQL simples}
+\chapter{Présentation du projet : moteur de requêtes SQL simples}
 
-    \section{Présentation générale}
+\section{Présentation générale}
 
-        Notre projet consiste à concevoir et implémenter un moteur de requêtes SQL simples, 
-        nous avons donc à partir d’un ou plusieurs fichiers CSV donnés permettre d’exécuter une requête SQL simple .
+Notre projet consiste à concevoir et implémenter un programme capable de lire des données, executer des requêtes SQL simple en mémoire et de renvoyer le resultat.
+Il s’agit donc de crée une passerelle entre la personne qui exécute la requête SQL et les données.
+Les difficultés principales sont donc les suivants :
+\vspace{0.3cm}
+\begin{itemize}
+	\item Savoir charger les données en mémoire;
+	\item Savoir interprèter une requête SQL et l'éxecuter sur les données en mémoire;
+	\item Savoir retourner le resultat sous un format compréhensible;
+\end{itemize}
+\vspace{0.3cm}
 
-        Il s’agit donc de crée une passerelle entre la personne qui exécute la requête SQL et le fichier CSV qui contient les informations nécessaire afin réaliser cette requête SQL, 
-        notre programme doit analyser une requête et la décompose en 3 : 
-        \begin{itemize}
-            \item SELECT...
-            \item FROM ...
-            \item WHERE ...
-        \end{itemize}
-        et qui en fonction de linges de code spécifique à ces 3 méthodes réanalyser ces 3 parties pour savoir quelle attributs sélectionner, 
-        comment combiner différents tableaux, comment trier le résultat etc... 
 
-        L’analyse syntaxique n’est qu’une petite partie de la tâche, 
-        après avoir décomposé la requête en clauses et expressions logique, 
-        il faut ‘traduire’ les noms des tableaux et les atributs et y avoir accès pour lire les données des fichiers CSV donné. 
-        Il faut appliquer des méthodes aux données pour déterminer quelles lignes inclure et lesquelles filtrer. 
-        Il est nécessaire de joindre des lignes de plusieurs fichiers de données en les mettant en correspondance selon les expressions de requêtes SQL. 
-        Il faut extraire des sous-ensembles de champs de chaque ligne.
-        
-        Un moteur de requêtes SQL simples est un logiciel qui :
-        \begin{itemize}
-            \item Reconnaît et interprète le langage SQL
-            \item Implémente l’accès aux données en lecture.
-        \end{itemize}
+\section{Les Fonctions Principales}
 
-    \section{Les Fonctions Principales}
+\subsection{Chargement des données en mémoire}
 
-        \subsection{La sélection}
+Les données prise en charge par notre programme sont des tables, issue d'une base de données relationnelle, stocké sous forme de fichier au format CSV.
 
-            La sélection est la ou les conditions finales afin d'effectuer la requête SQL , comme le but d'une requête SQL est d'extraire des informations spécifique dans des bases de données , la sélection permet de spécifier la requête plus en profondeur c.à.d de sélectionner seulement les éléments du ou des tableaux qui répondent a certain critères donné par la personne qui exécute la requête et de faire la concaténation de ces éléments là .
+\subsubsection{Format CSV}
 
-    	    Nous séparons chaque condition de sélection avec des opérateurs logiques (noté : AND et OR).
+Comma-separated values, connu sous le sigle CSV, est un format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. 
+Ce format n'a jamais vraiment fait l'objet d'une spécification formelle.
 
-	        La condition en elle même est composé de 3 parties (noté : A * B) où A et B sont les opérandes et * l'opérateur , ces conditions sont des comparaisons entre A et B , ces comparaisons sont de base de type "CHAR" mais peuvent être de "INT" ou "DATE" en fonction de la condition en elle même.
+Un fichier CSV est un fichier texte, par opposition aux formats dits \enquote{binaires}.
+Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes. 
+Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau.
 
-        \subsection{La projection}
+Les champs texte peuvent également être délimités par des guillemets. Lorsqu'un champ contient lui-même des guillemets, ils sont doublés afin de ne pas être considérés comme début ou fin du champ. 
+Si un champ contient un signe utilisé comme séparateur de colonne (virgule, point-virgule, tabulation, etc.)
 
-         Une projection est une instruction permettant de sélectionner un ensemble de colonnes dans une table.
-         Soit la table "FRANCE" suivante :
+\subsubsection{Lecture du fichier CSV}
+
+
+\subsection{Lecture de la raquête SQL}
 
 
 
-         \begin{tabular}{|l|c|r|}
-          \hline
-          ville & region & codepostal
-          \\
-          \hline
-          Paris01 & Ile-de-france & 75101 \\
-          Paris02 & Ile-de-france & 75102 \\
-          Paris03 & Ile-de-france & 75103 \\
-          \hline
+\subsection{Execution de la requête SQL}
 
-         \end{tabular}
+\subsubsection{selection}
 
+La sélection est la ou les conditions finales afin d'effectuer la requête SQL , comme le but d'une requête SQL est d'extraire des informations spécifique dans des bases de données , la sélection permet de spécifier la requête plus en profondeur c.à.d de sélectionner seulement les éléments du ou des tableaux qui répondent a certain critères donné par la personne qui exécute la requête et de faire la concaténation de ces éléments là .
 
-         La selection de la colonne ville se fait par l'instruction :
+Nous séparons chaque condition de sélection avec des opérateurs logiques (noté : AND et OR).
 
-         \enquote{Select ville from FRANCE;}
+La condition en elle même est composé de 3 parties (noté : A * B) où A et B sont les opérandes et * l'opérateur , ces conditions sont des comparaisons entre A et B , ces comparaisons sont de base de type "CHAR" mais peuvent être de "INT" ou "DATE" en fonction de la condition en elle même.
 
-         
+\subsubsection{projection}
 
-         \begin{tabular}{|l|}
-          \hline
-          ville
-          \\
-          \hline
-          Paris01 \\
-          Paris02 \\
-          Paris03  \\
-          \hline
+Une projection est une instruction permettant de sélectionner un ensemble de colonnes dans une table.
 
+Soit la table "FRANCE" suivante :
 
-         \end{tabular}
-        \subsection{La jointure}
+\begin{tabular}{|l|c|r|}
+	\hline
+	ville   & region        & codepostal
+	\\
+	\hline
+	Paris01 & Ile-de-france & 75101      \\
+	Paris02 & Ile-de-france & 75102      \\
+	Paris03 & Ile-de-france & 75103      \\
+	\hline
+\end{tabular}
 
-            La jointure est un produit cartésien entre un ou plusieurs tableaux donnés par la personne qui effectue la requête puis d'une sélection , les tableaux donnés sont séparé par des virgules lors de initialisation de la requête .
+La selection de la colonne ville se fait par l'instruction :
 
-            Le produit cartésien entre un tableau A et B et un tableau composé de l'ensemble des couples possible entre leurs éléments respectives, ainsi nous aurons en résultat un tableau A*B.
+\enquote{Select ville from FRANCE;}
 
-	          Un exemple est plus parlant qu'une longue explication , prenons deux tableaux N et B nous effectuons un PC entre ces deux tableaux N*B, le résultat de l’exécution de la jointure donnera un nouveau tableau ((N*B) - Sélection).
+\begin{tabular}{|l|}
+	\hline
+	ville
+	\\
+	\hline
+	Paris01 \\
+	Paris02 \\
+	Paris03 \\
+	\hline
+\end{tabular}
+
+\subsubsection{jointure}
+
+La jointure est un produit cartésien entre un ou plusieurs tableaux donnés par la personne qui effectue la requête puis d'une sélection , les tableaux donnés sont séparé par des virgules lors de initialisation de la requête .
+
+Le produit cartésien entre un tableau A et B et un tableau composé de l'ensemble des couples possible entre leurs éléments respectives, ainsi nous aurons en résultat un tableau A*B.
+
+Un exemple est plus parlant qu'une longue explication , prenons deux tableaux N et B nous effectuons un PC entre ces deux tableaux N*B, le résultat de l’exécution de la jointure donnera un nouveau tableau ((N*B) - Sélection).
+
+\subsection{Retourner le resultat}
+
 
 % ------------------------------------- %
 % Conception du Moteur de Requêtes
 % ------------------------------------- %
 
-    \chapter{Conception du Moteur de Requêtes}
+\chapter{Conception du Moteur de Requêtes}
 
-        \section{Structure de données}
-            Avant toute chose, il faut commencer par charger les données en mémoire. Pour cela il faut commencer par savoir comment stocker efficacement les données pour pouvoir effectuer dessus les traitements demandés par l’utilisateur.
+\section{Structure de données}
+Avant toute chose, il faut commencer par charger les données en mémoire. Pour cela il faut commencer par savoir comment stocker efficacement les données pour pouvoir effectuer dessus les traitements demandés par l’utilisateur.
 
-            Pour cela nous avons donc réaliser un diagramme UML schématisant les classes utilisé pour stocker en mémoire l’ensemble des données utilisé pour la requête.
+Pour cela nous avons donc réaliser un diagramme UML schématisant les classes utilisé pour stocker en mémoire l’ensemble des données utilisé pour la requête.
 
-            \includegraphics[width=1\textwidth]{img/sql.png}\par
+\includegraphics[width=1\textwidth]{img/sql.png}\par
 
-            La classe principale de notre programme est la classe « Table ». Comme vous le pouvez le voir sur le diagramme UML ci-dessus, la classe est constituée de trois attributs. Une chaîne de caractères dans laquelle on stock le nom de la table ( i.e : le nom du fichier ). Cette attribut est indispensable pour identifier la table sur laquelle on veux extraire les informations qu’on cherche.
+La classe principale de notre programme est la classe « Table ». Comme vous le pouvez le voir sur le diagramme UML ci-dessus, la classe est constituée de trois attributs. Une chaîne de caractères dans laquelle on stock le nom de la table ( i.e : le nom du fichier ). Cette attribut est indispensable pour identifier la table sur laquelle on veux extraire les informations qu’on cherche.
 
-            On a aussi pensé a modélisé la classe TabString, ainsi que MatriceString et TabTable, pour simplifié l’utilisation des tableaux dynamiques. Ce qui a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
+On a aussi pensé a modélisé la classe TabString, ainsi que MatriceString et TabTable, pour simplifié l’utilisation des tableaux dynamiques. Ce qui a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
 
-            Le deuxième attribut de notre classe principale est un tableau de chaînes de caractères dans laquelle chaque case stockera le nom de la colonne concernée. Quant au troisième attribut, c’est une matrice à deux dimension qui se chargera de stocker les valeurs de notre table.
-            
-            Notre programme commencera par initialiser un tableau de Table. Puis pour chaque fichier donné, il stockera la première ligne de ce dernier dans le deuxième attribut de la classe Table, puis continuera a lire le fichier pour stocker chaque ligne (i.e : à partir de la deuxième ligne) dans le troisième attributs.
+Le deuxième attribut de notre classe principale est un tableau de chaînes de caractères dans laquelle chaque case stockera le nom de la colonne concernée. Quant au troisième attribut, c’est une matrice à deux dimension qui se chargera de stocker les valeurs de notre table.
 
-            Évidement, avant de stocker une ligne, nous la passons à une fonction qui se chargera de parser cette dernière séparent ainsi les différents attributs ( les attributs étant séparer par des virgule dans le fichier).
+Notre programme commencera par initialiser un tableau de Table. Puis pour chaque fichier donné, il stockera la première ligne de ce dernier dans le deuxième attribut de la classe Table, puis continuera a lire le fichier pour stocker chaque ligne (i.e : à partir de la deuxième ligne) dans le troisième attributs.
 
-        \section{Traitement des données}
+Évidement, avant de stocker une ligne, nous la passons à une fonction qui se chargera de parser cette dernière séparent ainsi les différents attributs ( les attributs étant séparer par des virgule dans le fichier).
 
-            Analyse de la requete => \enquote{select ... from ... where ...}
+\section{Traitement des données}
 
-            \subsection{La sélection}
+Analyse de la requete => \enquote{select ... from ... where ...}
 
-            \subsection{La projection}
+\subsection{La sélection}
 
-                Cette méthode, comme son nom l'indique, exécute une projection sut la Table Courante.
+\subsection{La projection}
 
-	            Le paramètre donnée est un TabString (tableau de chaîne de caractère) qui contient le nom des attributs à projeter.
-                On commence par déclarer une Table vide qui va contenir le résultat.
-                Le nom des attributs de cette table est initialiser à la de l'argument donné (l'objet TabString donné en paramètre).
-                Puis pour chaque élément d paramètre on ajoute la colonne correspondante à la table résultat.
+Cette méthode, comme son nom l'indique, exécute une projection sut la Table Courante.
 
-            \subsection{La jointure}
+Le paramètre donnée est un TabString (tableau de chaîne de caractère) qui contient le nom des attributs à projeter.
+On commence par déclarer une Table vide qui va contenir le résultat.
+Le nom des attributs de cette table est initialiser à la de l'argument donné (l'objet TabString donné en paramètre).
+Puis pour chaque élément d paramètre on ajoute la colonne correspondante à la table résultat.
+
+\subsection{La jointure}
 
 % ------------------------------------- %
 % Implementation
 % ------------------------------------- %
 
-    \chapter{Implementation}
+\chapter{Implementation}
 
-        \section{Choix de la téchnologie}
+\section{Choix de la téchnologie}
 
-        \section{Développement}
+\section{Développement}
 
-            fonctions en plus / implem des algo avec appel aux differentes fonctions des objets….
+fonctions en plus / implem des algo avec appel aux differentes fonctions des objets….
 
-            \subsection{Chargement des données}
+\subsection{Chargement des données}
 
-            \subsection{restitution des données (affichage)}
+\subsection{restitution des données (affichage)}
 
-            \subsection{Selection ...}
+\subsection{Selection ...}
 
-        \section{Logiciel}
+\section{Logiciel}
 
-            terminal / ligne de commande / formt des données en entrée et sortie
+terminal / ligne de commande / formt des données en entrée et sortie
 
-        \section{Test}
+\section{Test}
 
 
 % ------------------------------------- %
 % Bilan et difficultés rencontrées
 % ------------------------------------- %
 
-    \chapter{Bilan et difficultés rencontrées}
+\chapter{Bilan et difficultés rencontrées}
 
 % ------------------------------------- %
 % Perspective
 % ------------------------------------- %
 
-    \chapter{Perspective}
+\chapter{Perspective}
 
 % ------------------------------------- %
 % Annexes
 % ------------------------------------- %
 
-    \chapter{Annexes}
+\chapter{Annexes}
 
 
 \end{document}
