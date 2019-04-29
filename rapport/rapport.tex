@@ -74,15 +74,13 @@
 \end{titlepage}
 
 
-\tableofcontents
 
-% Espacement entre les paragraphes
-\parskip=5pt
 
 % ------------------------------------- %
 % Introduction
 % ------------------------------------- %
 
+\parskip=5pt
 \chapter{Introduction}
 
 Dans le cadre de notre second semestre de la Licence 2,
@@ -91,7 +89,7 @@ au travers d’un cahier des charges ayant pour finalité la conception et le d�
 
 Les requêtes considérées seront des requêtes simples de la forme : \enquote{SELECT ... FROM ... WHERE ... }  sans imbrication.
 
-À partir d’un ou plusieurs fichiers CSV, Comma-separated Values\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules.},
+À partir d’un ou plusieurs fichiers CSV, Comma-separated Values\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Voir \pageref{csv}},
 il est demandé de construire une représentation en mémoire des données et d’implémenter les procédures de projection,
 sélection et de jointure découlant de l’interrogation SQL.
 
@@ -100,9 +98,16 @@ Il s’agit principalement de reproduire les fonctionnalités de bases d’un SG
 Notre groupe, composé de cinq personnes : Massili Kezzoul, Chakib Elhouiti, Ramzi Zeroual, Belkassim Bouzidi et Yang Feï, et encadré par Mme Anne-Muriel Chifolleau,
 a saisie l'opportunité de réaliser ce projet.
 
+
+\parskip=0pt
+\tableofcontents
+
+% Espacement entre les paragraphes
+\parskip=5pt
 % ------------------------------------- %
 % Organisation
 % ------------------------------------- %
+
 \chapter{Organisation du projet}
 \section{Méthodes d’organisation}
 
@@ -186,6 +191,7 @@ Les opérations de recherche et de manipulation des données peuvent être expri
 dans un langage informatique reconnu par le SGBD. SQL est le langage informatique le plus populaire.
 
 \section{Le langage SQL}
+\label{sql}
 
 Le SQL (sigle de Structured Query Language, en français langage de requête structurée) est le langage standard pour traiter les bases de données relationnelles.
 La programmation SQL peut être utilisée efficacement pour insérer, rechercher, mettre à jour et supprimer des enregistrements de base de données.
@@ -208,9 +214,9 @@ Les instructions SQL couvrent 3 principale domaines :
 Le domaine considéré dans ce projet et le langage de manipulation de données simple sans imbrication.
 Example de requête SQL : \enquote{SELECT * FROM Members WHERE Age $ \leq $ 30;}
 
-% ------------------------------------- %
+% -------------------------------------------------------------------------- %
 % Présentation du projet : moteur de requêtes SQL simples
-% ------------------------------------- %
+% -------------------------------------------------------------------------- %
 
 \chapter{Présentation du projet : moteur de requêtes SQL simples}
 
@@ -227,7 +233,6 @@ Les difficultés principales sont donc les suivants :
 \end{itemize}
 \vspace{0.3cm}
 
-
 \section{Les Fonctions Principales}
 
 \subsection{Chargement des données en mémoire}
@@ -235,7 +240,7 @@ Les difficultés principales sont donc les suivants :
 Les données prise en charge par notre programme sont des tables, issue d'une base de données relationnelle, stocké sous forme de fichier au format CSV.
 
 \subsubsection{Format CSV}
-
+\label{csv}
 Comma-separated values, connu sous le sigle CSV, est un format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. 
 Ce format n'a jamais vraiment fait l'objet d'une spécification formelle.
 
@@ -243,27 +248,153 @@ Un fichier CSV est un fichier texte, par opposition aux formats dits \enquote{bi
 Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes. 
 Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau.
 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.85\textwidth]{img/csv.png}
+	\caption{Fichier texte sous format CSV}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.85\textwidth]{img/csv_tables.png}
+	\caption{Representation du même fichier en une table de données}
+\end{figure}
+
 Les champs texte peuvent également être délimités par des guillemets. Lorsqu'un champ contient lui-même des guillemets, ils sont doublés afin de ne pas être considérés comme début ou fin du champ. 
 Si un champ contient un signe utilisé comme séparateur de colonne (virgule, point-virgule, tabulation, etc.)
 
 \subsubsection{Lecture du fichier CSV}
 
+Un fichier CSV est donc un moyen simple de stocker les données d'une base de données.
+Ici on considére que :
+\begin{itemize}
+	\item Le nom du fichier (sans l'extensions) est le nom de la table.
+	\item La première ligne du fichier ne represente pas des valeurs mais le nom des attributs de la table (c-à-d le nom des colones).
+	\item Toutes les autres lignes represente des Tuples où chaque valeur est separée par une vergule.
+\end{itemize}
+\vspace{0.3cm}
 
-\subsection{Lecture de la raquête SQL}
+La question qui se posent donc est : \\ \enquote{Comment charger les données qui se trouve dans un fichier CSV ? et comment stocker les données qui en resulte ?}
 
+\subsubsection{Lecture de la raquête SQL}
+
+Maintenant qu'on a nos tables chargées en mémoire, il faut lire et interprèter la requête SQL\footnote{Structured Query Language: voir Page \pageref{sql}}.
+
+Dans le contexe du projet, les requête prise en charge sont des requête SQL simples sans imbrication. Il respecteront donc la forme suivante : 
+
+\enquote{SELECT nomAttribut1,nomAttribut2 FROM nomTable1,nomTable2 WHERE condition1 AND condition2 OR condition3}
+
+Tel que : 
+\begin{itemize}
+	\item Le nom des attributs peuvent être remplacé par '*', ce qui signifie dans ce cas : \enquote{Tout les attributs};
+	\item Il faut scpécifier au moin une table (dans le FROM);
+	\item Les condition de selection (le WHERE) sont facultatif;
+\end{itemize}
+\vspace{0.3cm}
 
 
 \subsection{Execution de la requête SQL}
 
-\subsubsection{selection}
+La dernière étape consiste à executer la requête SQL, précédemment interprèter, sur les données charger en mémoire.
+On peut clairement découper la requête SQL en 3 étapes :
+
+\subsubsection{La jointure}
+
+La jointure est un produit cartésien entre deux ou plusieurs tables données par l'utilisateur suivit d'une sélection, 
+les tables données sont spécifier dans la partie FROM de la requête SQL.
+
+Le produit cartésien entre une table A et B est une table composée de l'ensemble des couples possible entre leurs éléments respectives, ainsi nous aurons en résultat une table A*B.
+
+Un exemple est plus parlant qu'une longue explication, prenons deux table Employés et Départements : 
+
+\begin{figure}[h]
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\begin{tabular}{|l|c|c|r|}
+			\hline
+			id   & nom  & age & idDep 
+			\\
+			\hline
+			01 & Emp1 &  30  & 01 \\
+			02 & Emp2 &  31  & 01 \\
+			03 & Emp3 &  29  & 02 \\
+			\hline
+		\end{tabular}
+		\vspace{0.2cm}\\
+		Table 'Employés'
+	\end{minipage}
+	\hfill%
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\begin{tabular}{|l|c|c|r|}
+			\hline
+			idDep   & nom   & localisation
+			\\
+			\hline
+			01 & Dep1 &  Montpellier  \\
+			02 & Dep2 &  Montpellier  \\
+			\hline
+		\end{tabular}
+		\vspace{0.2cm}\\
+		Table 'Départements'
+	\end{minipage}
+	\begin{figure}[h]
+		\caption{Execution de la selection}
+		\centering
+		\begin{tabular}
+			\hline
+			id   & nom  & age & idDep & nom   & localisation 
+			\\
+			\hline
+			01 & Emp1 &  30  & 01 & Dep1 &  Montpellier \\
+			02 & Emp2 &  31  & 01 & Dep1 &  Montpellier \\
+			03 & Emp3 &  29  & 01 & Dep1 &  Montpellier \\
+			\hline
+		\end{tabular}
+	\end{figure}
+	\begin{figure}[h]
+		\caption{Execution de la selection}
+		\centering
+		\begin{tabular}
+			\hline
+			id   & nom  & age & idDep & nom   & localisation 
+			\\
+			\hline
+			01 & Emp1 &  30  & 01 & Dep1 &  Montpellier \\
+			02 & Emp2 &  31  & 01 & Dep1 &  Montpellier \\
+			03 & Emp3 &  29  & 02 & Dep2 &  Montpellier \\
+			\hline
+		\end{tabular}
+	\end{figure}
+
+\end{figure}
+
+
+La selection de la colonne ville se fait par l'instruction :
+
+\enquote{Select ville from FRANCE;}
+
+\begin{tabular}{|l|}
+	\hline
+	ville
+	\\
+	\hline
+	Paris01 \\
+	Paris02 \\
+	Paris03 \\
+	\hline
+\end{tabular}
+
+\subsubsection{La selection}
 
 La sélection est la ou les conditions finales afin d'effectuer la requête SQL , comme le but d'une requête SQL est d'extraire des informations spécifique dans des bases de données , la sélection permet de spécifier la requête plus en profondeur c.à.d de sélectionner seulement les éléments du ou des tableaux qui répondent a certain critères donné par la personne qui exécute la requête et de faire la concaténation de ces éléments là .
-
+tablex
+tablex
 Nous séparons chaque condition de sélection avec des opérateurs logiques (noté : AND et OR).
 
 La condition en elle même est composé de 3 parties (noté : A * B) où A et B sont les opérandes et * l'opérateur , ces conditions sont des comparaisons entre A et B , ces comparaisons sont de base de type "CHAR" mais peuvent être de "INT" ou "DATE" en fonction de la condition en elle même.
 
-\subsubsection{projection}
+\subsubsection{La projection}
 
 Une projection est une instruction permettant de sélectionner un ensemble de colonnes dans une table.
 
@@ -294,14 +425,6 @@ La selection de la colonne ville se fait par l'instruction :
 	Paris03 \\
 	\hline
 \end{tabular}
-
-\subsubsection{jointure}
-
-La jointure est un produit cartésien entre un ou plusieurs tableaux donnés par la personne qui effectue la requête puis d'une sélection , les tableaux donnés sont séparé par des virgules lors de initialisation de la requête .
-
-Le produit cartésien entre un tableau A et B et un tableau composé de l'ensemble des couples possible entre leurs éléments respectives, ainsi nous aurons en résultat un tableau A*B.
-
-Un exemple est plus parlant qu'une longue explication , prenons deux tableaux N et B nous effectuons un PC entre ces deux tableaux N*B, le résultat de l’exécution de la jointure donnera un nouveau tableau ((N*B) - Sélection).
 
 \subsection{Retourner le resultat}
 
