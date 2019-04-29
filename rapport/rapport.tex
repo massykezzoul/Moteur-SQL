@@ -298,105 +298,9 @@ Tel que :
 La dernière étape consiste à executer la requête SQL, précédemment interprèter, sur les données charger en mémoire.
 On peut clairement découper la requête SQL en 3 étapes :
 
-\subsubsection{La jointure}
-
-La jointure est un produit cartésien entre deux ou plusieurs tables données par l'utilisateur suivit d'une sélection, 
-les tables données sont spécifier dans la partie FROM de la requête SQL.
-
-Le produit cartésien entre une table A et B est une table composée de l'ensemble des couples possible entre leurs éléments respectives, ainsi nous aurons en résultat une table A*B.
-
-Un exemple est plus parlant qu'une longue explication, prenons deux table Employés et Départements : 
-
-\begin{figure}[h]
-	\begin{minipage}[c]{.46\linewidth}
-		\centering
-		\begin{tabular}{|l|c|c|r|}
-			\hline
-			id   & nom  & age & idDep 
-			\\
-			\hline
-			01 & Emp1 &  30  & 01 \\
-			02 & Emp2 &  31  & 01 \\
-			03 & Emp3 &  29  & 02 \\
-			\hline
-		\end{tabular}
-		\vspace{0.2cm}\\
-		Table 'Employés'
-	\end{minipage}
-	\hfill%
-	\begin{minipage}[c]{.46\linewidth}
-		\centering
-		\begin{tabular}{|l|c|c|r|}
-			\hline
-			idDep   & nom   & localisation
-			\\
-			\hline
-			01 & Dep1 &  Montpellier  \\
-			02 & Dep2 &  Montpellier  \\
-			\hline
-		\end{tabular}
-		\vspace{0.2cm}\\
-		Table 'Départements'
-	\end{minipage}
-	\begin{figure}[h]
-		\caption{Execution de la selection}
-		\centering
-		\begin{tabular}
-			\hline
-			id   & nom  & age & idDep & nom   & localisation 
-			\\
-			\hline
-			01 & Emp1 &  30  & 01 & Dep1 &  Montpellier \\
-			02 & Emp2 &  31  & 01 & Dep1 &  Montpellier \\
-			03 & Emp3 &  29  & 01 & Dep1 &  Montpellier \\
-			\hline
-		\end{tabular}
-	\end{figure}
-	\begin{figure}[h]
-		\caption{Execution de la selection}
-		\centering
-		\begin{tabular}
-			\hline
-			id   & nom  & age & idDep & nom   & localisation 
-			\\
-			\hline
-			01 & Emp1 &  30  & 01 & Dep1 &  Montpellier \\
-			02 & Emp2 &  31  & 01 & Dep1 &  Montpellier \\
-			03 & Emp3 &  29  & 02 & Dep2 &  Montpellier \\
-			\hline
-		\end{tabular}
-	\end{figure}
-
-\end{figure}
-
-
-La selection de la colonne ville se fait par l'instruction :
-
-\enquote{Select ville from FRANCE;}
-
-\begin{tabular}{|l|}
-	\hline
-	ville
-	\\
-	\hline
-	Paris01 \\
-	Paris02 \\
-	Paris03 \\
-	\hline
-\end{tabular}
-
-\subsubsection{La selection}
-
-La sélection est la ou les conditions finales afin d'effectuer la requête SQL , comme le but d'une requête SQL est d'extraire des informations spécifique dans des bases de données , la sélection permet de spécifier la requête plus en profondeur c.à.d de sélectionner seulement les éléments du ou des tableaux qui répondent a certain critères donné par la personne qui exécute la requête et de faire la concaténation de ces éléments là .
-tablex
-tablex
-Nous séparons chaque condition de sélection avec des opérateurs logiques (noté : AND et OR).
-
-La condition en elle même est composé de 3 parties (noté : A * B) où A et B sont les opérandes et * l'opérateur , ces conditions sont des comparaisons entre A et B , ces comparaisons sont de base de type "CHAR" mais peuvent être de "INT" ou "DATE" en fonction de la condition en elle même.
-
 \subsubsection{La projection}
 
-Une projection est une instruction permettant de sélectionner un ensemble de colonnes dans une table.
+La projection, ou sélection verticale, d'une table sur certaines de ses colonnes est une opération qui fournit une autre table ne contenant qu'un sous-ensemble des colonnes de la table initiale.
 
 Soit la table "FRANCE" suivante :
 
@@ -411,20 +315,132 @@ Soit la table "FRANCE" suivante :
 	\hline
 \end{tabular}
 
-La selection de la colonne ville se fait par l'instruction :
+La selection de la colonne ville et codepostal se fait par l'instruction :
 
-\enquote{Select ville from FRANCE;}
+\enquote{Select ville,codepostal from FRANCE;}
 
-\begin{tabular}{|l|}
+\begin{tabular}{|l|r|}
 	\hline
-	ville
+	ville & codepostal
 	\\
 	\hline
-	Paris01 \\
-	Paris02 \\
-	Paris03 \\
+	Paris01 & 75101  \\
+	Paris02 & 75102 \\
+	Paris03 & 75103 \\
 	\hline
 \end{tabular}
+
+\subsubsection{La selection}
+
+La sélection (sélection horizontale) permet de ne conserver que les tuples qui respectent une condition définie sur les valeurs des attributs, 
+comme le but d'une requête SQL est d'extraire des informations spécifique dans des bases de données, 
+
+La sélection permet :
+\begin{itemize}
+ 	\item L'affichage de certaines lignes qui vérifient un critère donné;
+	\item Le critère est une exrpession booléenne plus ou moins compliquée;
+	\item Les conditions de sélection sont données juste après le mot clé WHERE;
+	\item Les conditions sont séparer par des opérateur logique, AND et OR;
+\end{itemize}
+\pagebreak
+
+Example de sélection :
+soit la requête SQL suivante : 
+
+\begin{center}
+	\enquote{SELECT * FROM Employés WHERE age $\leq$ 30;}
+\end{center}
+
+Et la table : 
+\begin{figure}[h]
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\caption{Table 'Employés'}
+		\begin{tabular}{|l|c|c|r|}
+			\hline
+			id   & nom  & age & idDep 
+			\\
+			\hline
+			01 & Emp1 &  30  & 01 \\
+			02 & Emp2 &  31  & 01 \\
+			03 & Emp3 &  29  & 02 \\
+			\hline
+		\end{tabular}
+	\end{minipage}
+	\hfill%
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\caption{Résultat de la sélection}
+		\begin{tabular}{|l|c|c|r|}
+			\hline
+			id   & nom   & age & idDep
+			\\
+			\hline
+			01 & Emp1 &  30  & 01 \\
+			03 & Emp3 &  29  & 02 \\
+			\hline
+		\end{tabular}
+	\end{minipage}
+\end{figure}
+
+\subsubsection{La jointure}
+
+la jointure est l'opération permettant d’associer plusieurs tables d'une base de données par le biais d’un lien logique de données entre les différentes tables, 
+le lien étant vérifié par le biais d'un prédicat se situant dans la clause WHERE. Le résultat de l'opération est une nouvelle table. 
+les tables données sont spécifier dans la partie FROM de la requête SQL.
+
+La jointure entre une table A et B est une table composée de l'ensemble des couples possible entre leurs éléments respectant le prédicat.
+
+Un exemple est plus parlant qu'une longue explication, prenons deux table Employés et Départements : 
+
+\begin{figure}[h]
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\caption{Table 'Employés'}
+		\begin{tabular}{|l|c|c|r|}
+			\hline
+			id   & nom  & age & idDep 
+			\\
+			\hline
+			01 & Emp1 &  30  & 01 \\
+			02 & Emp2 &  31  & 01 \\
+			03 & Emp3 &  29  & 02 \\
+			\hline
+		\end{tabular}
+	\end{minipage}
+	\hfill%
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\caption{Table 'Départements'}
+		\begin{tabular}{|l|c|c|r|}
+			\hline
+			idDep   & nom   & localisation
+			\\
+			\hline
+			01 & Dep1 &  Montpellier  \\
+			02 & Dep2 &  Paris  \\
+			\hline
+		\end{tabular}
+	\end{minipage}
+\end{figure}
+
+	\enquote{SELECT * FROM Employés,Départements WHERE Employés.idDep = Départements.idDep}
+
+\begin{figure}[h]
+		\centering
+		\caption{Execution de la jointure}
+		\begin{tabular}{|l|c|c|c|c|r|}
+			\hline
+			id   & nom  & age & idDep & nom   & localisation 
+			\\
+			\hline
+			01 & Emp1 &  30  & 01 & Dep1 &  Montpellier \\
+			02 & Emp2 &  31  & 01 & Dep1 &  Montpellier \\
+			03 & Emp3 &  29  & 02 & Dep2 &  Paris \\
+			\hline
+		\end{tabular}
+\end{figure}
+
 
 \subsection{Retourner le resultat}
 
@@ -468,7 +484,23 @@ Le nom des attributs de cette table est initialiser à la de l'argument donné (
 Puis pour chaque élément d paramètre on ajoute la colonne correspondante à la table résultat.
 
 \subsection{La jointure}
-
+	\begin{figure}
+		\centering
+		\caption{Execution du produit cartésien}
+		\begin{tabular}{|l|c|c|c|c|c|r|}
+			\hline
+			id   & nom  & age & Employés.idDep & Départements.idDep & nom   & localisation 
+			\\
+			\hline
+			01 & Emp1 &  30 & 01 & 01 & Dep1 &  Montpellier \\
+			02 & Emp2 &  31 & 01 & 01 & Dep1 &  Montpellier \\
+			03 & Emp3 &  29 & 02 & 01 & Dep1 &  Montpellier \\
+			01 & Emp1 &  30 & 01 & 02 & Dep2 &  Paris \\
+			02 & Emp2 &  31 & 01 & 02 & Dep2 &  Paris \\
+			03 & Emp3 &  29 & 02 & 02 & Dep2 &  Paris \\
+			\hline
+		\end{tabular}
+	\end{figure}
 % ------------------------------------- %
 % Implementation
 % ------------------------------------- %
