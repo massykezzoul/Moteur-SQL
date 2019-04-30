@@ -89,7 +89,7 @@ au travers d’un cahier des charges ayant pour finalité la conception et le d�
 
 Les requêtes considérées seront des requêtes simples de la forme : \enquote{SELECT ... FROM ... WHERE ... }  sans imbrication.
 
-À partir d’un ou plusieurs fichiers CSV, Comma-separated Values\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Voir \pageref{csv}},
+À partir d’un ou plusieurs fichiers CSV, Comma-separated Values\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Voir page \pageref{csv}},
 il est demandé de construire une représentation en mémoire des données et d’implémenter les procédures de projection,
 sélection et de jointure découlant de l’interrogation SQL.
 
@@ -114,7 +114,7 @@ a saisie l'opportunité de réaliser ce projet.
 
 Afin de mener à bien le développement du projet, nous avons décidé de travailler un maximum de temps ensemble et de manière très régulière. Nous nous sommes réunis trois à quatre fois par semaine afin de faire le point sur l’avancement du projet et de définir les objectifs restant à atteindre.
 
-Enfin, selon l’état d’avancement du moteur de requêtes, nous réalisons les tâches en retard durant le week-end pour ne pas cumulé de retard et respecter l’intégralité le cahier des charges.
+Enfin, selon l’état d’avancement du moteur de requêtes, nous réalisons les tâches en retard durant le week-end pour ne pas cumulé de retard et respecter l’intégralité du cahier des charges.
 
 Toutes les semaines, nous nous sommes réunis avec notre encadrante, Mme Anne-Muriel Chifolleau, afin de faire le point sur l’état du projet. Ces réunions nous on également permis de bénéficier des précieux conseils de notre encadrante.
 
@@ -168,8 +168,7 @@ Ce dispositif comporte un système de gestion de base de données.
 \section{Système de gestion de base de données}
 \label{sgbd}
 Le système de gestion de base de données (SGBD) est un ensemble de programmes qui permet à ses utilisateurs d'accéder à une base de données,
-de manipuler des données, de générer des rapports, ainsi que de contrôler l'accès à la base de données,
-tout en cachant la complexité des opérations effectuer.
+de manipuler des données, ainsi que de contrôler l'accès à la base de données, tout en cachant la complexité des opérations effectuer.
 
 Les SGBD sont utilisés pour de nombreuses applications informatiques, notamment :
 \begin{itemize}
@@ -213,7 +212,7 @@ Les instructions SQL couvrent 3 principale domaines :
 \vspace{0.3cm}
 
 Le domaine considéré dans ce projet et le langage de manipulation de données simple sans imbrication.
-Example de requête SQL : \enquote{SELECT * FROM Members WHERE Age $ \leq $ 30;}
+Example de requête SQL : \enquote{SELECT Name FROM Members WHERE Age $ \leq $ 30;}
 
 % -------------------------------------------------------------------------- %
 % Présentation du projet : moteur de requêtes SQL simples
@@ -242,7 +241,8 @@ Les données prise en charge par notre programme sont des tables, issue d'une ba
 
 \subsubsection{Format CSV}
 \label{csv}
-Comma-separated values, connu sous le sigle CSV, est un format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. 
+Comma-separated values, connu sous le sigle CSV, est un format texte ouvert %\footnote{format ouvert est défini comme \enquote{tout protocole de communication, d'interconnexion ou d'échange et tout format de données interopérable et dont les spécifications techniques sont publiques et sans restriction d'accès ni de mise en œuvre}}
+représentant des données tabulaires sous forme de valeurs séparées par des virgules. 
 Ce format n'a jamais vraiment fait l'objet d'une spécification formelle.
 
 Un fichier CSV est un fichier texte, par opposition aux formats dits \enquote{binaires}.
@@ -262,7 +262,7 @@ Les portions de texte séparées par une virgule correspondent ainsi aux contenu
 \end{figure}
 
 Les champs texte peuvent également être délimités par des guillemets. Lorsqu'un champ contient lui-même des guillemets, ils sont doublés afin de ne pas être considérés comme début ou fin du champ. 
-Si un champ contient un signe utilisé comme séparateur de colonne (virgule, point-virgule, tabulation, etc.)
+Si un champ contient un signe utilisé comme séparateur de colonne (virgule, point-virgule, tabulation, etc.), les guillemets sont obligatoires afin que ce signe ne soit pas confondu avec un séparateur.
 
 \subsubsection{Lecture du fichier CSV}
 
@@ -275,7 +275,10 @@ Ici on considére que :
 \end{itemize}
 \vspace{0.3cm}
 
-La question qui se posent donc est : \\ \enquote{Comment charger les données qui se trouve dans un fichier CSV ? et comment stocker les données qui en resulte ?}
+La question qui se posent donc est :
+\begin{center}
+	\enquote{Comment lire et interprèter un fichier CSV ? et comment stocker les données qui en resulte ?}
+\end{center}
 
 \subsubsection{Lecture de la raquête SQL}
 
@@ -447,6 +450,43 @@ Un exemple est plus parlant qu'une longue explication, prenons deux table Employ
 
 \subsection{Retourner le resultat}
 
+La dernière étape consiste à renvoyer la table resultante de l'éxecution de la requête sous un format \textit{réutilisable} et \textit{compréhensible}.
+
+\subsubsection{Réutilisable}
+
+Il est question de stocker les données obtenu dans un fichier, sous un format CSV, pour qu'elles soit sauvgardées et réutilisablees par le programme.
+
+\pagebreak
+
+\subsubsection{Compréhensible}
+
+Il s'agit de renvoyer la table de manière qu'elle soit compréhensible par l'utilisateur,c'est à dire en affichant les données sous forme d'un tableau.
+
+\begin{figure}[h!]
+		\centering
+		\caption{Tableau}
+		\vspace{0.1cm}
+		\begin{tabular}{|l|c|r|}
+			\hline
+			id   & nom  & prenom 
+			\\
+			\hline
+			01 & Nom1 &  Prenom1 \\
+			02 & Nom2 &  Prenom2 \\
+			03 & Nom3 &  Prenom3 \\
+			\hline
+		\end{tabular}
+\end{figure}
+
+\section{Objectif du programme}
+
+L'objectif du programme est résume dans le schéma suivante :
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{img/role_prog.png} % Inserer ici le schéma ROLE DU PROGRAMME
+	\vspace{0.1cm}
+	\caption{Objectif du programme}
+\end{figure}
 
 <<<<<<< HEAD
 
