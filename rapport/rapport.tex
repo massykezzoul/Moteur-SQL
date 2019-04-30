@@ -11,7 +11,7 @@
 
 % csquotes va utiliser la langue définie dans babel
 \usepackage[babel=true]{csquotes}
- 
+
 % pour afficher Schéma au lieu de figure dans les legende des images
 \addto\captionsfrench{\def\figurename{Schéma}}
 
@@ -242,11 +242,11 @@ Les données prise en charge par notre programme sont des tables, issue d'une ba
 \subsubsection{Format CSV}
 \label{csv}
 Comma-separated values, connu sous le sigle CSV, est un format texte ouvert %\footnote{format ouvert est défini comme \enquote{tout protocole de communication, d'interconnexion ou d'échange et tout format de données interopérable et dont les spécifications techniques sont publiques et sans restriction d'accès ni de mise en œuvre}}
-représentant des données tabulaires sous forme de valeurs séparées par des virgules. 
+représentant des données tabulaires sous forme de valeurs séparées par des virgules.
 Ce format n'a jamais vraiment fait l'objet d'une spécification formelle.
 
 Un fichier CSV est un fichier texte, par opposition aux formats dits \enquote{binaires}.
-Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes. 
+Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes.
 Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau.
 
 \begin{figure}[!h]
@@ -261,7 +261,7 @@ Les portions de texte séparées par une virgule correspondent ainsi aux contenu
 	\caption{Representation du même fichier en une table de données}
 \end{figure}
 
-Les champs texte peuvent également être délimités par des guillemets. Lorsqu'un champ contient lui-même des guillemets, ils sont doublés afin de ne pas être considérés comme début ou fin du champ. 
+Les champs texte peuvent également être délimités par des guillemets. Lorsqu'un champ contient lui-même des guillemets, ils sont doublés afin de ne pas être considérés comme début ou fin du champ.
 Si un champ contient un signe utilisé comme séparateur de colonne (virgule, point-virgule, tabulation, etc.), les guillemets sont obligatoires afin que ce signe ne soit pas confondu avec un séparateur.
 
 \subsubsection{Lecture du fichier CSV}
@@ -284,11 +284,11 @@ La question qui se posent donc est :
 
 Maintenant qu'on a nos tables chargées en mémoire, il faut lire et interprèter la requête SQL\footnote{Structured Query Language: voir Page \pageref{sql}}.
 
-Dans le contexe du projet, les requête prise en charge sont des requête SQL simples sans imbrication. Il respecteront donc la forme suivante : 
+Dans le contexe du projet, les requête prise en charge sont des requête SQL simples sans imbrication. Il respecteront donc la forme suivante :
 
 \enquote{SELECT nomAttribut1,nomAttribut2 FROM nomTable1,nomTable2 WHERE condition1 AND condition2 OR condition3}
 
-Tel que : 
+Tel que :
 \begin{itemize}
 	\item Le nom des attributs peuvent être remplacé par '*', ce qui signifie dans ce cas : \enquote{Tout les attributs};
 	\item Il faut scpécifier au moin une table (dans le FROM);
@@ -336,8 +336,8 @@ La selection de la colonne ville et codepostal se fait par l'instruction :
 
 \subsubsection{La selection}
 
-La sélection (sélection horizontale) permet de ne conserver que les tuples qui respectent une condition définie sur les valeurs des attributs, 
-comme le but d'une requête SQL est d'extraire des informations spécifique dans des bases de données, 
+La sélection (sélection horizontale) permet de ne conserver que les tuples qui respectent une condition définie sur les valeurs des attributs,
+comme le but d'une requête SQL est d'extraire des informations spécifique dans des bases de données,
 
 La sélection permet :
 \begin{itemize}
@@ -349,13 +349,13 @@ La sélection permet :
 \pagebreak
 
 Example de sélection :
-soit la requête SQL suivante : 
+soit la requête SQL suivante :
 
 \begin{center}
 	\enquote{SELECT * FROM Employés WHERE age $\leq$ 30;}
 \end{center}
 
-Et la table : 
+Et la table :
 \begin{figure}[h]
 	\begin{minipage}[c]{.46\linewidth}
 		\centering
@@ -363,7 +363,7 @@ Et la table :
 		%\vspace{0.1cm}
 		\begin{tabular}{|l|c|c|r|}
 			\hline
-			id   & nom  & age & idDep 
+			id   & nom  & age & idDep
 			\\
 			\hline
 			01 & Emp1 &  30  & 01 \\
@@ -391,13 +391,13 @@ Et la table :
 
 \subsubsection{La jointure}
 
-la jointure est l'opération permettant d’associer plusieurs tables d'une base de données par le biais d’un lien logique de données entre les différentes tables, 
-le lien étant vérifié par le biais d'un prédicat se situant dans la clause WHERE. Le résultat de l'opération est une nouvelle table. 
+la jointure est l'opération permettant d’associer plusieurs tables d'une base de données par le biais d’un lien logique de données entre les différentes tables,
+le lien étant vérifié par le biais d'un prédicat se situant dans la clause WHERE. Le résultat de l'opération est une nouvelle table.
 les tables données sont spécifier dans la partie FROM de la requête SQL.
 
 La jointure entre une table A et B est une table composée de l'ensemble des couples possible entre leurs éléments respectant le prédicat.
 
-Un exemple est plus parlant qu'une longue explication, prenons deux table Employés et Départements : 
+Un exemple est plus parlant qu'une longue explication, prenons deux table Employés et Départements :
 
 \begin{figure}[h]
 	\begin{minipage}[c]{.46\linewidth}
@@ -405,7 +405,7 @@ Un exemple est plus parlant qu'une longue explication, prenons deux table Employ
 		\caption{Table 'Employés'}
 		\begin{tabular}{|l|c|c|r|}
 			\hline
-			id   & nom  & age & idDep 
+			id   & nom  & age & idDep
 			\\
 			\hline
 			01 & Emp1 &  30  & 01 \\
@@ -437,7 +437,7 @@ Un exemple est plus parlant qu'une longue explication, prenons deux table Employ
 		\caption{Execution de la jointure}
 		\begin{tabular}{|l|c|c|c|c|r|}
 			\hline
-			id   & nom  & age & idDep & nom   & localisation 
+			id   & nom  & age & idDep & nom   & localisation
 			\\
 			\hline
 			01 & Emp1 &  30  & 01 & Dep1 &  Montpellier \\
@@ -468,7 +468,7 @@ Il s'agit de renvoyer la table de manière qu'elle soit compréhensible par l'ut
 		\vspace{0.1cm}
 		\begin{tabular}{|l|c|r|}
 			\hline
-			id   & nom  & prenom 
+			id   & nom  & prenom
 			\\
 			\hline
 			01 & Nom1 &  Prenom1 \\
@@ -536,7 +536,7 @@ Puis pour chaque élément d paramètre on ajoute la colonne correspondante à l
 		\caption{Execution du produit cartésien}
 		\begin{tabular}{|l|c|c|c|c|c|r|}
 			\hline
-			id   & nom  & age & Employés.idDep & Départements.idDep & nom   & localisation 
+			id   & nom  & age & Employés.idDep & Départements.idDep & nom   & localisation
 			\\
 			\hline
 			01 & Emp1 &  30 & 01 & 01 & Dep1 &  Montpellier \\
@@ -578,13 +578,34 @@ terminal / ligne de commande / formt des données en entrée et sortie
 % ------------------------------------- %
 
 \chapter{Bilan et difficultés rencontrées}
+\section{Bilan}
 
+Au final la conception et le développement d'un moteur d'évaluation de requêtes SQL simple en mémoire vive a été réalisée et le cahier des charges respecté , sur un plan plus général ce projet nous servira comme l'un de nos premièrs travaille en groupe sur un projet de dévlopement informatique, cela nous a apporté riguer, sérieu et surtout apprendre à s'organiser, l'organisation est donc le plus grand enrichissement que nous avons pu avoir.
+ \newline Ce projet a aussi permis de créer de vrais liens d'amitié au sein de notre groupe.
+
+\section{difficultés}
+
+Plusieurs retouche ont été apporté lors de l'implementation de notre projet du à des bugs , nous avons donc aussi du revenir sur pas mal de points de conception :
+\begin{itemize}
+  \item 
+\end{itemize}
 % ------------------------------------- %
 % Perspective
 % ------------------------------------- %
 
 \chapter{Perspective}
 
+ Dans une vision d'amélioration de notre programme voici quelques idées sur les quelles nous avons réfléchis :
+
+\begin{itemize}
+\item Une optimisation en mémoire de notre programme semble l'une des prémiers perspective sur les quelles nous pouvons nous pencher.
+\item L'ajout d'opérateurs à notre selection telles que LIKE : Ce mot-clé permet d’effectuer une recherche sur un modèle particulier. Il est par exemple possible de rechercher les enregistrements dont la valeur d’une colonne commence par telle ou telle lettre ,BETWEEN : sélectionne un intervalle de données dans une requête et L’opérateur logique IN qui vérifie si une colonne est égale à une des valeurs comprise dans set de valeurs déterminés.
+\item La commande GROUP BY qui est utilisée en SQL pour grouper plusieurs résultats et utiliser une fonction de totaux sur un groupe de résultat. Sur une table qui contient toutes les ventes d’un magasin, il est par exemple possible de liste regrouper les ventes par clients identiques et d’obtenir le coût total des achats pour chaque client.
+\item La condition HAVING en SQL est presque similaire à WHERE à la seule différence que HAVING permet de filtrer en utilisant des fonctions telles que SUM(), COUNT(), AVG(), MIN() ou MAX().
+\item La commande "AS" permet d’utiliser des alias pour renommer temporairement une colonne ou une table dans une requête. Cette astuce est particulièrement utile pour faciliter la lecture des requêtes.
+\item Les fonctions d'agrégation (AVG(),MAX(),MIN(),COUNT(),SUM())
+
+\end{itemize}
 % ------------------------------------- %
 % Annexes
 % ------------------------------------- %
