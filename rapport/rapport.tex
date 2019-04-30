@@ -211,7 +211,7 @@ Les instructions SQL couvrent 3 principale domaines :
 \end{itemize}
 \vspace{0.3cm}
 
-Le domaine considéré dans ce projet et le langage de manipulation de données simple sans imbrication.
+Le domaine considéré dans ce projet est le langage de manipulation de données simple sans imbrication.
 Example de requête SQL : \enquote{SELECT Name FROM Members WHERE Age $ \leq $ 30;}
 
 % -------------------------------------------------------------------------- %
@@ -495,17 +495,34 @@ L'objectif du programme est résume dans le schéma suivante :
 \chapter{Conception du Moteur de Requêtes}
 
 \section{Structure de données}
-Avant toute chose, il faut commencer par charger les données en mémoire. Pour cela il faut commencer par savoir comment stocker efficacement les données pour pouvoir effectuer dessus les traitements demandés par l’utilisateur.
+Avant toute chose, il faut commencer par lire les données. Pour cela il faut mettre en \oe uvre une stratégie afin de stocker efficacement les données pour pouvoir 
+y accéder et effectuer dessus les opérations demandées par l’utilisateur le plus aisément possible.
 
-Pour cela nous avons donc réaliser un diagramme UML schématisant les classes utilisé pour stocker en mémoire l’ensemble des données utilisé pour la requête.
+Pour cela nous avons donc réaliser un diagramme UML\footnote{Le Langage de Modélisation Unifié, de l'anglais Unified Modeling Language} modélisant la structure de données utilisée afin de stocker  l’ensemble des données.
 
-\includegraphics[width=1\textwidth]{img/sql.png}\par
+\begin{figure}[h!]
+	\includegraphics[width=1\textwidth]{img/sql.png}\par
+	\vspace{0.1cm}
+	\caption{Diagramme UML}
+\end{figure}
 
-La classe principale de notre programme est la classe « Table ». Comme vous le pouvez le voir sur le diagramme UML ci-dessus, la classe est constituée de trois attributs. Une chaîne de caractères dans laquelle on stock le nom de la table ( i.e : le nom du fichier ). Cette attribut est indispensable pour identifier la table sur laquelle on veux extraire les informations qu’on cherche.
+Nous avons choisis de modèliser notre structure de données en utilisant l'approche orientée objet qui est parfaitement adaptée à notre problème. En effet, 
+utiliser cette approche nous a permis de découper notre structure de données en plusieurs classes\footnote{Une classe regroupe des membres, méthodes et propriétés (attributs) communs à un ensemble d'objets.}.
 
-On a aussi pensé a modélisé la classe TabString, ainsi que MatriceString et TabTable, pour simplifié l’utilisation des tableaux dynamiques. Ce qui a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
+La classe principale de notre programme est la classe \textit{Table}. 
+Comme vous le pouvez le voir sur le diagramme UML ci-dessus, 
+la classe est constituée de trois attributs. Le premièr est une chaîne de caractères dans laquelle on stock le nom de la table. 
+Cette attribut est indispensable pour identifier la table sur laquelle on veux extraire les informations qu’on cherche.
 
-Le deuxième attribut de notre classe principale est un tableau de chaînes de caractères dans laquelle chaque case stockera le nom de la colonne concernée. Quant au troisième attribut, c’est une matrice à deux dimension qui se chargera de stocker les valeurs de notre table.
+%On a aussi pensé a modélisé la classe TabString, ainsi que MatriceString et TabTable, pour simplifié l’utilisation des tableaux dynamiques. Ce qui a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
+
+Le deuxième attribut est une classe qui represente un tableau de chaînes de caractères dans laquelle chaque case stockera le nom de la colonne (Attribut) concernée. 
+Il s'agit de la classe \textit{TabAttribut} qui est elle-même composée de plusieurs instances de la classe \textit{NomAttribut}.
+On a representé cette dernière comme étant le nom de l'attribut ainsi que le nom de la table d'où il provient, 
+car celà facilitera grandement l'accès au attributs lors de l'éxecution de la requête. Ce choix sera expliqué plus en détail dans ce qui suivra.
+
+Quant au troisième attribut, instance de \textit{MatriceString}, c’est une matrice à deux dimension qui se chargera de stocker les valeurs de notre table.
+\textit{MatriceString} est une classe constituée d'un tableau d'objets de la classe \textit{TabString} qui elle-même modélise une ligne d'une table, tout ce mécanisme a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
 
 Notre programme commencera par initialiser un tableau de Table. Puis pour chaque fichier donné, il stockera la première ligne de ce dernier dans le deuxième attribut de la classe Table, puis continuera a lire le fichier pour stocker chaque ligne (i.e : à partir de la deuxième ligne) dans le troisième attributs.
 
@@ -527,7 +544,7 @@ Le nom des attributs de cette table est initialiser à la de l'argument donné (
 Puis pour chaque élément d paramètre on ajoute la colonne correspondante à la table résultat.
 
 \subsection{La jointure}
-	\begin{figure}
+	\begin{figure}[h!]
 		\centering
 		\caption{Execution du produit cartésien}
 		\begin{tabular}{|l|c|c|c|c|c|r|}
