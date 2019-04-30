@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>  // pour écrire le resultat dans un fichier
 
+#include <cstdio> // getchar
+
 #include "../tabtable.h"
 #include "../table.h"
 #include "../requete.h"
@@ -22,6 +24,9 @@ int main(int argc, char const *argv[]) {
         res = baseDeDonnee.executer(sql);
         /* fichier ou sera écrit le resultat */
         cout << "Execution terminer" << endl;
+        cout << "Cliquez n'importe ou pour continuer" << endl;
+        getchar();
+        
         ofstream file("resultat.txt");
         if (file) {
             file << res;

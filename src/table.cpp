@@ -92,9 +92,10 @@ const MatriceString& Table::getValeurAttributs() const{
 }
 
 Table Table::projection(TabAttribut attributs) const{
-    
-    if (attributs.get(0).getAttribut() == "*" && attributs.get(0).getTable() == "") // select * from ... where ...;
+    if (attributs.get(0).getAttribut() == "*" && attributs.get(0).getTable() == "") {
+        // select * from ... where ...;
         return *this;
+    }
     else {
         /* Vérification des ambiguïté */
         for(unsigned long int i = 0; i < attributs.getSize(); i++) {

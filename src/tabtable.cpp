@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include <cstdlib>
 #include "tabtable.h"
 #include "table.h"
@@ -95,7 +96,6 @@ unsigned long int TabTable::getSize ()const {
 Table TabTable::executer(const Requete &sql) const {
         /* La Table final */
         Table res;
-
         /* execution des jointures (à ameliorer !!) */
         TabString join = sql.getFrom();
         if (join.getSize() > 1) {
@@ -108,6 +108,7 @@ Table TabTable::executer(const Requete &sql) const {
                 cerr << "La Table '"<<join[1] << "' n'existe pas" << endl;
                 exit(1);
             }
+			
             res = Table(get(join[0]),get(join[1]));
             for(unsigned long int i = 2; i < join.getSize(); i++) {
                 if (this->existe(join[i]))
@@ -117,6 +118,8 @@ Table TabTable::executer(const Requete &sql) const {
                     exit(1);
                 }
             }
+			
+			
         } else {
             if (this->existe(join[0]))
                 res = get(join[0]);
@@ -128,10 +131,11 @@ Table TabTable::executer(const Requete &sql) const {
         /* Execution de la selection */
         if (sql.getWhere().getSize() > 0)
             res = res.selection(sql.getWhere());
+		
 
         /* Execution de la projection */
         res = res.projection(sql.getSelect());
-
+		
         /* Retourner le resultat */
         return res;
 }

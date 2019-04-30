@@ -12,6 +12,8 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
 {
     size_t debut=0,fin=str.size();
     unsigned int nband=0,nbor=0,nbop=0;
+
+    /* Calcul du nombre de AND et de OR */
     while(debut < fin)
     {
         debut=str.find(" and ",debut+1);
@@ -23,6 +25,7 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
         debut=str.find(" or ",debut+1);
         if(debut !=string::npos) nbor++;
     }
+
     nbop=nband+nbor;
     tab = new Condition[nbop+1];
     oplogique = new OpLogique[nbop]; 
@@ -38,7 +41,7 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
         {
             if (posAnd < posOr )
             {
-                tab[i]=Condition(str.substr(debut,posAnd - debut - 1));
+                tab[i]=Condition(str.substr(debut,posAnd - debut));
                 oplogique[j]=AND;
                 j++;
                 i++;
@@ -47,7 +50,7 @@ TabCondition::TabCondition(string str):tab(NULL),oplogique(NULL),size(0)
             }
             else 
             {
-                tab[i]=Condition(str.substr(debut,posOr - debut - 1));
+                tab[i]=Condition(str.substr(debut,posOr - debut));
                 oplogique[j]=OR;
                 j++;
                 i++;
@@ -92,18 +95,17 @@ bool TabCondition::verifier(const TabString &line,const TabAttribut &attr) const
         exit(1);
     }
     bool booleen = tab[0].verifier(line,attr.get(tab[0].getOp1()),attr.get(tab[0].getOp2()));
-    unsigned int i=0;
-    while(i < getSizeOp())
+    unsigned int i=1;
+    while(i <= getSizeOp())
     {
-        if (attr.get(tab[i+1].getOp1()) > attr.getSize()) {
-            cerr << "Erreur : '" << tab[i+1].getOp1() << "' introuvable" << endl;
+        if (attr.get(tab[i].getOp1()) > attr.getSize()) {
+            cerr << "Erreur : '" << tab[i].getOp1() << "' introuvable" << endl;
             exit(1);
         }
-        if(oplogique[i]==AND)
-        {
-            booleen = (booleen && tab[i+1].verifier(line,attr.get(NomAttribut("",tab[i+1].getOp1())),attr.get(NomAttribut("",tab[i+1].getOp2()))));
-        }
-        else booleen = (booleen || tab[i+1].verifier(line,attr.get(NomAttribut("",tab[i+1].getOp1())),attr.get(NomAttribut("",tab[i+1].getOp2()))));
+        if(oplogique[i-1]==AND)
+            booleen = (booleen && tab[i].verifier(line,attr.get(NomAttribut(tab[i].getOp1())),attr.get(NomAttribut(tab[i].getOp2()))));
+        else 
+            booleen = (booleen || tab[i].verifier(line,attr.get(NomAttribut(tab[i].getOp1())),attr.get(NomAttribut(tab[i].getOp2()))));
         i++;
     }
     return booleen;
