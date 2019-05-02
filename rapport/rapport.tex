@@ -483,7 +483,7 @@ Il s'agit de renvoyer la table de manière qu'elle soit compréhensible par l'ut
 L'objectif du programme est résume dans le schéma suivante :
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=1\textwidth]{img/role_prog.png} % Inserer ici le schéma ROLE DU PROGRAMME
+	\includegraphics[width=1\textwidth]{img/role_prog.png}
 	\vspace{0.1cm}
 	\caption{Objectif du programme}
 \end{figure}
@@ -494,17 +494,22 @@ L'objectif du programme est résume dans le schéma suivante :
 
 \chapter{Conception du Moteur de Requêtes}
 
-\section{Structure de données}
+Nous avons pensé à decouper la conception du Moteur de requêtes SQL en deux étapes principales, d'une part comment structurer les données et de l'autre comment gérer la requête SQL.
+
+\section{Structure des données}
+
 Avant toute chose, il faut commencer par lire les données. Pour cela il faut mettre en \oe uvre une stratégie afin de stocker efficacement les données pour pouvoir 
 y accéder et effectuer dessus les opérations demandées par l’utilisateur le plus aisément possible.
 
 Pour cela nous avons donc réaliser un diagramme UML\footnote{Le Langage de Modélisation Unifié, de l'anglais Unified Modeling Language} modélisant la structure de données utilisée afin de stocker  l’ensemble des données.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\includegraphics[width=1\textwidth]{img/sql.png}\par
 	\vspace{0.1cm}
-	\caption{Diagramme UML}
+	\caption{Diagramme UML des données}
 \end{figure}
+
+\pagebreak
 
 Nous avons choisis de modèliser notre structure de données en utilisant l'approche orientée objet qui est parfaitement adaptée à notre problème. En effet, 
 utiliser cette approche nous a permis de découper notre structure de données en plusieurs classes\footnote{Une classe regroupe des membres, méthodes et propriétés (attributs) communs à un ensemble d'objets.}.
@@ -524,43 +529,52 @@ car celà facilitera grandement l'accès au attributs lors de l'éxecution de la
 Quant au troisième attribut, instance de \textit{MatriceString}, c’est une matrice à deux dimension qui se chargera de stocker les valeurs de notre table.
 \textit{MatriceString} est une classe constituée d'un tableau d'objets de la classe \textit{TabString} qui elle-même modélise une ligne d'une table, tout ce mécanisme a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
 
-Notre programme commencera par initialiser un tableau de Table. Puis pour chaque fichier donné, il stockera la première ligne de ce dernier dans le deuxième attribut de la classe Table, puis continuera a lire le fichier pour stocker chaque ligne (i.e : à partir de la deuxième ligne) dans le troisième attributs.
+La classe \textit{Table} sert donc à stocker le contenu d'un fichier. Mais celà n'est pas suffisant puisque nous serons amenés à manipuler plusieur fichiers, alors on a pensé à rajouter 
+la classe \textit{TabTable} pour pouvoir stocker plusiers objets de la classe \textit{Table} ainsi que les utilisés le plus facilement possible.
 
-Évidement, avant de stocker une ligne, nous la passons à une fonction qui se chargera de parser cette dernière séparent ainsi les différents attributs ( les attributs étant séparer par des virgule dans le fichier).
+\section{Structre de la requête}
 
-\section{Traitement des données}
+Aprés avoir modéliser la manière dont les données seront sotckées, il faut à présent concevoir la façon dont la requête doit être intèrpreter.
 
-Analyse de la requete => \enquote{select ... from ... where ...}
+Pour celà, nous avons conçu le diagramme suivant :
 
-\subsection{La sélection}
+\vfill
 
-\subsection{La projection}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{img/requette.png}
+	\vspace{0.1cm}
+	\caption{Diagramme UML de la requête}
+\end{figure}
 
-Cette méthode, comme son nom l'indique, exécute une projection sut la Table Courante.
+\pagebreak
 
-Le paramètre donnée est un TabString (tableau de chaîne de caractère) qui contient le nom des attributs à projeter.
-On commence par déclarer une Table vide qui va contenir le résultat.
-Le nom des attributs de cette table est initialiser à la de l'argument donné (l'objet TabString donné en paramètre).
-Puis pour chaque élément d paramètre on ajoute la colonne correspondante à la table résultat.
+La structure d'une requête SQL simple est de la forme suivante : \\
+\\SELECT Attribut1,Attribut2,...,AttributN\\FROM Table1,Table2,...,TableN\\WHERE condition1 [AND \textbar~OR] condition2 [AND \textbar~OR] ..... conditionN;\\
 
-\subsection{La jointure}
-	\begin{figure}[h!]
-		\centering
-		\caption{Execution du produit cartésien}
-		\begin{tabular}{|l|c|c|c|c|c|r|}
-			\hline
-			id   & nom  & age & Employés.idDep & Départements.idDep & nom   & localisation
-			\\
-			\hline
-			01 & Emp1 &  30 & 01 & 01 & Dep1 &  Montpellier \\
-			02 & Emp2 &  31 & 01 & 01 & Dep1 &  Montpellier \\
-			03 & Emp3 &  29 & 02 & 01 & Dep1 &  Montpellier \\
-			01 & Emp1 &  30 & 01 & 02 & Dep2 &  Paris \\
-			02 & Emp2 &  31 & 01 & 02 & Dep2 &  Paris \\
-			03 & Emp3 &  29 & 02 & 02 & Dep2 &  Paris \\
-			\hline
-		\end{tabular}
-	\end{figure}
+Telque \textit{Attribut1,Attribut2,...,AttributN} sont des noms d'attribut qui peuvent être considérés comme des instances de la classe \textit{NomAttribut}.
+
+\textit{Table1,Table2,...,TableN} peuvent être  considérés comme des chaînes de caractères.
+
+Et enfin, \textit{condition1 [AND \textbar~OR] condition2 [AND \textbar~OR] ..... conditionN}, qui sont des conditions qui ont une forme un peu plus complexe, leur structure sera détaillé plus loin dans ce chapitre.
+
+En définant la requête de cette façon, il est clair qu'elle peut être découpée en trois parties. En prenant en compte cette information, nous avons donc conçu la classe 
+\textit{Requete} dans la quelle on stock la requête SQL donnée par l'utilisateur. Cette dernière est composée de : 
+
+\subsubsection{Select}
+
+Un attribut de la classe \textit{TabAttribut}, composé de plusieurs objets de la classe \textit{NomAttribut} qui permet de gerer les deux types de projection.
+c'est à dire, celle où seulement le nom de l'attribut est mentionné et celle où le nom de la table d'où cette attribut provient est également mentionné.
+\begin{itemize}
+	\item \enquote{SELECT NomAttribut ...}
+	\item \enquote{SELECT NomTable.NomAttribut ...}
+\end{itemize}
+
+\subsubsection{From}
+
+\subsubsection{Where}
+
+
 % ------------------------------------- %
 % Implementation
 % ------------------------------------- %
@@ -578,6 +592,24 @@ fonctions en plus / implem des algo avec appel aux differentes fonctions des obj
 \subsection{restitution des données (affichage)}
 
 \subsection{Selection ...}
+	\begin{figure}[h!]
+		\centering
+		\caption{Execution du produit cartésien}
+		\begin{tabular}{|l|c|c|c|c|c|r|}
+			\hline
+			id   & nom  & age & Employés.idDep & Départements.idDep & nom   & localisation
+			\\
+			\hline
+			01 & Emp1 &  30 & 01 & 01 & Dep1 &  Montpellier \\
+			02 & Emp2 &  31 & 01 & 01 & Dep1 &  Montpellier \\
+			03 & Emp3 &  29 & 02 & 01 & Dep1 &  Montpellier \\
+			01 & Emp1 &  30 & 01 & 02 & Dep2 &  Paris \\
+			02 & Emp2 &  31 & 01 & 02 & Dep2 &  Paris \\
+			03 & Emp3 &  29 & 02 & 02 & Dep2 &  Paris \\
+			\hline
+		\end{tabular}
+	\end{figure}
+
 
 \section{Logiciel}
 
