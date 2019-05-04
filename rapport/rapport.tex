@@ -522,10 +522,13 @@ y accéder et effectuer dessus les opérations demandées par l’utilisateur le
 
 Pour cela nous avons donc réaliser un diagramme UML\footnote{Le Langage de Modélisation Unifié, de l'anglais Unified Modeling Language} modélisant la structure de données utilisée afin de stocker  l’ensemble des données.
 
+\vfill
+
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{img/sql.png}\par
 	\vspace{0.1cm}
 	\caption{Diagramme UML des données}
+	\label{uml-donnees}
 \end{figure}
 
 \pagebreak
@@ -536,7 +539,7 @@ utiliser cette approche nous a permis de découper notre structure de données e
 La classe principale de notre programme est la classe \textit{Table}. 
 Comme vous le pouvez le voir sur le diagramme UML ci-dessus, 
 la classe est constituée de trois attributs. Le premièr est une chaîne de caractères dans laquelle on stock le nom de la table. 
-Cette attribut est indispensable pour identifier la table sur laquelle on veux extraire les informations qu’on cherche.
+Cette attribut est indispensable pour identifier la table sur laquelle on veux extraire les< informations qu’on cherche.
 
 %On a aussi pensé a modélisé la classe TabString, ainsi que MatriceString et TabTable, pour simplifié l’utilisation des tableaux dynamiques. Ce qui a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
 
@@ -552,7 +555,7 @@ La classe \textit{Table} sert donc à stocker le contenu d'un fichier. Mais cel�
 la classe \textit{TabTable} pour pouvoir stocker plusieurs objets de la classe \textit{Table} ainsi que les utilisés le plus facilement possible.
 
 \section{Structre de la requête}
-
+\label{requete}
 Aprés avoir modéliser la manière dont les données seront sotckées, il faut à présent concevoir la façon dont la requête doit être intèrpreter.
 
 Pour celà, nous avons conçu le diagramme suivant :
@@ -617,16 +620,44 @@ Pour la deuxième classe, \textit{TabCondition}, elle est construite à partir d
 \chapter{Implementation}
 
 \section{Choix de la téchnologie}
+Nous avons choisis d'implémenter le programme en \textit{C++} parce que c'est un langage orienté objet qui est particulièrement adapté à la modélisation que nous avons précédement réalisée.
+le \textit{C++}  est multi-plateformes, ce qui nous permettra de porter l’application sur plusieurs systèmes relativement facilement.
+
+Par ailleurs, le \textit{C++} est l’un des principaux langages enseignés dans notre formation. Nous possédons donc des acquis avec ce langage, et ce projet nous permet d’en améliorer notre connaissances.
+Enfin, ce langage jouit d’une communauté importante, de nombreuses bibliothèques ainsi que d’une documentation très complète.
+
+Enfin, pour la compilation du code source nous avons utilisé \textit{Make}\footnote{Make est un logiciel qui construit automatiquement des fichiers, souvent exécutables, ou des bibliothèques à partir d'éléments de base tels que du code source}. Cela nous a permis d'automatiser la production de l'éxecutable.
 
 \section{Développement}
 
-fonctions en plus / implem des algo avec appel aux differentes fonctions des objets….
+Tout comme la partie conception, nous avons décider de répartir l'implémentation du projet en trois parties principales.
 
 \subsection{Chargement des données}
 
-\subsection{restitution des données (affichage)}
+Nous avons commencer par implémenter les classes que nous avons modéliser dans la première partie de la conception, puis nous nous sommes concentrer sur la manière de charger le contenu d'un fichier CSV en mémoire.
 
-\subsection{Selection ...}
+La principale difficulté dans cette partie étais de trouver un moyen d'interprèter un fichier CSV afin de stocker les données dans nos classes.
+Pour celà nous avons écris une fonction, \textit{strsplit}, qui se charge de parser une ligne du fichier en plusieurs chaîne de caractères, correspondent au valeurs ou au noms d'attribut.
+
+\textit{strsplit} prend en paramètre une ligne d'un fichier CSV et un caractère séparateur, une vergule par défault, et retourne un tableau de chaîne de caractère qui contient les différentes valeurs. Cette fonction commence par chercher tout les caractères séparateurs qui ne sont pas échapés (contenu dans des guillemets ' " ') afin d'allouer de l'espace mémoire pour stocker le resultat.
+Ensuite vient la lecture des attributs. Durant cette étape, deux cas de figure se presentent, un attribut peut, ou pas, être entouré par deux guillemets. Dans le cas où l'attribut est encadré, la fonction trouve donc au debut un guillemet et se met donc à chercher le guillemet fermant (qui n'est pas échapé) associé. Et elle met ce qui y'a entre les deux dans le tableau à la case correspondente en utilsant la méthode \textit{substr} appartenant à la classe \textit{String} qui soustrait, dans notre cas, une chaîne de la ligne débutant par la position du guillemet ouvrant au guillemet fermant sans les prendre au compte.
+Dans le deuxième cas, la fonction fonctionne pareil mais au lieu de chercher le guillemet fermant, elle cherche le caractère séparateur.
+
+Maintenant qu'on peut parser, on commence par lire la première ligne du fichier CSV et la passer à la fonction \textit{strsplit} en stockant le resultat dans l'attribut \textit{nomAttributs} de la classe \textit{Table} (Voir Schéma \ref{uml-donnees} page \pageref{uml-donnees}). Pour le reste du fichier, on passe chaque ligne à la fonction \textit{strsplit} et on ajoute le resultat dans la matrice \textit{valeursAttributs} de la classe \textit{Table}.
+
+À cette étape les données sont chargées en mémoire,
+
+\subsection{Requête}
+
+D'abord avant de parler de l'éxecution de la requête, on vas expliqué comment on a intérpreter cette dernière.
+
+\subsubsection{Intérpretation}
+
+Nous avons commencer par implémenter les classes que nous avons modéliser dans la deuxième partie de la conception (voir Chapitre \ref{requete} page \pageref{requete}), puis nous nous sommes occuper de trouver une manière de découper la requête afin de stocker chaque partie dans l'attribut correspondent.
+
+\subsubsection{Éxecution}
+
+
 	\begin{figure}[h!]
 		\centering
 		\caption{Execution du produit cartésien}
@@ -644,6 +675,8 @@ fonctions en plus / implem des algo avec appel aux differentes fonctions des obj
 			\hline
 		\end{tabular}
 	\end{figure}
+
+\subsection{restitution des données (affichage)}
 
 
 \section{Logiciel}
