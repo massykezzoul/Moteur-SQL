@@ -4,6 +4,7 @@
 #include "tabtable.h"
 #include "table.h"
 #include "requete.h"
+
 using namespace std;
 
 TabTable::TabTable():tables(NULL),size(0){}
@@ -138,4 +139,12 @@ Table TabTable::executer(const Requete &sql) const {
 		
         /* Retourner le resultat */
         return res;
+}
+
+TabString TabTable::list() const {
+	TabString tab;
+	for (unsigned long int i = 0; i < size; i++) {
+		tab.add(tables[i].getNomTable());
+	}
+	return tab;
 }

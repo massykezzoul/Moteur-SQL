@@ -67,6 +67,7 @@ void sortie(Table res) {
 void interactif(TabTable baseDeDonnee) {
     Table res;
     Requete sql;
+    TabString ls;
 
     string str = "";
     cout << "Bienvenu dans le mode interactif" << endl;
@@ -83,7 +84,12 @@ void interactif(TabTable baseDeDonnee) {
             cout << endl;
         } else if (str == "txt")
             cout << res << endl;
-        else
+        else if (str == "ls") {
+            ls = baseDeDonnee.list();
+            cout << "Les tables chargé en mémoire sont : " << endl;
+            for (unsigned long int i=0; i < ls.getSize(); i++)
+                cout << "\t"<< ls[i] << endl;
+        } else
             cerr << "Commande '" << str << "' non reconnu" << endl;
         cout << "> ";
         getline(cin,str);

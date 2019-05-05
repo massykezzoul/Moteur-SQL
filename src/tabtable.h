@@ -3,6 +3,7 @@
 
 class Table;
 class Requete;
+class TabString;
 
 class TabTable {
 private:
@@ -25,6 +26,9 @@ public:
 	unsigned long int getSize() const;
 	/* Execute la requete SQL donnée en paramétre et retourne le resultat final */
 	Table executer(const Requete&) const;
+
+	/* Donne une liste des noms des tables (un TabString) */
+	TabString list() const;
 };
 
 #endif
