@@ -38,7 +38,8 @@ public:
     Table selection(TabCondition condition) const;
     Table jointure(const Table& tab1,const Table& tab2) const;
 
-    
+    /* Ecrit la table sous un format CSV */
+    void to_csv(std::ostream&) const;
 
 };
 

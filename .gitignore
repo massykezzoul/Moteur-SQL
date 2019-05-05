@@ -11,12 +11,14 @@ src/jointure.txt
 src/selection.txt
 src/request.txt
 src/resultat.txt
+src/resultat.csv
 
 # Executable
 src/sql
 
 Utiles/
 # Pas tant que ça
+indent.log
 
 # Raport
 rapport/rapport.aux

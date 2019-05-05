@@ -24,13 +24,14 @@ int main(int argc, char const *argv[]) {
         res = baseDeDonnee.executer(sql);
         /* fichier ou sera écrit le resultat */
         cout << "Execution terminer" << endl;
-        cout << "Cliquez n'importe ou pour continuer" << endl;
-        getchar();
         
         ofstream file("resultat.txt");
-        if (file) {
+        ofstream file_csv("resultat.csv");
+        
+        if (file && file_csv) {
             file << res;
-            cout << "le resultat a bien été écrit dans le fichier \"resultat.txt\"" << endl;
+            res.to_csv(file_csv);
+            cout << "le resultat a bien été écrit dans le fichier \"resultat.txt\" et \"resultat.csv\"" << endl;
         } else {
             cout << res << endl;
             cerr << "Ecriture dans le fichier impossible" << endl;

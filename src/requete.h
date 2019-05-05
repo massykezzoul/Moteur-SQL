@@ -25,6 +25,7 @@ public:
 
     static std::string cleanLine(std::string);
 
+    static bool isRequete(std::string);
 };
 
 #endif

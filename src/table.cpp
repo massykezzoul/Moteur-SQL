@@ -171,6 +171,17 @@ string Table::getFileName(string filePath, bool withExtension, char seperator) {
     return filePath.substr(0,(withExtension || point == string::npos ? filePath.size() : point));
 }
 
+void Table::to_csv(ostream& stream) const {
+    /* Ecriture des noms d'attributs */
+    for (unsigned long int i = 0; i < nomAttributs.getSize() ; i++)
+        stream << '"' << nomAttributs[i] << '"' << (i==nomAttributs.getSize()-1?"\n":",");
+    /* Ecriture des valeurs */
+    for (unsigned long int i = 0; i < valeurAttributs.getSize() ; i++)
+        for (unsigned long int j = 0; j < valeurAttributs[i].getSize() ; j++)
+            stream << '"' << valeurAttributs[i][j] << '"' << (j==valeurAttributs[i].getSize()-1?"\n":",");
+}
+
+
 /*
  *  Affichage de la table sur un flux de sortie
 */
@@ -179,7 +190,7 @@ ostream& operator<<(ostream& stream,const Table& tab) {
     size_t max,somme=0;
     string sep,space;
     for(size_t i= 0 ; i < tab.getNomAttributs().getSize(); ++i) {
-        max = tab.getNomAttributs()[i].size(); // problem on *size*
+        max = tab.getNomAttributs()[i].size();
         for(size_t j=0 ; j < tab.getValeurAttributs().getSize();++j)
         {
             max = (tab.getValeurAttributs()[j][i].size() < max ? max : tab.getValeurAttributs()[j][i].size());
