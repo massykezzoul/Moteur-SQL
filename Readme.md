@@ -1,37 +1,37 @@
 # Implémentation d’un moteur de requêtes SQL simples
 
-## Objectif:
+## Objectif
 
 Le projet consiste a implémenter un moteur d’évaluation de requêtes SQL en mémoire vive.
 Les requêtes considérées seront de la forme SELECT ... FROM ... WHERE sans imbrication. À partir d’un fichier de données il est demandé de construire une représentation en mémoire des relations et des requêtes et d’implémenter les procédures de projection, sélection, et jointure découlant de l’interrogation SQL.
 
 ## Manière d'executer le programme
 
-### Via des arguments :
+### Via des arguments
 
 `$ prog table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."`<br>
 Chaque table utilisé dans le FROM doit être donné en argmument.
 
-### Via dossier contenant les fichiers .csv :
+### Via dossier contenant les fichiers .csv
 
 `$ prog -d dossier/ "SELECT ... FROM ... WHERE ..."`<br>
 Le dossier doit contenir tout les fichiers .csv utilisé dans le FROM de la Requête SQL.
 
-### Requête SQL donnée lors de l'execution du programme :
+### Requête SQL donnée lors de l'execution du programme
 
 `$ prog table1.csv ... tableN.csv`
 OU
 `$ prog -d dossier/`<br>
 Les requêtes SQL seront données au programme lors de son execution
 
-### Requête SQL donnée via un fichier :
+### Requête SQL donnée via un fichier
 
 `$ prog table1.csv ... tableN.csv -f file.sql`
 OU
 `$ prog -d dossier/ -f file.sql`<br>
 Les requêtes SQL seront données via un fichier
 
-### Resumé des cas d'utilisation :
+### Resumé des cas d'utilisation
 
 `$ prog table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."`<br>
 `$ prog -d dossier/ "SELECT ... FROM ... WHERE ..."`<br>
@@ -51,7 +51,7 @@ WHERE   age < 28
     AND age > 18
     OR  nom = "Michelle";
 
-## Les etapes d'execution du programmes:
+## Les etapes d'execution du programmes
 
 - Lire les arguments et identifié les tables (càd les fichiers .csv) et la requête;
   - Si la requête n'est pas donnée dans les arguments, le programme donne la main à l'utilisateur pour la saisir manuellement;

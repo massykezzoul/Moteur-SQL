@@ -143,18 +143,18 @@ Afin de s’organiser, nous avons décider d’utiliser Git au travers du serveu
 En ce qui concerne la rédaction de ce rapport, nous avons utilisés \LaTeX, système de composition de documents créé par Leslie Lamport, pour faciliter la rédaction à plusieurs.
 
 \begin{figure}[h]
-		\begin{minipage}[c]{.46\linewidth}
-			\centering
-			\includegraphics[width=1\textwidth]{img/gitlab.png}
-			\caption{Logo du GitLab}
-		\end{minipage}
-		\hfill%
-		\begin{minipage}[c]{.46\linewidth}
-			\centering
-			\includegraphics[width=1\textwidth]{img/latex.png}
-			\caption{Logo de Latex}
-		\end{minipage}
-	\end{figure}
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\includegraphics[width=1\textwidth]{img/gitlab.png}
+		\caption{Logo du GitLab}
+	\end{minipage}
+	\hfill%
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\includegraphics[width=1\textwidth]{img/latex.png}
+		\caption{Logo de Latex}
+	\end{minipage}
+\end{figure}
 
 
 % ------------------------------------- %
@@ -231,7 +231,7 @@ Les instructions SQL couvrent 3 principale domaines :
 \vspace{0.3cm}
 
 Le domaine considéré dans ce projet est le langage de manipulation de données simple sans imbrication.
-Example de requête SQL : \enquote{SELECT Name FROM Members WHERE Age $ \leq $ 30;}
+Exemple de requête SQL : \enquote{SELECT Name FROM Members WHERE Age $ \leq $ 30;}
 
 % -------------------------------------------------------------------------- %
 % Présentation du projet : moteur de requêtes SQL simples
@@ -241,7 +241,7 @@ Example de requête SQL : \enquote{SELECT Name FROM Members WHERE Age $ \leq $ 3
 
 \section{Présentation générale}
 
-Notre projet consiste à concevoir et implémenter un programme capable de lire des données, executer des requêtes SQL simple en mémoire et de renvoyer le resultat.
+Notre projet consiste à concevoir et implémenter une application capable de lire des données, executer des requêtes SQL simple en mémoire et de renvoyer le resultat.
 Il s’agit donc de crée une passerelle entre la personne qui exécute la requête SQL et les données.
 Les difficultés principales sont donc les suivants :
 \vspace{0.3cm}
@@ -256,7 +256,7 @@ Les difficultés principales sont donc les suivants :
 
 \subsection{Chargement des données en mémoire}
 
-Les données prise en charge par notre programme sont des tables, issue d'une base de données relationnelle, stocké sous forme de fichier au format CSV.
+Les données prise en charge par notre application sont des tables, issue d'une base de données relationnelle, stocké sous forme de fichier au format CSV.
 
 \subsubsection{Format CSV}
 \label{csv}
@@ -344,12 +344,12 @@ La selection de la colonne ville et codepostal se fait par l'instruction :
 
 \begin{tabular}{|l|r|}
 	\hline
-	ville & codepostal
+	ville   & codepostal
 	\\
 	\hline
-	Paris01 & 75101  \\
-	Paris02 & 75102 \\
-	Paris03 & 75103 \\
+	Paris01 & 75101      \\
+	Paris02 & 75102      \\
+	Paris03 & 75103      \\
 	\hline
 \end{tabular}
 
@@ -360,14 +360,14 @@ comme le but d'une requête SQL est d'extraire des informations spécifique dans
 
 La sélection permet :
 \begin{itemize}
- 	\item L'affichage de certaines lignes qui vérifient un critère donné;
+	\item L'affichage de certaines lignes qui vérifient un critère donné;
 	\item Le critère est une exrpession booléenne plus ou moins compliquée;
 	\item Les conditions de sélection sont données juste après le mot clé WHERE;
 	\item Les conditions sont séparer par des opérateur logique, AND et OR;
 \end{itemize}
 \pagebreak
 
-Example de sélection :
+Exemple de sélection :
 soit la requête SQL suivante :
 
 \begin{center}
@@ -382,12 +382,12 @@ Et la table :
 		%\vspace{0.1cm}
 		\begin{tabular}{|l|c|c|r|}
 			\hline
-			id   & nom  & age & idDep
+			id & nom  & age & idDep
 			\\
 			\hline
-			01 & Emp1 &  30  & 01 \\
-			02 & Emp2 &  31  & 01 \\
-			03 & Emp3 &  29  & 02 \\
+			01 & Emp1 & 30  & 01    \\
+			02 & Emp2 & 31  & 01    \\
+			03 & Emp3 & 29  & 02    \\
 			\hline
 		\end{tabular}
 	\end{minipage}
@@ -398,11 +398,11 @@ Et la table :
 		\vspace{0.1cm}
 		\begin{tabular}{|l|c|c|r|}
 			\hline
-			id   & nom   & age & idDep
+			id & nom  & age & idDep
 			\\
 			\hline
-			01 & Emp1 &  30  & 01 \\
-			03 & Emp3 &  29  & 02 \\
+			01 & Emp1 & 30  & 01    \\
+			03 & Emp3 & 29  & 02    \\
 			\hline
 		\end{tabular}
 	\end{minipage}
@@ -424,12 +424,12 @@ Un exemple est plus parlant qu'une longue explication, prenons deux table Employ
 		\caption{Table 'Employés'}
 		\begin{tabular}{|l|c|c|r|}
 			\hline
-			id   & nom  & age & idDep
+			id & nom  & age & idDep
 			\\
 			\hline
-			01 & Emp1 &  30  & 01 \\
-			02 & Emp2 &  31  & 01 \\
-			03 & Emp3 &  29  & 02 \\
+			01 & Emp1 & 30  & 01    \\
+			02 & Emp2 & 31  & 01    \\
+			03 & Emp3 & 29  & 02    \\
 			\hline
 		\end{tabular}
 	\end{minipage}
@@ -439,31 +439,31 @@ Un exemple est plus parlant qu'une longue explication, prenons deux table Employ
 		\caption{Table 'Départements'}
 		\begin{tabular}{|l|c|c|r|}
 			\hline
-			idDep   & nom   & localisation
+			idDep & nom  & localisation
 			\\
 			\hline
-			01 & Dep1 &  Montpellier  \\
-			02 & Dep2 &  Paris  \\
+			01    & Dep1 & Montpellier  \\
+			02    & Dep2 & Paris        \\
 			\hline
 		\end{tabular}
 	\end{minipage}
 \end{figure}
 
-	\enquote{SELECT * FROM Employés,Départements WHERE Employés.idDep = Départements.idDep}
+\enquote{SELECT * FROM Employés,Départements WHERE Employés.idDep = Départements.idDep}
 
 \begin{figure}[h]
-		\centering
-		\caption{Execution de la jointure}
-		\begin{tabular}{|l|c|c|c|c|r|}
-			\hline
-			id   & nom  & age & idDep & nom   & localisation
-			\\
-			\hline
-			01 & Emp1 &  30  & 01 & Dep1 &  Montpellier \\
-			02 & Emp2 &  31  & 01 & Dep1 &  Montpellier \\
-			03 & Emp3 &  29  & 02 & Dep2 &  Paris \\
-			\hline
-		\end{tabular}
+	\centering
+	\caption{Execution de la jointure}
+	\begin{tabular}{|l|c|c|c|c|r|}
+		\hline
+		id & nom  & age & idDep & nom  & localisation
+		\\
+		\hline
+		01 & Emp1 & 30  & 01    & Dep1 & Montpellier  \\
+		02 & Emp2 & 31  & 01    & Dep1 & Montpellier  \\
+		03 & Emp3 & 29  & 02    & Dep2 & Paris        \\
+		\hline
+	\end{tabular}
 \end{figure}
 
 
@@ -473,7 +473,7 @@ La dernière étape consiste à renvoyer la table resultante de l'éxecution de 
 
 \subsubsection{Réutilisable}
 
-Il est question de stocker les données obtenu dans un fichier, sous un format CSV, pour qu'elles soit sauvgardées et réutilisablees par le programme.
+Il est question de stocker les données obtenu dans un fichier, sous un format CSV, pour qu'elles soit sauvgardées et réutilisablees par l'application.
 
 \pagebreak
 
@@ -482,29 +482,29 @@ Il est question de stocker les données obtenu dans un fichier, sous un format C
 Il s'agit de renvoyer la table de manière qu'elle soit compréhensible par l'utilisateur,c'est à dire en affichant les données sous forme d'un tableau.
 
 \begin{figure}[h!]
-		\centering
-		\caption{Tableau}
-		\vspace{0.1cm}
-		\begin{tabular}{|l|c|r|}
-			\hline
-			id   & nom  & prenom
-			\\
-			\hline
-			01 & Nom1 &  Prenom1 \\
-			02 & Nom2 &  Prenom2 \\
-			03 & Nom3 &  Prenom3 \\
-			\hline
-		\end{tabular}
+	\centering
+	\caption{Tableau}
+	\vspace{0.1cm}
+	\begin{tabular}{|l|c|r|}
+		\hline
+		id & nom  & prenom
+		\\
+		\hline
+		01 & Nom1 & Prenom1 \\
+		02 & Nom2 & Prenom2 \\
+		03 & Nom3 & Prenom3 \\
+		\hline
+	\end{tabular}
 \end{figure}
 
-\section{Objectif du programme}
+\section{Objectif de l'application}
 
-L'objectif du programme est résume dans le schéma suivante :
+L'objectif de l'application est résume dans le schéma suivante :
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\textwidth]{img/role_prog.png}
 	\vspace{0.1cm}
-	\caption{Objectif du programme}
+	\caption{Objectif de l'application}
 \end{figure}
 
 % ------------------------------------- %
@@ -517,7 +517,7 @@ Nous avons pensé à decouper la conception du Moteur de requêtes SQL en deux �
 
 \section{Structure des données}
 
-Avant toute chose, il faut commencer par lire les données. Pour cela il faut mettre en \oe uvre une stratégie afin de stocker efficacement les données pour pouvoir 
+Avant toute chose, il faut commencer par lire les données. Pour cela il faut mettre en \oe uvre une stratégie afin de stocker efficacement les données pour pouvoir
 y accéder et effectuer dessus les opérations demandées par l’utilisateur le plus aisément possible.
 
 Pour cela nous avons donc réaliser un diagramme UML\footnote{Le Langage de Modélisation Unifié, de l'anglais Unified Modeling Language} modélisant la structure de données utilisée afin de stocker  l’ensemble des données.
@@ -533,25 +533,25 @@ Pour cela nous avons donc réaliser un diagramme UML\footnote{Le Langage de Mod�
 
 \pagebreak
 
-Nous avons choisis de modèliser notre structure de données en utilisant l'approche orientée objet qui est parfaitement adaptée à notre problème. En effet, 
+Nous avons choisis de modèliser notre structure de données en utilisant l'approche orientée objet qui est parfaitement adaptée à notre problème. En effet,
 utiliser cette approche nous a permis de découper notre structure de données en plusieurs classes\footnote{Une classe regroupe des membres, méthodes et propriétés (attributs) communs à un ensemble d'objets.}.
 
-La classe principale de notre programme est la classe \textit{Table}. 
-Comme vous le pouvez le voir sur le diagramme UML ci-dessus, 
-la classe est constituée de trois attributs. Le premièr est une chaîne de caractères dans laquelle on stock le nom de la table. 
+La classe principale de notre application est la classe \textit{Table}.
+Comme vous le pouvez le voir sur le diagramme UML ci-dessus,
+la classe est constituée de trois attributs. Le premièr est une chaîne de caractères dans laquelle on stock le nom de la table.
 Cette attribut est indispensable pour identifier la table sur laquelle on veux extraire les< informations qu’on cherche.
 
 %On a aussi pensé a modélisé la classe TabString, ainsi que MatriceString et TabTable, pour simplifié l’utilisation des tableaux dynamiques. Ce qui a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
 
-Le deuxième attribut est une classe qui represente un tableau de chaînes de caractères dans laquelle chaque case stockera le nom de la colonne (Attribut) concernée. 
+Le deuxième attribut est une classe qui represente un tableau de chaînes de caractères dans laquelle chaque case stockera le nom de la colonne (Attribut) concernée.
 Il s'agit de la classe \textit{TabAttribut} qui est elle-même composée de plusieurs instances de la classe \textit{NomAttribut}.
-On a representé cette dernière comme étant le nom de l'attribut ainsi que le nom de la table d'où il provient, 
+On a representé cette dernière comme étant le nom de l'attribut ainsi que le nom de la table d'où il provient,
 car celà facilitera grandement l'accès au attributs lors de l'éxecution de la requête. Ce choix sera expliqué plus en détail dans ce qui suivra.
 
 Quant au troisième attribut, instance de \textit{MatriceString}, c’est une matrice à deux dimension qui se chargera de stocker les valeurs de notre table.
 \textit{MatriceString} est une classe constituée d'un tableau d'objets de la classe \textit{TabString} qui elle-même modélise une ligne d'une table, tout ce mécanisme a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
 
-La classe \textit{Table} sert donc à stocker le contenu d'un fichier. Mais celà n'est pas suffisant puisque nous serons amenés à manipuler plusieur fichiers, alors on a pensé à rajouter 
+La classe \textit{Table} sert donc à stocker le contenu d'un fichier. Mais celà n'est pas suffisant puisque nous serons amenés à manipuler plusieur fichiers, alors on a pensé à rajouter
 la classe \textit{TabTable} pour pouvoir stocker plusieurs objets de la classe \textit{Table} ainsi que les utilisés le plus facilement possible.
 
 \section{Structre de la requête}
@@ -580,8 +580,8 @@ Telque \textit{Attribut1,Attribut2,...,AttributN} sont des noms d'attribut qui p
 
 Et enfin, \textit{condition1 [AND \textbar~OR] condition2 [AND \textbar~OR] ..... conditionN}, qui sont des conditions qui ont une forme un peu plus complexe, leur structure sera détaillé plus loin dans ce chapitre.
 
-En définant la requête de cette façon, il est clair qu'elle peut être découpée en trois parties. En prenant en compte cette information, nous avons donc conçu la classe 
-\textit{Requete} dans la quelle on stock la requête SQL donnée par l'utilisateur. Cette dernière est composée de : 
+En définant la requête de cette façon, il est clair qu'elle peut être découpée en trois parties. En prenant en compte cette information, nous avons donc conçu la classe
+\textit{Requete} dans la quelle on stock la requête SQL donnée par l'utilisateur. Cette dernière est composée de :
 
 \subsubsection{Select}
 
@@ -620,7 +620,7 @@ Pour la deuxième classe, \textit{TabCondition}, elle est construite à partir d
 \chapter{Implementation}
 
 \section{Choix de la téchnologie}
-Nous avons choisis d'implémenter le programme en \textit{C++} parce que c'est un langage orienté objet qui est particulièrement adapté à la modélisation que nous avons précédement réalisée.
+Nous avons choisis d'implémenter l'application en \textit{C++} parce que c'est un langage orienté objet qui est particulièrement adapté à la modélisation que nous avons précédement réalisée.
 le \textit{C++}  est multi-plateformes, ce qui nous permettra de porter l’application sur plusieurs systèmes relativement facilement.
 
 Par ailleurs, le \textit{C++} est l’un des principaux langages enseignés dans notre formation. Nous possédons donc des acquis avec ce langage, et ce projet nous permet d’en améliorer notre connaissances.
@@ -645,7 +645,7 @@ Dans le deuxième cas, la fonction fonctionne pareil mais au lieu de chercher le
 
 Maintenant qu'on peut parser, on commence par lire la première ligne du fichier CSV et la passer à la fonction \textit{strsplit} en stockant le resultat dans l'attribut \textit{nomAttributs} de la classe \textit{Table} (Voir Schéma \ref{uml-donnees} page \pageref{uml-donnees}). Pour le reste du fichier, on passe chaque ligne à la fonction \textit{strsplit} et on ajoute le resultat dans la matrice \textit{valeursAttributs} de la classe \textit{Table}.
 
-À cette étape les données sont chargées en mémoire,
+À cette étape les données sont chargées en mémoire.
 
 \subsection{Requête}
 
@@ -654,37 +654,157 @@ D'abord avant de parler de l'éxecution de la requête, on vas expliqué comment
 \subsubsection{Intérpretation}
 
 Nous avons commencer par implémenter les classes que nous avons modéliser dans la deuxième partie de la conception (voir Chapitre \ref{requete} page \pageref{requete}), puis nous nous sommes occuper de trouver une manière de découper la requête afin de stocker chaque partie dans l'attribut correspondent.
+\\
+La classe \textit{requete} est constituée de trois attributs comme on l'a vu, son constructeur qui prend une chaine de caractères en argument la parse en utilisant les trois méthodes \textit{parseSelect(string)}, \textit{parseFrom(string)} et \textit{parseWhere(string)}, ces trois méthodes font presque le même travail, tel que chaque méthode cherche le mot clé pour parser la requete et mettre ce qu'il faut dans l'attribut correspendant de la classe.
+\\
+Prenons la méthode \textit{parseSelect(string)} en exemple, elle prend en paramètre la requête et cherche le mot clé \textit{select} et \textit{from} pour récupérer la sous chaîne entre ces deux mot clés qui est à son tour transformer en une instance de la classe \textit{tabAttribut} aprés l'avoir découper avec la fonction \textit{strsplit}. Et dans ce même concept on obtiendra l'attribut \textit{from} et \textit{where}.
 
 \subsubsection{Éxecution}
+Maintenant on va parler de l'éxecution de la requête, ce qui veut dire comment notre application va t-elle éxecuter la requête SQL sur les données qu'on a déja chargé en mémoire vive ?
+\\
+Notre application éxecute la requête en trois étapes consécutives et complémentaires pour éffectuer le traitement nécessaire.
+Nous allons considére une exemple de requête ainsi que deux table de données afin de voir étape par étape le resultat de chaque traitement.
 
+Exemple de requete :
+\begin{center}
+	\enquote{SELECT nom,localisation FROM Employés,Départements WHERE Employés.idDep = Départements.idDep AND age $\leq$ 30;}
+	\begin{figure}[h]
+		\begin{minipage}[c]{.46\linewidth}
+			\centering
+			\caption{Table 'Employés'}
+			\begin{tabular}{|l|c|c|r|}
+				\hline
+				id & nom  & age & idDep
+				\\
+				\hline
+				01 & Emp1 & 30  & 01    \\
+				02 & Emp2 & 31  & 01    \\
+				03 & Emp3 & 29  & 02    \\
+				\hline
+			\end{tabular}
+		\end{minipage}
+		\hfill%
+		\begin{minipage}[c]{.46\linewidth}
+			\centering
+			\caption{Table 'Départements'}
+			\begin{tabular}{|l|c|c|r|}
+				\hline
+				idDep & nom  & localisation
+				\\
+				\hline
+				01    & Dep1 & Montpellier  \\
+				02    & Dep2 & Paris        \\
+				\hline
+			\end{tabular}
+		\end{minipage}
+	\end{figure}
+\end{center}
 
+Le \textbf{produit cartésien} est fait par la méthode \textit{produitCartésien(table1,table2)} qui prend en paramètres deux tables et produit une nouvelle table en sortie. Cette table a pour nom \enquote{nomtable1 JOIN nomtable2}. Le nom d'attributs de cette table sont la concaténation des noms d'attributs des deux tables. Pour les valeurs d'attributs, chaque ligne de \textit{valeurAttributs(matrice)} de la table1 est concatené avec toute les lignes de \textit{valeurAttributs(matrice)} de la table2 et celà se fait par deux boucles \textit{for} imbriquées.
+
+Le nom des tables concerné par le produit cartésien sont dans l'attribut \textit{from} de la requête. Comme on peut avoir plusieurs tables et notre méthode ne fait le produit cartésien qu'entre deux tables, on va l'éffectuer entre les deux premières tables puis l'éffectuer entre la table resultante des deux premières avec la prochaines table et ainsi de suite jusqu'a ce que le produit soit effectuer entre toutes les tables.
+
+\nb Le produit cartésien entre deux table est une opération très couteuse en terme de mémoire vive utiliser. Notre application n'est donc pas optimisée pour les grandes tables.
+
+À cette étape on a une seule table resultante qui contient les attributs de toutes les table concerner. La prochaine étape consiste a executée la sélection. Le resultat du produit cartésien est illustré dans la figure suivante.
+\begin{center}
+	\enquote{SELECT nom,localisation \textbf{FROM Employés,Départements} WHERE Employés.idDep = Départements.idDep AND age $\leq$ 30;}
 	\begin{figure}[h!]
 		\centering
 		\caption{Execution du produit cartésien}
 		\begin{tabular}{|l|c|c|c|c|c|r|}
 			\hline
-			id   & nom  & age & Employés.idDep & Départements.idDep & nom   & localisation
+			id & nom  & age & Employés.idDep & Départements.idDep & nom  & localisation
 			\\
 			\hline
-			01 & Emp1 &  30 & 01 & 01 & Dep1 &  Montpellier \\
-			02 & Emp2 &  31 & 01 & 01 & Dep1 &  Montpellier \\
-			03 & Emp3 &  29 & 02 & 01 & Dep1 &  Montpellier \\
-			01 & Emp1 &  30 & 01 & 02 & Dep2 &  Paris \\
-			02 & Emp2 &  31 & 01 & 02 & Dep2 &  Paris \\
-			03 & Emp3 &  29 & 02 & 02 & Dep2 &  Paris \\
+			01 & Emp1 & 30  & 01             & 01                 & Dep1 & Montpellier  \\
+			02 & Emp2 & 31  & 01             & 01                 & Dep1 & Montpellier  \\
+			03 & Emp3 & 29  & 02             & 01                 & Dep1 & Montpellier  \\
+			01 & Emp1 & 30  & 01             & 02                 & Dep2 & Paris        \\
+			02 & Emp2 & 31  & 01             & 02                 & Dep2 & Paris        \\
+			03 & Emp3 & 29  & 02             & 02                 & Dep2 & Paris        \\
 			\hline
 		\end{tabular}
 	\end{figure}
+\end{center}
 
-\subsection{restitution des données (affichage)}
+la \textbf{Selection} est réaliser par la méthode \textit{selection(TabCondition)} de la classe \textit{Table} qui prend en paramètre l'ensemble des condition contenues dans l'attribut \textit{where} de la classe \textit{Requete}. La selection est appliquée sur la table courante (la table resultante de l'étape précedente) et retourne en resultat une nouvelle table. Le nom des attributs de cette nouvelle table est exactement le même que la table courante, puisque la selection ne concerne que les valeurs des attributs et non leur noms.
 
+Les valeurs d'attributs sont parcourus un par un tout en leurs appliquant la méthode \textit{verifier} de la classe \textit{TabCondition}. Cette dernière retourne un booléen, \textit{Vrai} si les condition, appliquées à une ligne, sont vraies et \textit{Faux} sinon. Si les conditions sont vérifier pour une ligne donnée, alors cette ligne est ajoutée à la table resultante.
 
-\section{Logiciel}
+Àprès cette phase, on a en resultat une table qui contient les valeurs filtrer selon les conditions de la requête. Il ne reste donc qu'a projeté les attributs que l'utilisateur a demandé. Le resultat de la selection est schématisé ci-dessou.
+\begin{center}
+	\enquote{SELECT nom,localisation FROM Employés,Départements \textbf{WHERE Employés.idDep = Départements.idDep AND age $\leq$ 30};}
+	\begin{figure}[h]
+		\centering
+		\caption{Execution de la selection}
+		\begin{tabular}{|l|c|c|c|c|c|r|}
+			\hline
+			id & nom  & age & Employés.idDep & Départements.idDep & nom  & localisation
+			\\
+			\hline
+			01 & Emp1 & 30  & 01 & 01 & Dep1 & Montpellier  \\
+			03 & Emp3 & 29  & 02 & 02 & Dep2 & Paris        \\
+			\hline
+		\end{tabular}
+	\end{figure}
+\end{center}
 
-terminal / ligne de commande / formt des données en entrée et sortie
+La \textbf{projection} est éffectuée par la méthode \textit{projection(TabAttribut)} de la classe \textit{Table} qui prend en paramètre l'ensemble des noms d'attributs que contient l'attribut \textit{select} de la classe \textit{Requete}. La projection est appliquée sur la table resultante de la selection et retourne une nouvelle table (resultat final). Le nom des attributs de cette dernière est directement copié de l'attribut \textit{select}. La méthode se charge ensuite de copier toute les colonnes, dont le nom apparaît dans l'attribut \textit{select}, et de les ajouter dans la table resultante. Cette dernière est illustré ci-dessou.
+\begin{center}
+	\enquote{\textbf{SELECT nom,localisation} FROM Employés,Départements WHERE Employés.idDep = Départements.idDep AND age $\leq$ 30;}
+	\begin{figure}[h]
+		\centering
+		\caption{Execution de la selection}
+		\begin{tabular}{|l|r|}
+			\hline
+			nom  & localisation
+			\\
+			\hline
+			Emp1 & Montpellier  \\
+			Emp3 & Paris        \\
+			\hline
+		\end{tabular}
+	\end{figure}
+\end{center}
+
+\subsection{Restitution des données}
+
+Cette dérniere étape consiste, tout bonnement, a affichée la table qui resulte de l'éxecution de la requête sous deux format simple.Le première méthode est d'écrire la table dans un fichier sous un format CSV. Pour celà rien de plus simple que de parcourir la table champs par champs, les écrire tout en l'entourent pas des guillemets et séparent chaque champs par une vergule. Cela permet la réutilisabilité de la table dans des prochaine requête. La deuxième méthode consiste de retourner la table sous un format un peu plus compréhensible par un utilisateur humain. on a donc coder une méthode qui écrit une table un peu comme le fait l'interprèteur de requête d'Oracle. Ci-dessou une capture d'écran d'un resultat de cette méthode.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.65\textwidth]{img/sortie.png}
+	\caption{Exemple d'une sortie de resultat}
+\end{figure}
+
+\nb Le format CSV est écrit dans le fichier \textit{resultat.csv} dans le dossier courant. Le deuxième format est quant à lui écrit dans le fichier \textit{resultat.txt} dans le dossier courant aussi.
+
+\section{Compilation et utilisation}
+
+\subsubsection{Compilation}
+
+Le code source est dans le dossier \textit{src}. La compilation des sources de l'application peut se faire avec la commande suivante :
+
+\texttt{\$ make all}
+
+\nb la commande doit être executer dans le dossier où se trouve le code source.
+
+\subsubsection{Utilisation}
+
+Une fois le code compiler, un éxecutable sera créé (\textit{sql}). Vous pourrez utiliser notre application de deux façon :
+
+\texttt{\$ ./sql table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."}
+
+Les fichiers CSV sont scpécifiés en argument puis comme dernièr argument, la requête SQL entouré par des guillemets. L'application se charge de lire les fichiers et d'éxecuter la requête puis ecrire deux fichiers. Un sous le format CSV et l'autre sous un format compréhensible. Vous pourrez consulter ces fichiers grâce au deux commande \texttt{\$ cat resultat.txt} et \texttt{\$ cat resultat.csv}. L'application s'arrête automatiquement après l'éxecution et vous previent au cas de bon déroulement ou d'erreur.
+
+\texttt{\$ ./sql table1.csv ... tableN.csv}
+
+En éxecutant l'application de cette façon, elle charge les données en mémoire puis vous laisse la main pour donner la requête sql. Vous aurez le choix entre quatre commande.Si votre commande commence par : \texttt{select} alors l'application considére que lui avez donné la requête SQL et l'execute sur les données en mémoire. Les commandes \texttt{csv} et \texttt{txt} affiche, respectivement, le fichier \textit{resultat.csv} et \textit{resultat.txt} sur la sortie standard. La commande \texttt{exit} arrête l'application.
 
 \section{Test}
 
+Pour le bon déroulement de la partie implementation, nous avons à chaque étape de développement écrit plusieurs fichiers de test. Ces fichiers consistais à tester les modules de l'application séparement après chaque étape. Tout ces fichiers sources sont regrouper dans le dossier \textit{test} du dossier \textit{src}. Par exemple le fichier \textit{test-condition.cpp} test la classe \textit{Condition} séparement des autres classe afin de chercher d'éventuelle bogues et de veillez à son bon fonctionnement.
 
 % ------------------------------------- %
 % Bilan et difficultés rencontrées
@@ -694,13 +814,13 @@ terminal / ligne de commande / formt des données en entrée et sortie
 \section{Bilan}
 
 Au final la conception et le développement d'un moteur d'évaluation de requêtes SQL simple en mémoire vive a été réalisée et le cahier des charges respecté , sur un plan plus général ce projet nous servira comme l'un de nos premièrs travaille en groupe sur un projet de dévlopement informatique, cela nous a apporté riguer, sérieu et surtout apprendre à s'organiser, l'organisation est donc le plus grand enrichissement que nous avons pu avoir.
- \newline Ce projet a aussi permis de créer de vrais liens d'amitié au sein de notre groupe.
+\newline Ce projet a aussi permis de créer de vrais liens d'amitié au sein de notre groupe.
 
-\section{difficultés}
+\section{Difficultés}
 
 Plusieurs retouche ont été apporté lors de l'implementation de notre projet du à des bugs , nous avons donc aussi du revenir sur pas mal de points de conception :
 \begin{itemize}
-  \item 
+	\item
 \end{itemize}
 % ------------------------------------- %
 % Perspective
@@ -708,15 +828,15 @@ Plusieurs retouche ont été apporté lors de l'implementation de notre projet d
 
 \chapter{Perspective}
 
- Dans une vision d'amélioration de notre programme voici quelques idées sur les quelles nous avons réfléchis :
+Dans une vision d'amélioration de notre application voici quelques idées sur les quelles nous avons réfléchis :
 
 \begin{itemize}
-\item Une optimisation en mémoire de notre programme semble l'une des prémiers perspective sur les quelles nous pouvons nous pencher.
-\item L'ajout d'opérateurs à notre selection telles que LIKE : Ce mot-clé permet d’effectuer une recherche sur un modèle particulier. Il est par exemple possible de rechercher les enregistrements dont la valeur d’une colonne commence par telle ou telle lettre ,BETWEEN : sélectionne un intervalle de données dans une requête et L’opérateur logique IN qui vérifie si une colonne est égale à une des valeurs comprise dans set de valeurs déterminés.
-\item La commande GROUP BY qui est utilisée en SQL pour grouper plusieurs résultats et utiliser une fonction de totaux sur un groupe de résultat. Sur une table qui contient toutes les ventes d’un magasin, il est par exemple possible de liste regrouper les ventes par clients identiques et d’obtenir le coût total des achats pour chaque client.
-\item La condition HAVING en SQL est presque similaire à WHERE à la seule différence que HAVING permet de filtrer en utilisant des fonctions telles que SUM(), COUNT(), AVG(), MIN() ou MAX().
-\item La commande "AS" permet d’utiliser des alias pour renommer temporairement une colonne ou une table dans une requête. Cette astuce est particulièrement utile pour faciliter la lecture des requêtes.
-\item Les fonctions d'agrégation (AVG(),MAX(),MIN(),COUNT(),SUM())
+	\item Une optimisation en mémoire de notre application semble l'une des prémiers perspective sur les quelles nous pouvons nous pencher.
+	\item L'ajout d'opérateurs à notre selection telles que LIKE : Ce mot-clé permet d’effectuer une recherche sur un modèle particulier. Il est par exemple possible de rechercher les enregistrements dont la valeur d’une colonne commence par telle ou telle lettre ,BETWEEN : sélectionne un intervalle de données dans une requête et L’opérateur logique IN qui vérifie si une colonne est égale à une des valeurs comprise dans set de valeurs déterminés.
+	\item La commande GROUP BY qui est utilisée en SQL pour grouper plusieurs résultats et utiliser une fonction de totaux sur un groupe de résultat. Sur une table qui contient toutes les ventes d’un magasin, il est par exemple possible de liste regrouper les ventes par clients identiques et d’obtenir le coût total des achats pour chaque client.
+	\item La condition HAVING en SQL est presque similaire à WHERE à la seule différence que HAVING permet de filtrer en utilisant des fonctions telles que SUM(), COUNT(), AVG(), MIN() ou MAX().
+	\item La commande "AS" permet d’utiliser des alias pour renommer temporairement une colonne ou une table dans une requête. Cette astuce est particulièrement utile pour faciliter la lecture des requêtes.
+	\item Les fonctions d'agrégation (AVG(),MAX(),MIN(),COUNT(),SUM())
 \end{itemize}
 % ------------------------------------- %
 % Annexes
