@@ -792,7 +792,7 @@ Le code source est dans le dossier \textit{src}. La compilation des sources de l
 
 \subsubsection{Utilisation}
 
-Une fois le code compiler, un éxecutable sera créé (\textit{sql}). Vous pourrez utiliser notre application de deux façon :
+Une fois le code compiler, un éxecutable sera créé (\textit{sql}). Vous pourrez ainsi utiliser notre application de deux façon différentes :
 
 \texttt{\$ ./sql table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."}
 
@@ -800,11 +800,13 @@ Les fichiers CSV sont scpécifiés en argument puis comme dernièr argument, la 
 
 \texttt{\$ ./sql table1.csv ... tableN.csv}
 
-En éxecutant l'application de cette façon, elle charge les données en mémoire puis vous laisse la main pour donner la requête sql. Vous aurez le choix entre quatre commande.Si votre commande commence par : \texttt{select} alors l'application considére que lui avez donné la requête SQL et l'execute sur les données en mémoire. Les commandes \texttt{csv} et \texttt{txt} affiche, respectivement, le fichier \textit{resultat.csv} et \textit{resultat.txt} sur la sortie standard. La commande \texttt{exit} arrête l'application.
+En éxecutant l'application de cette façon, elle charge les tables, données en argument, en mémoire puis vous laisse la main pour donner la requête SQL. Vous aurez le choix entre quelques commandes. Si votre commande commence par : \texttt{select} alors l'application considére que lui avez donné la requête SQL et l'éxecute sur les données en mémoire. Les commandes \texttt{csv} et \texttt{txt} affiche, respectivement, le fichier \textit{resultat.csv} et \textit{resultat.txt} sur la sortie standard. Pour plus d'information, la commande \texttt{help} affiche la liste des commandes disponible. La commande \texttt{exit} arrête l'application.
+
+\nb Vous pourrez utiliser cette méthode sans donner aucun argument.
 
 \section{Test}
 
-Pour le bon déroulement de la partie implementation, nous avons à chaque étape de développement écrit plusieurs fichiers de test. Ces fichiers consistais à tester les modules de l'application séparement après chaque étape. Tout ces fichiers sources sont regrouper dans le dossier \textit{test} du dossier \textit{src}. Par exemple le fichier \textit{test-condition.cpp} test la classe \textit{Condition} séparement des autres classe afin de chercher d'éventuelle bogues et de veillez à son bon fonctionnement.
+Pour le bon déroulement de la partie implementation, nous avons à chaque étape de développement écrit plusieurs fichiers de test. Ces fichiers consistais à tester les modules de l'application séparement après chaque étape. Tout ces fichiers sources sont regrouper dans le dossier \textit{test} du dossier \textit{src}. Par exemple, le fichier \textit{test-condition.cpp} test la classe \textit{Condition} séparement des autres classe afin de chercher d'éventuelle bogues et de veillez à son bon fonctionnement.
 
 % ------------------------------------- %
 % Bilan et difficultés rencontrées
@@ -830,14 +832,46 @@ Plusieurs retouche ont été apporté lors de l'implementation de notre projet d
 
 Dans une vision d'amélioration de notre application voici quelques idées sur les quelles nous avons réfléchis :
 
+\subsubsection{Optimisation}
+
+Une optimisation en mémoire de notre application semble l'une des premières perspectives sur les quelles nous pouvons nous pencher. En effet, notre application ne permet pas d'éxecuter des jointure entre des tables assez conséquentes. Afin d'optimiser celà, plusieurs solution sont possible.
+
 \begin{itemize}
-	\item Une optimisation en mémoire de notre application semble l'une des prémiers perspective sur les quelles nous pouvons nous pencher.
-	\item L'ajout d'opérateurs à notre selection telles que LIKE : Ce mot-clé permet d’effectuer une recherche sur un modèle particulier. Il est par exemple possible de rechercher les enregistrements dont la valeur d’une colonne commence par telle ou telle lettre ,BETWEEN : sélectionne un intervalle de données dans une requête et L’opérateur logique IN qui vérifie si une colonne est égale à une des valeurs comprise dans set de valeurs déterminés.
-	\item La commande GROUP BY qui est utilisée en SQL pour grouper plusieurs résultats et utiliser une fonction de totaux sur un groupe de résultat. Sur une table qui contient toutes les ventes d’un magasin, il est par exemple possible de liste regrouper les ventes par clients identiques et d’obtenir le coût total des achats pour chaque client.
-	\item La condition HAVING en SQL est presque similaire à WHERE à la seule différence que HAVING permet de filtrer en utilisant des fonctions telles que SUM(), COUNT(), AVG(), MIN() ou MAX().
-	\item La commande "AS" permet d’utiliser des alias pour renommer temporairement une colonne ou une table dans une requête. Cette astuce est particulièrement utile pour faciliter la lecture des requêtes.
-	\item Les fonctions d'agrégation (AVG(),MAX(),MIN(),COUNT(),SUM())
+	\item Commencer par l'éxecution d'une projection partielle. C'est à dire supprimer les attributs (colonnes) qui n'apparaîssent pas sur les conditions de sélection. Celà réduira, grandement dans certains cas, la taille des tables sur laquelle la jointure sera executées.
+	\item Ensuite dans la même optique de réduction de la taille des tables, éxecuter les conditions de sélection (hors conditions de jointure) sur chaque tables individuellment.
+	\item Enfin, après toutes ces manipulation, il est envisageable d'écrire le resultat du produit cartésien dans un fichier temporaire, et pas directement en mémoire, afin de ne jamais surcharger la mémoire vive. Mais celà entrainera, en contre partie, un temps d'éxecution plus longs.
 \end{itemize}
+
+\subsubsection{Opérateur}
+
+Il est aussi possible d'ajouté certains opérateurs à notre selection telles que :
+\begin{description}
+	\item[LIKE] Ce mot-clé permet d’effectuer une recherche sur un modèle particulier. Il est par exemple possible de rechercher les enregistrements dont la valeur d’une colonne commence par telle ou telle lettre.	
+	\item[BETWEEN] Permet de sélectionner un intervalle de données dans une requête.
+	\item[IN] L’opérateur logique qui vérifie si une colonne est égale à une des valeurs comprise dans set de valeurs déterminés.
+\end{description}
+
+\subsubsection{Commandes}
+
+Ajouter des commandes en plus autre que \textit{SELECT, FROM} et \textit{WHERE}.
+
+\begin{description}
+	\item[GROUP BY] qui est utilisée en SQL pour grouper plusieurs résultats et utiliser une fonction de totaux sur un groupe de résultat. Sur une table qui contient toutes les ventes d’un magasin, il est par exemple possible de regrouper les ventes par clients identiques et d’obtenir le coût total des achats pour chaque client.
+	\item[HAVING] condition qui, en SQL, est presque similaire à WHERE à la seule différence que HAVING permet de filtrer en utilisant des fonctions telles que SUM(), COUNT(), AVG(), MIN() ou MAX().
+	\item[AS] permet d’utiliser des alias pour renommer temporairement une colonne ou une table dans une requête. Cette astuce est particulièrement utile pour faciliter la lecture des requêtes et indispensable dans certaines requête imbriquées.
+\end{description}
+
+\subsubsection{Fonctions d'agrégation}
+
+Nous avons aussi pensé à rajoter des fonctions d'agrégation, mais le temps ne nous l'a pas premis.
+
+\begin{description}
+	\item[MAX()/MIN()] Fonction qui calcul la valeur maximal/minimal d'un attribut.
+	\item[COUNT()] Fonction qui calcul le nombre de ligne de la table resultat.
+	\item[SUM()] Fonction qui a calcul la somme des valeurs d'un attribut.
+	\item[AVG()] Fonction qui calcul la moyenne des valeurs d'un attribut donné.
+\end{description}
+
 % ------------------------------------- %
 % Annexes
 % ------------------------------------- %
