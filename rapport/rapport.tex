@@ -10,6 +10,39 @@
 
 % Bout de code
 \usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ 
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  firstnumber=0,                   % start line enumeration with line 1000
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=C++,                    % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+}
 
 % Commande pour notation 'NB :' (nota bene)
 \newcommand\nb[1][0.3]{N\kern-#1emB : }
@@ -794,10 +827,18 @@ Au final la conception et le développement d'un moteur d'évaluation de requêt
 
 \section{Difficultés}
 
-Plusieurs retouches ont été apportées lors de l'implémentation de notre projet, ceci est dû à des bugs. Nous sommes donc revenus sur de nombreux points de conception :
-\begin{itemize}
-	\item
-\end{itemize}
+La partie conception a été une première difficulté. En effet, nous n’avions encore jamais travaillé sur la conception d’une application de cette taille. Nous avons donc passé plusieurs jours à définir le cahier des charges et les modèles afin d’éviter de nous bloquer par la suite en poursuivant avec un modèle erroné. Nous les avons ensuite raffinés pendant la phase d’implémentation.
+
+Malgré cela, plusieurs retouches ont été apportées au modèle lors de l'implémentation de notre projet. Nous sommes donc revenus sur de nombreux points de conception.
+
+\subsubsection{Condition et TabCondition}
+
+Lors de la première modélisation de l'application, nous n'avions pas encore réfléchi à définir les deux classes \textit{Condition} et \textit{TabCondition}. Cela nous a posé un problème lors de l'implémentation de la méthode \textit{selection} de la classe \textit{Table}.
+
+\subsubsection{NomAttribut et TabAttribut}
+
+L'attribut \textit{nomAttribut} de la classe \textit{Table} étais, durant la première version de la conception, une instance de la classe \textit{TabString} puis nous avons eu un problème quand on manipule plusieurs tables, car deux attribut peuvent avoir le même nom quand ils sont dans deux tables différentes.
+
 % ------------------------------------- %
 % Perspective
 % ------------------------------------- %
@@ -854,11 +895,17 @@ Nous avons aussi pensé à rajouter des fonctions d'agrégation, mais le temps n
 
 \chapter{Extraits de code}
 
+\section{Code de la méthode projection}
+
+\lstinputlisting[language=C++, firstline=94, lastline=136]{../src/table.cpp}
+
+\section{Code de la méthode selection}
+
+\lstinputlisting[language=C++, firstline=137, lastline=151]{../src/table.cpp}
+
 \section{Code verifier de la classe TabCondition}
 
-\begin{lstlisting}
-	Put your code here.
-\end{lstlisting}
+\lstinputlisting[language=C++, firstline=90, lastline=112]{../src/tabCondition.cpp}
 
 
 \end{document}
