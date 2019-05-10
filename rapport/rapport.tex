@@ -20,10 +20,10 @@
 % Informations le titre, le(s) auteur(s), la date
 \title{Moteur de Requêtes SQL Simples}
 \author{
-    Massili KEZZOUL \and
-    Chakib ELHOUITI \and
-    Ramzi ZEROUAL \and
     Belkassim BOUZIDI \and
+    Chakib ELHOUITI \and
+    Massili KEZZOUL \and
+    Ramzi ZEROUAL \and
     Fei YANG
 }
 \date{\today}
@@ -33,7 +33,7 @@
 %\maketitle
 \begin{titlepage}
 	\centering
-	{\scshape\LARGE Univérsité de Montpellier\par}
+	{\scshape\LARGE Universite de Montpellier\par}
 	{\scshape\Large Rapport de projet\par}
 	\vspace{1.5cm}
 	{\huge\bfseries Moteur de requêtes SQL simples\par}
@@ -85,22 +85,18 @@
 \parskip=5pt
 \chapter*{Introduction}
 
-Dans le cadre de notre second semestre de la Licence 2,
-il nous est proposé un projet nous permettant de mettre en pratique nos connaissances et nos compétences
-au travers d’un cahier des charges ayant pour finalité la conception et le développement d’un moteur d’évaluation de requêtes SQL en mémoire vive.
+Dans le cadre du cursus de la Licence 2 informatique, durant notre second semestre, il nous a été proposé un projet qui devra mettre en pratique nos connaissances et nos compétences au travers d'un cahier des charges. L’objet de cette démarche sera d’envisager la conception et le développement d'un moteur d'évaluation de requêtes SQL en mémoire vive.
 
 Les requêtes considérées seront des requêtes simples de la forme : \enquote{SELECT ... FROM ... WHERE ... }  sans imbrication.
 
 À partir d’un ou plusieurs fichiers CSV, Comma-separated Values\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Voir page \pageref{csv}},
-il est demandé de construire une représentation en mémoire des données et d’implémenter les procédures de projection,
-sélection et de jointure découlant de l’interrogation SQL.
+il est demandé de construire une représentation en mémoire des données et d'implémenter les procédures de projection, de sélection et de jointure, découlant de l'interrogation SQL.
 
-Il s’agit principalement de reproduire les fonctionnalités de bases d’un SGBD\footnote{Système de Gestion de Base de Données, voir page \pageref{sgbd}}, tel que MySQL ou bien Oracle.
+Il s'agit principalement de reproduire les fonctionnalités de bases d'un SGBD\footnote{Système de Gestion de Base de Données, voir page \pageref{sgbd}}, tel que MySQL ou bien Oracle.
 
-Notre groupe, composé de cinq personnes : Massili Kezzoul, Chakib Elhouiti, Ramzi Zeroual, Belkassim Bouzidi et Yang Feï, et encadré par Mme Anne-Muriel Chifolleau,
-a saisie l'opportunité de réaliser ce projet.
+Notre groupe, composé de cinq personnes : Belkassim Bouzidi, Chakib Elhouiti, Massili Kezzoul, Ramzi Zeroual et Yang Feï, et encadré par Mme Anne-Muriel Chifolleau, a saisie l'opportunité de réaliser ce projet.
 
-\chapter*{Remerciments}
+\chapter*{Remerciements}
 
 \parskip=0pt
 \tableofcontents
@@ -114,11 +110,11 @@ a saisie l'opportunité de réaliser ce projet.
 \chapter{Organisation du projet}
 \section{Méthodes d’organisation}
 
-Afin de mener à bien le développement du projet, nous avons décidé de travailler un maximum de temps ensemble et de manière très régulière. Nous nous sommes réunis trois à quatre fois par semaine afin de faire le point sur l’avancement du projet et de définir les objectifs restant à atteindre.
+Afin de mener à bien le développement du projet, nous avons décidé de travailler un maximum de temps ensemble et de manière très régulière. Nous nous sommes réunis trois à quatre fois par semaine, en vue de faire le point sur l'avancement du projet et de définir les objectifs restant à atteindre.
 
-Enfin, selon l’état d’avancement du moteur de requêtes, nous réalisons les tâches en retard durant le week-end pour ne pas cumulé de retard et respecter l’intégralité du cahier des charges.
+Ainsi, selon l'état de progression de la conception du moteur de requêtes, nous réalisâmes les tâches en retard durant le week-end pour ne pas cumuler de retard et respecter l'intégralité du cahier des charges.
 
-Toutes les semaines, nous nous sommes réunis avec notre encadrante, Mme Anne-Muriel Chifolleau, afin de faire le point sur l’état du projet. Ces réunions nous on également permis de bénéficier des précieux conseils de notre encadrante.
+Toutes les semaines, nous nous sommes réunis avec notre encadrante, Mme Anne-Muriel Chifolleau. Lors de ces réunions, des mises au point relatives au projet, nous furent prodiguées, cela nous a permis de bénéficier de précieux conseils.
 
 \section{Decoupage du projet}
 
@@ -126,21 +122,21 @@ Nous avons découpé la réalisation du projet en trois grandes phases.
 
 \subsection{Phase de modélisation}
 
-Durant cette étape, nous nous somme réunis pour définir les fonctionnalités demandés par le projet. Notamment séparer les fonctionnalités importants de celle moins importantes. Nous avons également choisi les outils de travail collaboratif et les principales technologies utilisés, ainsi que une première modélisation du projet.
+Durant cette étape, nous nous sommes réunis pour définir les fonctionnalités demandées par le projet. Notamment séparer les fonctionnalités importantes de celle moins importantes. Nous avons également choisi les outils de travail collaboratifs et les principales technologies utilisées, ainsi qu’une première modélisation du projet.
 
 \subsection{Phase de développement}
 
-Durant cette phase, nous avons commencer à implémenter les différentes fonctionnalités que nous avons modélisé lors de l’étape précédente, toute en améliorant la modélisation au fur et à mesure de l’avancement de notre projet. Nous avons notamment réaliser des tests pour les différents modules afin de s’assurer de leur bon fonctionnement.
+Durant cette phase, nous avons commencé à implémenter les différentes fonctionnalités que nous avons modélisées lors de l'étape précédente, toute en améliorant la modélisation au fur et à mesure de l'avancement de notre projet. Nous avons notamment réalisé des tests pour les différents modules afin de s'assurer de leur bon fonctionnement.
 
 \subsection{Finalisation du projet}
 
-Cette étape a consisté en la réalisation des tests finaux afin de s’assurer que le moteur de requêtes fonctionne en toute circonstance et éventuellement corriger les bogues qui peuvent apparaître.
+Cette étape a consisté en la réalisation des tests finaux afin de s'assurer que le moteur de requêtes fonctionne en toute circonstance et éventuellement corriger les bogues qui peuvent apparaitre.
 
 \section{Outils de collaboration}
 
-Afin de s’organiser, nous avons décider d’utiliser Git au travers du serveur GitLab héberger par le service informatique de la faculté. En effet le logiciel libre Git a facilité grandement la collaboration entre nous. Le serveur GitLab quant à lui est fourni gratuitement par le service informatique la faculté.
+Afin de s'organiser, nous avons décidé d'utiliser Git au travers du serveur GitLab hébergé par le service informatique de la faculté. En effet le logiciel libre Git a facilité grandement la collaboration entre nous. Le serveur GitLab quant à lui est fourni gratuitement par le service informatique de la faculté.
 
-En ce qui concerne la rédaction de ce rapport, nous avons utilisés \LaTeX, système de composition de documents créé par Leslie Lamport, pour faciliter la rédaction à plusieurs.
+En ce qui concerne la rédaction de ce rapport, nous avons utilisé \LaTeX, système de composition de documents créé par Leslie Lamport, pour faciliter la rédaction à plusieurs.
 
 \begin{figure}[h]
 	\begin{minipage}[c]{.46\linewidth}
@@ -168,11 +164,9 @@ En ce qui concerne la rédaction de ce rapport, nous avons utilisés \LaTeX, sys
 %\section{Qu’est-ce qu’une donnée}
 \section{Présentation d’une base de donnée}
 
-Une base de données regroupe et stock un ensemble d’informations, qu'on appelle aussi donnée.
-En termes simples, les données peuvent êtres des faits liés à tout objet considéré.
-(Par exemple, un nom, un age, une taille, un poids ...)
+Une base de données regroupe et stock un ensemble d'informations, qu'on appelle aussi données. En termes simples, les données peuvent êtres des faits liés à tout objet considéré. (Par exemple, un nom, un âge, une taille, un poids ...)
 
-On s'interesse ici uniquement au base de données dite relationnelles, une base de données où l'information est organisée dans des tableaux à deux dimensions appelés des relations ou tables\footnote{ selon le modèle introduit par Edgar F. Codd en 1970.}.
+On s'intéresse ici uniquement aux bases de données dites relationnelles, où l'information est organisée dans des tableaux à deux dimensions appelés relations ou tables\footnote{selon le modèle introduit par Edgar F. Codd en 1970.}.
 Selon ce modèle relationnel, une base de données consiste en une ou plusieurs relations. Les lignes de ces relations sont appelées des nuplets ou enregistrements. Les colonnes sont appelées des attributs.
 
 \begin{figure}[h]
@@ -181,13 +175,12 @@ Selon ce modèle relationnel, une base de données consiste en une ou plusieurs 
 	\caption{Représentation d'une Table}
 \end{figure}
 
-En informatique, une base de données est la pièce centrale des dispositifs de collecte, mise en forme, stockage et utilisation d'informations.
-Ce dispositif comporte un système de gestion de base de données.
+En informatique, une base de données est la pièce centrale des dispositifs de collecte, mise en forme, stockage et utilisation d'informations. Ce dispositif comporte un système de gestion de base de données.
 
 \section{Système de gestion de base de données}
 \label{sgbd}
-Le système de gestion de base de données (SGBD) est un ensemble de programmes qui permet à ses utilisateurs d'accéder à une base de données,
-de manipuler des données, ainsi que de contrôler l'accès à la base de données, tout en cachant la complexité des opérations effectuer.
+
+Le système de gestion de base de données (SGBD) est un ensemble de programmes qui permet à ses utilisateurs d'accéder a une base de données, de manipuler des données, ainsi que de contrôler l'accès a la base de données, tout en cachant la complexité des opérations exécutées.
 
 Les SGBD sont utilisés pour de nombreuses applications informatiques, notamment :
 \begin{itemize}
@@ -212,17 +205,13 @@ dans un langage informatique reconnu par le SGBD. SQL est le langage informatiqu
 \section{Le langage SQL}
 \label{sql}
 
-Le SQL (sigle de Structured Query Language, en français langage de requête structurée) est le langage standard pour traiter les bases de données relationnelles.
-La programmation SQL peut être utilisée efficacement pour insérer, rechercher, mettre à jour et supprimer des enregistrements de base de données.
-Les instructions SQL s'écrivent d'une manière qui ressemble à celle de phrases ordinaires en anglais. Cette ressemblance voulue vise à faciliter l'apprentissage et la lecture.
+Le SQL (sigle de Structured Query Language, en français langage de requête structurée) est le langage standard pour traiter les bases de données relationnelles. La programmation SQL peut être utilisée efficacement pour insérer, rechercher, mettre à jour et supprimer des enregistrements de base de données. Les instructions SQL s'écrivent d'une manière qui ressemble à celle de phrases ordinaires en anglais. Cette ressemblance voulue vise à faciliter l'apprentissage et la lecture.
 
-Le SQL est un langage déclaratif, c'est-à-dire qu'il permet de décrire le résultat escompté, sans décrire la manière de l'obtenir.
-Les SGBD sont équipés d'optimiseurs de requêtes, des mécanismes qui déterminent automatiquement la manière optimale d'effectuer les opérations,
-notamment par une estimation de la complexité algorithmique.
+Le SQL est un langage déclaratif, c'est-a-dire qu'il permet de décrire le résultat escompte, sans décrire la manière de l'obtenir. Les SGBD sont équipés d'optimiseurs de requêtes, des mécanismes qui déterminent automatiquement la manière optimale d'effectuer les opérations, notamment par une estimation de la complexité algorithmique.
 
 Le langage SQL est utilisé par des bases de données relationnelles, telles que la base de données MySQL, Oracle, le serveur Ms SQL, Sybase, etc...
 
-Les instructions SQL couvrent 3 principale domaines :
+Les instructions SQL couvrent 3 principaux domaines :
 \begin{itemize}
 	\item langage de manipulation de données.
 	\item langage de définition de données.
@@ -230,8 +219,7 @@ Les instructions SQL couvrent 3 principale domaines :
 \end{itemize}
 \vspace{0.3cm}
 
-Le domaine considéré dans ce projet est le langage de manipulation de données simple sans imbrication.
-Exemple de requête SQL : \enquote{SELECT Name FROM Members WHERE Age $ \leq $ 30;}
+Le domaine considéré dans ce projet est le langage de manipulation de données simples sans imbrication. Exemple de requête SQL : \enquote{SELECT Name FROM Members WHERE Age $ \leq $ 30;}
 
 % -------------------------------------------------------------------------- %
 % Présentation du projet : moteur de requêtes SQL simples
@@ -241,9 +229,7 @@ Exemple de requête SQL : \enquote{SELECT Name FROM Members WHERE Age $ \leq $ 3
 
 \section{Présentation générale}
 
-Notre projet consiste à concevoir et implémenter une application capable de lire des données, executer des requêtes SQL simple en mémoire et de renvoyer le resultat.
-Il s’agit donc de crée une passerelle entre la personne qui exécute la requête SQL et les données.
-Les difficultés principales sont donc les suivants :
+Notre projet consiste à concevoir et implémenter une application capable de lire des données, exécuter des requêtes SQL simple en mémoire et de renvoyer le résultat. Il s'agit donc de créer une passerelle entre la personne qui exécute la requête SQL et les données. Les difficultés principales sont donc les suivantes :
 \vspace{0.3cm}
 \begin{itemize}
 	\item Savoir charger les données en mémoire;
@@ -256,17 +242,13 @@ Les difficultés principales sont donc les suivants :
 
 \subsection{Chargement des données en mémoire}
 
-Les données prise en charge par notre application sont des tables, issue d'une base de données relationnelle, stocké sous forme de fichier au format CSV.
+Les données prises en charge par notre application sont des tables, issues d'une base de données relationnelles, stockées sous forme de fichiers au format CSV.
 
 \subsubsection{Format CSV}
 \label{csv}
-Comma-separated values, connu sous le sigle CSV, est un format texte ouvert %\footnote{format ouvert est défini comme \enquote{tout protocole de communication, d'interconnexion ou d'échange et tout format de données interopérable et dont les spécifications techniques sont publiques et sans restriction d'accès ni de mise en œuvre}}
-représentant des données tabulaires sous forme de valeurs séparées par des virgules.
-Ce format n'a jamais vraiment fait l'objet d'une spécification formelle.
+Comma-separated values, connu sous le sigle CSV, est un format texte ouvert\footnote{format ouvert est défini comme \enquote{tout protocole de communication, d'interconnexion ou d'échange et tout format de données interopérable et dont les spécifications techniques sont publiques et sans restriction d'accès ni de mise en œuvre}} représentant des données tabulaires sous forme de valeurs séparées par des virgules. Ce format n'a jamais vraiment fait l'objet d'une spécification formelle.
 
-Un fichier CSV est un fichier texte, par opposition aux formats dits \enquote{binaires}.
-Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes.
-Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau.
+Un fichier CSV est un fichier texte, par opposition aux formats dits \enquote{binaires}. Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes. Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau.
 
 \begin{figure}[!h]
 	\centering
@@ -277,49 +259,47 @@ Les portions de texte séparées par une virgule correspondent ainsi aux contenu
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.85\textwidth]{img/csv_tables.png}
-	\caption{Representation du même fichier en une table de données}
+	\caption{Représentation du même fichier en une table de données}
 \end{figure}
 
-Les champs texte peuvent également être délimités par des guillemets. Lorsqu'un champ contient lui-même des guillemets, ils sont doublés afin de ne pas être considérés comme début ou fin du champ.
-Si un champ contient un signe utilisé comme séparateur de colonne (virgule, point-virgule, tabulation, etc.), les guillemets sont obligatoires afin que ce signe ne soit pas confondu avec un séparateur.
+Les champs texte peuvent également être délimités par des guillemets. Lorsqu'un champ contient lui-même des guillemets, ils sont doublés afin de ne pas être considérés comme début ou fin du champ. Si un champ contient un signe utilise comme séparateur de colonne (virgule, point-virgule, tabulation, etc.), les guillemets sont obligatoires afin que ce signe ne soit pas confondu avec un séparateur.
 
 \subsubsection{Lecture du fichier CSV}
 
 Un fichier CSV est donc un moyen simple de stocker les données d'une base de données.
 Ici on considére que :
 \begin{itemize}
-	\item Le nom du fichier (sans l'extensions) est le nom de la table.
-	\item La première ligne du fichier ne represente pas des valeurs mais le nom des attributs de la table (c-à-d le nom des colones).
-	\item Toutes les autres lignes represente des Tuples où chaque valeur est separée par une vergule.
+	\item Le nom du fichier (sans l’extension) est le nom de la table.
+	\item La première ligne du fichier ne représente pas des valeurs mais le nom des attributs de la table (c.-à-d. le nom des colonnes).
+	\item Toutes les autres lignes représentent des Tuples où chaque valeur est séparée par une virgule.
 \end{itemize}
 \vspace{0.3cm}
 
-La question qui se posent donc est :
+La question qui se pose est donc :
 \begin{center}
-	\enquote{Comment lire et interprèter un fichier CSV ? et comment stocker les données qui en resulte ?}
+	\enquote{Comment lire et interpréter un fichier CSV et comment stocker les données qui en résultent ?}
 \end{center}
 
-\subsubsection{Lecture de la raquête SQL}
+\subsubsection{Lecture de la requête SQL}
 
-Maintenant qu'on a nos tables chargées en mémoire, il faut lire et interprèter la requête SQL\footnote{Structured Query Language: voir Page \pageref{sql}}.
+Maintenant qu'on a nos tables chargées en mémoire, il faut lire et interpréter la requête SQL\footnote{Structured Query Language: voir Page \pageref{sql}}.
 
-Dans le contexe du projet, les requête prise en charge sont des requête SQL simples sans imbrication. Il respecteront donc la forme suivante :
+Dans le contexte du projet, les requêtes prisent en charge sont des requêtes SQL simples sans imbrication. Elles respecteront donc la forme suivante :
 
 \enquote{SELECT nomAttribut1,nomAttribut2 FROM nomTable1,nomTable2 WHERE condition1 AND condition2 OR condition3}
 
 Tel que :
 \begin{itemize}
-	\item Le nom des attributs peuvent être remplacé par '*', ce qui signifie dans ce cas : \enquote{Tout les attributs};
-	\item Il faut scpécifier au moin une table (dans le FROM);
-	\item Les condition de selection (le WHERE) sont facultatif;
+	\item Le nom des attributs peut être remplacé par '*', ce qui signifie dans ce cas : \enquote{Tout les attributs};
+	\item Il faut spécifier au moins une table (dans le FROM);
+	\item Les conditions de sélection (le WHERE) sont facultatives;
 \end{itemize}
 \vspace{0.3cm}
 
 
-\subsection{Execution de la requête SQL}
+\subsection{Exécution de la requête SQL}
 
-La dernière étape consiste à executer la requête SQL, précédemment interprèter, sur les données charger en mémoire.
-On peut clairement découper la requête SQL en 3 étapes :
+La dernière étape consiste à exécuter la requête SQL, précédemment interprétée, sur les données chargées en mémoire. On peut clairement découper la requête SQL en trois étapes :
 
 \subsubsection{La projection}
 
@@ -338,7 +318,7 @@ Soit la table "FRANCE" suivante :
 	\hline
 \end{tabular}
 
-La selection de la colonne ville et codepostal se fait par l'instruction :
+La sélection de la colonne ville et code postal se fait par l'instruction :
 
 \enquote{Select ville,codepostal from FRANCE;}
 
@@ -353,21 +333,21 @@ La selection de la colonne ville et codepostal se fait par l'instruction :
 	\hline
 \end{tabular}
 
-\subsubsection{La selection}
+\subsubsection{La sélection }
 
-La sélection (sélection horizontale) permet de ne conserver que les tuples qui respectent une condition définie sur les valeurs des attributs,
-comme le but d'une requête SQL est d'extraire des informations spécifique dans des bases de données,
+La sélection (sélection horizontale) permet de ne conserver que les tuples qui respectent une condition définie sur les valeurs des attributs, car le but d'une requête SQL est d'extraire des informations spécifiques dans des bases de données,
 
 La sélection permet :
 \begin{itemize}
-	\item L'affichage de certaines lignes qui vérifient un critère donné;
-	\item Le critère est une exrpession booléenne plus ou moins compliquée;
-	\item Les conditions de sélection sont données juste après le mot clé WHERE;
-	\item Les conditions sont séparer par des opérateur logique, AND et OR;
+	\item L'affichage de certaines lignes qui vérifient un critère donné ;
+	\item Le critère est une expression booleenne plus ou moins compliquée ;
+	\item Les conditions de sélection sont données juste après le mot clé WHERE ;
+	\item Les conditions sont séparées par des opérateurs logiques, AND et OR ;
 \end{itemize}
 \pagebreak
 
 Exemple de sélection :
+
 soit la requête SQL suivante :
 
 \begin{center}
@@ -410,11 +390,9 @@ Et la table :
 
 \subsubsection{La jointure}
 
-la jointure est l'opération permettant d’associer plusieurs tables d'une base de données par le biais d’un lien logique de données entre les différentes tables,
-le lien étant vérifié par le biais d'un prédicat se situant dans la clause WHERE. Le résultat de l'opération est une nouvelle table.
-les tables données sont spécifier dans la partie FROM de la requête SQL.
+La jointure est l'opération permettant d'associer plusieurs tables d'une base de données par le biais d'un lien logique de données entre les différentes tables. Le lien étant vérifié par le biais d'un prédicat se situant dans la clause WHERE. Le résultat de l'opération est une nouvelle table. Les tables sélectionnées sont spécifiées dans la partie FROM de la requête SQL.
 
-La jointure entre une table A et B est une table composée de l'ensemble des couples possible entre leurs éléments respectant le prédicat.
+La jointure entre une table A et B est une table composée de l'ensemble des couples possibles entre leurs éléments respectant le prédicat.
 
 Un exemple est plus parlant qu'une longue explication, prenons deux table Employés et Départements :
 
@@ -467,19 +445,19 @@ Un exemple est plus parlant qu'une longue explication, prenons deux table Employ
 \end{figure}
 
 
-\subsection{Retourner le resultat}
+\subsection{Retourner le résultat}
 
-La dernière étape consiste à renvoyer la table resultante de l'éxecution de la requête sous un format \textit{réutilisable} et \textit{compréhensible}.
+La dernière étape consiste à renvoyer la table résultante de l'exécution de la requête sous un format \textit{réutilisable} et \textit{compréhensible}.
 
 \subsubsection{Réutilisable}
 
-Il est question de stocker les données obtenu dans un fichier, sous un format CSV, pour qu'elles soit sauvgardées et réutilisablees par l'application.
+Il est question de stocker les données obtenues dans un fichier, sous un format CSV, pour qu'elles soient sauvegardées et réutilisables par l'application.
 
 \pagebreak
 
 \subsubsection{Compréhensible}
 
-Il s'agit de renvoyer la table de manière qu'elle soit compréhensible par l'utilisateur,c'est à dire en affichant les données sous forme d'un tableau.
+Il s'agit de renvoyer la table de manière qu'elle soit compréhensible par l'utilisateur ; c'est-à-dire en affichant les données sous forme d'un tableau.
 
 \begin{figure}[h!]
 	\centering
@@ -499,7 +477,7 @@ Il s'agit de renvoyer la table de manière qu'elle soit compréhensible par l'ut
 
 \section{Objectif de l'application}
 
-L'objectif de l'application est résume dans le schéma suivante :
+L'objectif de l'application est résumé dans le schéma suivant :
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\textwidth]{img/role_prog.png}
@@ -513,14 +491,13 @@ L'objectif de l'application est résume dans le schéma suivante :
 
 \chapter{Conception du Moteur de Requêtes}
 
-Nous avons pensé à decouper la conception du Moteur de requêtes SQL en deux étapes principales, d'une part comment structurer les données et de l'autre comment gérer la requête SQL.
+Nous avons pensé à découper la conception du Moteur de requêtes SQL en deux étapes principales, d'une part comment structurer les données et de l'autre comment gérer la requête SQL.
 
-\section{Structure des données}
+\section{Structuration des données}
 
-Avant toute chose, il faut commencer par lire les données. Pour cela il faut mettre en \oe uvre une stratégie afin de stocker efficacement les données pour pouvoir
-y accéder et effectuer dessus les opérations demandées par l’utilisateur le plus aisément possible.
+Avant toute chose, il faut commencer par lire les données. Pour cela il faut mettre en \eo uvre une stratégie afin de stocker efficacement les données pour pouvoir y accéder et d’y effectuer les opérations demandées par l'utilisateur, le plus aisément possible.
 
-Pour cela nous avons donc réaliser un diagramme UML\footnote{Le Langage de Modélisation Unifié, de l'anglais Unified Modeling Language} modélisant la structure de données utilisée afin de stocker  l’ensemble des données.
+Pour cela nous avons donc réalisé un diagramme UML\footnote{Le Langage de Modélisation Unifié, de l'anglais Unified Modeling Language} modélisant la structure de données utilisée afn de stocker l'ensemble des données.
 
 \vfill
 
@@ -533,30 +510,25 @@ Pour cela nous avons donc réaliser un diagramme UML\footnote{Le Langage de Mod�
 
 \pagebreak
 
-Nous avons choisis de modèliser notre structure de données en utilisant l'approche orientée objet qui est parfaitement adaptée à notre problème. En effet,
-utiliser cette approche nous a permis de découper notre structure de données en plusieurs classes\footnote{Une classe regroupe des membres, méthodes et propriétés (attributs) communs à un ensemble d'objets.}.
+Nous avons choisis de modéliser notre structure de données, en utilisant l'approche orientée objet qui est parfaitement adaptée à notre problème. En effet, utiliser cette approche nous a permis de découper notre structure de données en plusieurs classes\footnote{Une classe regroupe des membres, méthodes et propriétés (attributs) communs à un ensemble d'objets.}.
 
 La classe principale de notre application est la classe \textit{Table}.
-Comme vous le pouvez le voir sur le diagramme UML ci-dessus,
-la classe est constituée de trois attributs. Le premièr est une chaîne de caractères dans laquelle on stock le nom de la table.
-Cette attribut est indispensable pour identifier la table sur laquelle on veux extraire les< informations qu’on cherche.
+Comme vous pouvez le voir sur le diagramme UML ci-dessus, la classe est constituée de trois attributs.
 
-%On a aussi pensé a modélisé la classe TabString, ainsi que MatriceString et TabTable, pour simplifié l’utilisation des tableaux dynamiques. Ce qui a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
+Le premier est une chaîne de caractères dans laquelle on stock le nom de la table. Cet attribut est indispensable pour identifier la table sur laquelle on veut extraire les< informations qu'on cherche.
 
-Le deuxième attribut est une classe qui represente un tableau de chaînes de caractères dans laquelle chaque case stockera le nom de la colonne (Attribut) concernée.
-Il s'agit de la classe \textit{TabAttribut} qui est elle-même composée de plusieurs instances de la classe \textit{NomAttribut}.
-On a representé cette dernière comme étant le nom de l'attribut ainsi que le nom de la table d'où il provient,
-car celà facilitera grandement l'accès au attributs lors de l'éxecution de la requête. Ce choix sera expliqué plus en détail dans ce qui suivra.
 
-Quant au troisième attribut, instance de \textit{MatriceString}, c’est une matrice à deux dimension qui se chargera de stocker les valeurs de notre table.
-\textit{MatriceString} est une classe constituée d'un tableau d'objets de la classe \textit{TabString} qui elle-même modélise une ligne d'une table, tout ce mécanisme a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
+Le deuxième attribut est une classe qui représente un tableau de chaînes de caractères dans lequel chaque case (cellule) stockera le nom de la colonne (Attribut) concernée. Il s'agit de la classe \textit{TabAttribut} qui est elle-même composée de plusieurs instances de la classe \textit{NomAttribut}.
+On a représenté cette dernière comme étant le nom de l'attribut ainsi que le nom de la table d'où il provient, car cela facilitera grandement l'accès aux attributs lors de l'exécution de la requête. Ce choix sera expliqué plus en détail dans ce qui suivra.
 
-La classe \textit{Table} sert donc à stocker le contenu d'un fichier. Mais celà n'est pas suffisant puisque nous serons amenés à manipuler plusieur fichiers, alors on a pensé à rajouter
-la classe \textit{TabTable} pour pouvoir stocker plusieurs objets de la classe \textit{Table} ainsi que les utilisés le plus facilement possible.
+Quant au troisième attribut, instance de \textit{MatriceString}, c'est une matrice à deux dimensions qui se chargera de stocker les valeurs de notre table.
+\textit{MatriceString} est une classe constituée d'un tableau d'objets de la classe \textit{TabString} qui elle-même modélise une ligne d'une table. Tout ce mécanisme a pour effet de produire du code facilement et cela rend donc sa lisibilité, son utilisation et sa maintenance beaucoup plus facile.
+
+La classe \textit{Table} sert donc à stocker le contenu d'un fichier. Mais cela n'est pas suffisant puisque nous serons amenés à manipuler plusieurs fichiers, alors on a pensé à rajouter la classe \textit{TabTable} pour pouvoir stocker plusieurs objets de la classe \textit{Table}, facilitant ainsi leurs manipulations.
 
 \section{Structre de la requête}
 \label{requete}
-Aprés avoir modéliser la manière dont les données seront sotckées, il faut à présent concevoir la façon dont la requête doit être intèrpreter.
+Aprés avoir modélisé la manière dont les données seront stockées, il faut à présent concevoir la façon dont la requête doit être interprétée.
 
 Pour celà, nous avons conçu le diagramme suivant :
 
@@ -574,19 +546,19 @@ Pour celà, nous avons conçu le diagramme suivant :
 La structure d'une requête SQL simple est de la forme suivante : \\
 \\SELECT Attribut1,Attribut2,...,AttributN\\FROM Table1,Table2,...,TableN\\WHERE condition1 [AND \textbar~OR] condition2 [AND \textbar~OR] ..... [AND \textbar~OR] conditionN;\\
 
-Telque \textit{Attribut1,Attribut2,...,AttributN} sont des noms d'attribut qui peuvent être considérés comme des instances de la classe \textit{NomAttribut}.
+Tels que \textit{Attribut1,Attribut2,...,AttributN} sont des noms d'attribut qui peuvent être considères comme des instances de la classe \textit{NomAttribut}.
 
-\textit{Table1,Table2,...,TableN} peuvent être  considérés comme des chaînes de caractères.
+\textit{Table1,Table2,...,TableN} peuvent être considérées comme des chaînes de caractères.
 
-Et enfin, \textit{condition1 [AND \textbar~OR] condition2 [AND \textbar~OR] ..... conditionN}, qui sont des conditions qui ont une forme un peu plus complexe, leur structure sera détaillé plus loin dans ce chapitre.
+Et enfin, \textit{condition1 [AND \textbar~OR] condition2 [AND \textbar~OR] ..... conditionN}, qui sont des conditions
+qui ont une forme un peu plus complexe, leur structure sera détaillée  plus loin dans ce chapitre.
 
-En définant la requête de cette façon, il est clair qu'elle peut être découpée en trois parties. En prenant en compte cette information, nous avons donc conçu la classe
-\textit{Requete} dans la quelle on stock la requête SQL donnée par l'utilisateur. Cette dernière est composée de :
+En définissant la requête de cette façon, il est clair qu'elle peut être découpée en trois parties. En prenant en compte cette information, nous avons donc conçu la classe \textit{Requete} dans laquelle on stocke la requête SQL donnée par l'utilisateur. Cette dernière est composée de :
 
 \subsubsection{Select}
 
-Un attribut de la classe \textit{TabAttribut} qui contient l'ensemble des éléments à projeter. Cette classe est composée de plusieurs objets de la classe \textit{NomAttribut} qui permet de gerer les deux types de projection.
-c'est à dire, celle où seulement le nom de l'attribut est mentionné et celle où le nom de la table d'où cette attribut provient est également mentionné.
+Un attribut de la classe \textit{TabAttribut} qui contient l'ensemble des éléments à projeter. Cette classe est composée de plusieurs objets de la classe \textit{NomAttribut} qui permet de gérer les deux types de projection. c'est-à-dire, celle où seulement le nom de l'attribut est mentionné et celle où le nom de la table d'où cet attribut provient est également mentionné .
+
 \begin{itemize}
 	\item \enquote{SELECT NomAttribut ...}
 	\item \enquote{SELECT NomTable.NomAttribut ...}
@@ -594,43 +566,41 @@ c'est à dire, celle où seulement le nom de l'attribut est mentionné et celle 
 
 \subsubsection{From}
 
-La partie \textit{From} est constituée de noms de table séparer par des vergule, il est donc naturel, vu la simplicité, d'utiliser la classe \textit{TabString} définie plus haut.
+La partie \textit{From} est constituée de noms de table séparés par des virgules. Il est donc naturel, vu la simplicité, d'utiliser la classe \textit{TabString} définie plus haut.
 
 \nb La définition d'alias pour le nom des tables n'est pas prise en charge.
 
 \subsubsection{Where}
 
-Enfin la dérniere partie, et celle qui nous a posé le plus de difficultés, est la partie \textit{Where}. Cette dernière, étant un peu plus complexe que les autres parties, nous a pris un peu plus de temps pour la modèliser.
+Enfin la dernière partie, celle qui nous a posé le plus de difficultés, est la partie \textit{Where}. Cette dernière, étant un peu plus complexe que les autres parties ; elle nous a pris un peu plus de temps pour la modéliser.
 
-En effet, Cette partie est constituée de conditions séparer par des opérateurs logique (i.e \textit{AND} ou \textit{OR}). Tel que chaque condition est elle même constituée de deux opérande séparer par un opérateur arithmétique.
+En effet, cette partie est constituée de conditions séparées par des opérateurs logiques (i.e \textit{AND} ou \textit{OR}). Telle que chaque condition est, elle même constituée de deux opérandes séparés par un opérateur arithmétique.
 
-Nous avons donc décider de créer deux nouvelle classe, \textit{Condition} et \textit{TabCondition}. La première est un classe qui represente une condition, c'est à dire deux opérande et un opérateur. On a de même rajouter un attribut \textit{typeCondition} car une condition se découpe en deux type :
+Nous avons donc décidé de créer deux nouvelles classes, \textit{Condition} et \textit{TabCondition}. La première est une classe qui représente une condition, c'est-à-dire deux opérandes et un opérateur. On a de même rajouté un attribut \textit{typeCondition} car une condition se découpe en deux type :
 \begin{description}
-	\item[Attribut - Valeur] le premièr opérande étant le nom d'un attribut et le deuxième une valeur. Les valeurs prise en charge sont les suivantes : nombre réel, chaîne de caractères et date.
-	\item[Attribut - Attribut] les deux opérande sont des noms d'attribut. Cette condition est, dans la majorité des cas, utiliser pour réaliser des jointure, appelées aussi \textit{condition de jointure}
+	\item[Attribut - Valeur] e premier opérande étant le nom d'un attribut et le deuxième une valeur. Les valeurs prises en charge sont les suivantes : nombre réel, chaîne de caractères et date.
+	\item[Attribut - Attribut] les deux opérandes sont des noms d'attribut. Cette condition est, dans la majorité des cas, utilisée pour réaliser des jointures, appelées aussi \textit{condition de jointure}
 \end{description}
 
-Pour la deuxième classe, \textit{TabCondition}, elle est construite à partir d'une ou plusieurs instances de la classe \textit{Condition}, ainsi que les opérateurs logique qui les séparent.
+Pour la deuxième classe, \textit{TabCondition}, est construite à partir d'une ou plusieurs instances de la classe \textit{Condition}, ainsi que des opérateurs logiques qui les séparent.
 
 
 % ------------------------------------- %
 % Implementation
 % ------------------------------------- %
 
-\chapter{Implementation}
+\chapter{Implémentation}
 
 \section{Choix de la téchnologie}
-Nous avons choisis d'implémenter l'application en \textit{C++} parce que c'est un langage orienté objet qui est particulièrement adapté à la modélisation que nous avons précédement réalisée.
-le \textit{C++}  est multi-plateformes, ce qui nous permettra de porter l’application sur plusieurs systèmes relativement facilement.
+Nous avons choisis d'implémenter l'application en langage de programmation \textit{C++} parce que c'est un langage orienté objet qui est particulièrement adapté à la modélisation que nous avons précédemment réalisée. Le \textit{C++} est multiplateforme, ce qui nous permettra de porter l'application sur plusieurs systèmes, relativement facilement.
 
-Par ailleurs, le \textit{C++} est l’un des principaux langages enseignés dans notre formation. Nous possédons donc des acquis avec ce langage, et ce projet nous permet d’en améliorer notre connaissances.
-Enfin, ce langage jouit d’une communauté importante, de nombreuses bibliothèques ainsi que d’une documentation très complète.
+Par ailleurs, le \textit{C++} est l'un des principaux langages enseignés dans notre formation. Nous possédons donc des acquis avec ce langage, et ce projet nous permet d'en améliorer nos connaissances. Aussi ce langage regroupe une importante communauté, jouit de nombreuses bibliothèques ainsi que d'une considérable documentation.
 
-Enfin, pour la compilation du code source nous avons utilisé \textit{Make}\footnote{Make est un logiciel qui construit automatiquement des fichiers, souvent exécutables, ou des bibliothèques à partir d'éléments de base tels que du code source}. Cela nous a permis d'automatiser la production de l'éxecutable.
+En outre, pour la compilation du code source nous avons utilisé \textit{Make}\footnote{Make est un logiciel qui construit automatiquement des fichiers, souvent exécutables, ou des bibliothèques à partir d'éléments de base tels que du code source}. Cela nous a permis d'automatiser la production de l'exécutable.
 
 \section{Développement}
 
-Tout comme la partie conception, nous avons décider de répartir l'implémentation du projet en trois parties principales.
+Tout comme la partie conception, nous avons décidé de répartir l'implémentation du projet en trois parties principales.
 
 \subsection{Chargement des données}
 
