@@ -97,9 +97,9 @@ Table Table::projection(TabAttribut attributs) const{
         return *this;
     }
     else {
-        /* Vérification des ambiguïté */
+        // Verification des ambiguite 
         for(unsigned long int i = 0; i < attributs.getSize(); i++) {
-            if (attributs[i] != "*") { // pas d'ambiguïté si attributs[i] == "Table.*"
+            if (attributs[i] != "*") { //si attributs[i] == "Table.*"
                 int n_trouve = 0;
                 for(unsigned long int j = 0; j < this->getNomAttributs().getSize(); j++) {
                     if (attributs.get(i) == this->getNomAttributs().get(j)) 
@@ -107,19 +107,19 @@ Table Table::projection(TabAttribut attributs) const{
                 }
                 if (n_trouve > 1) {
                     cerr << "Erreur dans la Requete SQL (selection) " << endl;
-                    cerr << "Il existe plusieurs '" << attributs[i] << "' dans les tables (ambiguïté)" << endl;
-                    cerr << "Veuillez préciser le nom de la table" << endl;
+                    cerr << "Il existe plusieurs '" << attributs[i] << "' dans les tables (ambiguite)" << endl;
+                    cerr << "Veuillez preciser le nom de la table" << endl;
                     exit(1);
                 }
                 if (n_trouve == 0) {
                     cerr << "Erreur dans la Requete SQL" << endl;
-                    cerr << "Il n'éxiste pas '" << attributs[i] << "' dans les tables." << endl;
+                    cerr << "Il n'existe pas '" << attributs[i] << "' dans les tables." << endl;
                     exit(1);
                 }
             }
         }
         
-        /* Si pas d'ambiguïté */
+        // Si pas d'ambiguite
         Table tab;
         tab.nomTable=nomTable;
         tab.valeurAttributs=MatriceString(valeurAttributs.getSize());
@@ -137,8 +137,8 @@ Table Table::projection(TabAttribut attributs) const{
 Table Table::selection(TabCondition condition) const{
     Table res; // la Table resultat
     res.nomTable = "Resultat Final";
-    res.nomAttributs = this->nomAttributs; // Le même nom d'attribut
-    /* Allocation de l'espace mémoire (plus que suffisant) */
+    res.nomAttributs = this->nomAttributs; // Le meme nom d'attribut
+    /* Allocation de l'espace memoire (plus que suffisant) */
     res.valeurAttributs = MatriceString(this->valeurAttributs.getSize());
     /* Parcours des valeurs */
     for(unsigned long int i = 0; i < this->valeurAttributs.getSize(); i++) {
@@ -146,7 +146,7 @@ Table Table::selection(TabCondition condition) const{
             res.valeurAttributs.add(this->valeurAttributs[i]);
         }
     }
-    /* Pensez à supprimer l'espace supplementaire alloué (if alloc >> size ) */
+    /* Pensez a supprimer l'espace supplementaire alloue (if alloc >> size ) */
     return res;
 }
 Table Table::jointure(const Table& tab1,const Table& tab2) const{
