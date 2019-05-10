@@ -128,7 +128,7 @@ Les requêtes considérées seront des requêtes simples de la forme : \enquote
 À partir d’un ou plusieurs fichiers CSV, Comma-separated Values\footnote{Comma-separated values, format texte ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Voir page \pageref{csv}},
 il est demandé de construire une représentation en mémoire des données et d'implémenter les procédures de projection, de sélection et de jointure, découlant de l'interrogation SQL.
 
-Il s'agit principalement de reproduire les fonctionnalités de bases d'un SGBD\footnote{Système de Gestion de Base de Données, voir page \pageref{sgbd}}, tel que MySQL ou bien Oracle.
+Il s'agit principalement de reproduire les fonctionnalités de bases d'un SGBD\footnote{Système de Gestion de Base de Données, voir page \pageref{sgbd}}, tel que MySQL ou bien Oracle Database.
 
 Notre groupe, composé de cinq personnes : Belkassim Bouzidi, Chakib Elhouiti, Massili Kezzoul, Ramzi Zeroual et Yang Feï, et encadré par Mme Anne-Muriel Chifolleau, a saisie l'opportunité de réaliser ce projet.
 
@@ -897,13 +897,19 @@ Nous avons aussi pensé à rajouter des fonctions d'agrégation, mais le temps n
 
 \section{Code de la méthode projection}
 
+Cette extrait de code montre comment est implémenté la fonction de projection.
+
 \lstinputlisting[language=C++, firstline=94, lastline=136]{../src/table.cpp}
 
 \section{Code de la méthode selection}
 
-\lstinputlisting[language=C++, firstline=137, lastline=151]{../src/table.cpp}
+Cette extrait de code montre l'implémentation de la méthode qui se charge de la sélection.
+
+\lstinputlisting[language=C++, firstline=137, lastline=150]{../src/table.cpp}
 
 \section{Code verifier de la classe TabCondition}
+
+Ce code montre comment les conditions sont appliquées sur une ligne d'une table donnée.
 
 \lstinputlisting[language=C++, firstline=90, lastline=112]{../src/tabCondition.cpp}
 
