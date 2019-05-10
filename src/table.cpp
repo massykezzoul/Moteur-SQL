@@ -146,7 +146,6 @@ Table Table::selection(TabCondition condition) const{
             res.valeurAttributs.add(this->valeurAttributs[i]);
         }
     }
-    /* Pensez a supprimer l'espace supplementaire alloue (if alloc >> size ) */
     return res;
 }
 Table Table::jointure(const Table& tab1,const Table& tab2) const{
