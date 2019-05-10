@@ -634,14 +634,12 @@ Tout comme la partie conception, nous avons décider de répartir l'implémentat
 
 \subsection{Chargement des données}
 
-Nous avons commencer par implémenter les classes que nous avons modéliser dans la première partie de la conception, puis nous nous sommes concentrer sur la manière de charger le contenu d'un fichier CSV en mémoire.
+Nous avons commencé par implémenter les classes que nous avions modélisées dans la première partie de la conception, puis nous nous sommes concentrés sur la manière de charger le contenu d'un fichier CSV en mémoire.
 
-La principale difficulté dans cette partie étais de trouver un moyen d'interprèter un fichier CSV afin de stocker les données dans nos classes.
-Pour celà nous avons écris une fonction, \textit{strsplit}, qui se charge de parser une ligne du fichier en plusieurs chaîne de caractères, correspondent au valeurs ou au noms d'attribut.
+La principale difficulté dans cette partie était de trouver un moyen d'interpréter un fichier CSV afin de stocker les données dans nos classes. Pour cela nous avons écrit une fonction,\textit{strsplit}, qui se charge de segmenter une ligne du fichier en plusieurs chaîne de caractères, correspondant aux valeurs ou aux noms d'attribut.
 
-\textit{strsplit} prend en paramètre une ligne d'un fichier CSV et un caractère séparateur, une vergule par défault, et retourne un tableau de chaîne de caractère qui contient les différentes valeurs. Cette fonction commence par chercher tout les caractères séparateurs qui ne sont pas échapés (contenu dans des guillemets ' " ') afin d'allouer de l'espace mémoire pour stocker le resultat.
-Ensuite vient la lecture des attributs. Durant cette étape, deux cas de figure se presentent, un attribut peut, ou pas, être entouré par deux guillemets. Dans le cas où l'attribut est encadré, la fonction trouve donc au debut un guillemet et se met donc à chercher le guillemet fermant (qui n'est pas échapé) associé. Et elle met ce qui y'a entre les deux dans le tableau à la case correspondente en utilsant la méthode \textit{substr} appartenant à la classe \textit{String} qui soustrait, dans notre cas, une chaîne de la ligne débutant par la position du guillemet ouvrant au guillemet fermant sans les prendre au compte.
-Dans le deuxième cas, la fonction fonctionne pareil mais au lieu de chercher le guillemet fermant, elle cherche le caractère séparateur.
+\textit{strsplit} prend en paramètre une ligne d'un fichier CSV et un caractère séparateur, une virgule par default, et retourne un tableau de chaînes de caractères qui contient les différentes valeurs. Cette fonction commence par chercher tous les caractères séparateurs qui ne sont pas libres (contenu entre des guillemets ' " '), afin d'allouer de l'espace mémoire pour stocker le résultat.
+Ensuite vient la lecture des attributs. Durant cette étape, deux cas de figure se présentent, un attribut peut, ou ne pas être entouré par deux guillemets. Dans le cas où l'attribut est encadré, la fonction trouvedonc au début un guillemet et se met donc à chercher le guillemet fermant associé (qui n'est pas échapé). Et elle insère dans le tableau ce qui existe entre les deux guillemets, à la case correspondante, en utilisant la méthode \textit{substr} appartenant à la classe \textit{String} qui soustrait, dans notre cas, une chaîne de la ligne débutant par la position du guillemet ouvrant au guillemet fermant sans les prendre au compte. Dans le deuxième cas, la lecture des attributs fonctionne de la même façon mais au lieu de chercher le guillemet fermant, elle cherche le caractère séparateur.
 
 Maintenant qu'on peut parser, on commence par lire la première ligne du fichier CSV et la passer à la fonction \textit{strsplit} en stockant le resultat dans l'attribut \textit{nomAttributs} de la classe \textit{Table} (Voir Schéma \ref{uml-donnees} page \pageref{uml-donnees}). Pour le reste du fichier, on passe chaque ligne à la fonction \textit{strsplit} et on ajoute le resultat dans la matrice \textit{valeursAttributs} de la classe \textit{Table}.
 
@@ -649,23 +647,22 @@ Maintenant qu'on peut parser, on commence par lire la première ligne du fichier
 
 \subsection{Requête}
 
-D'abord avant de parler de l'éxecution de la requête, on vas expliqué comment on a intérpreter cette dernière.
+D'abord avant de parler de l'exécution de la requête, on va expliquer comment on a interpréter cette dernière.
 
 \subsubsection{Intérpretation}
 
-Nous avons commencer par implémenter les classes que nous avons modéliser dans la deuxième partie de la conception (voir Chapitre \ref{requete} page \pageref{requete}), puis nous nous sommes occuper de trouver une manière de découper la requête afin de stocker chaque partie dans l'attribut correspondent.
+Nous avons commencé par implémenter les classes que nous avions modélisées dans la deuxième partie de la conception (voir Chapitre \ref{requete} page \pageref{requete}), puis nous nous sommes occupés à trouver une manière de découper la requête afin de stocker chaque partie dans l'attribut correspondant.
 \\
-La classe \textit{requete} est constituée de trois attributs comme on l'a vu, son constructeur qui prend une chaine de caractères en argument la parse en utilisant les trois méthodes \textit{parseSelect(string)}, \textit{parseFrom(string)} et \textit{parseWhere(string)}, ces trois méthodes font presque le même travail, tel que chaque méthode cherche le mot clé pour parser la requete et mettre ce qu'il faut dans l'attribut correspendant de la classe.
+La classe \textit{requete} est constituée de trois attributs comme on l'a vu, son constructeur qui prend une chaine de caractères en argument la parse par l’utilisation des trois méthodes \textit{parseSelect(string)}, \textit{parseFrom(string)} et \textit{parseWhere(string)}, Ces trois méthodes font presque le même travail, telle que chaque méthode cherche le mot clé pour parser la requête et mettre ce qu'il faut dans l'attribut correspondant de la classe.
 \\
-Prenons la méthode \textit{parseSelect(string)} en exemple, elle prend en paramètre la requête et cherche le mot clé \textit{select} et \textit{from} pour récupérer la sous chaîne entre ces deux mot clés qui est à son tour transformer en une instance de la classe \textit{tabAttribut} aprés l'avoir découper avec la fonction \textit{strsplit}. Et dans ce même concept on obtiendra l'attribut \textit{from} et \textit{where}.
+Prenons la méthode \textit{parseSelect(string)} comme exemple. Elle prend en paramètre la requête et cherche le mot clé \textit{select} et \textit{from} pour récupérer la sous-chaîne entre ces deux mots clés qui est à son tour transformée en une instance de la classe \textit{tabAttribut} après l'avoir découpée avec la fonction  \textit{strsplit}. Et par ce même concept on obtiendra l'attribut \textit{from} et \textit{where}.
 
 \subsubsection{Éxecution}
-Maintenant on va parler de l'éxecution de la requête, ce qui veut dire comment notre application va t-elle éxecuter la requête SQL sur les données qu'on a déja chargé en mémoire vive ?
+Maintenant on va parler de l'exécution de la requête, ce qui veut dire comment notre application va-t-elle exécuter la requête SQL sur les données qu'on a déjà chargées en mémoire vive ?
 \\
-Notre application éxecute la requête en trois étapes consécutives et complémentaires pour éffectuer le traitement nécessaire.
-Nous allons considére une exemple de requête ainsi que deux table de données afin de voir étape par étape le resultat de chaque traitement.
+Notre application exécute la requête en trois étapes consécutives et complémentaires pour effectuer le traitement nécessaire. Nous allons considérer un exemple de requête ainsi que deux tables de données afin de voir étape par étape le résultat de chaque traitement.
 
-Exemple de requete :
+Exemple de requête :
 \begin{center}
 	\enquote{SELECT nom,localisation FROM Employés,Départements WHERE Employés.idDep = Départements.idDep AND age $\leq$ 30;}
 	\begin{figure}[h]
@@ -700,13 +697,14 @@ Exemple de requete :
 	\end{figure}
 \end{center}
 
-Le \textbf{produit cartésien} est fait par la méthode \textit{produitCartésien(table1,table2)} qui prend en paramètres deux tables et produit une nouvelle table en sortie. Cette table a pour nom \enquote{nomtable1 JOIN nomtable2}. Le nom d'attributs de cette table sont la concaténation des noms d'attributs des deux tables. Pour les valeurs d'attributs, chaque ligne de \textit{valeurAttributs(matrice)} de la table1 est concatené avec toute les lignes de \textit{valeurAttributs(matrice)} de la table2 et celà se fait par deux boucles \textit{for} imbriquées.
+Le \textbf{produit cartésien} est fait par la méthode \textit{produitCartésien(table1,table2)} qui prend en paramètres deux tables et produit une nouvelle table en sortie. Cette table a pour nom \enquote{nomtable1 JOIN nomtable2}.Les noms d'attributs de cette table sont la concaténation des noms d'attributs des deux tables. Pour les valeurs d'attributs, chaque ligne de \textit{valeurAttributs(matrice)} de la table1 est concatenée avec toutes les lignes de \textit{valeurAttributs(matrice)} de la table2 et cela se fait par deux boucles \textit{for} imbriquées.
 
-Le nom des tables concerné par le produit cartésien sont dans l'attribut \textit{from} de la requête. Comme on peut avoir plusieurs tables et notre méthode ne fait le produit cartésien qu'entre deux tables, on va l'éffectuer entre les deux premières tables puis l'éffectuer entre la table resultante des deux premières avec la prochaines table et ainsi de suite jusqu'a ce que le produit soit effectuer entre toutes les tables.
+Le nom des tables concernées par le produit cartésien sont dans l'attribut \textit{from} de la requête. Comme on peut avoir plusieurs tables et notre méthode ne fait le produit cartésien qu'entre deux tables, on va l'effectuer entre les deux premières tables puis entre la table résultante des deux premières avec la prochaine table et ainsi de suite jusqu'à ce que le produit soit effectué entre toutes les tables.
 
-\nb Le produit cartésien entre deux table est une opération très couteuse en terme de mémoire vive utiliser. Notre application n'est donc pas optimisée pour les grandes tables.
+\nb Le produit cartésien entre deux tables est une opération très couteuse en termes de mémoire vive utilisée. Notre application n'est donc pas optimisée pour les grandes tables.
 
-À cette étape on a une seule table resultante qui contient les attributs de toutes les table concerner. La prochaine étape consiste a executée la sélection. Le resultat du produit cartésien est illustré dans la figure suivante.
+À cette étape, on a une seule table résultante qui contient les attributs de toutes les tables concernées. La prochaine étape consiste à exécuter la sélection. Le résultat du produit cartésien est illustré dans la figure suivante.
+
 \begin{center}
 	\enquote{SELECT nom,localisation \textbf{FROM Employés,Départements} WHERE Employés.idDep = Départements.idDep AND age $\leq$ 30;}
 	\begin{figure}[h!]
@@ -728,11 +726,12 @@ Le nom des tables concerné par le produit cartésien sont dans l'attribut \text
 	\end{figure}
 \end{center}
 
-la \textbf{Selection} est réaliser par la méthode \textit{selection(TabCondition)} de la classe \textit{Table} qui prend en paramètre l'ensemble des condition contenues dans l'attribut \textit{where} de la classe \textit{Requete}. La selection est appliquée sur la table courante (la table resultante de l'étape précedente) et retourne en resultat une nouvelle table. Le nom des attributs de cette nouvelle table est exactement le même que la table courante, puisque la selection ne concerne que les valeurs des attributs et non leur noms.
+la \textbf{Selection} est réalisée par la méthode \textit{selection(TabCondition)} de la classe \textit{Table} qui prend en paramètre l'ensemble des conditions contenues dans l'attribut \textit{where} de la classe \textit{Requete}. La sélection est appliquée sur la table courante (la table résultante de l'étape précédente) et retourne en résultat une nouvelle table. Les noms des attributs de cette nouvelle table sont exactement les mêmes que la table courante, puisque la sélection ne concerne que les valeurs des attributs et non leurs noms.
 
-Les valeurs d'attributs sont parcourus un par un tout en leurs appliquant la méthode \textit{verifier} de la classe \textit{TabCondition}. Cette dernière retourne un booléen, \textit{Vrai} si les condition, appliquées à une ligne, sont vraies et \textit{Faux} sinon. Si les conditions sont vérifier pour une ligne donnée, alors cette ligne est ajoutée à la table resultante.
+Les valeurs d'attributs sont parcourues une par une, tout en leurs appliquant la méthode \textit{verifier} de la classe \textit{TabCondition}. Cette dernière retourne un booléen, \textit{Vrai} si les conditions, appliquées a une ligne, sont vraies et \textit{Faux} sinon. Si les conditions sont vérifier pour une ligne donnée, alors cette ligne est ajoutée à la table résultante.
 
-Àprès cette phase, on a en resultat une table qui contient les valeurs filtrer selon les conditions de la requête. Il ne reste donc qu'a projeté les attributs que l'utilisateur a demandé. Le resultat de la selection est schématisé ci-dessou.
+Apres cette phase, on a comme résultat une table qui contient les valeurs filtrées selon les conditions de la requête. Il ne reste donc qu'à projeter les attributs que l'utilisateur a demandés . Le résultat de la sélection est schématisé ci-dessous.
+
 \begin{center}
 	\enquote{SELECT nom,localisation FROM Employés,Départements \textbf{WHERE Employés.idDep = Départements.idDep AND age $\leq$ 30};}
 	\begin{figure}[h]
@@ -750,7 +749,8 @@ Les valeurs d'attributs sont parcourus un par un tout en leurs appliquant la mé
 	\end{figure}
 \end{center}
 
-La \textbf{projection} est éffectuée par la méthode \textit{projection(TabAttribut)} de la classe \textit{Table} qui prend en paramètre l'ensemble des noms d'attributs que contient l'attribut \textit{select} de la classe \textit{Requete}. La projection est appliquée sur la table resultante de la selection et retourne une nouvelle table (resultat final). Le nom des attributs de cette dernière est directement copié de l'attribut \textit{select}. La méthode se charge ensuite de copier toute les colonnes, dont le nom apparaît dans l'attribut \textit{select}, et de les ajouter dans la table resultante. Cette dernière est illustré ci-dessou.
+La \textbf{projection} est effectuée par la méthode \textit{projection(TabAttribut)} de la classe \textit{Table} qui prend en paramètre l'ensemble des noms d'attributs que contient l'attribut \textit{select} de la classe \textit{Requete}.La projection est appliquée sur la table résultante de la sélection et retourne une nouvelle table (résultat final). Le nom des attributs de cette dernière est directement copié de l'attribut \textit{select}.La méthode se charge ensuite de copier toute les colonnes, dont le nom apparait dans l'attribut \textit{select} et de les ajouter dans la table résultante. Cette dernière est illustre ci-dessous.
+
 \begin{center}
 	\enquote{\textbf{SELECT nom,localisation} FROM Employés,Départements WHERE Employés.idDep = Départements.idDep AND age $\leq$ 30;}
 	\begin{figure}[h]
@@ -770,7 +770,8 @@ La \textbf{projection} est éffectuée par la méthode \textit{projection(TabAtt
 
 \subsection{Restitution des données}
 
-Cette dérniere étape consiste, tout bonnement, a affichée la table qui resulte de l'éxecution de la requête sous deux format simple.Le première méthode est d'écrire la table dans un fichier sous un format CSV. Pour celà rien de plus simple que de parcourir la table champs par champs, les écrire tout en l'entourent pas des guillemets et séparent chaque champs par une vergule. Cela permet la réutilisabilité de la table dans des prochaine requête. La deuxième méthode consiste de retourner la table sous un format un peu plus compréhensible par un utilisateur humain. on a donc coder une méthode qui écrit une table un peu comme le fait l'interprèteur de requête d'Oracle. Ci-dessou une capture d'écran d'un resultat de cette méthode.
+Cette dernière étape consiste, tout bonnement, à afficher la table qui résulte de l'exécution de la requête sous deux formats simples. La première méthode est de concevoir la table dans un fichier sous un format CSV. Pour cela rien de plus simple que de parcourir la table champs par champs, les écrire tout en les entourant par des guillemets et séparant chaque champs par une virgule. Cela permet la réutilisabilité de la table pour de prochaines requêtes. La deuxième méthode consiste à retourner la table sous un format un peu plus compréhensible par un utilisateur lambda. On a donc utilisé une méthode qui écrit une table un peu comme le fait l'interpréteur de requêtes d'Oracle.
+ Ci-dessous une capture d'écran d'un résultat selon cette dernière méthode.
 
 \begin{figure}[!h]
 	\centering
@@ -788,25 +789,25 @@ Le code source est dans le dossier \textit{src}. La compilation des sources de l
 
 \texttt{\$ make all}
 
-\nb la commande doit être executer dans le dossier où se trouve le code source.
+\nb la commande doit être exécutée dans le dossier où se trouve le code source.
 
 \subsubsection{Utilisation}
 
-Une fois le code compiler, un éxecutable sera créé (\textit{sql}). Vous pourrez ainsi utiliser notre application de deux façon différentes :
+Une fois le code compilé, un exécutable sera crée (\textit{sql}). Vous pourrez utiliser notre application de deux façons :
 
 \texttt{\$ ./sql table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."}
 
-Les fichiers CSV sont scpécifiés en argument puis comme dernièr argument, la requête SQL entouré par des guillemets. L'application se charge de lire les fichiers et d'éxecuter la requête puis ecrire deux fichiers. Un sous le format CSV et l'autre sous un format compréhensible. Vous pourrez consulter ces fichiers grâce au deux commande \texttt{\$ cat resultat.txt} et \texttt{\$ cat resultat.csv}. L'application s'arrête automatiquement après l'éxecution et vous previent au cas de bon déroulement ou d'erreur.
+Les fichiers CSV sont spécifiés en argument, puis comme dernier argument, la requête SQL est entourée par des guillemets. L'application se charge de lire les fichiers et d'exécuter la requête puis d’écrire deux fichiers. Un sous le format CSV et l'autre sous un format compréhensible. Vous pourrez consulter ces fichiers grâce aux deux commande \texttt{\$ cat resultat.txt} et \texttt{\$ cat resultat.csv}. L'application s'arrête automatiquement après l'exécution et vous prévient en cas de bon déroulement ou d'erreur.
 
 \texttt{\$ ./sql table1.csv ... tableN.csv}
 
-En éxecutant l'application de cette façon, elle charge les tables, données en argument, en mémoire puis vous laisse la main pour donner la requête SQL. Vous aurez le choix entre quelques commandes. Si votre commande commence par : \texttt{select} alors l'application considére que lui avez donné la requête SQL et l'éxecute sur les données en mémoire. Les commandes \texttt{csv} et \texttt{txt} affiche, respectivement, le fichier \textit{resultat.csv} et \textit{resultat.txt} sur la sortie standard. Pour plus d'information, la commande \texttt{help} affiche la liste des commandes disponible. La commande \texttt{exit} arrête l'application.
+En exécutant l'application de cette façon, elle charge les données en mémoire puis vous laisse la main pour donner la requête sql. Vous aurez le choix entre quatre commandes .Si votre commande commence par: \texttt{select} alors l'application considère que vous lui avez donné la requête SQL et l'exécute sur les données en mémoire. Les commandes \texttt{csv} et \texttt{txt} affichent , respectivement, le fichier \textit{resultat.csv} et \textit{resultat.txt} sur la sortie standard. Pour plus d'information, la commande \texttt{help} affiche la liste des commandes disponibles. La commande \texttt{exit} arrête l'application.
 
 \nb Vous pourrez utiliser cette méthode sans donner aucun argument.
 
 \section{Test}
 
-Pour le bon déroulement de la partie implementation, nous avons à chaque étape de développement écrit plusieurs fichiers de test. Ces fichiers consistais à tester les modules de l'application séparement après chaque étape. Tout ces fichiers sources sont regrouper dans le dossier \textit{test} du dossier \textit{src}. Par exemple, le fichier \textit{test-condition.cpp} test la classe \textit{Condition} séparement des autres classe afin de chercher d'éventuelle bogues et de veillez à son bon fonctionnement.
+Pour le bon déroulement de la partie implémentation, nous avons à chaque étape de développement écrit plusieurs fichiers de test. Ces fichiers consistaient à tester les modules de l'application séparément après chaque étape. Tous ces fichiers sources sont regroupés dans le dossier \textit{test} du dossier \textit{src}. Par exemple, le fichier \textit{test-condition.cpp} test la classe \textit{Condition} séparément des autres classes afin de chercher d'éventuels bogues et de veiller à son bon fonctionnement.
 
 % ------------------------------------- %
 % Bilan et difficultés rencontrées
@@ -815,12 +816,12 @@ Pour le bon déroulement de la partie implementation, nous avons à chaque étap
 \chapter{Bilan et difficultés rencontrées}
 \section{Bilan}
 
-Au final la conception et le développement d'un moteur d'évaluation de requêtes SQL simple en mémoire vive a été réalisée et le cahier des charges respecté , sur un plan plus général ce projet nous servira comme l'un de nos premièrs travaille en groupe sur un projet de dévlopement informatique, cela nous a apporté riguer, sérieu et surtout apprendre à s'organiser, l'organisation est donc le plus grand enrichissement que nous avons pu avoir.
+Au final la conception et le développement d'un moteur d'évaluation de requêtes SQL simple en mémoire vive ont pu être menés à terme et le cahier des charges respecté. Sur un plan général, ce projet nous servira comme l'un de notre premier travail en groupe autours du développement d’une application informatique. L'atteinte de l'objectif nous a permis de mieux apprécier le sens de la rigueur et du sérieux et surtout appris à nous organiser. L'organisation fut donc le plus grand enrichissement que nous ayons pu avoir.
 \newline Ce projet a aussi permis de créer de vrais liens d'amitié au sein de notre groupe.
 
 \section{Difficultés}
 
-Plusieurs retouche ont été apporté lors de l'implementation de notre projet du à des bugs , nous avons donc aussi du revenir sur pas mal de points de conception :
+Plusieurs retouches ont été apportées lors de l'implémentation de notre projet, ceci est dû à des bugs. Nous sommes donc revenus sur de nombreux points de conception :
 \begin{itemize}
 	\item
 \end{itemize}
@@ -830,25 +831,25 @@ Plusieurs retouche ont été apporté lors de l'implementation de notre projet d
 
 \chapter{Perspective}
 
-Dans une vision d'amélioration de notre application voici quelques idées sur les quelles nous avons réfléchis :
+Dans une vision d'amélioration de notre application voici quelques idées sur lesquelles nous avons réfléchi :
 
 \subsubsection{Optimisation}
 
-Une optimisation en mémoire de notre application semble l'une des premières perspectives sur les quelles nous pouvons nous pencher. En effet, notre application ne permet pas d'éxecuter des jointure entre des tables assez conséquentes. Afin d'optimiser celà, plusieurs solution sont possible.
+Une optimisation en mémoire de notre application semble l'une des premières perspectives sur laquelle nous devons nous pencher. En effet, notre application ne permet pas d'exécuter des jointures entre des tables assez conséquentes. Afin d'optimiser cela, plusieurs solutions sont possibles.
 
 \begin{itemize}
-	\item Commencer par l'éxecution d'une projection partielle. C'est à dire supprimer les attributs (colonnes) qui n'apparaîssent pas sur les conditions de sélection. Celà réduira, grandement dans certains cas, la taille des tables sur laquelle la jointure sera executées.
-	\item Ensuite dans la même optique de réduction de la taille des tables, éxecuter les conditions de sélection (hors conditions de jointure) sur chaque tables individuellment.
-	\item Enfin, après toutes ces manipulation, il est envisageable d'écrire le resultat du produit cartésien dans un fichier temporaire, et pas directement en mémoire, afin de ne jamais surcharger la mémoire vive. Mais celà entrainera, en contre partie, un temps d'éxecution plus longs.
+	\item Commencer par l'exécution d'une projection partielle. C'est-à-dire supprimer les attributs (colonnes) qui n'apparaissent pas sur les conditions de sélection. Cela réduira, grandement dans certains cas, la taille des tables sur laquelle la jointure sera exécutées.
+	\item Ensuite, dans la même optique de réduction de la taille des tables, exécuter les conditions de sélection (hors conditions de jointure) sur chaque tables individuellement.
+	\item Enfin, après toutes ces manipulations, il est envisageable d'écrire le résultat du produit cartésien dans un fichier temporaire et pas directement en mémoire, afin de ne jamais surcharger la mémoire vive. Mais cela entraînera, en contre partie, un temps d'exécution plus longs.
 \end{itemize}
 
 \subsubsection{Opérateur}
 
-Il est aussi possible d'ajouté certains opérateurs à notre selection telles que :
+Il est aussi possible d'ajouter certains opérateurs à notre selection telles que :
 \begin{description}
-	\item[LIKE] Ce mot-clé permet d’effectuer une recherche sur un modèle particulier. Il est par exemple possible de rechercher les enregistrements dont la valeur d’une colonne commence par telle ou telle lettre.	
+	\item[LIKE] Ce mot-clé permet d’effectuer une recherche sur un modèle particulier. Il est par exemple possible de rechercher les enregistrements dont la valeur d’une colonne commence par telle ou telle lettre.
 	\item[BETWEEN] Permet de sélectionner un intervalle de données dans une requête.
-	\item[IN] L’opérateur logique qui vérifie si une colonne est égale à une des valeurs comprise dans set de valeurs déterminés.
+	\item[IN] L’opérateur logique qui vérifie si une colonne est égale à une des valeurs comprises dans set de valeurs déterminées.
 \end{description}
 
 \subsubsection{Commandes}
@@ -863,7 +864,7 @@ Ajouter des commandes en plus autre que \textit{SELECT, FROM} et \textit{WHERE}.
 
 \subsubsection{Fonctions d'agrégation}
 
-Nous avons aussi pensé à rajoter des fonctions d'agrégation, mais le temps ne nous l'a pas premis.
+Nous avons aussi pensé à rajouter des fonctions d'agrégation, mais le temps ne nous l'a pas permis.
 
 \begin{description}
 	\item[MAX()/MIN()] Fonction qui calcul la valeur maximal/minimal d'un attribut.
