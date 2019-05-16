@@ -1,0 +1,138 @@
+\documentclass[11pt,handout]{beamer}
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[
+    left = \flqq{},%
+    right = \frqq{},%
+    leftsub = \flq{},%
+    rightsub = \frq{} %
+]{dirtytalk} 	% for \say{}
+\usepackage{xcolor} 	% for color text
+\usepackage{csquotes}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{array}
+
+\usetheme{Frankfurt}
+\usetheme{CambridgeUS}
+\usetheme{JuanLesPins}
+%\usetheme{Montpellier}
+%\usetheme{Madrid}
+
+\usecolortheme{dolphin}
+
+\useinnertheme{circles}
+\usefonttheme{structurebold}
+\useoutertheme{default}
+
+%\hypersetup{pdfpagemode=FullScreen}
+
+\title[Moteur de requêtes SQL]{Implémentation d’un moteur de \\ requêtes SQL simples}
+\author[Bouzidi, Elhouiti, Kezzoul, Zeroual, Feï]{Bouzidi Belkacem - Elhouiti Chakib \\ Kezzoul Massili - Zeroual Ramzi \\ Feï Yang}
+\institute[]{Université de Montpellier}
+\date{\today}
+
+% Pour inserer une frame de sommaire avant chaque debut de section
+\AtBeginSection[]
+{
+  \begin{frame}
+    \tableofcontents[hideothersubsections,currentsection,subsectionstyle=show/shaded/hide]
+  \end{frame}
+}
+
+% Mettre les listes en triangle
+\setbeamertemplate{itemize item}[triangle]
+
+%Insertion d'un logo
+\newif\ifplacelogo % create a new conditional
+\placelogotrue % set it to true
+\logo{\ifplacelogo\includegraphics[height=12mm]{img/univ-montpellier.png}\fi}
+
+%------------------------------------------------------%
+% page de titre
+%------------------------------------------------------%
+\begin{document}
+
+\placelogofalse
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\placelogotrue
+
+%------------------------------------------------------%
+% Tables des matières
+%------------------------------------------------------%
+
+\begin{frame}{table}
+	\frametitle{Sommaire}
+	\tableofcontents
+\end{frame}
+
+%------------------------------------------------------%
+% Intro
+%------------------------------------------------------%
+
+\section{Introduction}
+
+\begin{frame}{Introduction}{SQL et les bases de données}
+  \begin{block}{Requête SQL}
+
+  \end{block}
+
+  \begin{block}{Intérpreteur de requêtes SQL}
+    \begin{itemize}
+      \item Oracle Database
+      \item MySQL
+      \item ...
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+%------------------------------------------------------%
+% Modélisation
+%------------------------------------------------------%
+
+\section{Modélisation}
+
+\begin{frame}{Modélisation}
+
+\end{frame}
+
+%------------------------------------------------------%
+% Implémentation
+%------------------------------------------------------%
+
+\section{Implémentation}
+
+\begin{frame}{Implémentation}
+
+\end{frame}
+
+%------------------------------------------------------%
+% Démonstration
+%------------------------------------------------------%
+
+\section{Démonstration}
+
+\begin{frame}{Démonstration}
+
+\end{frame}
+
+%------------------------------------------------------%
+% Conclusion
+%------------------------------------------------------%
+
+\section{Conclusion}
+
+\begin{frame}{Bilan}
+
+\end{frame}
+
+\begin{frame}{Perspective}
+
+\end{frame}
+
+\end{document}
