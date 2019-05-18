@@ -76,7 +76,7 @@ Maintenant qu’on peut parser, on commence par lire la première ligne du fichi
 
 #### La requete
 
-Concernant la requête
+Après l
 
 --/ BOUZIDI /-- 3 minute
 
