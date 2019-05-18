@@ -76,7 +76,27 @@ Maintenant qu’on peut parser, on commence par lire la première ligne du fichi
 
 #### La requete
 
-Après l
+Une fois les données chargées en mémoire, il faut à present intérpreter la requête SQL. On peut clairement découper une requête SQL en trois partie.
+
+- Une partie Select,
+- Une partie From,
+- Une partie Where,
+
+Cela nous a permis de developper trois méthode :
+
+- Une fonction parseSelect(),
+- Une fonction parseFrom(),
+- Une fonction parseWhere(),
+
+Ou chaqu'une d'entre elle parse une partie de la requete et stocke les données récuperer dans l'attribut correspondant de la classe Requete.
+
+Maintenant que la requête a été interpretée, comment notre application va-t-elle exécuter la requête sur les données chargées en mémoire ?
+
+L'Éxecution de la requête se fait en trois étape clé :
+
+- Le produit cartésien de deux tables, ou chaque valeur de la première table est concatener avec tout les valeurs de la deuxième table à travers de deux boucle imbriqué.
+- on applique à la table resultante la selection.
+- La projection.
 
 --/ BOUZIDI /-- 3 minute
 
