@@ -160,14 +160,56 @@
 
 \end{frame}
 
+\begin{frame}{Structure des données}
+  \makebox[\textwidth]{\includegraphics[width=\paperwidth]{img/sql.png}}
+\end{frame}
+
+\begin{frame}{Structure de la requête}
+  \makebox[\textwidth]{\includegraphics[width=\paperwidth]{img/requette.png}}
+\end{frame}
+
 %------------------------------------------------------%
 % Implémentation
 %------------------------------------------------------%
-
 \section{Implémentation}
 
 \begin{frame}{Implémentation}
+  Les grandes lignes de l'implémentation : 
+  \begin{itemize}
+    \item Choix du C++ comme langage de programmation,
+    \item Répartition du développement en trois parties principales :
+    \begin{itemize}
+      \item Chargement des données,
+      \item Intérpretationet éxecution de la requête,
+      \item Restitution des données.
+    \end{itemize}
+    \item Utilisation du programme,
+    \item Phases de tests.
+  \end{itemize}
+\end{frame}
 
+\begin{frame}{Développement}{Chargement des données}
+  \begin{itemize}
+    \item Implémentation des classes,
+    \item Interpréter un fichier CSV,
+    \item Fonction strsplit,
+    \item Parser toutes les lignes du fichiers CSV,
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Développement}{La requête}
+  \begin{block}{Intérpretation}
+    Nous nous sommes occupés à trouver une manière de découper la requête afin de stocker chaque partie dans l’attribut correspondant.
+  \end{block}
+  
+  \begin{block}{Éxecution}
+    Notre application exécute la requête en trois étapes consécutives et complémentaires pour effectuer le traitement nécessaire.
+    \begin{itemize}
+      \item Le produit cartésien,
+      \item La selection,
+      \item La projection.
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 %------------------------------------------------------%
@@ -175,10 +217,6 @@
 %------------------------------------------------------%
 
 \section{Démonstration}
-
-\begin{frame}{Démonstration}
-
-\end{frame}
 
 %------------------------------------------------------%
 % Conclusion
