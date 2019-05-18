@@ -1,4 +1,4 @@
-\documentclass[11pt,handout]{beamer}
+\documentclass[10pt,handout]{beamer}
 
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
@@ -74,21 +74,45 @@
 %------------------------------------------------------%
 % Intro
 %------------------------------------------------------%
-
 \section{Introduction}
 
-\begin{frame}{Introduction}{SQL et les bases de données}
-  \begin{block}{Requête SQL}
+\subsection{Organisation du projet}
 
+\begin{frame}{Organisation}
+
+\end{frame}
+
+\subsection{Présentation du SQL et des bases de données}
+\begin{frame}{Présentation}{SQL et les bases de données}
+  \begin{block}{Base de données}
+    Une base de données (en anglais database), permet de stocker et de manipuler des données brutes ou d'informations.
   \end{block}
 
-  \begin{block}{Intérpreteur de requêtes SQL}
+  \begin{block}{Système de gestion de base de données}
+    Un SGBD est un logiciel système servant à stocker, à manipuler ou gérer, et à partager des informations dans une base de données, en garantissant la qualité, la pérennité et la confidentialité des informations, tout en cachant la complexité des opérations.
+  \end{block}
+
+  SGBD les plus utilisés :
     \begin{itemize}
       \item Oracle Database
       \item MySQL
       \item ...
     \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Structered Query Languages}
+  \begin{block}{Intérpreteur de requêtes SQL}
+    Le SQL est un langage informatique normalisé servant à exploiter des bases de données relationnelles.
   \end{block}
+
+  Les requêtes SQL considéré par notre programme sont sous cette forme :
+  
+  \begin{block}
+    
+    \textit{SELECT nomAttribut1,...,nomAttribut2 \\ FROM nomTable1,..., nomTable2 \\ WHERE nomAttributX = nomAttributY OR ... AND nomAttributZ = ZZ}
+  \end{block}
+
 \end{frame}
 
 %------------------------------------------------------%
