@@ -189,13 +189,23 @@ On peut aussi Executer le programme avec des fichier initail en les donnant en a
 
 `sql ../tables/example.csv ../tables/sample.csv`
 
-`ls` 
+`ls`
 
 Vous pouvez vois que les fichier sont déja chargé en mémoire sans executer `add`
 
-Enfin un example de joiture :
+Voici la table "sample":
 
-``
+`select * from sample`
+
+et la table "example" si vous l'avez oublier :
+
+`select * from example`
+
+Voici enfin un example de joiture :
+
+`select nom,villeOrigine,villeActuelle,age from example,sample where example.id = sample.id and age < 21`
+
+Dir conclusion ta3ek ou salam Ou3likoum kheli Ramzi itnak.
 
 --/ RAMZI /-- 2 minute
 
