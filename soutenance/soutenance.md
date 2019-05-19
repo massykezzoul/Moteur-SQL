@@ -127,6 +127,17 @@ Maintenant je laisse mon collègue vous faire une petite démonstration du fonct
 
 Scénario ecrit. 2/3 minute.
 
+### Mode ligne de commande
+
+Le premier mode que je vais vous presenter est le mode d'éxecution en ligne de commande. Voici un example simple :
+
+`./sql ../tables/example.csv "select * from example"`
+
+Le premier argument est le chemin vers le fichier CSV à charger en mémoire.
+Le deuxième est la requete SQL à executer.
+
+Puis le resultat (Comme indiquer) est dans les deux fichier 'resultat.csv' sous un format CSV et 'resultat.txt' sous un format plus lisible.
+
 --/ RAMZI /-- 2 minute
 
 ## Conclusion & Perspective

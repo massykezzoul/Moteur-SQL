@@ -93,8 +93,8 @@ string Requete::cleanLine(string ligne){
 Requete::Requete():select(),from(),where(){}
 
 Requete::Requete(string sql):select(),from(),where(){
+    sql = cleanLine(sql);
     if (isRequete(sql)) {
-        sql = cleanLine(sql);
         if (sql[sql.size()-1] == ';')
             sql = sql.substr(0,sql.size()-1);
         parseSelect(sql);
@@ -116,5 +116,6 @@ const TabCondition &Requete::getWhere() const {
 }
 
 bool Requete::isRequete(string sql) {
+    sql = cleanLine(sql);
     return (Requete::cleanLine(sql.substr(0,6)) == "select" && sql.find("from") != string::npos);
 }
