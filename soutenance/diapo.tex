@@ -169,11 +169,14 @@ Découpage de la conception en deux parties principales:
   \item Structuration des données
   \item Structure de la requête SQL
 \end{itemize}
+
 %\begin{block}{L'interêt de la séparation}
 %on a séparé la conception du moteur de requêtes SQL pour faciliter
 %l'implementation.
   
 %\end{block}
+
+
 
 
 \end{frame}
@@ -190,6 +193,7 @@ Découpage de la conception en deux parties principales:
   %tables , ce qui été notre but. 
 %\end{block}
 %\end{frame}
+
 
 \subsection{Structure de la requête}
 
@@ -211,7 +215,7 @@ Découpage de la conception en deux parties principales:
 \subsection{Les grandes lignes}
 
 \begin{frame}{Implémentation}
-  Les grandes lignes de l'implémentation : 
+  Les grandes lignes de l'implémentation :
   \begin{itemize}
     \item Choix du C++ comme langage de programmation,
     \item Répartition du développement en trois parties principales :
@@ -245,7 +249,7 @@ Découpage de la conception en deux parties principales:
       \item Where.
     \end{itemize}
   \end{block}
-  
+
   \begin{block}{Éxecution}
     Notre application exécute la requête en trois étapes consécutives et complémentaires pour effectuer le traitement nécessaire.
     \begin{itemize}
@@ -268,16 +272,37 @@ Découpage de la conception en deux parties principales:
 
 \section{Conclusion}
 
-\subsection{Bilan}
-
-\begin{frame}{Bilan}
-
-\end{frame}
-
 \subsection{Perspective}
 
 \begin{frame}{Perspective}
-
+Voici quelques idées afin d'améliorer le programme :
+\begin{itemize}
+  \item Optimisation en mémoire :
+  \begin{itemize}
+    \item Projection partielle
+    \item Exécuter les conditions de sélection sur chaque tables individuellement
+    \item Écrire le résultat du produit cartésien dans un fichier temporaire
+  \end{itemize}
+  \item Opérateur :
+  \begin{itemize}
+    \item LIKE
+    \item BETWEEN
+    \item IN
+  \end{itemize}
+  \item Commandes :
+  \begin{itemize}
+    \item GROUP BY
+    \item HAVING
+    \item AS
+  \end{itemize}
+  \item Fonctions d’agrégation :
+  \begin{itemize}
+    \item MAX et MIN
+    \item COUNT
+    \item SUM
+    \item AVG
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
 \end{document}
