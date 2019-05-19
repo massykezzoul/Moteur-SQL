@@ -7,7 +7,7 @@ Presentation du groupe et de ce qu'on va parler.
 
 ### Organisation
 
---/ YANG FEÏ /-- 3 Minutess
+--/ YANG FEÏ /-- 3 Minutes
 
 ### Presentation du SQL et des bases de données
 
@@ -25,6 +25,21 @@ Pour notre projet, le domaine considéré est le langage de manipulation de donn
 ## Modélisation / Conception
 
 --/ CHAKIB /-- 5 min
+###Intro
+Maintenant on va parler de la partie conception qui est la partie la plus importante pour réaliser un projet informatique.
+Mes collegues et moi,on a pensé a decouper la modelisation du moteur de requetes SQl en deux parties principales ou élémentaires : 
+premièrement comment stocker ou lire les données à partir d'un fichier CSV ?, ce qu'on a appelé structuration des données 
+Deuxièment comment stocker ou interpreter la requête SQL ? ,ce qu'on a appelé Structure de la requête.
+
+pour réaliser cette modelisation ,nous avons choisis l'approche orientée objet qui est parfaitement adaptée à notre problème
+En  effet,  utiliser  cette  approche  nous  a permis de découper nos deux parties en plusieurs classes.
+
+Pour Cela on a fait un Diagramme UML pour chacune des deux Parties.
+ Voila le diagramme qu'on a réalisé pour stocker les données.
+comme vous le voyer notre classe principale est en rouge qui est la classe Table , qui permet en quelques sortes de stocker 
+un fichier CSV 
+
+
 
 ## Implémentation
 
