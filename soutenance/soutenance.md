@@ -32,17 +32,17 @@ Pour notre projet, le domaine considéré est le langage de manipulation de donn
 
 ### Intro
 
-Cette partie consistais à trouver la meilleur façon de realiser les fonction precedement modéliser.
+la partie d'implémentation consiste à trouver la meilleur façon de realiser les classes ainsi que les fonction precedement modéliser.
 
 #### Choix du langage
 
 Mais avant ça, nous avons tout d'abord choisie le langage de programmation a utilisé.
 
-Le C++ est l’un des principaux langages enseignées dans notre formation. Nous nous somme donc naturellement tourné vers ce langage.
+Le C++ est un langage orienté objet qui est donc parfaitement adapté à la modélisation que nous avons réaliser. C'est aussi l’un des principaux langages enseignées dans notre formation. Nous nous somme donc naturellement tourné vers ce langage.
 
 #### Dév
 
-Puis nous avons répartie le dév en 3 parties principales, que nous allons brievement détailer :
+Puis nous avons répartie le dév en 3 parties principales, que nous allons brievement détailler un peu plus tard :
 
 - Chargement des données;
 - Intérpretation des données;
@@ -60,23 +60,51 @@ Esuite vient, la façon dont l'utilisateur vas utiliser le programme final. Nous
 Nous avons aussi penser à réaliser des test durant le développement.
 En effet pour le bon déroulement de l'implémentation, nous avons à chaque étape écrit des programmes de test unitaire ainsi que de test d'intégration.
 
+<--New Slide >
+
 ### Développement
 
 Revenont donc à la parie principale de l'implémentaion, Le dév.
 
 #### Chargements des données
 
-Tout d'abord nous avonc coommencé par implémenter les classes que nous avions modélisées lors de la phase de conception.
+Tout d'abord nous avonc commencé par implémenter les classes que nous avions modélisées lors de la phase de conception.
 Puis, la principale difficulté étais de trouver un moyen d'interpréter et d'éxtraire les données d'un fichier CSV.
 Pour cela nous avons éctit une fonction, strsplit, qui se charge de segmenter une ligne du fichier en plusieurs chaine de caractères.
 
-Cette fonction prend en paramètre une ligne d'un fichier CSV et caractère séparateur, par défault une virgule, et retourne une instance de TabString (un tableau de chaine de caractères) qui contient les différentes valeurs.
+Cette fonction prend en paramètre une ligne d'un fichier CSV et un caractère séparateur, par défault une virgule, et retourne une instance de TabString (un tableau de chaine de caractères) qui contient les différentes valeurs.
 
 Maintenant qu’on peut parser, on commence par lire la première ligne du fichier CSV et la passer à la fonction strsplit en stockant le resultat dans l’attribut nomAttributs de la classe Table. Pour le reste du fichier, on passe chaque ligne à la fonction strsplit et on ajoute le resultat dans la matrice valeursAttributs de la classe Table
 
+<-- New Slide -->
+
 #### La requete
 
-Concernant la requête
+Une fois les données chargées en mémoire, il faut à present intérpreter la requête SQL. On peut clairement découper une requête SQL en trois partie.
+
+- Une partie Select,
+- Une partie From,
+- Une partie Where,
+
+Cela nous a permis de developper trois méthode :
+
+- Une fonction parseSelect(),
+- Une fonction parseFrom(),
+- Une fonction parseWhere(),
+
+Ou chaqu'une d'entre elle parse une partie de la requete et stocke les données récuperer dans l'attribut correspondant de la classe Requete.
+
+Maintenant que la requête a été interpretée, la question qui sait posé est comment notre programme va-t-il exécuter la requête sur les données chargées en mémoire ?
+
+L'Éxecution de la requête se fait en trois étape clé :
+
+- Le produit cartésien entre deux tables, ou chaque ligne de la première table est concatener avec chaqu'une des lignes de la deuxième table à travers deux boucle imbriqué.
+- Puis on applique à la table resultante, la selection. La selection parcours les lignes de la table une par une. Si une ligne ne vérifie pas les condition spécifié dans le Where alors cette ligne est enlevée.
+- Enfin il ne reste qu'a projeter les attributs que l'utilisateur a demandés. La fonction de projection parcours la table colonne par colonne et ne garde que les colonnes dont le noms apparait dans l'attribut select de la requête.
+
+<-- New Slide -->
+
+Maintenant je laisse mon collègue vous faire une petite démonstration du fonctionnement du programme.
 
 --/ BOUZIDI /-- 3 minute
 

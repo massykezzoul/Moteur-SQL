@@ -7,41 +7,19 @@ Les requêtes considérées seront de la forme SELECT ... FROM ... WHERE sans im
 
 ## Manière d'executer le programme
 
-### Via des arguments
+### Mode ligne de commande
 
-`$ prog table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."`<br>
+`$ ./sql table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."`
+
 Chaque table utilisé dans le FROM doit être donné en argmument.
 
-### Via dossier contenant les fichiers .csv
+### Mode intéractif
 
-`$ prog -d dossier/ "SELECT ... FROM ... WHERE ..."`<br>
-Le dossier doit contenir tout les fichiers .csv utilisé dans le FROM de la Requête SQL.
-
-### Requête SQL donnée lors de l'execution du programme
-
-`$ prog table1.csv ... tableN.csv`
+`$ ./sql table1.csv ... tableN.csv`
 OU
-`$ prog -d dossier/`<br>
+`$ ./sql`
+
 Les requêtes SQL seront données au programme lors de son execution
-
-### Requête SQL donnée via un fichier
-
-`$ prog table1.csv ... tableN.csv -f file.sql`
-OU
-`$ prog -d dossier/ -f file.sql`<br>
-Les requêtes SQL seront données via un fichier
-
-### Resumé des cas d'utilisation
-
-`$ prog table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."`<br>
-`$ prog -d dossier/ "SELECT ... FROM ... WHERE ..."`<br>
-`$ prog -d dossier/ table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."`<br>
-`$ prog table1.csv ... tableN.csv`<br>
-`$ prog -d dossier/`<br>
-`$ prog -d dossier/ stable1.csv ... tableN.csv`<br>
-`$ prog table1.csv ... tableN.csv -f file.sql`<br>
-`$ prog -d dossier/ -f file.sql`<br>
-`$ prog -d dossier/ stable1.csv ... tableN.csv -f file.sql`<br>
 
 PS : Les requêtes prise en charge par le programme sont de la forme suivante :
 
@@ -65,7 +43,8 @@ WHERE   age < 28
 - Ecrire le resultat dans un flux de sortie;
 
 ## Encadrant et Étudiants :
-Encadrante : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
+
+Encadrante : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`
 
 Étudiants :
 
@@ -75,6 +54,6 @@ Encadrante : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`<br>
 - Ramzi ZEROUAL : `ramzizerr@gmail.com`
 - Fei YANG : `fei.yang@insa-cvl.fr`
 
-Début du projet : Janvier 2019<br>
-Fin du projet   : ~ 2019<br>
-Langage Utilisé : C++<br>
+- Début du projet : Janvier 2019
+- Fin du projet   : Mai 2019
+- Langage Utilisé : C++
