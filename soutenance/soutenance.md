@@ -136,7 +136,48 @@ Le premier mode que je vais vous presenter est le mode d'éxecution en ligne de 
 Le premier argument est le chemin vers le fichier CSV à charger en mémoire.
 Le deuxième est la requete SQL à executer.
 
-Puis le resultat (Comme indiquer) est dans les deux fichier 'resultat.csv' sous un format CSV et 'resultat.txt' sous un format plus lisible.
+Puis le resultat (Comme indiquer) est dans les deux fichier 'resultat.csv' sous un format CSV comme vous pouvez le voir :
+
+`cat resultat.csv`
+
+Ce type de sortie est réutilisable pour d'autre eventuelle utilisation.
+
+On a aussi le fichier 'resultat.txt' qui est un format plus lisible. sous forme de tableau, cette méthode de sortie est mieux adapté pour un utilisateur humain
+
+`cat resultat.txt`
+
+C'est cette méthode qui est d'ailleur utilisé par le SGBD d'Oracle.
+
+### Mode intéractif
+
+Le deuxième mode que nous avons développer est le mode intéractif.
+Pour utilisé ce mode il suffit d'executer le programme sans argument: 
+
+`./sql`
+
+Une fois entré dans le mode intéractif, on peut tapper `help` pour afficher un certain nombre d'information tel que la liste des mot clé qu'on peut utilisé.
+Par example, on peut tappez `ls` pour afficher la liste des fichiers chargé en mémoire.
+Comme vous pouvez le voir le programme indique "Aucune table en mémoire." ce qui est normal.
+Pour charger une table en mémoire il suffit de tappez `add` suivit du chemin vers un fichier CSV. par example:
+
+`add ../tables/example.csv`
+
+`ls` // retapper ls
+
+A present la table example est bien charger en mémoire.
+
+Maintenant on peut éxecuter une requete SQL
+
+`select nom,prenom from example`
+
+Je vient la d'éxecuter une requete de projection sur la table qu'on vient de voir pour afficher seulement les deux colonnes 'nom' et 'prenom'.
+POur afficher le fichier 'resultat.txt' il suffit de tappez :
+
+`txt`
+
+Pour afficher le fichier csv il suffit de tappez :
+
+`csv`
 
 --/ RAMZI /-- 2 minute
 
