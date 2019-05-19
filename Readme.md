@@ -9,15 +9,15 @@ Les requêtes considérées seront de la forme SELECT ... FROM ... WHERE sans im
 
 ### Mode ligne de commande
 
-`$ prog table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."`
+`$ ./sql table1.csv ... tableN.csv "SELECT ... FROM ... WHERE ..."`
 
 Chaque table utilisé dans le FROM doit être donné en argmument.
 
 ### Mode intéractif
 
-`$ prog table1.csv ... tableN.csv`
+`$ ./sql table1.csv ... tableN.csv`
 OU
-`$ prog -d dossier/`
+`$ ./sql`
 
 Les requêtes SQL seront données au programme lors de son execution
 
