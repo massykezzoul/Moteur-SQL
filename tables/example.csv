@@ -1,7 +1,6 @@
-NOM,PRENOM,e-mail,age
-Kezzoul,Massili,massy@example.com,20
-ElHouiti,chakib,chakib@example.com,20
-Zer,Ramzi,ramzi@example.com,20
-Bouzidi,Belkassim,mizou@example.com,21
-Yang,Fei,yang@example.com,21
-name,prenom,example@example.dr,22
+id,NOM,PRENOM,e-mail,age
+1,Bouzidi,Belkassim,mizou@example.com,21
+2,ElHouiti,chakib,chakib@example.com,20
+3,Kezzoul,Massili,massy@example.com,20
+4,Yang,Fei,yang@example.com,21
+5,Zer,Ramzi,ramzi@example.com,20

@@ -25,7 +25,9 @@ Pour notre projet, le domaine considéré est le langage de manipulation de donn
 ## Modélisation / Conception
 
 --/ CHAKIB /-- 5 min
-###Intro
+
+### Intro
+
 Maintenant on va parler de la partie conception qui est la partie la plus importante pour réaliser un projet informatique.
 Mes collegues et moi,on a pensé a decouper la modelisation du moteur de requetes SQl en deux parties principales ou élémentaires : 
 premièrement comment stocker ou lire les données à partir d'un fichier CSV ?, ce qu'on a appelé structuration des données 
@@ -36,16 +38,14 @@ En  effet,  utiliser  cette  approche  nous  a permis de découper nos deux part
 
 Pour Cela on a fait un Diagramme UML pour chacune des deux Parties.
  Voila le diagramme qu'on a réalisé pour stocker les données.
-comme vous le voyer notre classe principale est en rouge qui est la classe Table , qui permet en quelques sortes de stocker 
-un fichier CSV 
-
-
+comme vous le voyer notre classe principale est en rouge qui est la classe Table , qui permet en quelques sortes de stocker
+un fichier CSV
 
 ## Implémentation
 
 --/ MASSY /-- 5 min
 
-### Intro
+### Intro Implé
 
 la partie d'implémentation consiste à trouver la meilleur façon de realiser les classes ainsi que les fonction precedement modéliser.
 
@@ -127,10 +127,86 @@ Maintenant je laisse mon collègue vous faire une petite démonstration du fonct
 
 Scénario ecrit. 2/3 minute.
 
+### Mode ligne de commande
+
+Le premier mode que je vais vous presenter est le mode d'éxecution en ligne de commande. Voici un example simple :
+
+`./sql ../tables/example.csv "select * from example"`
+
+Le premier argument est le chemin vers le fichier CSV à charger en mémoire.
+Le deuxième est la requete SQL à executer.
+
+Puis le resultat (Comme indiquer) est dans les deux fichier 'resultat.csv' sous un format CSV comme vous pouvez le voir :
+
+`cat resultat.csv`
+
+Ce type de sortie est réutilisable pour d'autre eventuelle utilisation.
+
+On a aussi le fichier 'resultat.txt' qui est un format plus lisible. sous forme de tableau, cette méthode de sortie est mieux adapté pour un utilisateur humain
+
+`cat resultat.txt`
+
+C'est cette méthode qui est d'ailleur utilisé par le SGBD d'Oracle.
+
+### Mode intéractif
+
+Le deuxième mode que nous avons développer est le mode intéractif.
+Pour utilisé ce mode il suffit d'executer le programme sans argument: 
+
+`./sql`
+
+Une fois entré dans le mode intéractif, on peut tapper `help` pour afficher un certain nombre d'information tel que la liste des mot clé qu'on peut utilisé.
+Par example, on peut tappez `ls` pour afficher la liste des fichiers chargé en mémoire.
+Comme vous pouvez le voir le programme indique "Aucune table en mémoire." ce qui est normal.
+Pour charger une table en mémoire il suffit de tappez `add` suivit du chemin vers un fichier CSV. par example:
+
+`add ../tables/example.csv`
+
+`ls` // retapper ls
+
+A present la table example est bien charger en mémoire.
+
+Maintenant on peut éxecuter une requete SQL
+
+`select nom,prenom from example`
+
+Je vient la d'éxecuter une requete de projection sur la table qu'on vient de voir pour afficher seulement les deux colonnes 'nom' et 'prenom'.
+POur afficher le fichier 'resultat.txt' il suffit de tappez :
+
+`txt`
+
+Pour afficher le fichier csv il suffit de tappez :
+
+`csv`
+
+On peut aussi executer une selection avec la requete suivante qui affiche les e-mail des personnes qui on moint de 21 ans :
+
+`select e-mail,age from example where age < 21`
+
+`exit` // quiter le programme
+
+On peut aussi Executer le programme avec des fichier initail en les donnant en argument mais sans la requete
+
+`sql ../tables/example.csv ../tables/sample.csv`
+
+`ls`
+
+Vous pouvez vois que les fichier sont déja chargé en mémoire sans executer `add`
+
+Voici la table "sample":
+
+`select * from sample`
+
+et la table "example" si vous l'avez oublier :
+
+`select * from example`
+
+Voici enfin un example de joiture :
+
+`select nom,villeOrigine,villeActuelle,age from example,sample where example.id = sample.id and age < 21`
+
+Dir conclusion ta3ek ou salam Ou3likoum kheli Ramzi itnak.
+
 --/ RAMZI /-- 2 minute
 
-## Conclusion
-
-## Autre
-
-Aborder quelque point d'implementation
+## Conclusion & Perspective
