@@ -76,6 +76,8 @@ Cette fonction prend en paramètre une ligne d'un fichier CSV et un caractère s
 
 Maintenant qu’on peut parser, on commence par lire la première ligne du fichier CSV et la passer à la fonction strsplit en stockant le resultat dans l’attribut nomAttributs de la classe Table. Pour le reste du fichier, on passe chaque ligne à la fonction strsplit et on ajoute le resultat dans la matrice valeursAttributs de la classe Table
 
+<-- New Slide -->
+
 #### La requete
 
 Une fois les données chargées en mémoire, il faut à present intérpreter la requête SQL. On peut clairement découper une requête SQL en trois partie.
@@ -99,6 +101,8 @@ L'Éxecution de la requête se fait en trois étape clé :
 - Le produit cartésien entre deux tables, ou chaque ligne de la première table est concatener avec chaqu'une des lignes de la deuxième table à travers deux boucle imbriqué.
 - Puis on applique à la table resultante, la selection. La selection parcours les lignes de la table une par une. Si une ligne ne vérifie pas les condition spécifié dans le Where alors cette ligne est enlevée.
 - Enfin il ne reste qu'a projeter les attributs que l'utilisateur a demandés. La fonction de projection parcours la table colonne par colonne et ne garde que les colonnes dont le noms apparait dans l'attribut select de la requête.
+
+<-- New Slide -->
 
 Maintenant je laisse mon collègue vous faire une petite démonstration du fonctionnement du programme.
 
