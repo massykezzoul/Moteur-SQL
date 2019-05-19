@@ -166,21 +166,29 @@
 \begin{frame}{Modélisation}
 Découpage de la conception en deux parties principales:
 \begin{itemize}
-  \item Structuration de données
+  \item Structuration des données
   \item Structure de la requête SQL
-  
 \end{itemize}
+\begin{block}{L'interêt de la séparation}
+on a séparé la conception du moteur de requêtes SQL pour faciliter
+l'implementation.
+  
+\end{block}
+
 
 \end{frame}
 
 \placelogofalse
-\begin{frame}{Structure des données}
+\begin{frame}{Structuration des données}
   \makebox[\textwidth]{\includegraphics[width=\paperwidth]{img/sql.png}}
 \end{frame}
 \placelogotrue
 
-\begin{frame}{Structure des données}
-
+\begin{frame}{Structuration des données}
+\begin{block}{}
+  tout ce diagramme nous a permis de stocker non plus une table mais plusieurs 
+  tables , ce qui été notre but. 
+\end{block}
 \end{frame}
 
 \subsection{Structure de la requête}
