@@ -179,6 +179,24 @@ Pour afficher le fichier csv il suffit de tappez :
 
 `csv`
 
+On peut aussi executer une selection avec la requete suivante qui affiche les e-mail des personnes qui on moint de 21 ans :
+
+`select e-mail,age from example where age < 21`
+
+`exit` // quiter le programme
+
+On peut aussi Executer le programme avec des fichier initail en les donnant en argument mais sans la requete
+
+`sql ../tables/example.csv ../tables/sample.csv`
+
+`ls` 
+
+Vous pouvez vois que les fichier sont déja chargé en mémoire sans executer `add`
+
+Enfin un example de joiture :
+
+``
+
 --/ RAMZI /-- 2 minute
 
 ## Conclusion & Perspective

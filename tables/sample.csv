@@ -1,5 +1,6 @@
-EMAIL,prenom,nom,SMS,age
-john@example.com,Smith,John,33123456789,20
-harry@example.com,Pierce,Harry,33111222222,19
-howard@example.com,Paige,Howard,33777888898,21
-celhouiti@gmail.com,chakib,elhouiti,33751847995,22
+id,villeOrigine,villeActuelle
+1,Khenchella,Montpellier
+2,Alger19,Montpellier
+3,Bejaia,Montpellier
+4,Chine,Montpellier
+5,Alger16,Montpellier
