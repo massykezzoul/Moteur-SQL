@@ -65,10 +65,10 @@ Puis nous avons répartie le dév en 3 parties principales, que nous allons brie
 
 #### Utilisation
 
-Esuite vient, la façon dont l'utilisateur vas utiliser le programme final. Nous avons notamment décider de réaliser deux versions
+Esuite vient, la façon dont l'utilisateur vas utiliser le programme final. Nous avons notamment décider de réaliser deux modes d'utilisation
 
-- Une version en ligne de commande très utile pour l'automatisation des tâches;
-- Une version intéractif plus agréable à l'utilisation;
+- Un mode en ligne de commande très utile pour l'automatisation des tâches;
+- Un mode intéractif plus agréable à l'utilisation;
 
 #### Test
 
