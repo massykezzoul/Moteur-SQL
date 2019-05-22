@@ -54,6 +54,9 @@ Encadrante : Anne-Muriel Chifolleau : `chifolleau@lirmm.fr`
 - Ramzi ZEROUAL : `ramzizerr@gmail.com`
 - Fei YANG : `fei.yang@insa-cvl.fr`
 
+Autres informations:
+
 - Début du projet : Janvier 2019
 - Fin du projet   : Mai 2019
 - Langage Utilisé : C++
+- Univérsité de montpellier : `https://www.umontpellier.fr/`
