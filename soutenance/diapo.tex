@@ -86,7 +86,7 @@
   \item Forme des requêtes :
   \begin{itemize}
     \item SELECT : Projection
-    \item FROM : Jointure
+    \item FROM : Produit cartésien
     \item WHERE : Selection
   \end{itemize}
   \item Fichiers pris en charge : un ou plusieurs fichiers CSV
@@ -221,7 +221,7 @@ Découpage de la conception en deux parties principales:
     \item Répartition du développement en trois parties principales :
     \begin{itemize}
       \item Chargement des données,
-      \item Intérpretation et éxecution de la requête,
+      \item Analyse et éxecution de la requête,
       \item Restitution des données.
     \end{itemize}
     \item Utilisation du programme,
@@ -234,14 +234,14 @@ Découpage de la conception en deux parties principales:
 \begin{frame}{Développement}{Chargement des données}
   \begin{itemize}
     \item Implémentation des classes,
-    \item Interpréter un fichier CSV,
+    \item Analyse d'un fichier CSV,
     \item Fonction strsplit,
     \item Parser toutes les lignes du fichiers CSV,
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Développement}{La requête}
-  \begin{block}{Intérpretation}
+  \begin{block}{Analyse}
     Nous nous sommes occupés à trouver une manière de découper la requête afin de stocker chaque partie dans l’attribut correspondant.
     \begin{itemize}
       \item Select,
